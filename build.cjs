@@ -4,6 +4,6 @@ const path = require('node:path');
 const read = name => fs.readFileSync(path.join(__dirname,name),'utf8');
 let html=read('index.html');
 html=html.replace('<link rel="stylesheet" href="style.css">','<style>\n'+read('style.css')+'\n</style>');
-for(const name of ['data','content','landscape','core','systems','art','world','camera','panels','app'])html=html.replace('<script src="src/'+name+'.js"></script>','<script>\n'+read('src/'+name+'.js')+'\n</script>');
+for(const name of ['data','content','landscape','core','systems','art','world','village','village-view','camera','panels','app'])html=html.replace('<script src="src/'+name+'.js"></script>','<script>\n'+read('src/'+name+'.js')+'\n</script>');
 fs.writeFileSync(path.join(__dirname,'种日子.html'),html,'utf8');
 console.log('已生成独立离线版本：种日子.html ('+Buffer.byteLength(html)+' bytes)');

@@ -157,5 +157,5 @@
     if(weather==='雾')for(let i=0;i<4;i++)A.R(ctx,vx+(t*9+i*177)%(vw+200)-100,vy+i*vh/4,220,24,'#e8ecda24');
     if(season===0)for(let i=0;i<12;i++)A.R(ctx,vx+(i*89+t*9)%vw,vy+(i*71+t*6)%vh,2,2,'#eac6a977');
   }
-  root.ZRZWorld={draw,item,character:A.character,portrait:A.portrait,points,hit,blocked,route,plotAt,plotPosition,restorePosition,mapView,obstacles,clearLine,width:W,height:H};
+  root.ZRZWorld={terrain,drawPlots:plots,drawAnimal:animal,drawFurniture:furniture,drawPet:pet,draw,item,character:A.character,portrait:A.portrait,points,hit,blocked,route,plotAt,plotPosition,restorePosition,mapView,obstacles,clearLine,width:W,height:H};
 })(window);
