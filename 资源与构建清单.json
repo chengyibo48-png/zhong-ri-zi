@@ -1,0 +1,89 @@
+{
+  "name": "种日子",
+  "version": "0.3.0",
+  "platform": "Windows 桌面浏览器 / 单机离线 HTML",
+  "generatedAt": "2026-09-26T11:21:36.354Z",
+  "runtimeDependencies": [],
+  "remoteAssets": [],
+  "assets": "像素美术、图标、四季琴音及环境音均由项目代码绘制或合成；系统字体不随包分发。",
+  "developerOnly": [
+    "src/debug.js"
+  ],
+  "files": [
+    {
+      "name": "种日子.html",
+      "bytes": 281768,
+      "sha256": "97f15a423adddf59953194b50df9cbe3d56bc73a36ee663767af8428daa58660"
+    },
+    {
+      "name": "index.html",
+      "bytes": 6130,
+      "sha256": "6cfe0ff24f9c5bc2b06adbdb38a25c1e18ea02a51496fc5010a0a0b6e027b0e4"
+    },
+    {
+      "name": "style.css",
+      "bytes": 33415,
+      "sha256": "40767c1d68c0e4f6e56d3e183fc93d121654e899df0a106ee57ac959eb9e6ca7"
+    },
+    {
+      "name": "build.cjs",
+      "bytes": 661,
+      "sha256": "2a20932318fd484dc61b68f5f026593c866c0baa653f04886e5252fcf09fa01b"
+    },
+    {
+      "name": "server.cjs",
+      "bytes": 1395,
+      "sha256": "8091efbc68b8c397f6f11d6343e1ee88ac9be2ee8524bf13ff51c9cbd43d39b0"
+    },
+    {
+      "name": "package.json",
+      "bytes": 332,
+      "sha256": "ff9b02af90d2142257a5731a6d8d609ba078d822fe255edaa89bee24f9b541e5"
+    },
+    {
+      "name": "src/app.js",
+      "bytes": 62070,
+      "sha256": "91644f63ceb84ee068ff33049b7bc37b2c4024eb8173975ca8c9f937b29a3d63"
+    },
+    {
+      "name": "src/camera.js",
+      "bytes": 2152,
+      "sha256": "41d0f7ec4ec46640199dccff282ed54ebcb894f2e42800a6dfaf70e42b2e28df"
+    },
+    {
+      "name": "src/content.js",
+      "bytes": 43335,
+      "sha256": "60080670d0e5ba097f7b1fd41156c6021734138a063c2b91fe6b74b4cb97fe0e"
+    },
+    {
+      "name": "src/core.js",
+      "bytes": 20001,
+      "sha256": "99d943e24fd1fb23b921a84e9686552d1ffaca3134d8b2ae2e9cc3594c0ea2a0"
+    },
+    {
+      "name": "src/data.js",
+      "bytes": 8270,
+      "sha256": "46072ed5625c5203fc18d8712142ab2611360de46974af8cc99a2b7533fae470"
+    },
+    {
+      "name": "src/debug.js",
+      "bytes": 3603,
+      "sha256": "0cc4d650cd07c0bee7ae1643eae052858ab8bda15c44151556c5f9daf09bc9f6"
+    },
+    {
+      "name": "src/panels.js",
+      "bytes": 36482,
+      "sha256": "1e85cbce50306a502906b851217ed80af45c8f24ceccbe7211e8dee9811acf15"
+    },
+    {
+      "name": "src/systems.js",
+      "bytes": 37569,
+      "sha256": "e02466cf8a7e8264ab765a25618c922557b7ab8267b2e7a77ae0d1ec6bbbf969"
+    },
+    {
+      "name": "src/world.js",
+      "bytes": 32505,
+      "sha256": "d08e11618b3fa89bf60c1c8a739770d8da8c9cf1806231d3a183a609085c1836"
+    }
+  ]
+}

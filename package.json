@@ -1,0 +1,7 @@
+{
+  "name": "zhong-ri-zi",
+  "version": "0.3.0",
+  "private": true,
+  "description": "种日子 — 禾溪村的离线像素生活游戏基础原型",
+  "scripts": { "start": "node server.cjs", "build": "node build.cjs", "test": "node tests/core.test.cjs && node tests/expansion.test.cjs", "dev": "node server.cjs --dev" }
+}

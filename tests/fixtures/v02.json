@@ -1,0 +1,359 @@
+{
+  "version": 2,
+  "name": "Legacy villa",
+  "gender": "女",
+  "day": 37,
+  "minutes": 390,
+  "stamina": 100,
+  "money": 246,
+  "scene": "farm",
+  "player": {
+    "x": 431,
+    "y": 212,
+    "direction": "down"
+  },
+  "seed": "cabbage",
+  "bag": {
+    "cabbageSeed": 8,
+    "radishSeed": 4,
+    "rice": 4,
+    "egg": 2,
+    "feed": 9
+  },
+  "plots": [
+    {
+      "tilled": true,
+      "crop": "cabbage",
+      "growth": 3,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": true,
+      "crop": "cabbage",
+      "growth": 3,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": true,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": true,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": true,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": true,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": true,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": true,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    },
+    {
+      "tilled": false,
+      "crop": null,
+      "growth": 0,
+      "watered": false,
+      "soil": 2,
+      "lastGroup": null,
+      "repeats": 0
+    }
+  ],
+  "animals": [
+    {
+      "id": "hen",
+      "name": "点点",
+      "species": "鸡",
+      "personality": "爱跟着人",
+      "product": "egg",
+      "bond": 0,
+      "fed": false,
+      "ready": 1
+    },
+    {
+      "id": "duck",
+      "name": "小水",
+      "species": "鸭",
+      "personality": "喜欢散步",
+      "product": "duckEgg",
+      "bond": 0,
+      "fed": false,
+      "ready": 0
+    },
+    {
+      "id": "cow",
+      "name": "阿黄",
+      "species": "牛",
+      "personality": "慢悠悠",
+      "product": "milk",
+      "bond": 0,
+      "fed": false,
+      "ready": 0
+    }
+  ],
+  "relations": {
+    "granny": {
+      "points": 0,
+      "talked": -1,
+      "gifted": -1,
+      "returnGift": false
+    },
+    "qiao": {
+      "points": 43,
+      "talked": -1,
+      "gifted": -1,
+      "returnGift": false
+    },
+    "lin": {
+      "points": 0,
+      "talked": -1,
+      "gifted": -1,
+      "returnGift": false
+    },
+    "chen": {
+      "points": 0,
+      "talked": -1,
+      "gifted": -1,
+      "returnGift": false
+    },
+    "xu": {
+      "points": 0,
+      "talked": -1,
+      "gifted": -1,
+      "returnGift": false
+    },
+    "zhou": {
+      "points": 0,
+      "talked": -1,
+      "gifted": -1,
+      "returnGift": false
+    }
+  },
+  "flags": {
+    "bridge": true,
+    "firstDish": true
+  },
+  "upgrades": {
+    "kitchen": true
+  },
+  "collected": {},
+  "processing": [],
+  "festivals": [],
+  "discovered": [
+    "cabbageSeed",
+    "cabbage",
+    "rice",
+    "egg",
+    "feed"
+  ],
+  "stats": {
+    "harvested": 0,
+    "cooked": 0,
+    "fish": 0,
+    "earned": 0,
+    "gifts": 0,
+    "gathered": 0
+  },
+  "settings": {
+    "speed": "relaxed",
+    "sound": true,
+    "volume": 0.2,
+    "zoom": 1,
+    "hints": true,
+    "bindings": {
+      "up": "w",
+      "left": "a",
+      "down": "s",
+      "right": "d",
+      "interact": "e",
+      "bag": "b",
+      "map": "m",
+      "journal": "j"
+    }
+  },
+  "journal": [
+    {
+      "day": 0,
+      "text": "带着爷爷的旧钥匙，回到了禾溪村。"
+    }
+  ]
+}

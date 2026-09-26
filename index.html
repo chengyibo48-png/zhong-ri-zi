@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#647b52"><title>种日子 · 禾溪村的慢生活</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e7ebd9'/%3E%3Cpath d='M16 27V14M16 17C5 17 5 7 6 7c8 0 11 4 10 10M16 13C16 5 23 3 27 4c0 9-5 11-11 11' fill='none' stroke='%23637d51' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game-root" aria-label="种日子游戏">
+    <div class="world-frame" id="world-frame">
+      <canvas id="world" width="960" height="576" tabindex="0" aria-label="游戏世界。WASD或方向键移动，E交互，数字1到8切换工具；也可点击目标自动走近互动。"></canvas>
+      <div class="world-shade" aria-hidden="true"></div>
+      <div id="game-hud">
+        <section class="date-card hud-paper" aria-label="日期与天气">
+          <div class="date-top"><span id="year-label">在禾溪的第一年</span><span class="season-seal" id="solar-term">立春</span></div>
+          <button class="date-line" data-action="calendar" aria-label="打开节气历"><span id="season-date">春 <b>01</b><small>日</small></span><span id="weather-today"></span></button>
+          <div class="clock-row"><span id="clock-label">06:30 · 清晨</span><span class="time-dot"></span></div>
+          <div class="forecast" id="forecast"></div>
+        </section>
+        <div class="scene-heading"><span class="scene-kicker">种 日 子 <i></i> 禾溪村</span><h1 id="scene-title">农家小院</h1><span id="time-pill">舒缓时光 · 慢慢来</span><span id="location-pill" hidden></span></div>
+        <nav class="hud-actions" aria-label="游戏功能">
+          <button class="hud-icon" data-action="map" title="村庄地图 · M" aria-label="打开地图"><span data-icon="mountain"></span><small>地图</small></button>
+          <button class="hud-icon" data-action="save" title="保存与读档" aria-label="保存与读档"><span data-icon="save"></span><small>存档</small></button>
+          <button class="hud-icon" data-action="fullscreen" id="fullscreen-btn" title="切换全屏 · F" aria-label="进入全屏"><span data-icon="expand"></span><small>全屏</small></button>
+          <button class="hud-icon menu-toggle" data-action="menu" title="生活菜单 · Tab" aria-label="打开生活菜单"><span data-icon="menu"></span><small>菜单</small></button>
+        </nav>
+        <section class="wish-card hud-paper" id="wish-card">
+          <button class="wish-heading" data-action="toggle-quest" aria-expanded="true"><span data-icon="note"></span><span>日子里的小事</span><span id="quest-chevron">−</span></button>
+          <div id="quest-content"><div id="objective"></div><div class="quest-actions"><button data-action="guide" id="guide-btn">带我去看看 <span>↗</span></button><button data-action="orders" title="查看全部邻里心愿">手记</button></div></div>
+        </section>
+        <section class="player-card hud-paper" aria-label="角色状态">
+          <div class="player-row"><canvas id="portrait" width="32" height="36" aria-hidden="true"></canvas><div><strong id="player-name">小满</strong><small>归乡的日子</small></div><span class="coins" id="money"></span></div>
+          <div class="energy-label"><span>体力</span><span id="energy-text">100 / 100</span></div><div class="energy-track"><div id="energy-fill"></div></div>
+        </section>
+        <div class="tool-dock">
+          <div class="tool-name" id="tool-name">双手 · 收获 / 交互</div>
+          <div class="toolbar-wrap"><div id="toolbelt" role="group" aria-label="随身工具"></div><span class="toolbar-divider"></span><button class="bag-button" data-action="bag" title="打开背包 · B"><span data-icon="bag"></span><span>背包<small id="bag-count"></small></span><kbd>B</kbd></button><button class="seed-button" data-action="seeds" title="选择种子 · Q"><canvas id="seed-icon" width="24" height="24"></canvas><span id="seed-label">小青菜种子<small>选择播种</small></span><span>⌄</span></button></div>
+          <div class="controls-footer" id="controls-hint"></div>
+        </div>
+        <div class="quiet-corner"><span id="save-status">此刻，安心生活</span><button data-action="sound" id="sound-btn" aria-label="声音开关" title="声音开关"></button><button data-action="toggle-hud" title="收起界面 · H" aria-label="收起界面"><span data-icon="eye"></span></button></div>
+        <div class="hover-card" id="hover-card" hidden></div>
+        <div class="interaction-prompt" id="interaction-prompt" hidden></div>
+        <div class="toast-stack" id="toasts" aria-live="polite"></div>
+      </div>
+      <button id="hud-restore" data-action="toggle-hud" hidden>显示界面 <kbd>H</kbd></button>
+      <div class="scene-arrival" id="scene-arrival" hidden aria-live="polite"></div>
+    </div>
+    <div class="modal-overlay" id="modal-overlay" hidden><section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-topline"><span>禾溪生活簿</span><span class="pause-badge">时光暂停</span><button class="modal-close" aria-label="关闭窗口" data-action="close">×</button></header><nav id="book-nav" aria-label="生活簿功能页"></nav><div id="modal-body"></div><footer class="modal-foot"><span>不着急，日子慢慢过。</span><span><kbd>Esc</kbd> 返回村庄</span></footer></section></div>
+    <input type="file" id="import-file" accept=".json,application/json" hidden>
+  </main>
+  <script src="src/data.js"></script><script src="src/content.js"></script><script src="src/core.js"></script><script src="src/systems.js"></script><script src="src/world.js"></script><script src="src/camera.js"></script><script src="src/panels.js"></script><script src="src/app.js"></script>
+</body></html>
