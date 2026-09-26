@@ -7,7 +7,7 @@
   const button=document.createElement('button');button.className='hud-icon';button.dataset.action='debug';button.textContent='开发';button.setAttribute('aria-label','开发检查台');document.querySelector('.hud-actions').appendChild(button);
   document.addEventListener('click',e=>{const b=e.target.closest('[data-debug]');if(!b)return;let s=window.ZRZDeveloper.state();const v=id=>document.getElementById(id).value;
     if(b.dataset.debug==='days'){const count=Math.min(112,Math.max(1,Number(v('debug-days'))||1));for(let i=0;i<count;i++)C.nextDay(s);}
-    if(b.dataset.debug==='travel'){s.scene=v('debug-scene');s.player=s.scene==='river'?{x:130,y:188,direction:'right'}:{x:429,y:490,direction:'up'};}
+    if(b.dataset.debug==='travel'){s.scene=v('debug-scene');s.player={...window.ZRZLandscape.spawn(s.scene)};}
     if(b.dataset.debug==='item')C.add(s,v('debug-item'),Math.min(100,Math.max(1,Math.floor(Number(v('debug-qty'))||1))));
     if(b.dataset.debug==='money')s.money+=1000;
     if(b.dataset.debug==='relation')s.relations[v('debug-npc')].points=100;

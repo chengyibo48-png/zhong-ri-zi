@@ -6,8 +6,8 @@ const D = require('../src/data.js');
 const Camera = require('../src/camera.js');
 
 test('immersive camera fills all aspect ratios without distortion, keeps player visible and round trips input',()=>{
-  for(const [width,height] of [[1920,1080],[1440,900],[800,1000],[390,844],[2560,1080]])for(const zoom of [1,1.2,1.4])for(const player of [{x:16,y:54},{x:480,y:288},{x:944,y:556}]){
-    const v=Camera.geometry(width,height,player,zoom);assert.ok(v.viewWidth<=960+1e-8);assert.ok(v.viewHeight<=576+1e-8);assert.ok(v.x>=0&&v.y>=0);assert.ok(v.x+v.viewWidth<=960+1e-8);assert.ok(v.y+v.viewHeight<=576+1e-8);
+  for(const [width,height] of [[1920,1080],[1440,900],[800,1000],[390,844],[2560,1080]])for(const zoom of [1,1.2,1.4])for(const player of [{x:16,y:54},{x:480,y:288},{x:1896,y:1128}]){
+    const v=Camera.geometry(width,height,player,zoom);assert.ok(v.viewWidth<=960+1e-8);assert.ok(v.viewHeight<=576+1e-8);assert.ok(v.x>=0&&v.y>=0);assert.ok(v.x+v.viewWidth<=1920+1e-8);assert.ok(v.y+v.viewHeight<=1152+1e-8);
     assert.ok(Math.abs(v.viewWidth/v.viewHeight-width/height)<1e-8);
     const screen=Camera.toScreen(v,player.x,player.y),world=Camera.toWorld(v,screen.x,screen.y);assert.ok(screen.x>=0&&screen.x<=width);assert.ok(screen.y>=0&&screen.y<=height);assert.ok(Math.abs(world.x-player.x)<1e-8&&Math.abs(world.y-player.y)<1e-8);
   }

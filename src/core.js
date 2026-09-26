@@ -2,6 +2,7 @@
   'use strict';
   const D = root.ZRZData || require('./data.js');
   if (typeof module !== 'undefined' && !D.expanded) require('./content.js');
+  const L = root.ZRZLandscape || require('./landscape.js');
   const VERSION = 3;
   const defaultBindings = Object.freeze({ up: 'w', left: 'a', down: 's', right: 'd', interact: 'e', bag: 'b', map: 'm', journal: 'j' });
   const bindingKeyAllowed = key => typeof key === 'string' && /^[a-z]$/.test(key) && !['c','f','h','q'].includes(key);
@@ -15,7 +16,7 @@
   function weather(day) { return ['晴', '晴', '阴', '雨', '晴', '雾', '晴', '雨', '阴', '晴', '晴', '雨', '晴', '阴'][day % 14]; }
   function initial(name = '小满', gender = '不设定') {
     return { version: VERSION, name: name.trim().slice(0, 12) || '小满', gender, day: 0, minutes: 390, stamina: 100, money: 180,
-      scene: 'farm', player: { x: 431, y: 212, direction: 'down' }, seed: 'cabbage',
+      worldRevision: 2, scene: 'farm', player: { ...L.home }, seed: 'cabbage',
       bag: { cabbageSeed: 8, radishSeed: 4, rice: 4, egg: 2, feed: 9 },
       plots: Array.from({ length: 24 }, (_, i) => ({ tilled: i < 8, crop: i < 2 ? 'cabbage' : null, growth: i < 2 ? 3 : 0, watered: false, soil: 2, lastGroup: null, repeats: 0 })),
       animals: [{ id: 'hen', name: '点点', species: '鸡', personality: '爱跟着人', product: 'egg', bond: 0, fed: false, ready: 1 }, { id: 'duck', name: '小水', species: '鸭', personality: '喜欢散步', product: 'duckEgg', bond: 0, fed: false, ready: 0 }, { id: 'cow', name: '阿黄', species: '牛', personality: '慢悠悠', product: 'milk', bond: 0, fed: false, ready: 0 }],
@@ -157,7 +158,7 @@
     const todayRain = weather(s.day) === '雨';
     s.plots.forEach(p => { if (p.crop) p.growth = Math.min(D.crops[p.crop].days, p.growth + (p.watered || todayRain ? 1 : 0.35)); else p.soil = Math.min(2, p.soil + 0.25); p.watered = weather(s.day + 1) === '雨'; });
     s.animals.forEach(a => { if (!a.fed && s.upgrades.coop && has(s, { feed: 1 })) { consume(s, { feed: 1 }); a.fed = true; } if (a.fed) a.ready = Math.min(7, a.ready + 1); a.fed = false; });
-    s.day++; s.minutes = 390; s.stamina = 100; s.scene = 'farm'; s.player = { x: 431, y: 212, direction: 'down' };
+    s.day++; s.minutes = 390; s.stamina = 100; s.scene = 'farm'; s.player = { ...L.home };
     s.processing = s.processing.filter(p => { if (p.readyDay <= s.day) { add(s, p.id, p.qty); s.stats.cooked += p.qty; log(s, D.items[p.id].name + '腌好了。'); return false; } return true; });
     if (s.day % 112 === 0) { s.flags.yearReview = true; log(s, '走过四季，日子有了自己的模样。新的一年，继续慢慢过。'); }
     return ok('早安，' + s.name + '。今天' + weather(s.day) + '，又是新的一天。');
@@ -174,14 +175,17 @@
     s.gender = ['不设定', '女', '男'].includes(v.gender) ? v.gender : '不设定';
     s.bag = {}; for (const [id, qty] of Object.entries(v.bag)) { if (!D.items[id] || !Number.isInteger(qty) || !finite(qty, 0, 999999)) throw new Error('背包物品数据无效。'); if (qty > 0) s.bag[id] = qty; }
     s.plots = v.plots.map(p => { if (!p || (p.crop !== null && !D.crops[p.crop]) || !finite(p.growth, 0, 12) || !finite(p.soil, 0, 2)) throw new Error('农地数据无效。'); return { tilled: !!p.tilled, crop: p.crop, growth: p.growth, soil: p.soil, watered: !!p.watered, lastGroup: ['叶菜', '根菜', '豆类', '谷物', '果实'].includes(p.lastGroup) ? p.lastGroup : null, repeats: clamp(Number(p.repeats) || 0, 0, 1000) }; });
-    if (v.player && finite(v.player.x, 16, 944) && finite(v.player.y, 48, 556)) s.player = { x: v.player.x, y: v.player.y, direction: ['up', 'down', 'left', 'right'].includes(v.player.direction) ? v.player.direction : 'down' };
+    if(v.worldRevision!==undefined&&v.worldRevision!==2)throw new Error('地图版本不兼容。');
+    const expanded=v.worldRevision===2;
+    if(v.player&&finite(v.player.x,expanded?24:16,expanded?1896:944)&&finite(v.player.y,expanded?38:48,expanded?1128:556))s.player={x:v.player.x+(expanded?0:480),y:v.player.y+(expanded?0:288),direction:['up','down','left','right'].includes(v.player.direction)?v.player.direction:'down'};
+    s.worldRevision=2;
     if (D.crops[v.seed]) s.seed = v.seed;
     for (const a of s.animals) { const prev = Array.isArray(v.animals) && v.animals.find(x => x.id === a.id); if (prev) { a.bond = clamp(Number(prev.bond) || 0, 0, 100); a.fed = !!prev.fed; a.ready = clamp(Math.floor(Number(prev.ready) || 0), 0, 7); if(typeof prev.name==='string')a.name=prev.name.slice(0,12)||a.name; } }
     for (const [id, r] of Object.entries(s.relations)) { const prev = v.relations && v.relations[id]; if (prev) { r.points = clamp(Number(prev.points) || 0, 0, 100); for (const k of ['talked', 'gifted']) r[k] = Number.isInteger(prev[k]) ? Math.min(prev[k], s.day) : -1; r.returnGift = !!prev.returnGift; } }
     for (const k of ['firstHarvest', 'firstSale', 'firstCook', 'firstDish', 'schoolLunch', 'carpenterLunch', 'bridge', 'yearReview', 'introDone']) if (v.flags && v.flags[k]) s.flags[k] = true;
     for (const k of Object.keys(D.upgrades)) if (v.upgrades && v.upgrades[k]) s.upgrades[k] = true;
     for (const k of Object.keys(s.stats)) s.stats[k] = clamp(Number(v.stats && v.stats[k]) || 0, 0, 1e9);
-    s.collected = {}; if (v.collected && typeof v.collected === 'object') for (const [k, day] of Object.entries(v.collected)) if (/^(bamboo|mountain)-\d+$/.test(k) && Number.isInteger(day) && day <= s.day) s.collected[k] = day;
+    s.collected = {}; if (v.collected && typeof v.collected === 'object') for (const [k, day] of Object.entries(v.collected)) if ((/^(bamboo|mountain)-\d+$/.test(k)||Object.values(L.maps).some(m=>m.landmarks.some(p=>p.kind==='gather'&&p.id===k))) && Number.isInteger(day) && day <= s.day) s.collected[k] = day;
     s.discovered = Array.isArray(v.discovered) ? [...new Set(v.discovered.filter(id => !!D.items[id]))] : Object.keys(s.bag);
     s.processing = Array.isArray(v.processing) ? v.processing.filter(p => p && p.id === 'pickles' && Number.isInteger(p.qty) && p.qty > 0 && p.qty <= 20 && Number.isInteger(p.readyDay) && p.readyDay >= s.day && p.readyDay <= s.day + 1).map(p => ({ id: p.id, qty: p.qty, readyDay: p.readyDay })) : [];
     s.festivals = Array.isArray(v.festivals) ? [...new Set(v.festivals.filter(k => typeof k === 'string' && /^\d+-[0-3]$/.test(k)))].slice(0, 4000) : [];
