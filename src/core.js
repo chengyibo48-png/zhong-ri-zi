@@ -27,7 +27,7 @@
   }
   function add(s, id, count = 1) { s.bag[id] = (s.bag[id] || 0) + count; if (count > 0 && !s.discovered.includes(id)) s.discovered.push(id); }
   function has(s, needs, n = 1) { return Object.entries(needs).every(([id, qty]) => (s.bag[id] || 0) >= qty * n); }
-  function consume(s, needs, n = 1) { Object.entries(needs).forEach(([id, qty]) => { const q=s.quality?.[id]; if(q){const normal=Math.max(0,(s.bag[id]||0)-q[0]-q[1]),remaining=Math.max(0,qty*n-normal),good=Math.min(q[0],remaining);q[0]-=good;q[1]=Math.max(0,q[1]-(remaining-good));} s.bag[id] -= qty * n; if (!s.bag[id]) delete s.bag[id]; }); }
+  function consume(s, needs, n = 1) { Object.entries(needs).forEach(([id, qty]) => { const q=s.quality?.[id]; if(q){const normal=Math.max(0,(s.bag[id]||0)-q.reduce((a,b)=>a+b,0));let remaining=Math.max(0,qty*n-normal);for(let i=0;i<q.length;i++){const used=Math.min(q[i],remaining);q[i]-=used;remaining-=used;}} s.bag[id] -= qty * n; if (!s.bag[id]) delete s.bag[id]; }); }
   function log(s, text) { s.journal.unshift({ day: s.day, text }); s.journal = s.journal.slice(0, 60); }
   function labor(s, cost, minutes = 8) { cost=Math.max(1,cost-(s.skills?.farming.choice==='gentle'?1:0)-(s.buffs?.laborDay===s.day?1:0)-(s._laborTool&&s.toolUpgrades?.[s._laborTool]?1:0)); if (s.stamina < cost) return false; s.stamina -= cost; s.minutes = Math.min(1320, s.minutes + minutes); return true; }
   function plotAction(s, index, tool) {

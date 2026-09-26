@@ -66,6 +66,28 @@
 
 #walk-progress{align-self:center;max-width:260px;padding:8px 12px;background:#2f5044e8;border:1px solid #a6bb8e;border-radius:5px;color:#fff2cf;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media(max-width:500px){#walk-progress{max-width:190px;font-size:10px;order:-1}}
 
+/* 四时农事：田亩索引与田边操作 */
+.modal:has(.farm-book){width:min(1160px,96vw)}
+.farm-book h2{margin:8px 0 12px}.farm-overview{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.farm-overview button{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#e6e8d5;border:1px solid #c1cbb1;border-radius:12px;color:#3d5945}
+.farm-overview button.active{background:#42664e;color:#fff9e5}.farm-overview strong{font:700 30px Georgia,serif}.farm-overview span{font-size:13px}
+.farm-forecast{display:flex;flex-wrap:wrap;gap:18px;padding:13px 16px;background:#e8eee5;border-radius:9px;font-size:13px;color:#55745f}.farm-forecast small{flex:1;min-width:200px;color:#657368}
+.farm-controls{display:flex;align-items:end;flex-wrap:wrap;gap:9px;margin:16px 0}.farm-controls label{display:grid;gap:6px;font-size:12px;color:#64715d}.farm-controls select{max-width:240px;min-height:37px;background:#fffbed;border:1px solid #c6cbb8;border-radius:7px;padding:6px;color:#405b45}
+.farm-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px}.farm-map-wrap{align-self:start;background:#e9e7d6;padding:16px;border-radius:13px;border:1px solid #d3d0b9}
+.farm-map-head{display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-bottom:14px}.farm-map-head small{font-size:11px;font-weight:400;color:#6e7861}
+.farm-map{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.farm-cell{position:relative;min-height:39px;background:#d2c7a2;border:1px solid #baae88;border-radius:5px;color:#665b40;padding:3px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.farm-cell span{font-size:9px;line-height:10px}.farm-cell b{font-size:14px;line-height:19px;font-weight:500}.farm-cell i{position:absolute;height:3px;background:#5c9aaa;bottom:0;left:0}.farm-cell.growing{background:#a8ba80;color:#294d33}.farm-cell.ready{background:#e5c775;color:#675225}.farm-cell.dim{opacity:.35}.farm-cell.selected{outline:2px solid #3b624b;outline-offset:1px;opacity:1}.farm-cell:nth-child(24){margin-bottom:8px}.farm-cell:nth-child(19),.farm-cell:nth-child(20),.farm-cell:nth-child(21),.farm-cell:nth-child(22),.farm-cell:nth-child(23){margin-bottom:8px}
+.farm-map-key{font-size:11px!important;line-height:1.8!important;color:#6c7760}.farm-batch{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid #cecab0;padding-top:12px}.farm-batch strong{width:100%;font-size:12px;margin-bottom:5px}.farm-batch-preview{background:#fff6da;padding:12px;margin-top:12px;border-radius:8px;font-size:12px}
+.farm-main{min-width:0}.farm-main>.tabs{margin-top:0}.farm-main .tabs [aria-current]{background:#45684f;color:#fff8df}.farm-detail-title{position:relative;padding:6px 0 14px}.farm-detail-title>.mini-btn{float:right}.eyebrow{font-size:11px;letter-spacing:2px;color:#778067}
+.farm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.farm-stat{padding:12px;background:#f0eedf;border-radius:9px}.farm-stat>span{display:block;color:#6c775e;font-size:11px}.farm-stat strong{display:block;font-size:24px;margin:6px 0}.farm-stat small{font-size:10px;font-weight:400;color:#8b907b}
+.farm-meter{height:5px;background:#dbdfca;border-radius:6px;overflow:hidden}.farm-meter i{display:block;height:100%;background:#658d62}.farm-growth{padding:16px 0 4px}.farm-growth>span{display:block;font-size:10px;color:#80916e;margin-top:8px}.farm-growth p{font-size:12px!important}
+.farm-advice{background:#e8edda;border-left:3px solid #8aa56b;padding:13px 15px;border-radius:0 9px 9px 0;margin:12px 0;font-size:12px}.farm-advice ul{margin:6px 0 0;padding-left:16px;line-height:1.9}
+.farm-facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px;color:#7c806d}.farm-facts span{display:flex;flex-direction:column;gap:3px}.farm-facts b{font-weight:500;color:#4f644e;line-height:1.6}.farm-actions{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.farm-harvest-preview{display:flex;gap:12px;flex-wrap:wrap;align-items:center;border:1px solid #dbcf9b;background:#fbf4dc;padding:12px;margin-top:14px;border-radius:9px;font-size:12px}.farm-harvest-preview small{width:100%;color:#8a815c}.farm-more{border-top:1px solid #d8dcc6;padding:15px 0;margin-top:12px}.farm-more summary{cursor:pointer;font-size:13px;font-weight:600;color:#48624d}.farm-more p{font-size:12px!important}.farm-target{width:60px}.farm-guide{font-size:13px;line-height:1.9}.farm-guide h3{color:#547044;margin-top:24px}.farm-seed-summary{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:#e9edda;border-radius:9px;padding:12px;margin:12px 0;font-size:12px}.farm-selected{border-color:#648f62!important}
+@media(max-width:700px){.farm-layout{grid-template-columns:1fr;gap:16px}.farm-map{grid-template-columns:repeat(12,1fr);gap:4px}.farm-map-wrap{padding:12px}.farm-cell{min-height:34px}.farm-overview{gap:5px}.farm-overview button{padding:9px 5px;flex-direction:column;gap:4px}.farm-overview strong{font-size:23px}.farm-overview span{font-size:11px}.farm-controls select{max-width:190px}.farm-facts{grid-template-columns:1fr 1fr}.farm-stats{gap:6px}.farm-stat{padding:9px}.farm-cell:nth-child(n){margin-bottom:0}}
+
+.farm-book>h2{font-size:24px;margin:0 0 6px}.farm-book>.subtitle{margin:0 0 12px;line-height:1.6}.farm-book .farm-overview{margin:12px 0}.farm-book .farm-overview button{padding:9px 16px}.farm-book .farm-forecast{padding:10px 14px}.farm-book>.farm-controls{margin:12px 0}.farm-book .farm-map-wrap{position:static}.farm-book .farm-stat strong{color:#355140}.farm-book .farm-advice{color:#445d42}.farm-book .farm-facts{color:#69715d}
+@media(max-width:700px){.farm-book .farm-map-wrap{position:static}.farm-book .farm-map{grid-template-columns:repeat(12,minmax(0,1fr))}.farm-book .farm-overview button{padding:9px 4px}.farm-book .farm-cell{min-width:0}.farm-book .farm-cell span{font-size:8px}.farm-book .farm-map-key{font-size:10px!important}}
+
 </style>
 </head>
 <body>
@@ -434,7 +456,7 @@
   }
   function add(s, id, count = 1) { s.bag[id] = (s.bag[id] || 0) + count; if (count > 0 && !s.discovered.includes(id)) s.discovered.push(id); }
   function has(s, needs, n = 1) { return Object.entries(needs).every(([id, qty]) => (s.bag[id] || 0) >= qty * n); }
-  function consume(s, needs, n = 1) { Object.entries(needs).forEach(([id, qty]) => { const q=s.quality?.[id]; if(q){const normal=Math.max(0,(s.bag[id]||0)-q[0]-q[1]),remaining=Math.max(0,qty*n-normal),good=Math.min(q[0],remaining);q[0]-=good;q[1]=Math.max(0,q[1]-(remaining-good));} s.bag[id] -= qty * n; if (!s.bag[id]) delete s.bag[id]; }); }
+  function consume(s, needs, n = 1) { Object.entries(needs).forEach(([id, qty]) => { const q=s.quality?.[id]; if(q){const normal=Math.max(0,(s.bag[id]||0)-q.reduce((a,b)=>a+b,0));let remaining=Math.max(0,qty*n-normal);for(let i=0;i<q.length;i++){const used=Math.min(q[i],remaining);q[i]-=used;remaining-=used;}} s.bag[id] -= qty * n; if (!s.bag[id]) delete s.bag[id]; }); }
   function log(s, text) { s.journal.unshift({ day: s.day, text }); s.journal = s.journal.slice(0, 60); }
   function labor(s, cost, minutes = 8) { cost=Math.max(1,cost-(s.skills?.farming.choice==='gentle'?1:0)-(s.buffs?.laborDay===s.day?1:0)-(s._laborTool&&s.toolUpgrades?.[s._laborTool]?1:0)); if (s.stamina < cost) return false; s.stamina -= cost; s.minutes = Math.min(1320, s.minutes + minutes); return true; }
   function plotAction(s, index, tool) {
@@ -637,15 +659,15 @@
   C.weather=day=>{const d=day%112;if(d===46)return '台风';if(d===51||d===52)return '高温';if(d===99)return '寒潮';if(d===95||d===105)return '小雪';return old.weather(day);};
   C.weatherAdvice=day=>({台风:'明日台风：可先备好蓄水、留在家中加工。作物和动物不会损失。',高温:'高温天多歇歇，补好蓄水；不浇水只会长慢一些。',寒潮:'寒潮期间温棚照常生长，露地暂时减速，作物不会枯死。',小雪:'小雪可以安心拜访、做饭，田里的作物仍会慢慢生长。',雨:'雨水会替你浇地，晒制顺延一天；可以去串门。'}[C.weather(day)]||'适合出门走走，照看小院或赶集。');
   C.market=s=>({open:s.day%7===5,demand:Object.keys(D.crops)[Math.floor(s.day/7)%Object.keys(D.crops).length],bonus:.2});
-  C.price=(s,id,qty=1)=>{let base=D.items[id].price,bonus=C.market(s);const q=s.quality[id]||[0,0],ordinary=Math.max(0,(s.bag[id]||0)-q[0]-q[1]);const good=Math.min(q[0],Math.max(0,qty-ordinary)),care=Math.max(0,qty-ordinary-good);return Math.floor(base*(qty+good*.2+care*.4)*(bonus.open&&bonus.demand===id?1.2:1));};
+  C.price=(s,id,qty=1)=>{const base=D.items[id].price,bonus=C.market(s),q=s.quality[id]||[0,0];let left=Math.max(0,qty-Math.max(0,(s.bag[id]||0)-q.reduce((a,b)=>a+b,0))),extra=0;for(let i=0;i<q.length;i++){const used=Math.min(left,q[i]);extra+=used*[.2,.4,.7][i];left-=used;}return Math.floor(base*(qty+extra)*(bonus.open&&bonus.demand===id?1.2:1));};
   C.sell=(s,id,n=1)=>{if(!D.items[id]||!Number.isInteger(n)||n<1||!C.has(s,{[id]:n}))return no('没有这么多可出售的物品。');const money=C.price(s,id,n);C.consume(s,{[id]:n});s.money+=money;s.stats.earned+=money;s.flags.firstSale=true;return yes('售出'+D.items[id].name+' ×'+n+'，收到 '+money+' 元（含品质与赶集加价）。');};
   C.storageMove=(s,id,qty,toStorage)=>{
     if(!s.upgrades.storage)return no('先在修缮小院中添置储物柜。');
     if(!D.items[id]||!Number.isInteger(qty)||qty<1||qty>999999)return no('请输入有效数量。');
     const from=toStorage?s.bag:s.storage,to=toStorage?s.storage:s.bag,qFrom=toStorage?s.quality:s.storageQuality,qTo=toStorage?s.storageQuality:s.quality;
     if((from[id]||0)<qty)return no('没有这么多物品。');
-    const q=qFrom[id]||[0,0],normal=from[id]-q[0]-q[1],g=Math.min(q[0],Math.max(0,qty-normal)),c=Math.max(0,qty-normal-g);
-    from[id]-=qty;if(!from[id])delete from[id];to[id]=(to[id]||0)+qty;qFrom[id]=[q[0]-g,q[1]-c];qTo[id]??=[0,0];qTo[id][0]+=g;qTo[id][1]+=c;
+    const q=qFrom[id]||[0,0],normal=from[id]-q.reduce((a,b)=>a+b,0);let left=Math.max(0,qty-normal);qTo[id]??=Array(q.length).fill(0);while(qTo[id].length<q.length)qTo[id].push(0);const moved=q.map((n,i)=>{const used=Math.min(n,left);left-=used;qTo[id][i]+=used;return n-used;});
+    from[id]-=qty;if(!from[id])delete from[id];to[id]=(to[id]||0)+qty;qFrom[id]=moved;
     return yes((toStorage?'存好':'取出')+D.items[id].name+' ×'+qty+'，品质也已一同保留。');
   };
   C.fertilize=(s,i)=>{const p=s.plots[i];if(!p||!p.tilled)return no('请选一块已经松土的菜地。');if(p.soil>=2)return no('土壤已经肥沃，暂时不用堆肥。');if(!C.has(s,{compost:1}))return no('需要熟堆肥，可在加工页制作或杂货铺购买。');C.consume(s,{compost:1});p.soil=Math.min(2,p.soil+1);xp(s,'farming');return yes('熟堆肥拌进土里，土壤恢复了一档。');};
@@ -739,7 +761,7 @@
     const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
     const itemMap=x=>{if(!obj(x))invalid();const r={};for(const[k,n]of Object.entries(x)){if(!D.items[k]||!int(n,0,999999))invalid();if(n)r[k]=n;}return r;};
     s.storage=itemMap(v.storage||{});
-    for(const[key,bag]of [['quality',s.bag],['storageQuality',s.storage]]){s[key]={};if(!obj(v[key]||{}))invalid();for(const[id,q]of Object.entries(v[key]||{})){if(!D.items[id]||!Array.isArray(q)||q.length!==2||!q.every(n=>int(n,0,999999))||q[0]+q[1]>(bag[id]||0))invalid();s[key][id]=q;}}
+    for(const[key,bag]of [['quality',s.bag],['storageQuality',s.storage]]){s[key]={};if(!obj(v[key]||{}))invalid();for(const[id,q]of Object.entries(v[key]||{})){if(!D.items[id]||!Array.isArray(q)||![2,3].includes(q.length)||!q.every(n=>int(n,0,999999))||q.reduce((a,b)=>a+b,0)>(bag[id]||0))invalid();s[key][id]=q;}}
     if(!Array.isArray(v.knownRecipes)||v.knownRecipes.some(id=>!D.recipes.some(r=>r.id===id)))invalid();s.knownRecipes=[...new Set(v.knownRecipes)];
     for(const n of D.npcs){const st=v.stories?.[n.id];if(st){if(!int(st.step,0,D.arcs[n.id].length)||!Array.isArray(st.choices)||st.choices.length!==st.step||st.choices.some(c=>![0,1].includes(c))||!int(st.lastDay,-1,s.day))invalid();s.stories[n.id]=copy(st);}}
     if(!obj(v.partners||{}))invalid();s.partners={};for(const[id,status]of Object.entries(v.partners||{})){if(D.npcs.find(n=>n.id===id)?.tier!=='romance'||!['friend','dating'].includes(status))invalid();s.partners[id]=status;}
@@ -767,7 +789,7 @@
     for(const[k,id]of Object.entries(v.lastGifts||{}))if(s.relations[k]&&D.items[id])s.lastGifts[k]=id;
     for(const[k,val]of Object.entries(v.resourcePressure||{}))if(Object.hasOwn(D.scenes,k)&&int(val.day,0,s.day)&&int(val.count,0,99))s.resourcePressure[k]={day:val.day,count:val.count};
     s.eventLog=Array.isArray(v.eventLog)?v.eventLog.filter(e=>e&&int(e.day,0,s.day)&&typeof e.text==='string').slice(0,200).map(e=>({day:e.day,text:e.text.slice(0,600)})):[];
-    s.processing=Array.isArray(v.processing)?v.processing.map(p=>{if(!p||!D.items[p.id]||!int(p.qty,1,400)||!int(p.readyDay,s.day,s.day+3)||!['晾晒架','腌菜坛','堆肥箱'].includes(p.station)&&p.id!=='pickles')invalid();return {id:p.id,qty:p.qty,readyDay:p.readyDay,station:p.station||'腌菜坛',cooking:p.cooking!==false};}):[];
+    s.processing=Array.isArray(v.processing)?v.processing.map(p=>{if(!p||!D.items[p.id]||!int(p.qty,1,400)||!int(p.readyDay,s.day,s.day+3)||!['晾晒架','腌菜坛','堆肥箱'].includes(p.station)&&p.id!=='pickles')invalid();return {id:p.id,qty:p.qty,readyDay:p.readyDay,station:p.station||'腌菜坛',cooking:p.cooking!==false,...(p.farmGrade!==undefined?(int(p.farmGrade,1,3)?{farmGrade:p.farmGrade}:(invalid(),{})): {})};}):[];
     s.plots.forEach((p,i)=>{const prev=v.plots[i];if(!int(prev.care??0,0,30))invalid();p.care=prev.care??0;p.pest=!!prev.pest;});
     const vs=v.settings||{};for(const k of ['music','ambient','effects'])s.settings[k]=number(vs[k],0,1)?vs[k]:.35;
     s.settings.textSpeed=['instant','slow','normal'].includes(vs.textSpeed)?vs.textSpeed:'instant';s.settings.textScale=[1,1.15,1.3].includes(vs.textScale)?vs.textScale:1;s.settings.contrast=!!vs.contrast;s.settings.vibration=!!vs.vibration;s.settings.gamepad=vs.gamepad!==false;s.settings.fishAssist=vs.fishAssist!==false;
@@ -1253,6 +1275,208 @@
 </script>
   <script>
 (function(root){
+'use strict';
+const C=root.ZRZCore,D=root.ZRZData,V=root.ZRZVillage;
+const clamp=(n,a=0,b=100)=>Math.max(a,Math.min(b,n)),copy=v=>JSON.parse(JSON.stringify(v)),yes=msg=>({ok:true,msg}),no=msg=>({ok:false,msg});
+const soils={loam:{name:'壤土',evap:15,color:'#98724e'},sand:{name:'沙壤土',evap:23,color:'#bfa070'},clay:{name:'黏土',evap:9,color:'#826653'},humus:{name:'腐殖土',evap:13,color:'#665546'},wetland:{name:'水田土',evap:6,color:'#697765'}};
+const grades=['普通','优质','上品','珍品'],kinds={normal:{name:'普通种',cap:2,rate:1,resist:0},heirloom:{name:'乡传良种',cap:3,rate:.92,resist:10},seasonal:{name:'节令种',cap:2,rate:1.14,resist:5}};
+const facilities={
+ sprinkler:{name:'竹管喷灌',radius:72,cost:70,needs:{wood:4,bamboo:6},description:'水分低于阈值时，每块消耗 1 格储水；补到 65。'},
+ greenhouse:{name:'小暖棚',radius:62,cost:220,needs:{wood:10,bamboo:12},day:56,description:'第三季起可建；覆盖内可反季种植，挡寒潮。'},
+ scarecrow:{name:'草帽稻草人',radius:110,cost:35,needs:{wood:3},description:'防成熟作物被鸟啄；不能治疗病虫害。'},
+ shade:{name:'竹篾遮阳网',radius:72,cost:60,needs:{bamboo:6},description:'高温减蒸发、护叶；普通晴天稍慢。'},
+ fence:{name:'田边矮篱',radius:68,cost:40,needs:{wood:5},description:'护住东坡幼苗，减少小动物踩踏。'},
+ trellis:{name:'瓜豆攀爬架',radius:52,cost:45,needs:{bamboo:5},description:'瓜豆攀援加速；下层叶菜获得微荫。'},
+ drain:{name:'浅沟排水渠',radius:70,cost:50,needs:{wood:3},description:'雨后将积水缓缓排至安全水分。'}
+};
+for(const[id,c]of Object.entries(D.crops)){
+ for(const kind of ['heirloom','seasonal'])D.items[id+'_'+kind]={...D.items[c.seed],name:c.name+'·'+kinds[kind].name,cost:Math.ceil(c.cost*(kind==='heirloom'?2.8:1.5)),price:Math.max(1,Math.floor(c.cost/2)),kind:'种子',icon:'seed'};
+}
+Object.assign(D.items,{slowFertilizer:{name:'草木缓释肥',kind:'材料',icon:'bag',cost:20,price:8},bioCare:{name:'草本护苗液',kind:'材料',icon:'bottle',cost:14,price:5},plantCare:{name:'速效护苗剂',kind:'材料',icon:'bottle',cost:22,price:8}});
+const seedId=(id,kind='normal')=>kind==='normal'?D.crops[id].seed:id+'_'+kind;
+function profile(id){const c=D.crops[id],wet=['rice','lotus','taro'].includes(id),rootCrop=c.group==='根菜',climber=['bean','pea','broadbean','cucumber','pumpkin','wintermelon'].includes(id);return {wet,climber,preferred:wet?'wetland':rootCrop?'sand':c.group==='叶菜'?'humus':'loam',low:wet?55:rootCrop?28:35,high:wet?95:78,feed:c.group==='豆类'?-2:c.group==='果实'?6:4};}
+function fresh(p){return {type:'loam',fertility:clamp(p.soil*50),moisture:p.watered?65:45,health:100,pests:p.pest?20:0,disease:0,weeds:0,stress:0,ripeDays:0,kind:'normal',density:'balanced',compacted:0,fallow:false,removed:false,condition:75,ticks:0,fertilized:-1,treated:-1,slow:0,penalty:0,companion:null,irrigated:-1};}
+function ensure(s){if(!s.farm)s.farm={version:1,beds:s.plots.map(fresh),facilities:[],water:0,threshold:40,seedKind:'normal',density:'balanced',autoSeed:false,overlay:false,collection:{}};return s.farm;}
+function sync(s,i){const b=ensure(s).beds[i],p=s.plots[i];p.soil=b.fertility/50;p.watered=b.moisture>=35;p.pest=b.pests>=15||b.disease>=15;}
+function coverage(s,i){const a=V.plotPosition(i);return ensure(s).facilities.filter(f=>f.durability>0&&f.enabled&&Math.hypot(a.x-V.plotPosition(f.anchor).x,a.y-V.plotPosition(f.anchor).y)<=facilities[f.type].radius);}
+const covered=(s,i,type)=>coverage(s,i).some(f=>f.type===type);
+function compatible(a,b){if(a===b)return -1;const x=D.crops[a],y=D.crops[b];if(x.group===y.group)return -1;if(x.group==='豆类'||y.group==='豆类')return 1;if(x.group==='叶菜'&&y.group==='根菜'||y.group==='叶菜'&&x.group==='根菜')return 1;return 0;}
+function neighbors(s,i){const p=V.plotPosition(i);return s.plots.map((_,j)=>j).filter(j=>j!==i&&Math.hypot(p.x-V.plotPosition(j).x,p.y-V.plotPosition(j).y)<63);}
+function relation(s,i){const p=s.plots[i],b=ensure(s).beds[i];if(!p.crop)return 0;const ids=neighbors(s,i).map(j=>s.plots[j].crop).filter(Boolean);if(b.companion)ids.push(b.companion.crop);return clamp(ids.reduce((v,id)=>v+compatible(p.crop,id),0),-2,2);}
+function stage(s,i){const p=s.plots[i],b=ensure(s).beds[i];if(b.removed)return '待修复地';if(b.fallow)return '休耕养地';if(!p.tilled)return '荒地';if(!p.crop)return b.compacted>55?'板结待松土':'待播种';if(b.health<22)return '萎蔫·可抢救';if(p.growth>=D.crops[p.crop].days)return b.ripeDays>=4?'留种期':'成熟';const k=p.growth/D.crops[p.crop].days;return k<.12?'种子':k<.28?'萌芽':k<.48?'幼苗':k<.72?'生长期':'开花结实';}
+function score(s,i){const b=ensure(s).beds[i],p=s.plots[i];return clamp(b.condition*.65+b.health*.25+b.fertility*.1+(b.type===profile(p.crop).preferred?4:0)-Math.max(0,b.ripeDays-3)*4-b.penalty);}
+function grade(s,i){const b=ensure(s).beds[i],v=score(s,i);return Math.min(kinds[b.kind].cap,v>=92?3:v>=78?2:v>=58?1:0);}
+function preview(s,i){const p=s.plots[i],b=ensure(s).beds[i];if(!p.crop)return null;return {grade:grade(s,i),qty:Math.max(1,(b.fertility>=60?2:1)+(b.density==='dense'&&b.health>=70?1:0)-(b.pests+b.disease>=100?1:0)),seed:seedId(p.crop,b.health>=75&&grade(s,i)>=2?'heirloom':b.kind)};}
+function advice(s,i){const p=s.plots[i],b=ensure(s).beds[i],out=[];if(b.removed)return ['松土修复后可重新使用'];if(b.fallow)return ['每天恢复肥力，随时结束休耕'];if(!p.tilled)return ['开垦消耗 3 体力'];if(p.crop&&p.growth>=D.crops[p.crop].days)out.push('可收获；成熟后 3 天为最佳采收期');if(b.health<35)out.push('先补水／排水并护苗，仍能救回');if(b.moisture<(p.crop?profile(p.crop).low:35))out.push('缺水：浇一壶，喷灌也可补水');if(b.moisture>(p.crop?profile(p.crop).high:85))out.push('偏涝：开沟排水，暂缓浇水');if(b.pests>=15)out.push('虫害 '+Math.round(b.pests)+'：人工捉虫或草本护苗');if(b.disease>=15)out.push('叶斑 '+Math.round(b.disease)+'：疏水并用护苗液');if(b.weeds>35)out.push('杂草争肥：拔草可改善');if(b.fertility<40)out.push('肥力低：堆肥、豆类轮作或休耕');if(b.compacted>55)out.push('土壤板结：空地深耕');if(p.repeats>=2)out.push('连作压力：下一茬换科或休耕');if(p.crop&&relation(s,i)<0)out.push('邻田同科竞争，混种豆类／根叶搭配更合适');if(p.crop&&!D.crops[p.crop].seasons.includes(C.calendar(s).season)&&!covered(s,i,'greenhouse'))out.push('当前非适季：露地生长减慢，可添小暖棚');if(!out.length)out.push('长势安稳，可以放心去村里走走');return out;}
+function addQuality(s,id,n,g){C.add(s,id,n);if(g){s.quality[id]??=[0,0,0];while(s.quality[id].length<3)s.quality[id].push(0);s.quality[id][g-1]+=n;}}
+function pay(s,cost,needs={},money=0){if(s.money<money)return no('零钱不足，需要 '+money+' 元。');if(!C.has(s,needs))return no('材料不足：'+Object.entries(needs).map(([id,n])=>D.items[id].name+' ×'+n).join('、'));if(!C.labor(s,cost,5))return no('体力不足，先歇一会儿。');C.consume(s,needs);s.money-=money;return null;}
+function perform(s,i,action,arg){const previous=s._laborTool;s._laborTool=['hoe','restore','deep'].includes(action)?'hoe':['water','drain'].includes(action)?'water':null;try{return performAction(s,i,action,arg);}finally{if(previous===undefined)delete s._laborTool;else s._laborTool=previous;}}
+function performAction(s,i,action,arg){
+ const f=ensure(s),p=s.plots[i],b=f.beds[i];if(!p||!b)return no('这块地不存在。');let err;
+ const done=msg=>{sync(s,i);if(s.skills)s.skills.farming.xp=Math.min(99999,s.skills.farming.xp+1);return yes(msg);};
+ if(action==='hoe'||action==='restore'){if(p.crop)return no('先收下作物再松土。');if(p.tilled&&!b.removed&&!b.fallow)return no('已经松好土，可选择深耕或播种。');if(err=pay(s,3))return err;p.tilled=true;b.removed=false;b.fallow=false;b.compacted=Math.max(0,b.compacted-25);return done('挥锄松土，地块可以播种了。');}
+ if(!p.tilled||b.removed)return no('先挥锄开垦或修复这块地。');
+ if(action==='sow'||action==='companion'){
+  const id=arg?.crop||s.seed,kind=arg?.kind||f.seedKind,c=D.crops[id],density=arg?.density||f.density;
+  if(!Object.hasOwn(D.crops,id)||!Object.hasOwn(kinds,kind)||!['sparse','balanced','dense'].includes(density))return no('请选择有效种子与密度。');
+  if(action==='sow'&&p.crop)return no('这里已经种下作物。');if(action==='companion'&&(!p.crop||b.companion))return no('主作物旁可套种一株。');
+  if(action==='companion'&&compatible(p.crop,id)<0)return no('同科争肥，不适合在同一块地套种。换豆类或根叶搭配试试。');
+  if(!c.seasons.includes(C.calendar(s).season)&&!(covered(s,i,'greenhouse')&&kind!=='seasonal'))return no('这个季节不适种；普通种与乡传良种可在小暖棚覆盖内播种。');
+  if(err=pay(s,2,{[seedId(id,kind)]:density==='dense'&&action==='sow'?2:1}))return err;
+  if(action==='companion'){b.companion={crop:id,growth:0,kind};return done('在垄旁套种'+c.name+'，成熟后可单独收下。');}
+  p.crop=id;p.growth=0;b.kind=kind;b.density=density;b.health=100;b.stress=0;b.ripeDays=0;b.condition=75;b.ticks=0;b.penalty=0;b.fallow=false;return done('播下'+c.name+'·'+kinds[kind].name+'，'+(density==='dense'?'密植需多留意通风。':'留好株距，慢慢等它长大。'));
+ }
+ if(action==='water'){if(b.moisture>=95)return no('已经积水，先排水。');if(err=pay(s,2))return err;b.moisture=clamp(b.moisture+30);if(b.moisture>=40&&b.moisture<=85)b.health=clamp(b.health+8);return done('水沿田垄渗下，水分 '+Math.round(b.moisture)+' / 100'+(b.moisture>85?'，偏湿，暂缓再浇。':'。'));}
+ if(action==='drain'){if(b.moisture<=60)return no('这块地暂时无需排水。');if(err=pay(s,2))return err;b.moisture=Math.max(55,b.moisture-30);b.health=clamp(b.health+5);return done('疏通小沟，积水缓缓流走。');}
+ if(action==='fertilize'||action==='slow'||action==='green'){
+  if(b.fertilized===s.day||b.slow>0&&action==='slow')return no('今天已有肥效，不必重复施肥。');
+  if(action==='green'&&p.crop)return no('绿肥翻埋需要空地。');if(b.fertility>=95)return no('土壤肥沃，暂时不用再施肥。');
+  const needs=action==='fertilize'?{compost:1}:action==='slow'?{slowFertilizer:1}:{beanSeed:1};
+  if(err=pay(s,2,needs))return err;b.fertility=clamp(b.fertility+(action==='fertilize'?25:action==='green'?18:8));b.slow=action==='slow'?5:b.slow;b.fertilized=s.day;b.compacted=clamp(b.compacted-10);return done(action==='slow'?'缓释肥将在五天内慢慢养地。':'把有机肥轻轻拌进土里。');
+ }
+ if(action==='weed'){if(b.weeds<10)return no('田垄很干净。');if(err=pay(s,2))return err;b.weeds=0;return done('拔掉杂草，根须终于有了空间。');}
+ if(['manual','bio','agent'].includes(action)){
+  if(b.pests<1&&b.disease<1)return no('暂时没有病虫害，不必用药。');if(b.treated===s.day)return no('今天已处理过，明早再观察。');
+  if(action==='manual'&&b.pests<1)return no('人工捉虫不能消除叶斑，请使用草本护苗液。');
+  if(err=pay(s,action==='manual'?3:2,action==='bio'?{bioCare:1}:action==='agent'?{plantCare:1}:{}))return err;
+  b.pests=clamp(b.pests-(action==='manual'?45:action==='bio'?35:80));if(action!=='manual')b.disease=clamp(b.disease-(action==='bio'?40:80));
+  b.health=clamp(b.health+15);b.treated=s.day;if(action==='agent')b.penalty=clamp(b.penalty+8);return done(action==='agent'?'病叶与小虫得到控制；本茬品质评分 -8。':'仔细护好叶片，明天再看长势。');
+ }
+ if(['deep','fallow','remove','soil'].includes(action)){
+  if(action==='soil'&&!Object.hasOwn(soils,arg))return no('请选择有效土质。');
+  if(p.crop||b.companion)return no('请先收下作物，土地调整不会替你销毁庄稼。');
+  if(err=pay(s,action==='deep'?4:2,action==='soil'?{compost:2}:{},action==='soil'?20:0))return err;
+  if(action==='deep'){b.compacted=0;b.fertility=clamp(b.fertility+5);return done('深翻晒土，板结松开了。');}
+  if(action==='fallow'){b.fallow=!b.fallow;return done(b.fallow?'铺好草屑，让土地休息。':'结束休耕，可以重新播种。');}
+  if(action==='remove'){b.removed=true;p.tilled=false;return done('撤去田垄，保留土壤；随时可以修复。');}
+  b.type=arg;return done('换入'+soils[arg].name+'，适种偏好已更新。');
+ }
+ if(action==='companionHarvest'){
+  const a=b.companion;if(!a||a.growth<D.crops[a.crop].days)return no('套种作物还没成熟。');if(err=pay(s,2))return err;const g=Math.min(grade(s,i),kinds[a.kind].cap);addQuality(s,a.crop,1,g);s.stats.harvested++;const name=D.crops[a.crop].name;b.companion=null;return done('摘下垄旁的'+name+' ×1 · '+grades[g]+'。');
+ }
+ if(action==='harvest'||action==='seedSave'){
+  if(!p.crop||p.growth<D.crops[p.crop].days)return no('还没到成熟时候。');if(err=pay(s,2))return err;
+  const id=p.crop,c=D.crops[id],r=preview(s,i);let msg;
+  if(action==='seedSave'){const n=(b.health>=60?2:1)+(b.health>=75&&b.ripeDays>=4&&b.ripeDays<=8?1:0);C.add(s,r.seed,n);msg='挑选饱满种子 ×'+n+'，收进种子袋。';}
+  else {addQuality(s,id,r.qty,r.grade);s.stats.harvested+=r.qty;s.flags.firstHarvest=true;f.collection[id]=Math.max(f.collection[id]||0,r.grade+1);msg='收下'+c.name+' ×'+r.qty+' · '+grades[r.grade]+'。';if(f.autoSeed){C.add(s,seedId(id,b.kind),1);msg+=' 留了一份原品种种子。';}}
+  p.repeats=p.lastGroup===c.group?p.repeats+1:1;p.lastGroup=c.group;b.fertility=clamp(b.fertility+(c.group==='豆类'?14:-5));p.crop=null;p.growth=0;b.ripeDays=0;b.ticks=0;
+  if(b.companion){p.crop=b.companion.crop;p.growth=b.companion.growth;b.kind=b.companion.kind;b.companion=null;b.density='sparse';msg+=' 套种作物继续生长。';}
+  return done(msg);
+ }
+ return no('请选择农事动作。');
+}
+function daily(s,day){
+ const f=ensure(s),weather=C.weather(day),season=C.calendar({day}).season,rain=['雨','台风'].includes(weather),prior=f.beds.map(b=>({pests:b.pests,disease:b.disease}));
+ for(let i=0;i<s.plots.length;i++){
+  const p=s.plots[i],b=f.beds[i],types=new Set(coverage(s,i).map(v=>v.type)),has=k=>types.has(k),crop=p.crop?profile(p.crop):null;
+  if(!p.tilled||b.removed){b.fertility=clamp(b.fertility+1);sync(s,i);continue;}
+  b.moisture=clamp(b.moisture+(rain?(weather==='台风'?48:34):0)-soils[b.type].evap*(weather==='高温'?1.5:1)*(has('shade')?.65:1));
+  if(has('drain')&&b.moisture>80)b.moisture=75;
+  if(p.crop&&has('sprinkler')&&b.moisture<f.threshold&&f.water>0){f.water--;b.moisture=65;b.irrigated=s.day;}
+  if(s.projects.canal&&s.day%7===0&&D.npcs.some(n=>s.relations[n.id].points>=30))b.moisture=Math.max(55,b.moisture);
+  if(b.slow>0){b.fertility=clamp(b.fertility+5);b.slow--;}
+  if(!p.crop){b.fertility=clamp(b.fertility+(b.fallow?9:3));b.compacted=clamp(b.compacted-3);b.pests=clamp(b.pests-8);b.disease=clamp(b.disease-8);if(b.fallow){p.repeats=Math.max(0,p.repeats-1);b.weeds=0;}sync(s,i);continue;}
+  const c=D.crops[p.crop],rel=relation(s,i),dry=b.moisture<crop.low,wet=b.moisture>crop.high,off=!c.seasons.includes(season)&&!has('greenhouse'),cold=weather==='寒潮'&&!has('greenhouse'),heat=weather==='高温'&&!has('shade'),same=neighbors(s,i).filter(j=>s.plots[j].crop===p.crop).length;
+  const risk=clamp(2+p.repeats*2+same*2+(b.density==='dense'?7:0)+(wet?9:0)+(heat?5:0)+(b.fertility<30?5:0)-kinds[b.kind].resist-(rel>0?4:0),0,35);
+  const roll=(Math.imul(day+1,1103515245)+Math.imul(i+17,12345))>>>0;
+  if(day>6&&roll%100<risk)b.pests=clamp(b.pests+14);
+  if(day>6&&wet&&((roll>>>8)%100<risk))b.disease=clamp(b.disease+12);
+  if(wet||b.density==='dense')for(const j of neighbors(s,i)){if(prior[j].pests>=60)b.pests=clamp(b.pests+2);if(prior[j].disease>=60)b.disease=clamp(b.disease+2);}
+  b.weeds=clamp(b.weeds+(rain?5:2));b.compacted=clamp(b.compacted+(wet?3:1));
+  const stress=(dry||wet?12:0)+(cold||heat||off?7:0)+(b.pests+b.disease)*.12+(b.weeds>60?5:0);
+  b.health=clamp(b.health+(stress>12?-Math.min(15,stress-8):8),10,100);b.stress=stress>12?Math.min(999,b.stress+1):0;
+  const condition=clamp(100-(dry||wet?28:0)-(off||cold||heat?15:0)-(b.pests+b.disease)*.25-(b.fertility<40?20:0)-(b.weeds>40?10:0)+(rel>0?3:0));
+  b.condition=(b.condition*b.ticks+condition)/(b.ticks+1);b.ticks=Math.min(100000,b.ticks+1);
+  let rate=(dry||wet?.55:1)*(off?.65:1)*(cold?.7:1)*(b.health<22?.25:1)*(1-(b.pests+b.disease)/400)*kinds[b.kind].rate;
+  rate*=b.type===crop.preferred?1.08:1;rate*=b.density==='dense'?.94:b.density==='sparse'?1.05:1;rate*=rel>0?1.05:rel<0?.95:1;
+  if(b.compacted>55)rate*=.85;if(b.fertility<25)rate*=.85;if(has('trellis')&&crop.climber)rate*=1.15;if(has('trellis')&&c.group==='叶菜'&&heat)rate*=1.1;if(has('shade')&&weather==='晴')rate*=.95;
+  if(i>=24&&!has('fence')&&day%17===i%17&&p.growth<c.days*.5)b.health=clamp(b.health-6,10);
+  if(!has('scarecrow')&&p.growth>=c.days&&day%13===i%13)b.penalty=clamp(b.penalty+3);
+  if(p.growth>=c.days)b.ripeDays=Math.min(100000,b.ripeDays+1);else {p.growth=Math.min(c.days,p.growth+Math.max(.08,rate));b.fertility=clamp(b.fertility-crop.feed*(b.density==='dense'?1.25:1));}
+  if(b.companion)b.companion.growth=Math.min(D.crops[b.companion.crop].days,b.companion.growth+rate*.9);
+  sync(s,i);
+ }
+ for(const a of f.facilities)a.durability=clamp(a.durability-(weather==='台风'?7:1));
+}
+function facility(s,i,type,mode='build',target=null){const f=ensure(s),spec=facilities[type];if(!Object.hasOwn(facilities,type)||!s.plots[i])return no('请选择设施与地块。');let a=f.facilities.find(v=>v.anchor===i&&v.type===type),err;
+ if(mode==='build'){if(a)return no('这里已有同类设施。');if(f.facilities.filter(v=>v.anchor===i).length>=2)return no('田埂最多放两座设施，请换一处位置。');if(spec.day&&s.day<spec.day)return no('小暖棚在第三季开放，现在可先准备木材与竹料。');const stock=(s.furniture[type]||0)>0;if(err=pay(s,3,stock?{}:spec.needs,stock?0:spec.cost))return err;if(stock)s.furniture[type]--;f.facilities.push({type,anchor:i,durability:100,enabled:true});return yes(spec.name+'安在田埂上，仅影响覆盖内的地块。');}
+ if(!a)return no('没有找到这座设施。');if(mode==='move'){if(!Number.isInteger(target)||!s.plots[target]||target===i||f.facilities.filter(v=>v.anchor===target).length>=2||f.facilities.some(v=>v.anchor===target&&v.type===type))return no('目标田埂已满或位置无效。');if(err=pay(s,2))return err;a.anchor=target;return yes('把设施搬到了 '+(target+1)+' 号地旁。');}
+ if(mode==='repair'){if(a.durability===100)return no('设施完好，无需维修。');if(err=pay(s,2,{wood:1},5))return err;a.durability=100;return yes('绑紧竹结，设施修好了。');}
+ if(mode==='toggle'){a.enabled=!a.enabled;return yes(a.enabled?'设施已启用。':'设施已暂停。');}return no('未知设施操作。');
+}
+function fillWater(s){const f=ensure(s);if(f.water>=120)return no('水箱已经装满。');const err=pay(s,3,{},6);if(err)return err;f.water=120;return yes('挑水补满 120 格储水，喷灌每次照料一块消耗 1 格。');}
+function list(s,filter='all',region='all',crop='all'){ensure(s);return s.plots.map((p,i)=>i).filter(i=>{const p=s.plots[i],b=s.farm.beds[i];return(region==='all'||(region==='home'?i<24:i>=24))&&(crop==='all'||p.crop===crop)&&(filter==='all'||filter==='ready'&&p.crop&&p.growth>=D.crops[p.crop].days||filter==='dry'&&p.crop&&p.tilled&&b.moisture<(p.crop?profile(p.crop).low:35)||filter==='risk'&&(b.pests>=15||b.disease>=15||p.crop&&b.health<40||p.tilled&&b.moisture>(p.crop?profile(p.crop).high:85))||filter==='empty'&&p.tilled&&!p.crop&&!b.removed);});}
+function plan(s,ids,action){return [...new Set(ids)].filter(i=>{const p=s.plots[i],b=ensure(s).beds[i];if(!p||!b)return false;if(action==='harvest')return p.crop&&p.growth>=D.crops[p.crop].days;if(action==='sow')return p.tilled&&!p.crop&&!b.removed;if(action==='water')return p.crop&&p.tilled&&!b.removed&&b.moisture<(p.crop?profile(p.crop).low:35);if(action==='fertilize')return p.tilled&&b.fertility<70&&b.fertilized!==s.day;return false;}).map(index=>({index,action,arg:action==='sow'?{crop:s.seed,kind:s.farm.seedKind,density:s.farm.density}:undefined}));}
+function validate(v,s){const f=v.farm;if(!f)return ensure(s);const bad=()=>{throw new Error('种植系统存档无效，请使用备份。');},num=(x,a=0,b=100)=>Number.isFinite(x)&&x>=a&&x<=b;
+ if(f.version!==1||!Array.isArray(f.beds)||f.beds.length!==s.plots.length||!Array.isArray(f.facilities)||f.facilities.length>144||!num(f.water,0,120)||!num(f.threshold,20,65)||!Object.hasOwn(kinds,f.seedKind)||!['sparse','balanced','dense'].includes(f.density))bad();
+ f.beds.forEach(b=>{if(!b||!Object.hasOwn(soils,b.type)||!Object.hasOwn(kinds,b.kind)||!['sparse','balanced','dense'].includes(b.density)||!['fertility','moisture','health','pests','disease','weeds','compacted','condition','penalty'].every(k=>num(b[k]))||!num(b.ripeDays,0,100000)||!num(b.ticks,0,100000)||!num(b.stress,0,999)||!num(b.slow,0,5)||!num(b.fertilized,-1,s.day)||!num(b.treated,-1,s.day)||!['removed','fallow'].every(k=>typeof b[k]==='boolean'))bad();if(b.companion&&(!Object.hasOwn(D.crops,b.companion.crop)||!Object.hasOwn(kinds,b.companion.kind)||!num(b.companion.growth,0,D.crops[b.companion.crop].days)))bad();});
+ const seen=new Set();f.facilities.forEach(a=>{const k=a.anchor+'/'+a.type;if(!Object.hasOwn(facilities,a.type)||!Number.isInteger(a.anchor)||!s.plots[a.anchor]||!num(a.durability)||typeof a.enabled!=='boolean'||seen.has(k)||f.facilities.filter(v=>v.anchor===a.anchor).length>2)bad();seen.add(k);});
+ if(!f.collection||typeof f.collection!=='object'||Array.isArray(f.collection))bad();for(const[id,g]of Object.entries(f.collection))if(!Object.hasOwn(D.crops,id)||!Number.isInteger(g)||g<1||g>4)bad();
+ s.farm=copy(f);s.farm.autoSeed=!!f.autoSeed;s.farm.overlay=!!f.overlay;return s.farm;
+}
+const old={initial:C.initial,load:C.load,nextDay:C.nextDay,plot:C.plotAction,cook:C.cook,process:C.process,upgrade:C.upgrade,buy:C.buy};
+C.initial=(...args)=>{const s=old.initial(...args);ensure(s);return s;};
+C.load=raw=>{const v=typeof raw==='string'?JSON.parse(raw):copy(raw),s=old.load(v);validate(v,s);if(!v.farm){if(s.upgrades.irrigation){s.farm.facilities.push({type:'sprinkler',anchor:7,durability:100,enabled:true});s.farm.water=120;}for(const a of s.layouts){if(['trellis','greenhouse','scarecrow','fence'].includes(a.id)){const slot=C.layoutSlots[a.slot],anchor=s.plots.reduce((best,_,i)=>{const p=V.plotPosition(i),q=V.plotPosition(best);return Math.hypot(p.x-slot.x-1920,p.y-slot.y-1152)<Math.hypot(q.x-slot.x-1920,q.y-slot.y-1152)?i:best;},0);if(s.farm.facilities.filter(f=>f.anchor===anchor).length<2&&!s.farm.facilities.some(f=>f.anchor===anchor&&f.type===a.id))s.farm.facilities.push({type:a.id,anchor,durability:100,enabled:true});}}}s.plots.forEach((_,i)=>sync(s,i));return s;};
+C.nextDay=s=>{ensure(s);const plots=copy(s.plots),jobs=s.processing.slice(),day=s.day,r=old.nextDay(s);for(const job of jobs)if(job.farmGrade&&!s.processing.includes(job)){s.quality[job.id]??=[0,0,0];while(s.quality[job.id].length<3)s.quality[job.id].push(0);s.quality[job.id][job.farmGrade-1]+=job.qty;}s.plots=plots;daily(s,day);return r;};
+C.plotAction=(s,i,tool)=>['hoe','seed','water','hand'].includes(tool)?perform(s,i,{hoe:'hoe',seed:'sow',water:'water',hand:'harvest'}[tool]):old.plot(s,i,tool);
+C.fertilize=(s,i)=>perform(s,i,'fertilize');C.clearPest=(s,i)=>perform(s,i,'manual');C.fillWater=fillWater;
+function premiumNeeds(s,needs,n){return Object.entries(needs).every(([id,count])=>{const q=s.quality[id]||[],total=q.reduce((a,b)=>a+b,0);return total>=count*n&&(s.bag[id]||0)===total;});}
+C.cook=(s,id,n=1,sub=false)=>{const recipe=D.recipes.find(r=>r.id===id),premium=recipe&&!sub&&premiumNeeds(s,recipe.ingredients,n),before=s.processing.length,r=old.cook(s,id,n,sub);if(r.ok&&premium){if(s.processing.length>before)s.processing.at(-1).farmGrade=2;else{const q=s.quality[id];if(q){while(q.length<3)q.push(0);const index=s.skills.cooking.choice==='host'?1:0;q[index]-=n;q[Math.min(2,index+1)]+=n;}}r.msg+=' 好食材让料理提升一档品质。';}return r;};
+C.process=(s,id,n=1)=>{const recipe=D.processingRecipes.find(r=>r.id===id),premium=recipe&&premiumNeeds(s,recipe.needs,n),before=s.processing.length,r=old.process(s,id,n);if(r.ok&&premium){if(s.processing.length>before)s.processing.at(-1).farmGrade=1;else{s.quality[id]??=[0,0,0];s.quality[id][0]+=recipe.qty*n;}r.msg+=' 保留了原料的优质风味。';}return r;};
+C.upgrade=(s,id)=>{const r=old.upgrade(s,id);if(r.ok&&id==='irrigation'){const f=ensure(s);const anchor=s.plots.findIndex((_,i)=>f.facilities.filter(a=>a.anchor===i).length<2&&!f.facilities.some(a=>a.anchor===i&&a.type==='sprinkler'));if(anchor>=0)f.facilities.push({type:'sprinkler',anchor,durability:100,enabled:true});f.water=120;r.msg+=' 配送一座局部竹管喷灌与满箱储水，可在四时农事中搬动。';}return r;};
+C.buy=(s,id,n=1)=>id.endsWith('_heirloom')&&s.day<14&&s.relations.qiao.points<20?no('春十五或与沈禾熟悉后开放乡传良种。'):old.buy(s,id,n);
+C.weatherAdvice=day=>({台风:'台风将带来积水并磨损设施；提前排水、修整田埂。',高温:'高温蒸发较快，可补储水或安装遮阳网。',寒潮:'寒潮会减缓露地生长，小暖棚覆盖内更稳妥。',小雪:'小雪日田里仍慢慢长，可安心做饭串门。',雨:'雨水会补水，低洼田注意排水；晒制可能顺延。'}[C.weather(day)]||'水土合适就让作物慢慢长，今日可出门走走。');
+const F={ensure,soils,grades,kinds,facilities,seedId,profile,coverage,covered,compatible,neighbors,relation,stage,score,grade,preview,advice,perform,facility,fillWater,list,plan,daily};
+root.ZRZFarming=F;if(typeof module!=='undefined')module.exports=F;
+})(typeof window!=='undefined'?window:globalThis);
+
+
+</script><script>
+(function(root){
+'use strict';
+const F=root.ZRZFarming,D=root.ZRZData,V=root.ZRZVillage,W=root.ZRZWorld;
+const rect=(c,x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(Math.round(x),Math.round(y),w,h);};
+function leaf(c,x,y,k,color){rect(c,x-k,y,k,2,color);rect(c,x+1,y-3,k,3,color);rect(c,x,y-4,2,10,'#3f6541');}
+F.drawPlot=function(c,s,i,t){
+ const p=s.plots[i],b=F.ensure(s).beds[i],pos=V.plotPosition(i),x=pos.x-19,y=pos.y-20,col=F.soils[b.type].color;
+ rect(c,x,y,38,32,p.tilled?'#604c38':'#819452');rect(c,x+1,y+1,36,29,p.tilled?col:'#8f9e5d');
+ if(!p.tilled||b.removed){for(let j=0;j<6;j++){rect(c,x+4+j*5,y+15+j%3*4,1,4,'#5c7e45');rect(c,x+3+j*5,y+16+j%3*4,3,1,'#bec779');}return;}
+ if(b.moisture>60){c.fillStyle=b.type==='wetland'?'#77a5a870':'#293c3230';c.fillRect(x+2,y+2,34,26);}
+ for(let j=0;j<4;j++){rect(c,x+3,y+5+j*6,32,2,'#65513c');rect(c,x+3,y+4+j*6,32,1,b.moisture>60?'#a3966c':'#c0a273');}
+ if(b.moisture<28)for(let j=0;j<3;j++){rect(c,x+7+j*10,y+12+j%2*8,1,6,'#503e32');rect(c,x+7+j*10,y+16+j%2*8,4,1,'#503e32');}
+ if(b.fallow){for(let j=0;j<9;j++)rect(c,x+4+j*3,y+5+j%4*5,5,1,'#c8b97e');}
+ if(p.crop){
+  const crop=D.crops[p.crop],k=Math.min(1,p.growth/crop.days),sway=Math.sin(t*2+i)*.7,green=b.health<25?'#bab76b':b.health<60?'#90a05c':'#8eaf59';
+  if(k<.12){for(let j=0;j<3;j++){rect(c,x+9+j*8,y+13,3,2,'#d5b279');rect(c,x+9+j*8,y+14,2,1,'#614730');}}
+  else if(k>=1){c.save();c.globalAlpha=b.health<22?.75:1;W.item(c,p.crop,x+3,y-5,1.1);c.restore();if(b.ripeDays>=4){rect(c,x+20,y-6,1,9,'#6d8041');rect(c,x+18,y-8,5,3,'#d9c387');}else if(Math.sin(t*3+i)>.55){rect(c,x+31,y-4,1,5,'#fff0b4');rect(c,x+29,y-2,5,1,'#fff9de');}}
+  else{
+   const stalk=crop.group==='谷物',fruit=crop.group==='果实',rootCrop=crop.group==='根菜',height=4+k*(stalk?28:19);
+   for(let j=0;j<(b.density==='dense'?4:3);j++){const xx=x+8+j*8+sway,yy=y+19+(j%2)*3;rect(c,xx,yy-height,2,height,'#3f6944');leaf(c,xx,yy-height*.65,Math.round(2+k*5),green);if(k>.48)leaf(c,xx,yy-height*.95,Math.round(3+k*4),'#b4c975');if(k>.72){if(stalk){rect(c,xx-1,yy-height-6,4,8,'#d5c06b');rect(c,xx-2,yy-height-5,1,5,'#f2dfa0');}else if(fruit){rect(c,xx+2,yy-height+3,4,5,crop.color||'#c48748');rect(c,xx+3,yy-height+3,1,2,'#f1d392');}else if(rootCrop)rect(c,xx-1,yy-1,5,4,crop.color||'#deb988');else{rect(c,xx-2,yy-height-2,5,2,'#efe1a0');rect(c,xx,yy-height-3,2,4,'#fff1c4');}}}
+  }
+  if(b.companion){const a=b.companion,ratio=a.growth/D.crops[a.crop].days;leaf(c,x+32,y+24-ratio*9,3,'#b7c889');if(ratio>=1)rect(c,x+30,y+9,5,5,D.crops[a.crop].color||'#e3c66e');}
+  if(b.pests>=15){const xx=x+11+Math.sin(t*3+i)*4;rect(c,xx,y+8,3,2,'#353c31');rect(c,xx-1,y+7,1,1,'#d9b96c');}
+  if(b.disease>=15){rect(c,x+12,y+5,2,2,'#76513b');rect(c,x+23,y+9,2,2,'#76513b');}
+ }
+ if(b.weeds>35){leaf(c,x+4,y+24,2,'#52773c');leaf(c,x+34,y+14,2,'#52773c');}
+ if(b.moisture>60){rect(c,x+33,y+25,2,4,'#77c5d5');rect(c,x+34,y+24,1,3,'#d0eee4');}
+ if(b.health<30&&p.crop){rect(c,x+1,y-5,2,5,'#efbb71');rect(c,x+1,y+2,2,1,'#efbb71');}
+};
+F.drawCoverage=function(c,s){if(!F.ensure(s).overlay)return;c.save();for(const a of s.farm.facilities){if(!a.enabled||a.durability<=0)continue;const p=V.plotPosition(a.anchor);c.strokeStyle='#edf8bbcc';c.fillStyle='#c8e4a51c';c.setLineDash([4,5]);c.beginPath();c.arc(p.x,p.y,F.facilities[a.type].radius,0,Math.PI*2);c.fill();c.stroke();}c.restore();};
+F.drawFacility=function(c,s,a,t){
+ const p=V.plotPosition(a.anchor),same=s.farm.facilities.filter(v=>v.anchor===a.anchor),side=same.indexOf(a)%2?1:-1,x=p.x+side*19,y=p.y+13,disabled=!a.enabled||a.durability<=0;
+ c.save();c.globalAlpha=disabled?.5:1;rect(c,x-4,y,11,3,'#304c3b55');
+ if(a.type==='sprinkler'){rect(c,x,y-19,3,21,'#708975');rect(c,x-5,y-19,13,3,'#c3c6a0');rect(c,x,y-21,3,2,'#e4dab0');if(s.farm.water>0&&s.farm.beds.some((b,i)=>b.irrigated===s.day&&s.minutes<510&&F.covered(s,i,'sprinkler'))&&!disabled)for(let j=0;j<7;j++){const z=(t*2+j/7)%1;rect(c,x+Math.cos(j)*z*28,y-20+z*z*20,1,2,'#b9e5e8');}}
+ if(a.type==='scarecrow'){rect(c,x,y-32,3,34,'#8c704b');rect(c,x-11,y-21,24,3,'#967446');rect(c,x-5,y-27,13,14,'#bd8864');rect(c,x-5,y-36,12,10,'#d6b681');rect(c,x-9,y-37,20,3,'#cfb46c');rect(c,x-4,y-42,11,6,'#af934f');rect(c,x-1,y-31,1,2,'#494a39');rect(c,x+4,y-31,1,2,'#494a39');rect(c,x-4,y-25,11,2,'#6e876a');}
+ if(['greenhouse','shade','trellis'].includes(a.type)){const width=a.type==='trellis'?26:40;for(const dx of [-width/2,width/2])rect(c,x+dx,y-29,2,32,'#a1915f');for(let j=0;j<4;j++)rect(c,x-width/2,y-28+j*6,width,1,'#bea775');if(a.type!=='trellis'){c.fillStyle=a.type==='greenhouse'?'#d5eeee66':'#617c5777';c.fillRect(x-width/2,y-34,width,10);rect(c,x-width/2-2,y-34,width+4,2,'#d3d3a3');}else {leaf(c,x-7,y-17,4,'#739851');leaf(c,x+5,y-25,3,'#acc277');}}
+ if(a.type==='fence'){for(let j=0;j<4;j++)rect(c,x-13+j*9,y-14,3,17,'#b5a279');rect(c,x-14,y-11,34,3,'#d3bd8f');rect(c,x-14,y-3,34,2,'#907e57');}
+ if(a.type==='drain'){rect(c,x-18,y-3,39,6,'#526451');rect(c,x-16,y-2,35,3,'#81b0b4');rect(c,x-10+(Math.sin(t)*5),y-2,9,1,'#c2d7c3');}
+ if(a.durability<30){rect(c,x+7,y-8,2,5,'#edb777');rect(c,x+7,y-1,2,1,'#edb777');}c.restore();
+};
+})(window);
+
+
+</script><script>
+(function(root){
   'use strict';
   const V=root.ZRZVillage,W=root.ZRZWorld,A=root.ZRZArt,C=root.ZRZCore,D=root.ZRZData,L=root.ZRZLandscape;
   const R=A.R,E=A.ellipse,P=A.poly;
@@ -1272,7 +1496,7 @@
   }
   function daylight(minutes){if(minutes<420)return {night:.19,warm:.16,sun:-1};if(minutes<510)return {night:Math.max(0,(480-minutes)/500),warm:(510-minutes)/430,sun:-.7};if(minutes<990)return {night:0,warm:0,sun:(minutes-750)/400};if(minutes<1140)return {night:(minutes-990)/800,warm:Math.sin((minutes-990)/150*Math.PI)*.24,sun:1.1};return {night:Math.min(.63,.2+(minutes-1140)/320),warm:0,sun:1.2};}
   function cast(c,x,y,w,h,s){const light=daylight(s.minutes);c.save();c.globalAlpha=.16+(light.night?.03:0);P(c,[[x-w/2,y],[x+w/2,y],[x+w/2+light.sun*h*.8,y+h*.36],[x-w/2+light.sun*h*.8,y+h*.36]],'#203b38');c.restore();}
-  function plot(c,s,i,t){const p=s.plots[i],pos=V.plotPosition(i),x=pos.x-19,y=pos.y-20;R(c,x,y,38,32,p.tilled?'#72583d':'#839a52');if(p.tilled){R(c,x+2,y+1,34,28,p.watered?'#6f6348':'#ac8354');for(let j=0;j<4;j++){R(c,x+3,y+5+j*6,32,2,p.watered?'#4d5240':'#7b5739');R(c,x+3,y+4+j*6,32,1,p.watered?'#958c5b':'#d1a877');}}else for(let j=0;j<5;j++)R(c,x+5+j*6,y+12+j%2*4,3,1,'#b9c47d');
+  function plot(c,s,i,t){if(root.ZRZFarming)return root.ZRZFarming.drawPlot(c,s,i,t);const p=s.plots[i],pos=V.plotPosition(i),x=pos.x-19,y=pos.y-20;R(c,x,y,38,32,p.tilled?'#72583d':'#839a52');if(p.tilled){R(c,x+2,y+1,34,28,p.watered?'#6f6348':'#ac8354');for(let j=0;j<4;j++){R(c,x+3,y+5+j*6,32,2,p.watered?'#4d5240':'#7b5739');R(c,x+3,y+4+j*6,32,1,p.watered?'#958c5b':'#d1a877');}}else for(let j=0;j<5;j++)R(c,x+5+j*6,y+12+j%2*4,3,1,'#b9c47d');
     if(p.crop){const k=p.growth/D.crops[p.crop].days;if(k>=1){W.item(c,p.crop,x+3,y-4,1.1);if(Math.sin(t*3+i)>.85){R(c,x+31,y-4,1,5,'#ffeac0');R(c,x+29,y-2,5,1,'#fff7d7');}}else{R(c,x+18,y+22-k*15,2,8+k*15,'#3c613d');R(c,x+11,y+19-k*15,8,4,'#90b564');R(c,x+20,y+16-k*15,8,5,'#638e4b');}}
     if(p.watered){R(c,x+33,y+25,2,4,'#82c3d4');R(c,x+34,y+24,1,3,'#c9ece3');}
   }
@@ -1364,10 +1588,10 @@
   }
   function draw(canvas,s,t,hover,walking,effect,view){const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);c.save();c.translate(-view.x,-view.y);const indoor=!!s.village.interior,season=C.calendar(s).season,rt=V.stateRuntime(s),time=rt.clock;
     if(indoor){R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#253c37');room(c,s,time);}else{R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#7c9d62');for(const r of V.regions){if(r.x>view.x+view.viewWidth||r.x+1920<view.x||r.y>view.y+view.viewHeight||r.y+1152<view.y)continue;c.drawImage(terrain(r,s),r.x,r.y);}
-      for(let i=0;i<72;i++){const p=V.plotPosition(i);if(Math.abs(p.x-s.player.x)<900&&Math.abs(p.y-s.player.y)<700)plot(c,s,i,time);}
+      root.ZRZFarming?.drawCoverage(c,s);for(let i=0;i<72;i++){const p=V.plotPosition(i);if(Math.abs(p.x-s.player.x)<900&&Math.abs(p.y-s.player.y)<700)plot(c,s,i,time);}
     }
     const visible=p=>p.x>view.x-300&&p.x<view.x+view.viewWidth+160&&p.y>view.y-50&&p.y<view.y+view.viewHeight+260,objects=[];
-    if(!indoor){for(const p of V.allProps.filter(visible)){const bottom=p.kind==='house'?p.y+p.h:p.y;objects.push({y:bottom,draw(){if(p.kind==='house')cast(c,p.x+p.w/2,bottom,p.w,100,s);const v=sprite(p,season),under=p.kind==='house'?s.player.x>p.x&&s.player.x<p.x+p.w&&s.player.y>p.y&&s.player.y<p.y+55:['tree','bamboo','willow','orchard','blossom'].includes(p.kind)&&Math.abs(s.player.x-p.x)<55&&s.player.y<p.y&&s.player.y>p.y-110;c.globalAlpha=under?.42:1;c.drawImage(v.canvas,p.x+v.dx,p.y+v.dy);c.globalAlpha=1;}});}
+    if(!indoor){for(const a of root.ZRZFarming?.ensure(s).facilities||[]){const p=V.plotPosition(a.anchor);if(visible(p))objects.push({y:p.y+14,draw:()=>root.ZRZFarming.drawFacility(c,s,a,time)});}for(const p of V.allProps.filter(visible)){const bottom=p.kind==='house'?p.y+p.h:p.y;objects.push({y:bottom,draw(){if(p.kind==='house')cast(c,p.x+p.w/2,bottom,p.w,100,s);const v=sprite(p,season),under=p.kind==='house'?s.player.x>p.x&&s.player.x<p.x+p.w&&s.player.y>p.y&&s.player.y<p.y+55:['tree','bamboo','willow','orchard','blossom'].includes(p.kind)&&Math.abs(s.player.x-p.x)<55&&s.player.y<p.y&&s.player.y>p.y-110;c.globalAlpha=under?.42:1;c.drawImage(v.canvas,p.x+v.dx,p.y+v.dy);c.globalAlpha=1;}});}
       for(const p of V.outdoorActions.filter(visible))objects.push({y:p.y,draw:()=>p.kind==='chore'?ranchObject(c,p,time,s):A.prop(c,{kind:'table',x:p.x,y:p.y},season)});
       for(const [i,a]of s.animals.entries()){const p=V.animalPosition(s,i);if(visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,33,35,s);W.drawAnimal(c,a,p.x,p.y,time);}});}
       const pet={x:2775,y:1690};if(visible(pet))objects.push({y:pet.y,draw:()=>{c.save();c.translate(1928,1170);W.drawPet(c,s,time);c.restore();}});
@@ -1435,7 +1659,7 @@
     const row=(title,body,actions='',icon='')=>'<article class="row-card">'+(icon?ic(icon):'')+'<div class="row-text"><h3>'+title+'</h3>'+body+'</div><div class="row-actions">'+actions+'</div></article>';
     const select=(id,options)=>'<select id="'+id+'">'+options.map(([k,v])=>'<option value="'+e(k)+'">'+e(v)+'</option>').join('')+'</select>';
     const dishes=Object.entries(s.bag).filter(([id,n])=>n>0&&D.items[id].kind==='料理').map(([id,n])=>[id,D.items[id].name+' ×'+n]);
-    const qtext=id=>{const q=s.quality[id]||[0,0];return q[0]||q[1]?' · 好收成 '+q[0]+' / 精心照料 '+q[1]:'';};
+    const qtext=id=>{const q=s.quality[id]||[];return q.some(n=>n>0)?' · 优质 '+(q[0]||0)+' / 上品 '+(q[1]||0)+' / 珍品 '+(q[2]||0):'';};
     const source=r=>r.source==='known'?'爷爷留下的家常配方':r.source==='market'?'杂货铺手写配方':r.source.startsWith('festival')?D.festivals[Number(r.source.slice(-1))]+' / 赶集配方摊':(D.npcs.find(n=>n.id===r.source)?.name||'邻居')+'熟悉后传授 / 赶集配方摊';
     if(name==='recipes'||name==='cook'){
       let h=head(name==='cook'?'灶火正暖，做点家常。':'三十道菜，三十次相聚。','已掌握 '+s.knownRecipes.length+' / '+D.recipes.length+' 道 · 6 种厨房工序 · 做菜、便当、家宴和节令各有用处。');
@@ -1498,7 +1722,7 @@
     if(name==='build')return head('把老院修成想住的样子','八处功能修缮，每一处都能留下用途；自由布置可以随时撤回。')+Object.entries(D.upgrades).map(([id,u])=>row(u.name,'<p>'+u.description+'</p>'+needs(u.materials)+'<p>工钱 '+u.cost+' 元 · 现有 '+s.money+' 元</p>',b(s.upgrades[id]?'已经修好':'一起动工','upgrade',id,'mini-btn',s.upgrades[id]?'disabled':''))).join('')+'<div class="button-row">'+b('庭院自由布置','decor','','secondary')+b('工具维修升级','tools','','secondary')+b('储物柜','storage','','secondary')+'</div>';
     if(name==='decor'){
       let h=head('庭院留白，随你安排。','先制作或领取家具，再点一格放下。已占用的格子点一下收回，换个位置重新放；不扣材料。');if(!s.upgrades.yard)return h+b('先整理庭院','build');
-      h+='<div class="paper-note">菜架给叶菜、果树荫地给耐阴菜、沟边菜床给稻米和莲藕少量生长帮助；果树也改善散养。稻草人让鸟儿处理小虫。秋季可制作温棚，允许跨季播种。</div><div class="decor-palette">'+Object.entries(D.furniture).map(([id,f])=>'<div><button data-action="e-decor-select" data-id="'+id+'" class="'+(ui.furniture===id?'active':'')+'">'+f.name+' <b>×'+(s.furniture[id]||0)+'</b></button>'+b('制作','e-craft',id,'mini-btn')+'</div>').join('')+'</div><p>正在摆放：'+D.furniture[ui.furniture].name+' · '+Object.entries(D.furniture[ui.furniture].needs).map(([id,n])=>D.items[id].name+' '+n).join('、')+'</p><div class="yard-plan"><div class="yard-house">老屋 · 菜地 · 小厨房（保留通道）</div><div class="decor-grid">'+C.layoutSlots.map((p,i)=>{const f=s.layouts.find(v=>v.slot===i);return '<button class="'+(f?'occupied':'')+'" data-action="e-place" data-id="'+i+'" aria-label="庭院第 '+(i+1)+' 格">'+(f?D.furniture[f.id].name:'＋')+'</button>';}).join('')+'</div></div>';return h;
+      h+='<div class="paper-note">这里布置庭院景观，果树改善散养环境。农田设施请在“四时农事 → 田埂设施”安置：已做好的菜架、篱笆、稻草人、温棚可直接使用库存，局部生效并可查看覆盖。稻草人驱鸟，病虫另行治理。</div><div class="decor-palette">'+Object.entries(D.furniture).map(([id,f])=>'<div><button data-action="e-decor-select" data-id="'+id+'" class="'+(ui.furniture===id?'active':'')+'">'+f.name+' <b>×'+(s.furniture[id]||0)+'</b></button>'+b('制作','e-craft',id,'mini-btn')+'</div>').join('')+'</div><p>正在摆放：'+D.furniture[ui.furniture].name+' · '+Object.entries(D.furniture[ui.furniture].needs).map(([id,n])=>D.items[id].name+' '+n).join('、')+'</p><div class="yard-plan"><div class="yard-house">老屋 · 菜地 · 小厨房（保留通道）</div><div class="decor-grid">'+C.layoutSlots.map((p,i)=>{const f=s.layouts.find(v=>v.slot===i);return '<button class="'+(f?'occupied':'')+'" data-action="e-place" data-id="'+i+'" aria-label="庭院第 '+(i+1)+' 格">'+(f?D.furniture[f.id].name:'＋')+'</button>';}).join('')+'</div></div>';return h;
     }
     if(name==='tools')return head('旧工具，修得更顺手','每种只升级一次，减少对应劳动的体力消耗；没有耐久损坏。')+Object.entries(D.toolUpgrades).map(([id,t])=>row(t.name,needs(t.needs)+'<p>'+t.cost+' 元 · 消耗 −1</p>',b(s.toolUpgrades[id]?'已升级':'请宋伯改一改','e-tool-upgrade',id,'mini-btn',s.toolUpgrades[id]?'disabled':''))).join('');
     if(name==='farmcare'){
@@ -1597,6 +1821,83 @@
 })(window);
 
 </script><script>
+(function(root){
+'use strict';
+const F=root.ZRZFarming,C=root.ZRZCore,D=root.ZRZData,X=root.ZRZPanels,V=root.ZRZVillage;
+const ui={index:0,filter:'all',region:'all',crop:'all',tab:'field',batch:null};
+const val=id=>document.getElementById(id)?.value;
+const btn=(text,action,id='',extra='')=>'<button class="mini-btn" data-action="f-'+action+'" data-id="'+id+'" '+extra+'>'+text+'</button>';
+const select=(id,items,value)=>'<select id="'+id+'">'+items.map(([k,v])=>'<option value="'+k+'" '+(String(k)===String(value)?'selected':'')+'>'+v+'</option>').join('')+'</select>';
+const stat=(title,value,color)=>'<div class="farm-stat"><span>'+title+'</span><strong>'+Math.round(value)+'<small> / 100</small></strong><div class="farm-meter"><i style="width:'+value+'%;background:'+color+'"></i></div></div>';
+const fieldName=i=>(i<24?'小院':'东坡')+' · '+String(i+1).padStart(2,'0')+' 号田';
+function seedOptions(s){return Object.entries(D.crops).map(([id,c])=>[id,c.name+' · '+(s.bag[F.seedId(id,s.farm.seedKind)]||0)+' 份']);}
+function selection(s){return '<div class="farm-controls"><label>作物'+select('farm-seed',seedOptions(s),s.seed)+'</label><label>种子品种'+select('farm-kind',Object.entries(F.kinds).map(([k,v])=>[k,v.name]),s.farm.seedKind)+'</label><label>株距'+select('farm-density',[['sparse','疏植 · 快长'],['balanced','标准 · 稳妥'],['dense','密植 · 2 份种子，多一份产量']],s.farm.density)+'</label>'+btn('记住播种选择','selection')+'</div>';}
+function seeds(s,head){
+ let h=head('一颗种子，一季期待。','普通种最高上品；乡传良种生长稍慢、抗虫，最高珍品；节令种快长，仅适季可种。')+selection(s);
+ h+='<div class="farm-seed-summary"><strong>现在选好：'+D.crops[s.seed].name+' · '+F.kinds[s.farm.seedKind].name+'</strong><span>背包 '+(s.bag[F.seedId(s.seed,s.farm.seedKind)]||0)+' 份</span>'+btn('拿起种子袋','equip')+'</div><div class="inventory-grid">';
+ h+=Object.entries(D.crops).map(([id,c])=>{const inSeason=c.seasons.includes(C.calendar(s).season),k=s.farm.seedKind,item=F.seedId(id,k),locked=k==='heirloom'&&s.day<14&&s.relations.qiao.points<20;return '<article class="item-card '+(id===s.seed?'farm-selected':'')+'"><div class="item-head"><canvas data-item="'+id+'" width="40" height="40"></canvas><strong>'+c.name+'</strong><span class="tag">'+(inSeason?'当季':'非当季')+'</span></div><p>'+c.days+' 天起 · 偏爱'+F.soils[F.profile(id).preferred].name+'<br>'+c.seasons.map(v=>D.seasons[v]).join(' / ')+' · '+c.group+'</p><small>持有 '+(s.bag[item]||0)+' 份 · '+(locked?'春十五或与沈禾熟悉后可购良种':'种子 '+D.items[item].cost+' 元 / 份')+'</small><div class="button-row">'+btn('选择','seed',id)+btn('购 1 份','buy',item,locked?'disabled':'')+btn('购 5 份','buy',item,'data-qty="5" '+(locked?'disabled':''))+'</div></article>';}).join('')+'</div>';return h;
+}
+function field(s){const i=ui.index,p=s.plots[i],b=s.farm.beds[i],r=F.preview(s,i),st=F.stage(s,i),cover=F.coverage(s,i),crop=p.crop?D.crops[p.crop]:null;
+ let h='<div class="farm-detail-title"><span class="eyebrow">'+fieldName(i)+'</span><h2>'+(crop?crop.name:'等一颗种子的土地')+'</h2><span class="tag">'+st+'</span>'+btn('走到田边','walk',i)+'</div>';
+ h+='<div class="farm-stats">'+stat('土壤肥力',b.fertility,'#9caa59')+stat('根部水分',b.moisture,'#5c9eaa')+stat('植株健康',b.health,'#64896c')+'</div>';
+ if(crop){const k=Math.min(100,p.growth/crop.days*100);h+='<div class="farm-growth"><div class="farm-meter"><i style="width:'+k+'%"></i></div><span>种子 → 萌芽 → 幼苗 → 生长 → 开花 → 成熟</span><p>'+Math.round(k)+'% · '+(k>=100?'最佳采收窗口剩余 '+Math.max(0,4-b.ripeDays)+' 天；过期仍可收或留种':'预计还需约 '+Math.ceil((crop.days-p.growth)/(b.health<22?.3:.85))+' 天，随水土天气调整')+'</p></div>';}
+ h+='<div class="farm-advice"><strong>今天看看这里</strong><ul>'+F.advice(s,i).map(t=>'<li>'+t+'</li>').join('')+'</ul></div>';
+ h+='<div class="farm-facts"><span>土质 <b>'+F.soils[b.type].name+'</b></span><span>肥力档 <b>'+(b.fertility>=75?'肥沃':b.fertility>=38?'稳定':'待养护')+'</b></span><span>虫 / 病 / 草 <b>'+Math.round(b.pests)+' / '+Math.round(b.disease)+' / '+Math.round(b.weeds)+'</b></span><span>上茬 <b>'+(p.lastGroup||'尚无')+' · 连作 '+p.repeats+'</b></span><span>设施 <b>'+(cover.map(v=>F.facilities[v.type].name).join('、')||'暂无覆盖')+'</b></span><span>季节适应 <b>'+(crop?(crop.seasons.includes(C.calendar(s).season)?'当季适种':F.covered(s,i,'greenhouse')?'暖棚保护':'非适季 · 生长减慢'):'待选择作物')+'</b></span><span>轮作建议 <b>'+(p.lastGroup==='豆类'?'叶菜或果实':'豆类、不同科作物或休耕')+'</b></span></div>';
+ if(r)h+='<div class="farm-harvest-preview">采收预览 <strong>'+r.qty+' 份 · '+F.grades[r.grade]+'</strong><small>专门留种：'+((b.health>=60?2:1)+(b.health>=75&&b.ripeDays>=4&&b.ripeDays<=8?1:0))+' 份 '+D.items[r.seed].name+'。持续照料决定品质。</small></div>';
+ const action=(text,a,disabled=false)=>btn(text,'task',i,'data-op="'+a+'" '+(disabled?'disabled':''));
+ h+='<div class="farm-actions">'+action('挥锄开垦 · 3 力','hoe',p.tilled&&!b.removed)+action('播种 · 2 力','sow',!!p.crop||!p.tilled)+action('浇一壶 · 2 力','water',!p.tilled)+action('疏沟排水 · 2 力','drain',b.moisture<=60)+action('收获 · 2 力','harvest',!crop||p.growth<crop.days)+action('专门留种 · 2 力','seedSave',!crop||p.growth<crop.days)+'</div>';
+ h+='<details class="farm-more"><summary>施肥、护苗与土地整治</summary><div class="farm-actions">'+action('熟堆肥 ×1 · 2 力','fertilize')+action('缓释肥 ×1 · 2 力','slow')+action('绿肥翻埋 · 豆种 ×1','green',!!p.crop)+action('拔草 · 2 力','weed')+action('人工捉虫 · 3 力','manual')+action('草本护苗 ×1 · 2 力','bio')+action('速效处理 ×1 · 品质 −8','agent')+action('深耕 · 4 力','deep',!!p.crop)+action(b.fallow?'结束休耕':'休耕养地 · 2 力','fallow',!!p.crop)+action('撤去空田垄 · 可修复','remove',!!p.crop)+'</div><div class="farm-controls"><label>改良土质'+select('farm-soil',Object.entries(F.soils).map(([id,v])=>[id,v.name]),b.type)+'</label>'+btn('换土 · 堆肥 ×2 +20 元','soil',i,p.crop?'disabled':'')+'</div></details>';
+ h+='<details class="farm-more"><summary>套种与留种设置</summary><p>同一垄最多两种作物。豆类搭配其他科、叶菜搭配根菜有互助；同科套种会争肥，不能叠种。瓜豆攀架、架下叶菜有微荫。先收主作物后，副作物会继续长大。</p>'+selection(s)+(b.companion?'<p>垄旁：'+D.crops[b.companion.crop].name+' · '+Math.round(b.companion.growth/D.crops[b.companion.crop].days*100)+'%</p>'+action('收下套种作物','companionHarvest'):action('用选中的种子套种 · 2 力','companion',!p.crop))+btn(s.farm.autoSeed?'自动留一份种子：开':'自动留一份种子：关','auto-seed')+'</details>';return h;
+}
+function infrastructure(s){const i=ui.index;let h='<h2>'+fieldName(i)+' · 田埂设施</h2><p>每处田埂最多两座。只照料范围内的田块，耐久为零时停用；台风磨损更快。</p><div class="farm-controls">'+btn(s.farm.overlay?'关闭地面覆盖线':'显示地面覆盖线','overlay')+btn('储水 '+s.farm.water+' / 120 · 补满 6 元 +3 力','fill')+'<label>喷灌水分阈值'+select('farm-threshold',[[30,'低于 30'],[40,'低于 40'],[55,'低于 55'],[65,'低于 65']],s.farm.threshold)+'</label>'+btn('设置阈值','threshold')+'</div>';
+ for(const[id,v]of Object.entries(F.facilities)){const a=s.farm.facilities.find(f=>f.anchor===i&&f.type===id);h+='<article class="row-card"><div class="row-text"><h3>'+v.name+' <span class="tag">覆盖 '+s.plots.filter((_,j)=>{const a=V.plotPosition(i),b=V.plotPosition(j);return Math.hypot(a.x-b.x,a.y-b.y)<=v.radius;}).length+' 块田</span></h3><p>'+v.description+'<br>'+(a?'耐久 '+a.durability+' / 100 · '+(a.enabled?'使用中':'已暂停'):((s.furniture[id]||0)>0?'使用已有家具 ×1；免材料与资金':v.cost+' 元')+' · '+Object.entries(v.needs).map(([k,n])=>D.items[k].name+' ×'+n).join('、')+(v.day?' · 第三季解锁':''))+'</p></div><div class="row-actions">'+(a?btn('修理 · 木材 ×1 +5 元','facility',i,'data-type="'+id+'" data-mode="repair"')+btn(a.enabled?'暂停':'启用','facility',i,'data-type="'+id+'" data-mode="toggle"')+'<label>搬往田号<input class="farm-target" id="move-'+id+'" type="number" min="1" max="72" value="'+(i+1)+'"></label>'+btn('搬动 · 2 力','facility',i,'data-type="'+id+'" data-mode="move"'):btn('安置 · 3 力','facility',i,'data-type="'+id+'" data-mode="build" '+(v.day&&s.day<v.day?'disabled':'')))+'</div></article>';}
+ h+='<h3>已建 '+s.farm.facilities.length+' 座</h3><div class="button-row">'+s.farm.facilities.map(a=>btn(fieldName(a.anchor)+' · '+F.facilities[a.type].name,'inspect',a.anchor)).join('')+'</div>';return h;
+}
+function guide(s){return '<div class="farm-guide"><h2>会呼吸的田地</h2><p>松土、播种、照料、看天、采收、留种，再让土地歇一歇。成长以每天结算为准，生活簿打开时会暂停时光。</p><h3>看得见的变化</h3><p>田里的六个生长阶段会改变形态。蓝色水滴表示润湿，褐色裂纹表示干燥，黄边叶片表示萎蔫，黑色小虫／叶斑提示风险；成熟田垄会闪光。没有倒计时逼迫：失照只会拖慢生长，萎蔫可以救回，晚收也仍有收成。</p><h3>水土与轮作</h3><p>水田土适合稻、藕、芋；沙壤土适合根菜；腐殖土适合叶菜。肥力低时用熟堆肥，缓释肥分五天供肥，空地可翻埋豆种或休耕。连续同科、密植和潮湿更容易出问题。不是所有地都要每天浇水。</p><h3>四档品质</h3><p>普通 / 优质 / 上品 / 珍品，售价分别为基础的 1 / 1.2 / 1.4 / 1.7 倍。普通食材能完成原有菜谱与订单；品质随物品存取，优先消耗普通。全用优质食材做即时料理可额外提升料理一档。图鉴保留最高收获品质。</p><h3>病虫害可以缓解</h3><p>幼虫、叶斑分开记录；15 以下轻微、15—44 提醒、45—69 较重、70 以上优先照料。高密同科、连作、湿热、弱土会增加风险，严重邻田会小范围传染。人工捉虫省材料，草本护苗兼治叶斑，速效处理更强但本茬品质评分减 8。稻草人只驱鸟。</p><h3>种子与设施</h3><p>春十五或与沈禾熟悉后能买乡传良种；健康的上品收成专门留种也可得到良种；成熟后第 4—8 天、健康达到 75，专门留种多一份。节令种可直接购买。开启自动留种后，每次采收另留一份原品种种子。喷灌用水箱储水，设施仅在田埂附近生效，可以搬动、修理、暂停。</p><h3>批量照料</h3><p>先按区域、作物和状态筛选，再预览任务与材料。开始后角色逐块走到田边做动作；体力或材料不足会停止并保留已完成部分，方向键或“停止带路”可取消。</p></div>';}
+function render(s,A){
+ F.ensure(s);ui.index=Math.max(0,Math.min(s.plots.length-1,ui.index));const ids=F.list(s,ui.filter,ui.region,ui.crop);
+ let h='<div class="farm-book">'+A.head('禾溪 · 四时农事','种下期待，照料有度。每块田都有自己的水土与节奏。');
+ h+='<div class="farm-overview">'+[['ready','熟了',F.list(s,'ready').length],['dry','待补水',F.list(s,'dry').length],['risk','需留意',F.list(s,'risk').length],['all','全部田地',s.plots.length]].map(([k,t,n])=>'<button data-action="f-filter" data-id="'+k+'" class="'+(ui.filter===k?'active':'')+'"><strong>'+n+'</strong><span>'+t+'</span></button>').join('')+'</div>';
+ h+='<div class="farm-forecast">'+[0,1,2].map(n=>'<span>'+(n===0?'今日':n===1?'明日':'后日')+' <b>'+C.weather(s.day+n)+'</b></span>').join('')+'<small>'+C.weatherAdvice(s.day+1)+'</small></div>';
+ h+='<div class="farm-controls"><label>片区'+select('farm-region',[['all','全部田地'],['home','稻香小院 · 24 块'],['pasture','东坡新田 · 48 块']],ui.region)+'</label><label>按作物'+select('farm-crop',[['all','全部作物'],...Object.entries(D.crops).map(([id,c])=>[id,c.name])],ui.crop)+'</label>'+btn('应用筛选','filters')+btn('仅看待播地','filter','empty')+'</div>';
+ h+='<div class="farm-layout"><aside class="farm-map-wrap"><div class="farm-map-head">田亩索引 <small>'+ids.length+' 块符合筛选</small></div><div class="farm-map">';
+ for(let i=0;i<s.plots.length;i++){const p=s.plots[i],b=s.farm.beds[i],ready=p.crop&&p.growth>=D.crops[p.crop].days;h+='<button class="farm-cell '+(ids.includes(i)?'':'dim ')+(ui.index===i?'selected ':'')+(ready?'ready ':p.crop?'growing ':'')+'" data-action="f-inspect" data-id="'+i+'" title="'+fieldName(i)+' · '+F.stage(s,i)+'" aria-label="'+fieldName(i)+' '+F.stage(s,i)+'"><span>'+String(i+1).padStart(2,'0')+'</span><b>'+(ready?'✦':b.pests>=15||b.disease>=15?'!':p.crop?'芽':p.tilled?'田':'·')+'</b><i style="width:'+b.moisture+'%"></i></button>';}
+ h+='</div><p class="farm-map-key">✦ 可采收　芽 生长中　! 病虫提醒<br>01—24 小院　25—72 东坡<br>蓝线：水分 · 点选查看，角色不会传送</p><div class="farm-batch"><strong>对筛选结果批量安排</strong>'+[['water','补水'],['fertilize','堆肥'],['sow','播种'],['harvest','采收']].map(([id,t])=>btn(t,'batch',id)).join('')+'</div>';
+ if(ui.batch){const tasks=F.plan(s,ids,ui.batch),n=tasks.length,material=ui.batch==='sow'?D.items[F.seedId(s.seed,s.farm.seedKind)].name+' ×'+n*(s.farm.density==='dense'?2:1):ui.batch==='fertilize'?'熟堆肥 ×'+n:'无需材料';h+='<div class="farm-batch-preview"><b>'+n+' 块可安排</b><p>最多 '+n*2+' 体力 · 当前 '+Math.floor(s.stamina)+'（特长可减免）<br>'+material+'<br>按序走到田边执行；途中可取消。</p>'+btn('开始这一批','batch-start',ui.batch,n?'':'disabled')+'</div>';}
+ h+='</aside><section class="farm-main"><div class="tabs">'+[['field','这块田'],['seeds','种子袋'],['facilities','田埂设施'],['guide','农事手册']].map(([id,t])=>btn(t,'tab',id,ui.tab===id?'aria-current="page"':'')).join('')+'</div>';
+ h+=ui.tab==='field'?field(s):ui.tab==='seeds'?seeds(s,A.head):ui.tab==='facilities'?infrastructure(s):guide(s);
+ h+='</section></div><details class="farm-more"><summary>农资补给与收获图鉴</summary><div class="button-row">'+['compost','slowFertilizer','bioCare','plantCare','beanSeed'].map(id=>btn(D.items[id].name+' · '+D.items[id].cost+' 元（有 '+(s.bag[id]||0)+'）','buy',id)).join('')+'</div><p>'+Object.entries(s.farm.collection).map(([id,g])=>D.crops[id].name+' · '+F.grades[g-1]).join('　')+'</p></details></div>';return h;
+}
+const oldRender=X.render,oldDispatch=X.dispatch,oldAfter=X.after;
+X.render=(name,arg,s,A)=>{if(name==='farmcare'){if(Number.isInteger(arg))ui.index=arg;return render(s,A);}if(name==='seeds')return seeds(s,A.head);return oldRender(name,arg,s,A);};
+X.dispatch=(a,id,data,ctx)=>{
+ if(!a.startsWith('f-'))return oldDispatch(a,id,data,ctx);
+ const{s,apply,open,render:refresh,save,update,toast,close,queueFarm,equipSeed}=ctx;F.ensure(s);const use=r=>{apply(r);refresh();},store=()=>{save();update();refresh();},task=(op,arg,index=Number(id))=>{queueFarm([{index,action:op,arg}]);};
+ if(a==='f-filter'){ui.filter=id;ui.batch=null;refresh();}
+ if(a==='f-filters'){ui.region=val('farm-region');ui.crop=val('farm-crop');ui.batch=null;refresh();}
+ if(a==='f-inspect'){ui.index=Number(id);open('farmcare');}
+ if(a==='f-tab'){ui.tab=id;refresh();}
+ if(a==='f-selection'){s.seed=val('farm-seed');s.farm.seedKind=val('farm-kind');s.farm.density=val('farm-density');store();toast('种子与株距已经记好。');}
+ if(a==='f-seed'){s.seed=id;store();}
+ if(a==='f-equip'){equipSeed();close();}
+ if(a==='f-buy'){if(id.endsWith('_heirloom')&&s.day<14&&s.relations.qiao.points<20)toast('春十五或与沈禾熟悉后开放。',true);else use(C.buy(s,id,Number(data.qty)||1));}
+ if(a==='f-task'){task(data.op,['sow','companion'].includes(data.op)?{crop:s.seed,kind:s.farm.seedKind,density:s.farm.density}:undefined);}
+ if(a==='f-soil')task('soil',val('farm-soil'));
+ if(a==='f-facility')task('facility',{type:data.type,mode:data.mode,target:Number(val('move-'+data.type))-1});
+ if(a==='f-fill'){task('fill',null,ui.index);}
+ if(a==='f-walk')task('inspect');
+ if(a==='f-auto-seed'){s.farm.autoSeed=!s.farm.autoSeed;store();}
+ if(a==='f-overlay'){s.farm.overlay=!s.farm.overlay;store();}
+ if(a==='f-threshold'){s.farm.threshold=Number(val('farm-threshold'));store();}
+ if(a==='f-batch'){ui.batch=id;refresh();}
+ if(a==='f-batch-start'){const tasks=F.plan(s,F.list(s,ui.filter,ui.region,ui.crop),id);ui.batch=null;queueFarm(tasks);}
+ return true;
+};
+X.after=(name,s,A)=>{if(name==='bag')return '<div class="paper-note">品质：优质 +20% · 上品 +40% · 珍品 +70%。使用与出售优先普通品质。'+Object.entries(s.quality).filter(([,q])=>q.some(n=>n>0)).map(([id,q])=>'<br>'+D.items[id].name+' · '+F.grades.slice(1).map((g,i)=>g+' '+(q[i]||0)).join(' / ')).join('')+'</div>'+A.button('存取与拆分物品','storage','','secondary');return oldAfter(name,s,A);};
+})(window);
+
+
+</script><script>
 (function () {
   'use strict';
   const D = window.ZRZData, C = window.ZRZCore, W = window.ZRZWorld, X = window.ZRZPanels, V = window.ZRZVillage;
@@ -1639,7 +1940,11 @@
   if (raw) { try { s = C.load(raw); } catch (_) { try { s = C.load(readSave(SAVE + '-backup')); startupNotice = '自动存档损坏，已恢复上一份备份。'; } catch (_) { startupNotice = '自动档和备份无法读取。原文件保留，请在存档面板导入可用备份。'; } } }
   s ||= C.initial();
   let tool = 'hand', hovered = null, path = [], pending = null, effect = null, currentPanel = null, panelArg = null, lastFocus = null, walking = false, tick = 0, lastTime = 0, frameTime = 0, inputLocked = false;
-  let queuedDestination=null, chaseAt=0;
+  let queuedDestination=null, chaseAt=0, farmQueue=[],farmNextAt=0,farmCompleted=0;
+  const F=window.ZRZFarming;
+  function queueFarm(tasks){closePanel();farmQueue=tasks.slice();farmCompleted=0;advanceFarm();}
+  function advanceFarm(){const task=farmQueue.shift();if(!task)return;const pos=V.plotPosition(task.index);navigate({kind:'farm-task',...pos,...task,name:'农事 · '+(task.index+1)+' 号田'});if(!path.length&&!queuedDestination){farmQueue=[];toast('这块地暂时无法到达，本批已停止。',true);}}
+
   let fishTimer = null, soundContext = null, melodyAt = 0, inventoryFilter = '全部', calSeason = C.calendar(s).season;
   const keys = new Set();
   const camera = new window.ZRZCamera.Camera($('world'));
@@ -1701,7 +2006,7 @@
     $('sound-btn').innerHTML=svg(s.settings.sound?'sound':'mute');$('sound-btn').setAttribute('aria-pressed',String(s.settings.sound));
     if($('toolbelt').dataset.active!==tool){$('toolbelt').innerHTML=tools.map(t=>'<button class="tool '+(t.id===tool?'active':'')+'" title="'+t.name+' · '+t.key+' · '+t.desc+'" aria-label="'+t.name+'" aria-pressed="'+(t.id===tool)+'" data-action="tool" data-id="'+t.id+'"><span>'+t.key+'</span><canvas width="32" height="32" data-item="'+t.id+'"></canvas></button>').join('');$('toolbelt').dataset.active=tool;}
     const selected=tools.find(t=>t.id===tool);$('tool-name').textContent=selected.name+' · '+selected.desc;
-    $('seed-label').innerHTML=D.crops[s.seed].name+'种子 <small>剩余 '+(s.bag[D.crops[s.seed].seed]||0)+' 份 · 点击更换</small>';
+    $('seed-label').innerHTML=D.crops[s.seed].name+' · '+F.kinds[F.ensure(s).seedKind].name+' <small>剩余 '+(s.bag[F.seedId(s.seed,s.farm.seedKind)]||0)+' 份 · 点击更换</small>';
     $('bag-count').textContent=Object.values(s.bag).reduce((a,b)=>a+b,0)+' 件物品';
     const roomOwner=V.houses.find(h=>h.id===s.village.interior)?.owner;
     $('time-pill').textContent=currentPanel?'翻阅手记中 · 时间暂停':roomOwner?V.profiles[roomOwner][2]:s.settings.speed==='relaxed'?'舒缓时光 · 慢慢来':'常规时光 · 好好生活';
@@ -1723,7 +2028,7 @@
   const button=(label,action,id='',cls='primary',extra='')=>'<button class="'+cls+'" data-action="'+action+'"'+(id?' data-id="'+id+'"':'')+' '+extra+'>'+label+'</button>';
   const itemCanvas=id=>'<canvas width="32" height="32" data-item="'+id+'"></canvas>';
   const ingredients=needs=>'<div class="ingredients">'+Object.entries(needs).map(([id,n])=>'<span class="'+((s.bag[id]||0)<n?'missing':'')+'">'+D.items[id].name+' '+(s.bag[id]||0)+' / '+n+'</span>').join('')+'</div>';
-  function openPanel(name,arg=null){if(inputLocked)return;path=[];pending=null;queuedDestination=null;hovered=null;capturing=null;keys.clear();if(!currentPanel)lastFocus=document.activeElement;currentPanel=name;panelArg=arg;$('modal-overlay').hidden=false;$('game-root').classList.add('menu-open');$('hover-card').hidden=true;renderPanel(name,arg);$('modal-body').scrollTop=0;const focus=$('modal-body').querySelector('input,button,select');if(focus)focus.focus({preventScroll:true});else document.querySelector('.modal-close').focus({preventScroll:true});update();}
+  function openPanel(name,arg=null){if(inputLocked)return;path=[];pending=null;queuedDestination=null;farmQueue=[];hovered=null;capturing=null;keys.clear();if(!currentPanel)lastFocus=document.activeElement;currentPanel=name;panelArg=arg;$('modal-overlay').hidden=false;$('game-root').classList.add('menu-open');$('hover-card').hidden=true;renderPanel(name,arg);$('modal-body').scrollTop=0;const focus=$('modal-body').querySelector('input,button,select');if(focus)focus.focus({preventScroll:true});else document.querySelector('.modal-close').focus({preventScroll:true});update();}
   function closePanel(){if(inputLocked)return;if(currentPanel==='welcome'&&!s.flags.introDone){startGame();return;}currentPanel=null;panelArg=null;capturing=null;$('modal-overlay').hidden=true;$('game-root').classList.remove('menu-open');keys.clear();(lastFocus?.isConnected?lastFocus:$('world')).focus();update();}
   function renderPanel(name,arg){
     let html='', extra=name==='debug'&&window.ZRZ_DEV?window.ZRZDebug?.render(s):X.render(name,arg,s,{head,button,itemCanvas,ingredients,escape,dialogue:lastDialogue});
@@ -1744,7 +2049,7 @@
     } else if(name==='shop'){
       const season=C.calendar(s).season;html=head('许婶的杂货铺','应季的种子、家常的米粮，还有几句街坊闲话。你有 '+s.money+' 元。');
       html+='<div class="tabs">'+button('买点东西','shop','','active')+button('卖出收成','sell-panel')+'</div>';
-      const ids=[...Object.values(D.crops).filter(c=>c.seasons.includes(season)).map(c=>c.seed),'feed','rice'];
+      const ids=[...Object.values(D.crops).filter(c=>c.seasons.includes(season)).map(c=>c.seed),'feed','rice','compost','slowFertilizer','bioCare','plantCare'];
       html+=ids.map(id=>{const it=D.items[id],crop=Object.values(D.crops).find(c=>c.seed===id),cost=it.cost||24;return '<div class="row-card">'+itemCanvas(id)+'<div class="row-text"><h3>'+it.name+' <span class="tag">'+cost+' 元 / 份</span></h3><p>'+(crop?crop.days+' 天收获 · '+crop.group+' · 售价 '+crop.price+' 元 / 份':id==='feed'?'鸡、鸭、牛都喜欢的草谷饲料。':'做一碗热饭，或为家常菜备点主食。')+'</p></div><div class="row-actions">'+button('买 1 份','buy',id,'mini-btn','data-qty="1"')+button('买 5 份','buy',id,'mini-btn','data-qty="5"')+'</div></div>';}).join('');
     } else if(name==='seeds'){
       html=head('播下这一季的期待','土壤轮作可以提高收成。豆类能养地，休耕也会慢慢恢复。');
@@ -1807,7 +2112,7 @@
       html+='<div class="settings-row"><label>琴音与交互音</label>'+button(s.settings.sound?'已开启':'已关闭','sound','','secondary')+'</div><div class="settings-row"><label>音量</label><input id="volume-setting" type="range" min="0" max="1" step=".05" value="'+s.settings.volume+'" aria-label="音量"></div>';
       html+='<div class="settings-row"><label>生活提示<small>显示画面里的心愿便条与操作提示；H 可临时收起全部界面。</small></label>'+button(s.settings.hints?'已开启':'已关闭','toggle-hints','','secondary')+'</div>';
       html+='<div class="settings-row"><label>自定义按键<small>方向键、空格和 Esc 始终保留，也可以更换 8 个字母快捷键。</small></label>'+button('修改按键','controls','','secondary')+'</div>';
-      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.5.0 · 会呼吸的禾溪村<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
+      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.6.0 · 会呼吸的禾溪村<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
     } else if(name==='controls'){
       html=head('把操作换成顺手的样子','点击一个按键，再按想使用的字母。重复按键会交换位置。Esc 取消修改。');
       html+='<div class="key-grid">'+Object.entries(bindingNames).map(([id,name])=>'<div class="key-row"><span>'+name+'</span>'+button(keyLabel(id),'bind-key',id,'key-button')+'</div>').join('')+'</div>';
@@ -1853,6 +2158,7 @@
   let lastDialogue='';
   function interact(p){
     if(!p||currentPanel||inputLocked)return;
+    if(p.kind==='farm-task'){const before=s.plots[p.index].crop,r=p.action==='inspect'?{ok:true,msg:F.advice(s,p.index).join('；')}:p.action==='facility'?F.facility(s,p.index,p.arg.type,p.arg.mode,p.arg.target):p.action==='fill'?F.fillWater(s):F.perform(s,p.index,p.action,p.arg);if(r.ok){const kind=['harvest','seedSave','companionHarvest'].includes(p.action)?'harvest':p.action==='water'||p.action==='fill'?'water':p.action==='sow'||p.action==='companion'?'seed':'hoe';V.feedback(s,p,kind,r.msg,1.2,kind==='harvest'?before:null);farmCompleted++;save();update();sound('good');}else{toast(r.msg+' 已完成 '+farmCompleted+' 块，本批停止。',true);farmQueue=[];}farmNextAt=frameTime+.85;if(!farmQueue.length&&r.ok)toast('农事完成 · '+farmCompleted+' 次。'+r.msg);return;}
     if(p.kind==='npc'){const actual=V.npcPoint(s,D.npcs.find(n=>n.id===p.id));if(!actual){navigate(V.destination(s,'npc',p.id));return;}if(Math.hypot(actual.x-s.player.x,actual.y-s.player.y)>70){walkTo(actual);return;}lastDialogue=C.talk(s,p.id).msg;V.feedback(s,actual,'greet',lastDialogue,1.2);save();update();sound('soft');return;}
     if(p.kind==='enter'||p.kind==='exit'){const ok=p.kind==='enter'?V.enter(s,p.house):V.leave(s);if(ok){path=[];pending=null;hovered=null;camera.update(s,0,true);save();update();sound('soft');if(queuedDestination){const target=queuedDestination;queuedDestination=null;walkTo(target);}}return;}
     if(p.kind==='walk'){V.feedback(s,s.player,'spark','走到了。慢慢看看周围吧。');return;}
@@ -1879,9 +2185,9 @@
   document.addEventListener('click',e=>{
     const b=e.target.closest('[data-action]');if(!b||b.disabled||inputLocked)return;const a=b.dataset.action,id=b.dataset.id;
     if(a==='v-walk-activity'){navigate(V.outdoorActions.find(p=>p.id===id));return;}
-    if(a==='v-walk-region'){navigate(V.destination(s,'region',id));return;}if(a==='v-walk-house'){navigate(V.destination(s,'house',id));return;}if(a==='v-npc-talk'){lastDialogue=C.talk(s,id).msg;openPanel('npc',id);return;}if(a==='v-npc-gift'){openPanel('gifts',id);return;}if(a==='v-bike'){if(s.village.interior){toast('先走出小屋再骑车。');return;}s.village.riding=!s.village.riding;update();return;}if(a==='v-stop'){path=[];pending=null;queuedDestination=null;return;}
+    if(a==='v-walk-region'){navigate(V.destination(s,'region',id));return;}if(a==='v-walk-house'){navigate(V.destination(s,'house',id));return;}if(a==='v-npc-talk'){lastDialogue=C.talk(s,id).msg;openPanel('npc',id);return;}if(a==='v-npc-gift'){openPanel('gifts',id);return;}if(a==='v-bike'){if(s.village.interior){toast('先走出小屋再骑车。');return;}s.village.riding=!s.village.riding;update();return;}if(a==='v-stop'){path=[];pending=null;queuedDestination=null;farmQueue=[];return;}
     if(window.ZRZ_DEV&&a==='debug'){openPanel('debug');return;}
-    if(X.dispatch(a,id,b.dataset,{s,apply,open:openPanel,render:()=>renderPanel(currentPanel,panelArg),save,update,toast,close:closePanel}))return;
+    if(X.dispatch(a,id,b.dataset,{s,apply,open:openPanel,render:()=>renderPanel(currentPanel,panelArg),save,update,toast,close:closePanel,queueFarm,equipSeed:()=>setTool('seed')}))return;
     if(a==='walk-landmark'){const point=W.points(s).find(p=>p.id===id);closePanel();if(point)walkTo(point);return;}
     if(['menu','controls','bag','shop','recipes','relations','orders','build','journal','settings','save','help','seeds','map','project','sleep'].includes(a)){openPanel(a);return;}
     if(a==='calendar'){calSeason=C.calendar(s).season;openPanel(a);return;}
@@ -1900,7 +2206,7 @@
     if(a==='buy')apply(C.buy(s,id,Number(b.dataset.qty)),true);
     if(a==='sell-item')apply(C.sell(s,id,1),true);if(a==='sell-all')apply(C.sell(s,id,s.bag[id]||0),true);
     if(a==='eat')apply(C.eat(s,id),true);
-    if(a==='choose-seed'){s.seed=id;setTool('seed');closePanel();save();toast('选好了'+D.crops[id].name+'种子。点击松好的菜地播种。');}
+    if(a==='choose-seed'){if(!id||!D.crops[id]){openPanel('seeds');return;}s.farm.seedKind='normal';s.seed=id;setTool('seed');closePanel();save();toast('选好了'+D.crops[id].name+'种子。点击松好的菜地播种。');}
     if(a==='cook-item'){const r=C.cook(s,id,Number(b.dataset.qty));if(r.ok)V.feedback(s,s.player,'steam','灶火与热气一起升起来。',2);apply(r,true);}
     if(a==='gift-list')openPanel('gifts',id);
     if(a==='gift-item')apply(C.gift(s,b.dataset.npc,id),true);
@@ -1921,12 +2227,12 @@
   document.addEventListener('change',e=>{if(e.target.dataset.extraSetting){const key=e.target.dataset.extraSetting;s.settings[key]=['textScale','music','ambient','effects'].includes(key)?Number(e.target.value):e.target.value;save();update();return;}if(e.target.id==='speed-setting'){s.settings.speed=e.target.value;save();update();}if(e.target.id==='volume-setting'){s.settings.volume=Number(e.target.value);save();sound();}if(e.target.id==='zoom-setting'){s.settings.zoom=Number(e.target.value);camera.update(s,0,true);save();update();}});
   $('import-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2e6)throw new Error('存档文件过大，请选择本游戏导出的 JSON。');const next=C.load(await file.text());save('backup');s=next;W.restorePosition(s);path=[];pending=null;hovered=null;closePanel();save();update();toast('存档已经带回来了，欢迎继续生活。');}catch(err){toast(err.message||'无法读取这份存档。',true);}finally{e.target.value='';}});
   $('modal-overlay').addEventListener('click',e=>{if(e.target===$('modal-overlay'))closePanel();});
-  function hoverInfo(){const box=$('hover-card');if(!hovered||currentPanel){box.hidden=true;return;}if(hovered.kind==='plot'){const p=s.plots[hovered.index],name=p.crop?D.crops[p.crop].name:p.tilled?'松好的菜地':'未开垦的土地',soil=p.soil>=1.75?'肥沃':p.soil>=.75?'稳定':'需要养护';box.innerHTML='<strong>'+name+'</strong>'+(p.crop?(p.growth>=D.crops[p.crop].days?'已经成熟 · 用双手收获':'预计 '+Math.ceil(D.crops[p.crop].days-p.growth)+' 天后收获'):'适合种植：'+(p.lastGroup==='叶菜'?'豆类 / 根菜轮作':'当季作物'))+'<small>土壤：'+soil+' · '+(p.watered?'湿润':'待浇水')+(p.pest?' · 少量小虫，农田照料页可处理':'')+'<br>适合：'+(p.lastGroup==='叶菜'?'豆类、根菜轮作':'当季作物轮作')+'</small>';}else{box.innerHTML='<strong>'+hovered.name+'</strong><small>点击走近互动 · 靠近后按 E</small>';}box.hidden=false;}
+  function hoverInfo(){const box=$('hover-card');if(!hovered||currentPanel){box.hidden=true;return;}if(hovered.kind==='plot'){const b=F.ensure(s).beds[hovered.index];box.innerHTML='<strong>'+F.stage(s,hovered.index)+' · '+(hovered.index+1)+' 号田</strong><small>'+F.soils[b.type].name+' · 肥力 '+Math.round(b.fertility)+' · 水分 '+Math.round(b.moisture)+'<br>'+F.advice(s,hovered.index)[0]+'</small>';box.hidden=false;return;const p=s.plots[hovered.index],name=p.crop?D.crops[p.crop].name:p.tilled?'松好的菜地':'未开垦的土地',soil=p.soil>=1.75?'肥沃':p.soil>=.75?'稳定':'需要养护';box.innerHTML='<strong>'+name+'</strong>'+(p.crop?(p.growth>=D.crops[p.crop].days?'已经成熟 · 用双手收获':'预计 '+Math.ceil(D.crops[p.crop].days-p.growth)+' 天后收获'):'适合种植：'+(p.lastGroup==='叶菜'?'豆类 / 根菜轮作':'当季作物'))+'<small>土壤：'+soil+' · '+(p.watered?'湿润':'待浇水')+(p.pest?' · 少量小虫，农田照料页可处理':'')+'<br>适合：'+(p.lastGroup==='叶菜'?'豆类、根菜轮作':'当季作物轮作')+'</small>';}else{box.innerHTML='<strong>'+hovered.name+'</strong><small>点击走近互动 · 靠近后按 E</small>';}box.hidden=false;}
   function coords(e){const r=$('world').getBoundingClientRect();return camera.toWorld(e.clientX-r.left,e.clientY-r.top);}
   function positionHover(){if(!pointer)return;const box=$('hover-card'),v=camera.view;box.style.left=Math.max(8,Math.min(v.width-box.offsetWidth-12,pointer.x+20))+'px';box.style.top=Math.max(8,Math.min(v.height-box.offsetHeight-150,pointer.y+23))+'px';}
   $('world').addEventListener('pointermove',e=>{const r=$('world').getBoundingClientRect();pointer={x:e.clientX-r.left,y:e.clientY-r.top};const p=coords(e);hovered=W.hit(s,p.x,p.y);hoverInfo();positionHover();});
   $('world').addEventListener('pointerleave',()=>{hovered=null;pointer=null;hoverInfo();});
-  $('world').addEventListener('pointerdown',e=>{if(currentPanel||inputLocked)return;queuedDestination=null;e.preventDefault();$('world').focus();sound('soft');const p=coords(e),hit=W.hit(s,p.x,p.y);if(hit&&Math.hypot(hit.x-s.player.x,hit.y-s.player.y)<53){path=[];pending=null;interact(hit);return;}const target=hit?{x:hit.x,y:hit.y+5}:p;path=W.route(s,target.x,target.y);pending=path.length?hit:null;if(!path.length)toast('这里走不过去，试试旁边的小路。');});
+  $('world').addEventListener('pointerdown',e=>{if(currentPanel||inputLocked)return;queuedDestination=null;farmQueue=[];e.preventDefault();$('world').focus();sound('soft');const p=coords(e),hit=W.hit(s,p.x,p.y);if(hit&&Math.hypot(hit.x-s.player.x,hit.y-s.player.y)<53){path=[];pending=null;interact(hit);return;}const target=hit?{x:hit.x,y:hit.y+5}:p;path=W.route(s,target.x,target.y);pending=path.length?hit:null;if(!path.length)toast('这里走不过去，试试旁边的小路。');});
   document.addEventListener('keydown',e=>{
     if(capturing){e.preventDefault();if(e.key==='Escape'){capturing=null;renderPanel('controls');return;}const key=e.key.toLowerCase();if(!C.bindingKeyAllowed(key)){toast('请选择字母键；C、F、H、Q 是固定功能键。',true);return;}const old=s.settings.bindings[capturing],other=Object.keys(s.settings.bindings).find(k=>s.settings.bindings[k]===key);if(other)s.settings.bindings[other]=old;s.settings.bindings[capturing]=key;capturing=null;save();update();renderPanel('controls');toast('按键已经换好了，下次打开也会记住。');return;}
     if(e.key==='Tab'&&currentPanel){const focusable=[...$('modal').querySelectorAll('button:not([disabled]):not([hidden]),input,select')].filter(el=>el.offsetParent!==null);if(!focusable.length)return;const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}return;}
@@ -1936,7 +2242,7 @@
     const key=e.key.toLowerCase(),bindings=s.settings.bindings;
     if([...Object.values(bindings),'arrowup','arrowdown','arrowleft','arrowright',' ','1','2','3','4','5','6','7','8','tab','c','q','f','h'].includes(key))e.preventDefault();
     if(key==='shift')keys.add(key);
-    if([bindings.up,bindings.left,bindings.down,bindings.right,'arrowup','arrowdown','arrowleft','arrowright'].includes(key)){keys.add(key);path=[];pending=null;queuedDestination=null;}
+    if([bindings.up,bindings.left,bindings.down,bindings.right,'arrowup','arrowdown','arrowleft','arrowright'].includes(key)){keys.add(key);path=[];pending=null;queuedDestination=null;farmQueue=[];}
     if(e.repeat)return;
     if('12345678'.includes(key)&&key.length===1)setTool(tools[Number(key)-1].id);
     if(key===bindings.interact||key===' '){const point=nearest();if(point)interact(point);else toast('走近菜地、村民或设施，就能互动。');}
@@ -1960,14 +2266,14 @@
       }
     }else{
       padX=(Math.abs(pad.axes[0]||0)>.2?pad.axes[0]:0)+(down(15)?1:0)-(down(14)?1:0);padY=(Math.abs(pad.axes[1]||0)>.2?pad.axes[1]:0)+(down(13)?1:0)-(down(12)?1:0);
-      if(padX||padY){path=[];pending=null;queuedDestination=null;}
+      if(padX||padY){path=[];pending=null;queuedDestination=null;farmQueue=[];}
       if(press(0)){const point=nearest();if(point)interact(point);}
       if(press(2))openPanel('bag');if(press(3))openPanel('map');if(press(9)||press(1))openPanel('menu');
       if(press(4)||press(5)){const i=tools.findIndex(t=>t.id===tool),next=(i+(press(5)?1:-1)+tools.length)%tools.length;setTool(tools[next].id);}
     }
     padPrevious=pad.buttons.map(b=>b.pressed);
   }
-  function move(dt){if(['npc','animal'].includes(pending?.kind)&&frameTime>chaseAt){chaseAt=frameTime+.7;const target=V.destination(s,pending.kind,pending.id);if(target&&Math.hypot(target.x-pending.x,target.y-pending.y)>30){path=W.route(s,target.x,target.y+5);pending=target;}}const bindings=s.settings.bindings;let dx=(keys.has(bindings.right)||keys.has('arrowright')?1:0)-(keys.has(bindings.left)||keys.has('arrowleft')?1:0),dy=(keys.has(bindings.down)||keys.has('arrowdown')?1:0)-(keys.has(bindings.up)||keys.has('arrowup')?1:0);const speed=(s.village.riding?355:keys.has('shift')?265:195)*dt;
+  function move(dt){if(farmQueue.length&&!path.length&&!pending&&!queuedDestination&&frameTime>=farmNextAt)advanceFarm();if(['npc','animal'].includes(pending?.kind)&&frameTime>chaseAt){chaseAt=frameTime+.7;const target=V.destination(s,pending.kind,pending.id);if(target&&Math.hypot(target.x-pending.x,target.y-pending.y)>30){path=W.route(s,target.x,target.y+5);pending=target;}}const bindings=s.settings.bindings;let dx=(keys.has(bindings.right)||keys.has('arrowright')?1:0)-(keys.has(bindings.left)||keys.has('arrowleft')?1:0),dy=(keys.has(bindings.down)||keys.has('arrowdown')?1:0)-(keys.has(bindings.up)||keys.has('arrowup')?1:0);const speed=(s.village.riding?355:keys.has('shift')?265:195)*dt;
     dx+=padX;dy+=padY;
     if(path.length&&!dx&&!dy){const n=path[0],dist=Math.hypot(n.x-s.player.x,n.y-s.player.y);if(dist<=speed){s.player.x=n.x;s.player.y=n.y;path.shift();if(!path.length&&pending){const p=pending;pending=null;interact(p);}return true;}dx=(n.x-s.player.x)/dist;dy=(n.y-s.player.y)/dist;}
     const norm=Math.hypot(dx,dy);if(!norm)return false;dx=dx/norm*speed;dy=dy/norm*speed;const p=s.player;
@@ -1987,7 +2293,7 @@
     requestAnimationFrame(frame);
   }
   const contextual=document.createElement('div');contextual.id='context-actions';document.getElementById('game-hud').appendChild(contextual);let contextKey='';
-  function updateContext(near){const key=(currentPanel?'menu':near?.kind+'/'+near?.id)+'/'+s.village.riding+'/'+!!path.length;if(key!==contextKey){contextKey=key;contextual.hidden=!!currentPanel;let html='';if(near?.kind==='npc')html=button('继续聊聊','v-npc-talk',near.id,'context-btn')+button('送份心意','v-npc-gift',near.id,'context-btn')+button('去他家看看','v-walk-house',V.homeOf(near.id).id,'context-btn');else if(!s.village.interior)html=button(s.village.riding?'下车慢慢走':'骑自行车','v-bike','','context-btn');if(path.length)html+='<span id="walk-progress"></span>'+button('停止带路','v-stop','','context-btn');contextual.innerHTML=html;}
+  function updateContext(near){const key=(currentPanel?'menu':near?.kind+'/'+(near?.id??near?.index))+'/'+s.village.riding+'/'+!!path.length;if(key!==contextKey){contextKey=key;contextual.hidden=!!currentPanel;let html='';if(near?.kind==='plot')html=button('查看这块田','f-inspect',String(near.index),'context-btn')+button('四时农事','farmcare','','context-btn');else if(near?.kind==='npc')html=button('继续聊聊','v-npc-talk',near.id,'context-btn')+button('送份心意','v-npc-gift',near.id,'context-btn')+button('去他家看看','v-walk-house',V.homeOf(near.id).id,'context-btn');else if(!s.village.interior)html=button(s.village.riding?'下车慢慢走':'骑自行车','v-bike','','context-btn');if(path.length)html+='<span id="walk-progress"></span>'+button('停止带路','v-stop','','context-btn');contextual.innerHTML=html;}
     if(path.length){let dist=0,last=s.player;for(const p of path){dist+=Math.hypot(p.x-last.x,p.y-last.y);last=p;}const el=$('walk-progress');if(el)el.textContent=(queuedDestination?'先出门':pending?.name||'前往标记')+' · 约 '+Math.max(1,Math.ceil(dist/(s.village.riding?355:195)))+' 秒';}
   }
   document.addEventListener('click',e=>{if(e.target.id!=='area-map')return;const r=e.target.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*V.WIDTH,y=(e.clientY-r.top)/r.height*V.HEIGHT,h=V.houses.find(h=>Math.hypot(h.door.x-x,h.door.y-y)<90);navigate(h?V.destination(s,'house',h.id):{kind:'walk',name:'地图标记',...V.safePosition({village:{}},{x,y})});});

@@ -26,15 +26,15 @@
   C.weather=day=>{const d=day%112;if(d===46)return '台风';if(d===51||d===52)return '高温';if(d===99)return '寒潮';if(d===95||d===105)return '小雪';return old.weather(day);};
   C.weatherAdvice=day=>({台风:'明日台风：可先备好蓄水、留在家中加工。作物和动物不会损失。',高温:'高温天多歇歇，补好蓄水；不浇水只会长慢一些。',寒潮:'寒潮期间温棚照常生长，露地暂时减速，作物不会枯死。',小雪:'小雪可以安心拜访、做饭，田里的作物仍会慢慢生长。',雨:'雨水会替你浇地，晒制顺延一天；可以去串门。'}[C.weather(day)]||'适合出门走走，照看小院或赶集。');
   C.market=s=>({open:s.day%7===5,demand:Object.keys(D.crops)[Math.floor(s.day/7)%Object.keys(D.crops).length],bonus:.2});
-  C.price=(s,id,qty=1)=>{let base=D.items[id].price,bonus=C.market(s);const q=s.quality[id]||[0,0],ordinary=Math.max(0,(s.bag[id]||0)-q[0]-q[1]);const good=Math.min(q[0],Math.max(0,qty-ordinary)),care=Math.max(0,qty-ordinary-good);return Math.floor(base*(qty+good*.2+care*.4)*(bonus.open&&bonus.demand===id?1.2:1));};
+  C.price=(s,id,qty=1)=>{const base=D.items[id].price,bonus=C.market(s),q=s.quality[id]||[0,0];let left=Math.max(0,qty-Math.max(0,(s.bag[id]||0)-q.reduce((a,b)=>a+b,0))),extra=0;for(let i=0;i<q.length;i++){const used=Math.min(left,q[i]);extra+=used*[.2,.4,.7][i];left-=used;}return Math.floor(base*(qty+extra)*(bonus.open&&bonus.demand===id?1.2:1));};
   C.sell=(s,id,n=1)=>{if(!D.items[id]||!Number.isInteger(n)||n<1||!C.has(s,{[id]:n}))return no('没有这么多可出售的物品。');const money=C.price(s,id,n);C.consume(s,{[id]:n});s.money+=money;s.stats.earned+=money;s.flags.firstSale=true;return yes('售出'+D.items[id].name+' ×'+n+'，收到 '+money+' 元（含品质与赶集加价）。');};
   C.storageMove=(s,id,qty,toStorage)=>{
     if(!s.upgrades.storage)return no('先在修缮小院中添置储物柜。');
     if(!D.items[id]||!Number.isInteger(qty)||qty<1||qty>999999)return no('请输入有效数量。');
     const from=toStorage?s.bag:s.storage,to=toStorage?s.storage:s.bag,qFrom=toStorage?s.quality:s.storageQuality,qTo=toStorage?s.storageQuality:s.quality;
     if((from[id]||0)<qty)return no('没有这么多物品。');
-    const q=qFrom[id]||[0,0],normal=from[id]-q[0]-q[1],g=Math.min(q[0],Math.max(0,qty-normal)),c=Math.max(0,qty-normal-g);
-    from[id]-=qty;if(!from[id])delete from[id];to[id]=(to[id]||0)+qty;qFrom[id]=[q[0]-g,q[1]-c];qTo[id]??=[0,0];qTo[id][0]+=g;qTo[id][1]+=c;
+    const q=qFrom[id]||[0,0],normal=from[id]-q.reduce((a,b)=>a+b,0);let left=Math.max(0,qty-normal);qTo[id]??=Array(q.length).fill(0);while(qTo[id].length<q.length)qTo[id].push(0);const moved=q.map((n,i)=>{const used=Math.min(n,left);left-=used;qTo[id][i]+=used;return n-used;});
+    from[id]-=qty;if(!from[id])delete from[id];to[id]=(to[id]||0)+qty;qFrom[id]=moved;
     return yes((toStorage?'存好':'取出')+D.items[id].name+' ×'+qty+'，品质也已一同保留。');
   };
   C.fertilize=(s,i)=>{const p=s.plots[i];if(!p||!p.tilled)return no('请选一块已经松土的菜地。');if(p.soil>=2)return no('土壤已经肥沃，暂时不用堆肥。');if(!C.has(s,{compost:1}))return no('需要熟堆肥，可在加工页制作或杂货铺购买。');C.consume(s,{compost:1});p.soil=Math.min(2,p.soil+1);xp(s,'farming');return yes('熟堆肥拌进土里，土壤恢复了一档。');};
@@ -128,7 +128,7 @@
     const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
     const itemMap=x=>{if(!obj(x))invalid();const r={};for(const[k,n]of Object.entries(x)){if(!D.items[k]||!int(n,0,999999))invalid();if(n)r[k]=n;}return r;};
     s.storage=itemMap(v.storage||{});
-    for(const[key,bag]of [['quality',s.bag],['storageQuality',s.storage]]){s[key]={};if(!obj(v[key]||{}))invalid();for(const[id,q]of Object.entries(v[key]||{})){if(!D.items[id]||!Array.isArray(q)||q.length!==2||!q.every(n=>int(n,0,999999))||q[0]+q[1]>(bag[id]||0))invalid();s[key][id]=q;}}
+    for(const[key,bag]of [['quality',s.bag],['storageQuality',s.storage]]){s[key]={};if(!obj(v[key]||{}))invalid();for(const[id,q]of Object.entries(v[key]||{})){if(!D.items[id]||!Array.isArray(q)||![2,3].includes(q.length)||!q.every(n=>int(n,0,999999))||q.reduce((a,b)=>a+b,0)>(bag[id]||0))invalid();s[key][id]=q;}}
     if(!Array.isArray(v.knownRecipes)||v.knownRecipes.some(id=>!D.recipes.some(r=>r.id===id)))invalid();s.knownRecipes=[...new Set(v.knownRecipes)];
     for(const n of D.npcs){const st=v.stories?.[n.id];if(st){if(!int(st.step,0,D.arcs[n.id].length)||!Array.isArray(st.choices)||st.choices.length!==st.step||st.choices.some(c=>![0,1].includes(c))||!int(st.lastDay,-1,s.day))invalid();s.stories[n.id]=copy(st);}}
     if(!obj(v.partners||{}))invalid();s.partners={};for(const[id,status]of Object.entries(v.partners||{})){if(D.npcs.find(n=>n.id===id)?.tier!=='romance'||!['friend','dating'].includes(status))invalid();s.partners[id]=status;}
@@ -156,7 +156,7 @@
     for(const[k,id]of Object.entries(v.lastGifts||{}))if(s.relations[k]&&D.items[id])s.lastGifts[k]=id;
     for(const[k,val]of Object.entries(v.resourcePressure||{}))if(Object.hasOwn(D.scenes,k)&&int(val.day,0,s.day)&&int(val.count,0,99))s.resourcePressure[k]={day:val.day,count:val.count};
     s.eventLog=Array.isArray(v.eventLog)?v.eventLog.filter(e=>e&&int(e.day,0,s.day)&&typeof e.text==='string').slice(0,200).map(e=>({day:e.day,text:e.text.slice(0,600)})):[];
-    s.processing=Array.isArray(v.processing)?v.processing.map(p=>{if(!p||!D.items[p.id]||!int(p.qty,1,400)||!int(p.readyDay,s.day,s.day+3)||!['晾晒架','腌菜坛','堆肥箱'].includes(p.station)&&p.id!=='pickles')invalid();return {id:p.id,qty:p.qty,readyDay:p.readyDay,station:p.station||'腌菜坛',cooking:p.cooking!==false};}):[];
+    s.processing=Array.isArray(v.processing)?v.processing.map(p=>{if(!p||!D.items[p.id]||!int(p.qty,1,400)||!int(p.readyDay,s.day,s.day+3)||!['晾晒架','腌菜坛','堆肥箱'].includes(p.station)&&p.id!=='pickles')invalid();return {id:p.id,qty:p.qty,readyDay:p.readyDay,station:p.station||'腌菜坛',cooking:p.cooking!==false,...(p.farmGrade!==undefined?(int(p.farmGrade,1,3)?{farmGrade:p.farmGrade}:(invalid(),{})): {})};}):[];
     s.plots.forEach((p,i)=>{const prev=v.plots[i];if(!int(prev.care??0,0,30))invalid();p.care=prev.care??0;p.pest=!!prev.pest;});
     const vs=v.settings||{};for(const k of ['music','ambient','effects'])s.settings[k]=number(vs[k],0,1)?vs[k]:.35;
     s.settings.textSpeed=['instant','slow','normal'].includes(vs.textSpeed)?vs.textSpeed:'instant';s.settings.textScale=[1,1.15,1.3].includes(vs.textScale)?vs.textScale:1;s.settings.contrast=!!vs.contrast;s.settings.vibration=!!vs.vibration;s.settings.gamepad=vs.gamepad!==false;s.settings.fishAssist=vs.fishAssist!==false;
