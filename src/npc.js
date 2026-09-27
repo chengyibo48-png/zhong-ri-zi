@@ -24,6 +24,7 @@ function activity(s,id){
  if(cal.date===14&&m>=660&&m<1080){const center=market?.door||work.xu;return at('festival','准备'+D.festivals[cal.season],{x:center.x+(i%6-2)*30,y:center.y+80+Math.floor(i/6)*32},'fan','',D.festivals[cal.season]+'当天，去老街会合');}
  if(e&&e.status!=='done'&&['granny','zhouSenior','liang','song'].includes(id)&&m>=570&&m<960)return home('housework',P[id].request,P[id].gesture,'家中有件小事，可带材料或一起搭把手');
  if(m<510+i%3*20)return home('morning','准备出门 · '+P[id].work,P[id].gesture,'早起先整理手边东西');
+ const museumPlan=root.ZRZMuseum?.visitPlan(s,id);if(museumPlan)return museumPlan;
  const lunch=720+i%3*20;if(m>=lunch&&m<lunch+65)return home('lunch','回家吃饭歇脚','tea','午饭和休息有自己的时间');
  if(n.tier==='child'&&s.day%7<5&&m<900&&school)return at('school','上课与自然观察',{x:school.door.x+(i%4-1.5)*28,y:school.door.y+30},'read',null,'平日先上学，放学后做自己的事');
  if(m<960){if(s.day%7===5&&['xu','mei','tao','song','luSenior','luo'].includes(id)){const c=market?.door||work.xu;return at('market','赶集 · '+P[id].work,{x:c.x+(i%5-2)*37,y:c.y+90+Math.floor(i/5)*20},P[id].gesture,null,'每周赶集日到老街照看摊位');}return at('work',P[id].work,work[id],P[id].gesture);}
@@ -89,7 +90,7 @@ function resolve(s,id,op,day){
  remember(s,id,'event-'+e.day+'-'+op,msg,'邻里小事',op==='later'?'calm':'happy',choice);C.log(s,D.npcs.find(n=>n.id===id).name+'：'+msg);return ok(msg);
 }
 function updateNPC(s,n,i,a,dt){
- const rt=V.stateRuntime(s),p=s.village.npc[n.id],h=homes[n.id],plan=activity(s,n.id);
+ const rt=V.stateRuntime(s),p=s.village.npc[n.id],plan=activity(s,n.id),h=V.houses.find(h=>h.id===(p.room||plan.room))||homes[n.id];
  if(rt.sequence?.npcId===n.id){a.walking=false;const here=p.room?a.inside:p;if(here)face(here,s.player);a.emotion='focus';a.emotionUntil=rt.clock+2;return;}
  const key=[s.day,plan.key,plan.room,plan.target.x,plan.target.y].join('/');
  if(a.scheduleKey!==key){a.scheduleKey=key;a.plan=plan;a.phase=plan.key;a.target=null;a.path=[];a.wait=0;a.insideRt={path:[],wait:0};a.goal=V.safePosition({village:{}},plan.target);a.failures=0;}

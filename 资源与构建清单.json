@@ -1,8 +1,8 @@
 {
   "name": "种日子",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "platform": "Windows 桌面浏览器 / 单机离线 HTML",
-  "generatedAt": "2026-09-27T17:06:28.828Z",
+  "generatedAt": "2026-09-27T21:57:40.042Z",
   "runtimeDependencies": [],
   "remoteAssets": [],
   "assets": "像素美术、图标、四季琴音及环境音均由项目代码绘制或合成；系统字体不随包分发。",
@@ -12,13 +12,13 @@
   "files": [
     {
       "name": "种日子.html",
-      "bytes": 967811,
-      "sha256": "47e00696adbc79311bb4f9aeb50f84aecd19ee983f7ac061fe5c610bea1337c1"
+      "bytes": 1008076,
+      "sha256": "54d1aea433604c5c2a99c325b750e372220c1c7506284abc1cc40671cbc12227"
     },
     {
       "name": "index.html",
-      "bytes": 8427,
-      "sha256": "e38fb09a67a4c256ce1b40ed5fac41a2a1829a051208048a41ffa8a477af01a6"
+      "bytes": 8549,
+      "sha256": "78ab9a97f3370e7efcb7c874d73a2796fb7fdf25366b9b2f7e98dbe5605a7ca6"
     },
     {
       "name": "style.css",
@@ -27,13 +27,13 @@
     },
     {
       "name": "ui-art.css",
-      "bytes": 15857,
-      "sha256": "f0f7b7f0f00c8ae0841def628bdd50817a150511dd52947975d16e5377469096"
+      "bytes": 18005,
+      "sha256": "baeb3d03a0e5a9545c0a30c61b197e4b02775f126cfab54bf6beea2165fc5cda"
     },
     {
       "name": "build.cjs",
-      "bytes": 1357,
-      "sha256": "a6b3b8236c45a89c8800f3ba3257c92e6c8f131ae8319c67a8055b951003a593"
+      "bytes": 1392,
+      "sha256": "014024789dc21b0bdd0d045a5d096b448d3b7fdb091bac68b66a75fff4dae887"
     },
     {
       "name": "server.cjs",
@@ -42,8 +42,8 @@
     },
     {
       "name": "package.json",
-      "bytes": 949,
-      "sha256": "7c12032a7d86d022ddb6d81a34332d7e449ac149f5dab4eecf5f27bca29e1c79"
+      "bytes": 979,
+      "sha256": "3bdbecc573e8c782be4a75ae1d1a8bf570a858f9343c7d2515b3da2f6571ee97"
     },
     {
       "name": "src/actions.js",
@@ -52,8 +52,8 @@
     },
     {
       "name": "src/app.js",
-      "bytes": 88234,
-      "sha256": "e8601e37e3330526cf1857c5929d70b738074e6b5a5da28c687ac2bfa5f7955e"
+      "bytes": 90150,
+      "sha256": "8bab9f0fdb1e26708db0973b39ec255cc467ea5aefebcff02afbf6c4e9852b8d"
     },
     {
       "name": "src/art.js",
@@ -112,8 +112,8 @@
     },
     {
       "name": "src/debug.js",
-      "bytes": 15195,
-      "sha256": "b6dc08c4d7d8e1ba376e27c3d2f74235da48fea5a9a319f29274a325d667544e"
+      "bytes": 15688,
+      "sha256": "c19acc1ff07ff00e060a46bd5a9b335fd1b9aae91f04d73e9986fe9d81f12430"
     },
     {
       "name": "src/economy-ui.js",
@@ -231,6 +231,21 @@
       "sha256": "10a3fefaadfcac67d73ec2a68d626082dd33b8aec3cbed473d871e0f5c6781f9"
     },
     {
+      "name": "src/museum-ui.js",
+      "bytes": 13917,
+      "sha256": "64ae9c5e30318d7d38fc54d186fd65419d0727c8866778a0755081d42ea19ccf"
+    },
+    {
+      "name": "src/museum-view.js",
+      "bytes": 6907,
+      "sha256": "9c9d643cf8535fb22f4e53087eb2fd906e4bb27003ad6081e00de15b0ff42e33"
+    },
+    {
+      "name": "src/museum.js",
+      "bytes": 15034,
+      "sha256": "b29e5537f5cb3aa5ca1e53572152736b08b5cece2d19a10a0126bcc7d28f9a73"
+    },
+    {
       "name": "src/npc-content.js",
       "bytes": 12611,
       "sha256": "5867854b27f3e7a3e90e39eaf36577c3652983dc60b6a5ec2669a8c2df02f353"
@@ -247,8 +262,8 @@
     },
     {
       "name": "src/npc.js",
-      "bytes": 16983,
-      "sha256": "cc0c3f73df84e7acb915a1327050d3b5256bb22ceb3512c1055f676569be43fd"
+      "bytes": 17112,
+      "sha256": "8e88ef02e4abbd80c620fccc1ede08738f96a7f7e736982901213b8ba22c6be6"
     },
     {
       "name": "src/panels.js",
@@ -312,13 +327,13 @@
     },
     {
       "name": "src/ui-art.js",
-      "bytes": 6917,
-      "sha256": "09ec425d9dd6f653179e13d441c2194c62bc941310833bac23c24767b3f43898"
+      "bytes": 7036,
+      "sha256": "114ab8fe96a3fdb58ca1af07819955982d9206753f360cf172868e30b9c666b3"
     },
     {
       "name": "src/village-view.js",
-      "bytes": 31780,
-      "sha256": "a8597befb3c50c42399ad20fd5d58d3c05528eb20bcf2e9f9e855d7fac8894d7"
+      "bytes": 31815,
+      "sha256": "1af0caed16963f48207c9f71a96d3fc49c3c7a8b06fd242c2f36656177866bf1"
     },
     {
       "name": "src/village.js",

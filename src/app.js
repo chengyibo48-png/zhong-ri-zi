@@ -122,7 +122,7 @@
   function save(slot = 'auto', silent = true) {
     const started=performance.now();
     try {
-      K.ensure(s);const valid = C.load(s), key = SAVE + '-' + slot;
+      K.ensure(s);window.ZRZMuseum.sync(s);const valid = C.load(s), key = SAVE + '-' + slot;
       if (slot === 'auto') { const previous = localStorage.getItem(key); if (previous) { try { C.load(previous); localStorage.setItem(SAVE + '-backup', previous); } catch (_) {} } }
       localStorage.setItem(key, JSON.stringify(valid));diagnostics.saves++;diagnostics.lastSaveMs=performance.now()-started;diagnostics.maxSaveMs=Math.max(diagnostics.maxSaveMs,diagnostics.lastSaveMs);storageAvailable = true;$('save-status').textContent = slot === 'auto' ? '已自动保存 · 安心生活' : '已保存到手动档 ' + slot;
       if (!silent) toast('已经好好记下今天的日子。'); return true;
@@ -136,6 +136,8 @@
   }
   function apply(result, refresh = false) { if (result.ok) { sound('good');if(s.settings.vibration){try{const pad=[...(navigator.getGamepads?.()||[])].find(Boolean);pad?.vibrationActuator?.playEffect('dual-rumble',{duration:60,weakMagnitude:.12,strongMagnitude:0})?.catch(()=>{});}catch(_){}}save();update();if (refresh && currentPanel) renderPanel(currentPanel,panelArg); } toast(result.msg,!result.ok);return result.ok; }
   function update() {
+    window.ZRZMuseum.sync(s);
+    const museum=window.ZRZMuseum,tracked=museum.bundles.find(b=>b.id===museum.ensure(s).tracked);let badge=$('museum-tracker');if(!badge){badge=document.createElement('button');badge.id='museum-tracker';badge.className='ms-track-hud';badge.dataset.action='ms-open-tracked';$('quest-content').appendChild(badge);}badge.hidden=!tracked;if(tracked)badge.textContent='馆藏 · '+tracked.name+' '+tracked.keys.filter(k=>museum.ensure(s).donated[k]).length+'/'+tracked.keys.length+' · 查看';
     window.ZRZUIArt.apply(s);
     $('game-root').style.setProperty('--reading-scale',s.settings.textScale);$('game-root').classList.toggle('high-contrast',s.settings.contrast);
     const fp=Feedback.ensure(s).prefs;$('game-root').classList.toggle('reduced-feedback',fp.motion==='reduced');const unread=Feedback.ensure(s).rows.filter(r=>!r.read).length;if($('feedback-button')){$('feedback-button').textContent='回响'+(unread?' · '+unread:'');$('feedback-button').setAttribute('aria-label','打开手边回响，'+unread+' 条未读');}
@@ -278,7 +280,7 @@
       html=head('听，水面的动静。','轻松垂钓 · 不需要抢时机，坐稳等一小会儿。')+'<p class="dialogue-quote">鱼漂轻轻晃动，风从河面吹来……</p><div class="paper-note">等浮漂稳定，约两秒后收竿。设置可打开自动收竿，跳过等待。</div>';
     }
     html+=X.after(name,s,{button});$('modal-body').innerHTML=html;X.mount(s);
-    const focused=['welcome','npc','gifts','fishing','sleep','year','new-confirm','story','wedding','separation','feedback-confirm'].includes(name);$('modal').classList.toggle('focused',focused);
+    const focused=['welcome','npc','gifts','fishing','sleep','year','new-confirm','story','wedding','separation','feedback-confirm','museum-confirm'].includes(name);$('modal').classList.toggle('focused',focused);
     const active=window.ZRZUIArt.bookPage(name)||{cook:'recipes',sell:'bag',seeds:'bag',save:'settings',help:'settings',project:'orders',festival:'calendar',controls:'settings'}[name]||name;
     $('book-nav').innerHTML=bookPages.map(([id,title,icon])=>'<button data-action="'+id+'" class="'+(id===active?'active':'')+'" '+(id===active?'aria-current="page"':'')+'>'+svg(icon)+title+'</button>').join('');
     window.ZRZUIArt.mount(s,name);
@@ -301,12 +303,16 @@
   }
   function toggleHud(){hudVisible=!hudVisible;$('game-root').classList.toggle('hud-hidden',!hudVisible);$('hud-restore').hidden=hudVisible;}
   async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if($('game-root').requestFullscreen)await $('game-root').requestFullscreen();else throw new Error('unsupported');}catch(_){toast('画面已铺满当前窗口。此浏览器不支持原生全屏，可以用 Edge 或 Chrome 打开。',true);}camera.update(s,0,true);update();}
+  function queueMuseum(op,id,mode,grade){const M=window.ZRZMuseum;if(!['donate','claim','upgrade','feature'].includes(op))return;if(s.village.interior!==M.house.id){navigate(V.destination(s,'house',M.house.id));return;}closePanel();farmQueue=[];ranchQueue=[];kitchenTask=null;buildTask=null;queuedDestination=null;walkTo({...M.registry,kind:'museum-task',name:'村史馆登记桌',op,id,mode,grade});}
   let lastDialogue='';
   function interact(p,performed=false){
     if(!p||currentPanel||inputLocked)return;
+    if(p.kind==='museum-task'){const M=window.ZRZMuseum;if(!performed){const kind=p.op==='upgrade'?'build':p.mode==='sample'?'trade':'read';startAction({...Actions.spec(kind,p.op==='upgrade'?'整理展架，擦净展柜':p.op==='claim'?'签名领取，收好纪念陈设':p.op==='feature'?'布置展品，摆正铭牌':p.mode==='sample'?'点验物产，装盒登记':'摊开资料，誊写入册'),duration:p.op==='upgrade'?2.8:1.6,item:p.mode==='sample'?p.id.split(':')[1]:null},p,()=>interact(p,true));return;}const r=p.op==='donate'?M.donate(s,p.id,p.mode,p.grade):p.op==='claim'?M.claim(s,p.id):p.op==='upgrade'?M.upgrade(s):M.feature(s,p.id);apply(r);openPanel('museum');return;}
     if(p.kind==='npc-task'){if(!window.ZRZNpc.near(s,p.id)){toast('对方走开了，先靠近再聊。');return;}if(!performed){const n=window.ZRZNpc.profiles[p.id],kind=p.op==='join'?n.helpKind:p.op==='supply'?'trade':p.op==='story'?'read':'greet';startAction({...Actions.spec(kind,p.op==='join'?n.helpAction:p.op==='supply'?'点好材料，交到邻居手中':'停下脚步，面对面回应'),duration:p.op==='join'?2.8:1.15,item:p.op==='supply'?n.item:null},p,()=>interact(p,true));return;}const r=p.op==='talk'?window.ZRZNpc.converse(s,p.id,p.topic||'auto'):p.op==='story'?C.storyChoice(s,p.id,p.choice):window.ZRZNpc.resolve(s,p.id,p.op,p.day);if(r.ok)lastDialogue=r.msg;apply(r);openPanel(p.op==='story'?'story':'npc',p.id);return;}
     if(!performed&&p.kind==='fish'&&window.ZRZFishing){const begun=window.ZRZFishing.begin(s,p);if(!begun.ok){toast(begun.msg,true);return;}startAction(begun.spec,p,()=>apply(window.ZRZFishing.finish(s)),()=>window.ZRZFishing.cancel(s));return;}
     if(!performed){const spec=Actions.point(p,tool);if(spec){startAction(spec,p,()=>interact(p,true));return;}}
+    if(p.kind==='museum'&&['物产','文物','民俗','生物'].includes(p.id)){window.ZRZMuseumUI.ui.group=p.id;window.ZRZMuseumUI.ui.tab='donate';openPanel('museum');return;}
+    if(p.kind==='wildlife'){apply(window.ZRZMuseum.observe(s,p.id));return;}
     if(p.kind==='build-task'){const r=B.perform(s,p);if(r.ok)V.feedback(s,p,p.op?.startsWith('economy-')?'harvest':'hoe',r.msg,1.7);apply(r);return;}
     if(p.kind==='build-piece'){if(p.service==='water'){const r=F.fillWater(s);V.feedback(s,p,'water',r.msg,1.5);apply(r);}else if(p.service==='rest'){V.feedback(s,p,'steam','在自己的小院里歇一歇。',1.5);apply(C.rest(s));}else if(p.service)openPanel(p.service);else{V.feedback(s,p,'spark','这处小景，是你亲手安置的。',1.5);sound('soft');}return;}
     if(p.kind==='kitchen-station'){if(['stove','steam'].includes(p.station))openPanel('cook',{tab:'recipes'});else openPanel('processing',{station:p.station});return;}
@@ -346,7 +352,7 @@
     if(a==='v-walk-activity'){navigate(V.outdoorActions.find(p=>p.id===id));return;}
     if(a==='v-walk-region'){navigate(V.destination(s,'region',id));return;}if(a==='v-walk-house'){navigate(V.destination(s,'house',id));return;}if(a==='v-npc-talk'){queueNeighbor(id,'talk',{topic:'auto'});return;}if(a==='v-npc-gift'){openPanel('gifts',id);return;}if(a==='v-bike'){if(s.village.interior){toast('先走出小屋再骑车。');return;}s.village.riding=!s.village.riding;update();return;}if(a==='v-stop'){path=[];pending=null;queuedDestination=null;farmQueue=[];ranchQueue=[];kitchenTask=null;buildTask=null;return;}
     if(window.ZRZ_DEV&&a==='debug'){openPanel('debug');return;}
-    if(X.dispatch(a,id,b.dataset,{s,apply,open:openPanel,render:()=>renderPanel(currentPanel,panelArg),save,update,toast,close:closePanel,queueFarm,queueRanch,queueKitchen,queueBuild,queueNeighbor,navigate,equipTool:setTool,equipSeed:()=>setTool('seed')}))return;
+    if(X.dispatch(a,id,b.dataset,{s,apply,open:openPanel,render:()=>renderPanel(currentPanel,panelArg),save,update,toast,close:closePanel,queueFarm,queueRanch,queueKitchen,queueBuild,queueNeighbor,queueMuseum,navigate,equipTool:setTool,equipSeed:()=>setTool('seed')}))return;
     if(a==='walk-landmark'){const point=W.points(s).find(p=>p.id===id);closePanel();if(point)walkTo(point);return;}
     if(['menu','controls','bag','shop','recipes','relations','orders','build','journal','settings','save','help','seeds','map','project','sleep'].includes(a)){openPanel(a);return;}
     if(a==='calendar'){calSeason=C.calendar(s).season;openPanel(a);return;}
