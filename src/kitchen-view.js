@@ -10,8 +10,8 @@
    c.fillStyle='#5e5140';c.font='bold 18px serif';c.textAlign='center';c.fillText('一 粥 一 饭 · 四 季 有 味',455,233);
    // Furniture follows the shared indoor collision rectangles, leaving broad walking aisles.
    rect(c,161,249,183,43,'#75634d');rect(c,165,251,175,7,'#ded4b7');for(let x=171;x<335;x+=26){rect(c,x,263,22,7,'#b1a28a');rect(c,x+7,275,18,6,'#c8b694');}
-   for(const x of [223,311]){c.fillStyle='#303d37';c.beginPath();c.ellipse(x,254,30,10,0,0,7);c.fill();c.strokeStyle='#76847a';c.lineWidth=3;c.stroke();rect(c,x-15,278,29,9,'#553d2e');rect(c,x-9,280,17,5,'#e68b43');}
-   for(let i=0;i<3;i++){const y=235-(t*18+i*17)%52;rect(c,213+i*7+Math.sin(t*2+i)*4,y,4,10,'#fff6d68a');}
+   for(const x of [223,311]){c.fillStyle='#303d37';c.beginPath();c.ellipse(x,254,30,10,0,0,7);c.fill();c.strokeStyle='#76847a';c.lineWidth=3;c.stroke();rect(c,x-15,278,29,9,'#553d2e');if(s.kitchen.jobs.some(j=>['stove','steam'].includes(j.station)&&j.ready>K.now(s)))rect(c,x-9,280,17,5,'#e68b43');}
+   if(s.kitchen.jobs.some(j=>['stove','steam'].includes(j.station)&&j.ready>K.now(s))&&s.feedback?.prefs.motion!=='reduced'&&root.ZRZVisualFx?.policy(s).ambient!==false)for(let i=0;i<3;i++){const y=235-(t*18+i*17)%52;rect(c,213+i*7+Math.sin(t*2+i)*4,y,4,10,'#fff6d68a');}
    rect(c,297,231,28,14,'#b9945e');for(let i=0;i<4;i++)rect(c,300+i*6,232,2,12,'#dec08c');rect(c,294,228,34,4,'#ddbd80');
    rect(c,627,248,140,40,'#735b40');rect(c,630,250,134,7,'#bc9768');c.fillStyle='#a0a498';c.beginPath();c.ellipse(700,251,46,18,0,0,7);c.fill();c.strokeStyle='#666d65';c.lineWidth=3;c.stroke();c.beginPath();c.ellipse(700,248,26,9,0,0,7);c.stroke();rect(c,696,226,7,25,'#725335');rect(c,698,226,34,5,'#987441');
    rect(c,658,443,144,38,'#825f43');for(let i=0;i<3;i++){const x=684+i*43;rect(c,x-17,435,33,41,'#996a47');rect(c,x-21,431,40,6,'#624b3c');rect(c,x-10,443,20,21,'#d6bd89');c.fillStyle='#714a39';c.font='12px serif';c.fillText(['腌','酿','乳'][i],x,458);}

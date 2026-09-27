@@ -1,12 +1,12 @@
 {
   "name": "zhong-ri-zi",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "private": true,
   "description": "种日子 — 禾溪村的离线像素生活游戏基础原型",
   "scripts": {
     "start": "node server.cjs",
     "build": "node build.cjs",
-    "test": "node tests/core.test.cjs && node tests/expansion.test.cjs && node tests/visual-world.test.cjs && node tests/village.test.cjs && node tests/farming.test.cjs && node tests/ranch.test.cjs && node tests/kitchen.test.cjs && node tests/building.test.cjs && node tests/tools.test.cjs && node tests/economy.test.cjs && node tests/scenes.test.cjs && node tests/environment.test.cjs && node tests/forage.test.cjs && node tests/fishing-interiors.test.cjs && node tests/npc.test.cjs && node tests/feedback.test.cjs && node tests/tiles.test.cjs && node tests/characters.test.cjs && node tests/item-icons.test.cjs && node tests/ui-art.test.cjs",
+    "test": "node tests/core.test.cjs && node tests/expansion.test.cjs && node tests/visual-world.test.cjs && node tests/village.test.cjs && node tests/farming.test.cjs && node tests/ranch.test.cjs && node tests/kitchen.test.cjs && node tests/building.test.cjs && node tests/tools.test.cjs && node tests/economy.test.cjs && node tests/scenes.test.cjs && node tests/environment.test.cjs && node tests/forage.test.cjs && node tests/fishing-interiors.test.cjs && node tests/npc.test.cjs && node tests/feedback.test.cjs && node tests/tiles.test.cjs && node tests/characters.test.cjs && node tests/item-icons.test.cjs && node tests/ui-art.test.cjs && node tests/visual-fx.test.cjs",
     "dev": "node server.cjs --dev"
   }
 }

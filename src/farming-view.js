@@ -12,9 +12,10 @@ F.drawPlot=function(c,s,i,t){
  if(b.moisture<28)for(let j=0;j<3;j++){rect(c,x+7+j*10,y+12+j%2*8,1,6,'#503e32');rect(c,x+7+j*10,y+16+j%2*8,4,1,'#503e32');}
  if(b.fallow){for(let j=0;j<9;j++)rect(c,x+4+j*3,y+5+j%4*5,5,1,'#c8b97e');}
  if(p.crop){
-  const crop=D.crops[p.crop],k=Math.min(1,p.growth/crop.days),sway=Math.sin(t*2+i)*.7,green=b.health<25?'#bab76b':b.health<60?'#90a05c':'#8eaf59';
+  const visual=root.ZRZVisualFx,quiet=visual?.policy(s).reduced||s.settings.particles===false;c.save();const scale=visual?.growthScale(s,i)||1;c.translate(pos.x,pos.y);c.scale(1,scale);c.translate(-pos.x,-pos.y);
+  const crop=D.crops[p.crop],k=Math.min(1,p.growth/crop.days),sway=quiet?0:Math.sin(t*2+i)*.7,green=b.health<25?'#bab76b':b.health<60?'#90a05c':'#8eaf59';
   if(k<.12){for(let j=0;j<3;j++){rect(c,x+9+j*8,y+13,3,2,'#d5b279');rect(c,x+9+j*8,y+14,2,1,'#614730');}}
-  else if(k>=1){c.save();c.globalAlpha=b.health<22?.75:1;W.item(c,p.crop,x+3,y-5,1.1);c.restore();if(b.ripeDays>=4){rect(c,x+20,y-6,1,9,'#6d8041');rect(c,x+18,y-8,5,3,'#d9c387');}else if(Math.sin(t*3+i)>.55){rect(c,x+31,y-4,1,5,'#fff0b4');rect(c,x+29,y-2,5,1,'#fff9de');}}
+  else if(k>=1){c.save();c.globalAlpha=b.health<22?.75:1;W.item(c,p.crop,x+3,y-5,1.1);c.restore();if(b.ripeDays>=4){rect(c,x+20,y-6,1,9,'#6d8041');rect(c,x+18,y-8,5,3,'#d9c387');}else if(quiet||Math.hypot(pos.x-s.player.x,pos.y-s.player.y)<150&&Math.sin(t*1.5+i*2.4)>.92){rect(c,x+31,y-4,1,5,'#fff0b4');rect(c,x+29,y-2,5,1,'#fff9de');}}
   else{
    const stalk=crop.group==='谷物',fruit=crop.group==='果实',rootCrop=crop.group==='根菜',height=4+k*(stalk?28:19);
    for(let j=0;j<(b.density==='dense'?4:3);j++){const xx=x+8+j*8+sway,yy=y+19+(j%2)*3;rect(c,xx,yy-height,2,height,'#3f6944');leaf(c,xx,yy-height*.65,Math.round(2+k*5),green);if(k>.48)leaf(c,xx,yy-height*.95,Math.round(3+k*4),'#b4c975');if(k>.72){if(stalk){rect(c,xx-1,yy-height-6,4,8,'#d5c06b');rect(c,xx-2,yy-height-5,1,5,'#f2dfa0');}else if(fruit){rect(c,xx+2,yy-height+3,4,5,crop.color||'#c48748');rect(c,xx+3,yy-height+3,1,2,'#f1d392');}else if(rootCrop)rect(c,xx-1,yy-1,5,4,crop.color||'#deb988');else{rect(c,xx-2,yy-height-2,5,2,'#efe1a0');rect(c,xx,yy-height-3,2,4,'#fff1c4');}}}
@@ -23,6 +24,7 @@ F.drawPlot=function(c,s,i,t){
   if(b.pests>=15){const xx=x+11+Math.sin(t*3+i)*4;rect(c,xx,y+8,3,2,'#353c31');rect(c,xx-1,y+7,1,1,'#d9b96c');}
   if(b.disease>=15){rect(c,x+12,y+5,2,2,'#76513b');rect(c,x+23,y+9,2,2,'#76513b');}
  }
+ if(p.crop)c.restore();
  if(b.weeds>35){leaf(c,x+4,y+24,2,'#52773c');leaf(c,x+34,y+14,2,'#52773c');}
  if(b.moisture>60){rect(c,x+33,y+25,2,4,'#77c5d5');rect(c,x+34,y+24,1,3,'#d0eee4');}
  if(b.health<30&&p.crop){rect(c,x+1,y-5,2,5,'#efbb71');rect(c,x+1,y+2,2,1,'#efbb71');}
