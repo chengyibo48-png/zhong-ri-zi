@@ -1,8 +1,8 @@
 {
   "name": "种日子",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "platform": "Windows 桌面浏览器 / 单机离线 HTML",
-  "generatedAt": "2026-09-27T16:27:35.809Z",
+  "generatedAt": "2026-09-27T16:46:50.630Z",
   "runtimeDependencies": [],
   "remoteAssets": [],
   "assets": "像素美术、图标、四季琴音及环境音均由项目代码绘制或合成；系统字体不随包分发。",
@@ -12,13 +12,13 @@
   "files": [
     {
       "name": "种日子.html",
-      "bytes": 931991,
-      "sha256": "04a81c970b629e19cf422922d536e7646663c3ec7c937f1f7fbfc51337d7521d"
+      "bytes": 955255,
+      "sha256": "c97657b186e65dcac4c73332428d5d946bdf20616fe1579b8f4dbb8fc6ea820d"
     },
     {
       "name": "index.html",
-      "bytes": 8120,
-      "sha256": "b68ecf419c75bfee87b1b26b9d7ba12bdf0b2ea3974acf0d3f608f7956e6b3d2"
+      "bytes": 8386,
+      "sha256": "e8b8a8f7370bf44a87204aa18e0177446dff3c8f908aee3fd739f2119184e815"
     },
     {
       "name": "style.css",
@@ -26,9 +26,14 @@
       "sha256": "4a97e9ecf4de6544aa2ef6c816c6cdf91aa9cbd1eb35a5d5a18718f071156bd9"
     },
     {
+      "name": "ui-art.css",
+      "bytes": 15857,
+      "sha256": "f0f7b7f0f00c8ae0841def628bdd50817a150511dd52947975d16e5377469096"
+    },
+    {
       "name": "build.cjs",
-      "bytes": 1228,
-      "sha256": "1cddb1c608c1fe7960b01c70020d9ccf0cd86516b3b19b16ae6dcd44cef6e06f"
+      "bytes": 1345,
+      "sha256": "4b3bbbc4e95918eb0fc086aeb6b18182af54662d0410b842e5dcef97272e9391"
     },
     {
       "name": "server.cjs",
@@ -37,8 +42,8 @@
     },
     {
       "name": "package.json",
-      "bytes": 886,
-      "sha256": "73de10b381cecbf661dbc99fad7b2c5b11c5568b4fec8526c7da50cbf1cccb2b"
+      "bytes": 916,
+      "sha256": "27b0d81d9cd30fa9086f3b4f3dd95c51ace505e4694a81e17be6d06574267db9"
     },
     {
       "name": "src/actions.js",
@@ -47,8 +52,8 @@
     },
     {
       "name": "src/app.js",
-      "bytes": 87530,
-      "sha256": "412f9267cad331722f40bab49915e537b76740b6a8a46ec04d4a238f14c36500"
+      "bytes": 87796,
+      "sha256": "ee9077a3b6ae08f97aa70a1749857565d4f9ffcbf959a06a3a4750f7a98a5774"
     },
     {
       "name": "src/art.js",
@@ -304,6 +309,11 @@
       "name": "src/tools.js",
       "bytes": 15515,
       "sha256": "97a00696306e0838c7e4a2f44f487b24ad4b74568f9e016f67796df9ea2bbcbb"
+    },
+    {
+      "name": "src/ui-art.js",
+      "bytes": 6917,
+      "sha256": "09ec425d9dd6f653179e13d441c2194c62bc941310833bac23c24767b3f43898"
     },
     {
       "name": "src/village-view.js",

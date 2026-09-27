@@ -136,6 +136,7 @@
   }
   function apply(result, refresh = false) { if (result.ok) { sound('good');if(s.settings.vibration){try{const pad=[...(navigator.getGamepads?.()||[])].find(Boolean);pad?.vibrationActuator?.playEffect('dual-rumble',{duration:60,weakMagnitude:.12,strongMagnitude:0})?.catch(()=>{});}catch(_){}}save();update();if (refresh && currentPanel) renderPanel(currentPanel,panelArg); } toast(result.msg,!result.ok);return result.ok; }
   function update() {
+    window.ZRZUIArt.apply(s);
     $('game-root').style.setProperty('--reading-scale',s.settings.textScale);$('game-root').classList.toggle('high-contrast',s.settings.contrast);
     const fp=Feedback.ensure(s).prefs;$('game-root').classList.toggle('reduced-feedback',fp.motion==='reduced');const unread=Feedback.ensure(s).rows.filter(r=>!r.read).length;if($('feedback-button')){$('feedback-button').textContent='回响'+(unread?' · '+unread:'');$('feedback-button').setAttribute('aria-label','打开手边回响，'+unread+' 条未读');}
     const c = C.calendar(s), hr = Math.floor(s.minutes / 60), minute = Math.floor(s.minutes % 60 / 10) * 10;
@@ -248,14 +249,14 @@
       for(const slot of ['auto','1','2','3','backup','recovery']){const raw=readSave(SAVE+'-'+slot);let meta='还没有留下记录。',valid=false;if(raw){try{const v=C.load(raw),c=C.calendar(v);meta=escape(v.name)+' · 第 '+c.year+' 年 '+D.seasons[c.season]+' '+c.date+' 日 · '+v.money+' 元';valid=true;}catch(_){meta='此存档损坏，原数据保留。';}}html+='<div class="save-row"><div><h3>'+({auto:'每日自动档',backup:'上一份自动备份',recovery:'读取前的回退档'}[slot]||'手动存档 '+slot)+'</h3><p>'+meta+'</p></div>'+(!['auto','backup','recovery'].includes(slot)?button('保存到此处','save-slot',slot,'mini-btn'):'')+button('读取','load-slot',slot,'mini-btn',valid?'':'disabled')+'</div>';}
       html+='<div class="button-row">'+button('导出存档','export','','secondary')+button('导入存档','import','','secondary')+'</div><p class="mode-tag">浏览器清理数据或更换游戏路径可能影响本地存档。导出一份 JSON，就能在另一台电脑继续生活。</p>';
     } else if(name==='settings'){
-      html=head('按自己的节奏生活','画面、声音与操作，都由你来决定。设置随存档保存。');
+      html=head('按自己的节奏生活','画面、声音与操作，都由你来决定。设置随存档保存。')+window.ZRZUIArt.settings(s);
       html+='<div class="settings-row"><label>画面全屏<small>游戏始终铺满窗口；点击还可隐藏浏览器边框。</small></label>'+button(document.fullscreenElement?'退出原生全屏':'进入原生全屏','fullscreen','','secondary')+'</div>';
       html+='<div class="settings-row"><label>镜头距离<small>保持像素比例，镜头跟随角色，不拉伸场景。</small></label><select id="zoom-setting"><option value="1" '+(s.settings.zoom===1?'selected':'')+'>开阔 · 100%</option><option value="1.2" '+(s.settings.zoom===1.2?'selected':'')+'>舒适 · 120%</option><option value="1.4" '+(s.settings.zoom===1.4?'selected':'')+'>近景 · 140%</option></select></div>';
       html+='<div class="settings-row"><label>时间速度<small>常规约 10 分钟一天，舒缓约 15 分钟；劳动另计少量时间。</small></label><select id="speed-setting"><option value="relaxed" '+(s.settings.speed==='relaxed'?'selected':'')+'>舒缓 · 慢慢来</option><option value="normal" '+(s.settings.speed==='normal'?'selected':'')+'>常规 · 日常节奏</option></select></div>';
       html+='<div class="settings-row"><label>琴音与交互音</label>'+button(s.settings.sound?'已开启':'已关闭','sound','','secondary')+'</div><div class="settings-row"><label>音量</label><input id="volume-setting" type="range" min="0" max="1" step=".05" value="'+s.settings.volume+'" aria-label="音量"></div>';
       html+='<div class="settings-row"><label>生活提示<small>显示画面里的心愿便条与操作提示；H 可临时收起全部界面。</small></label>'+button(s.settings.hints?'已开启':'已关闭','toggle-hints','','secondary')+'</div>';
       html+='<div class="settings-row"><label>自定义按键<small>方向键、空格和 Esc 始终保留，也可以更换 8 个字母快捷键。</small></label>'+button('修改按键','controls','','secondary')+'</div>';
-      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.19.0 · 一物一形，一篮日常<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
+      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.20.0 · 纸上四时，手边日常<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
     } else if(name==='controls'){
       html=head('把操作换成顺手的样子','点击一个按键，再按想使用的字母。重复按键会交换位置。Esc 取消修改。');
       html+='<div class="key-grid">'+Object.entries(bindingNames).map(([id,name])=>'<div class="key-row"><span>'+name+'</span>'+button(keyLabel(id),'bind-key',id,'key-button')+'</div>').join('')+'</div>';
@@ -278,8 +279,9 @@
     }
     html+=X.after(name,s,{button});$('modal-body').innerHTML=html;X.mount(s);
     const focused=['welcome','npc','gifts','fishing','sleep','year','new-confirm','story','wedding','separation','feedback-confirm'].includes(name);$('modal').classList.toggle('focused',focused);
-    const active={cook:'recipes',sell:'bag',seeds:'bag',save:'settings',help:'settings',project:'orders',festival:'calendar',controls:'settings'}[name]||name;
+    const active=window.ZRZUIArt.bookPage(name)||{cook:'recipes',sell:'bag',seeds:'bag',save:'settings',help:'settings',project:'orders',festival:'calendar',controls:'settings'}[name]||name;
     $('book-nav').innerHTML=bookPages.map(([id,title,icon])=>'<button data-action="'+id+'" class="'+(id===active?'active':'')+'" '+(id===active?'aria-current="page"':'')+'>'+svg(icon)+title+'</button>').join('');
+    window.ZRZUIArt.mount(s,name);
     drawIcons();
   }
   function projectCard(){return '<div class="row-card"><div class="row-text"><h3>一起修缮村口河埠 '+(s.flags.bridge?'<span class="tag">已经完成</span>':'')+'</h3><p>换下旧木板，添一张长椅。让老人孩子都能安心在河边歇脚。</p>'+(!s.flags.firstDish?'<p>先给林阿婆送一道家常菜，她会把你介绍给大家。</p>':'')+ingredients({wood:8,bamboo:6})+'</div>'+button(s.flags.bridge?'去河边看看':'和乡亲们动工',s.flags.bridge?'travel':'repair',s.flags.bridge?'river':'','mini-btn',!s.flags.bridge&&(!s.flags.firstDish||!C.has(s,{wood:8,bamboo:6}))?'disabled':'')+'</div>';}
@@ -381,7 +383,7 @@
     if(a==='new-confirm')openPanel('new-confirm');
     if(a==='new-game'){save('backup');s=C.initial();path=[];pending=null;hovered=null;tool='hand';openPanel('welcome');update();}
   });
-  document.addEventListener('change',e=>{if(e.target.dataset.feedbackPref){if(Feedback.preference(s,e.target.dataset.feedbackPref,e.target.value)){save();update();}return;}if(e.target.dataset.extraSetting){const key=e.target.dataset.extraSetting;s.settings[key]=['textScale','music','ambient','effects'].includes(key)?Number(e.target.value):e.target.value;save();update();return;}if(e.target.id==='speed-setting'){s.settings.speed=e.target.value;save();update();}if(e.target.id==='volume-setting'){s.settings.volume=Number(e.target.value);save();sound();}if(e.target.id==='zoom-setting'){s.settings.zoom=Number(e.target.value);camera.update(s,0,true);save();update();}});
+  document.addEventListener('change',e=>{if(e.target.dataset.uiArt){if(window.ZRZUIArt.set(s,e.target.dataset.uiArt,e.target.value)){save();update();}return;}if(e.target.dataset.feedbackPref){if(Feedback.preference(s,e.target.dataset.feedbackPref,e.target.value)){save();update();}return;}if(e.target.dataset.extraSetting){const key=e.target.dataset.extraSetting;s.settings[key]=['textScale','music','ambient','effects'].includes(key)?Number(e.target.value):e.target.value;save();update();return;}if(e.target.id==='speed-setting'){s.settings.speed=e.target.value;save();update();}if(e.target.id==='volume-setting'){s.settings.volume=Number(e.target.value);save();sound();}if(e.target.id==='zoom-setting'){s.settings.zoom=Number(e.target.value);camera.update(s,0,true);save();update();}});
   $('import-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2e6)throw new Error('存档文件过大，请选择本游戏导出的 JSON。');const next=C.load(await file.text());save('backup');s=next;W.restorePosition(s);path=[];pending=null;hovered=null;closePanel();save();update();toast('存档已经带回来了，欢迎继续生活。');}catch(err){toast(err.message||'无法读取这份存档。',true);}finally{e.target.value='';}});
   $('modal-overlay').addEventListener('click',e=>{if(e.target===$('modal-overlay'))closePanel();});
   function hoverInfo(){const box=$('hover-card');if(!hovered||currentPanel||inputLocked){box.hidden=true;return;}const info=Feedback.describe(s,hovered,tool);box.innerHTML='<strong>'+escape(info.name)+'</strong><small>'+escape(info.state)+'<br>'+escape(info.reason||info.verb)+(info.detail?'<br>'+escape(info.detail):'')+'<br>点击走近 · '+keyLabel('interact')+' 交互</small>';box.hidden=false;}
@@ -393,7 +395,7 @@
   $('world').addEventListener('pointerdown',e=>{if(currentPanel||inputLocked)return;queuedDestination=null;farmQueue=[];ranchQueue=[];kitchenTask=null;buildTask=null;e.preventDefault();$('world').focus();sound('soft');const p=coords(e),hit=W.hit(s,p.x,p.y);if(hit&&Math.hypot(hit.x-s.player.x,hit.y-s.player.y)<53){path=[];pending=null;interact(hit);return;}const target=hit?Actions.approach(s,hit):p;path=W.route(s,target.x,target.y);pending=path.length?hit:null;if(!path.length)toast('这里走不过去，试试旁边的小路。');});
   document.addEventListener('keydown',e=>{
     if(capturing){e.preventDefault();if(e.key==='Escape'){capturing=null;renderPanel('controls');return;}const key=e.key.toLowerCase();if(!C.bindingKeyAllowed(key)){toast('请选择字母键；C、F、H、Q 是固定功能键。',true);return;}const old=s.settings.bindings[capturing],other=Object.keys(s.settings.bindings).find(k=>s.settings.bindings[k]===key);if(other)s.settings.bindings[other]=old;s.settings.bindings[capturing]=key;capturing=null;save();update();renderPanel('controls');toast('按键已经换好了，下次打开也会记住。');return;}
-    if(e.key==='Tab'&&currentPanel){const focusable=[...$('modal').querySelectorAll('button:not([disabled]):not([hidden]),input,select')].filter(el=>el.offsetParent!==null);if(!focusable.length)return;const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}return;}
+    if(e.key==='Tab'&&currentPanel){const focusable=[...$('modal').querySelectorAll('button:not([disabled]):not([hidden]),input,select,summary')].filter(el=>el.offsetParent!==null);if(!focusable.length)return;const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}return;}
     if(e.key==='Escape'){e.preventDefault();if(sequence.active){cancelAction();return;}currentPanel?closePanel():openPanel('menu');return;}
     if(currentPanel||inputLocked||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;
     if(e.ctrlKey||e.metaKey||e.altKey)return;
@@ -421,8 +423,8 @@
       if(press(1)||press(9)){closePanel();}
       else{const focus=document.activeElement,horizontal=press(15)?1:press(14)?-1:0;if(horizontal&&focus?.tagName==='SELECT'){focus.selectedIndex=(focus.selectedIndex+horizontal+focus.options.length)%focus.options.length;focus.dispatchEvent(new Event('change',{bubbles:true}));}else if(horizontal&&focus?.matches('input[type=range],input[type=number]')){const step=Number(focus.step)||1;focus.value=String(Math.max(Number(focus.min)||0,Math.min(Number(focus.max)||999999,Number(focus.value)+horizontal*step)));focus.dispatchEvent(new Event('change',{bubbles:true}));}
         const direction=down(13)?1:down(12)?-1:Math.abs(pad.axes[1]||0)>.5?Math.sign(pad.axes[1]):0;
-        if(direction&&now>padMenuAt){padMenuAt=now+190;const list=[...$('modal').querySelectorAll('button:not([disabled]),input,select')].filter(el=>el.offsetParent!==null),i=list.indexOf(document.activeElement);if(list.length){const next=list[(i+direction+list.length)%list.length];next.focus();next.scrollIntoView({block:'nearest'});}}
-        if(press(0)&&document.activeElement?.matches('button:not([disabled]),input[type=checkbox]'))document.activeElement.click();
+        if(direction&&now>padMenuAt){padMenuAt=now+190;const list=[...$('modal').querySelectorAll('button:not([disabled]),input,select,summary')].filter(el=>el.offsetParent!==null),i=list.indexOf(document.activeElement);if(list.length){const next=list[(i+direction+list.length)%list.length];next.focus();next.scrollIntoView({block:'nearest'});}}
+        if(press(0)&&document.activeElement?.matches('button:not([disabled]),input[type=checkbox],summary'))document.activeElement.click();
       }
     }else{
       padX=(Math.abs(pad.axes[0]||0)>.2?pad.axes[0]:0)+(down(15)?1:0)-(down(14)?1:0);padY=(Math.abs(pad.axes[1]||0)>.2?pad.axes[1]:0)+(down(13)?1:0)-(down(12)?1:0);

@@ -5,6 +5,7 @@
   <meta name="theme-color" content="#647b52"><title>种日子 · 禾溪村的慢生活</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e7ebd9'/%3E%3Cpath d='M16 27V14M16 17C5 17 5 7 6 7c8 0 11 4 10 10M16 13C16 5 23 3 27 4c0 9-5 11-11 11' fill='none' stroke='%23637d51' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="ui-art.css">
 </head>
 <body>
   <main id="game-root" aria-label="种日子游戏">
@@ -46,7 +47,7 @@
       <button id="hud-restore" data-action="toggle-hud" hidden>显示界面 <kbd>H</kbd></button>
       <div class="scene-arrival" id="scene-arrival" hidden aria-live="polite"></div>
     </div>
-    <div class="modal-overlay" id="modal-overlay" hidden><section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-topline"><span>禾溪生活簿</span><span class="pause-badge">时光暂停</span><button class="modal-close" aria-label="关闭窗口" data-action="close">×</button></header><nav id="book-nav" aria-label="生活簿功能页"></nav><div id="modal-body"></div><footer class="modal-foot"><span>不着急，日子慢慢过。</span><span><kbd>Esc</kbd> 返回村庄</span></footer></section></div>
+    <div class="modal-overlay" id="modal-overlay" hidden><section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-topline"><span class="ui-book-mark" aria-hidden="true">禾</span><span class="ui-book-title"><small>种日子 · 禾溪</small><span id="ui-chapter">生活总览</span></span><span class="ui-season" id="ui-season"></span><span class="pause-badge">时光暂停</span><button class="modal-close" aria-label="关闭窗口" data-action="close">×</button></header><nav id="book-nav" aria-label="生活簿功能页"></nav><div id="modal-body"></div><footer class="modal-foot"><span>不着急，日子慢慢过。</span><span><kbd>Esc</kbd> 返回村庄</span></footer></section></div>
     <input type="file" id="import-file" accept=".json,application/json" hidden>
   </main>
   <script src="src/data.js"></script><script src="src/content.js"></script><script src="src/landscape.js"></script><script src="src/core.js"></script><script src="src/systems.js"></script><script src="src/art.js"></script><script src="src/world.js"></script><script src="src/village.js"></script>
@@ -88,5 +89,6 @@
 <script src="src/feedback-ui.js"></script>
 <script src="src/characters-ui.js"></script>
 <script src="src/item-icons-ui.js"></script>
+<script src="src/ui-art.js"></script>
 <script src="src/app.js"></script>
 </body></html>

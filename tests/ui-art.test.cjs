@@ -1,0 +1,19 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm');
+global.ZRZData=require('../src/content.js');global.ZRZCore=require('../src/core.js');global.ZRZLandscape=require('../src/landscape.js');global.ZRZArt=require('../src/art.js');global.window=global;
+for(const n of ['world','village','farming','farming-view','ranch','ranch-view','kitchen','kitchen-view','building','building-view','tools','tools-view','economy','economy-view','scenes','actions','environment','environment-view','forage','interiors','fishing','npc-content','npc','npc-view','feedback','feedback-view','tiles','tiles-view'])vm.runInThisContext(fs.readFileSync(require.resolve('../src/'+n+'.js'),'utf8'));
+
+for(const n of ['characters','creatures-view','item-icons','panels','economy-ui','item-icons-ui'])vm.runInThisContext(fs.readFileSync(require.resolve('../src/'+n+'.js'),'utf8'));
+
+const C=ZRZCore,D=ZRZData,baseline=C.load(C.initial());
+vm.runInThisContext(fs.readFileSync(require.resolve('../src/ui-art.js'),'utf8'));
+const U=ZRZUIArt;
+test('existing saves acquire paper UI while preserving character, inventory and farming progress',()=>{const s=C.load(baseline);assert.deepEqual(s.uiArt,{theme:'paper',seasonal:true});for(const key of ['appearance','bag','money','plots','farm','ranch','neighbors','settings'])assert.deepEqual(s[key],baseline[key]);});
+test('all themes and ornament preferences survive save export and import',()=>{for(const theme of Object.keys(U.themes))for(const seasonal of ['true','false']){const s=C.initial();U.set(s,'theme',theme);U.set(s,'seasonal',seasonal);assert.deepEqual(C.load(JSON.stringify(s)).uiArt,s.uiArt);}});
+test('invalid theme or malformed preference data is rejected without hidden fallback',()=>{for(const v of [null,{}, {theme:'unknown',seasonal:true},{theme:'paper',seasonal:'true'},{theme:'__proto__',seasonal:true}]){const s=C.initial();s.uiArt=v;assert.throws(()=>C.load(s),/界面外观/);}});
+test('UI preference changes cannot mutate gameplay or arbitrary properties',()=>{const s=C.initial(),before=structuredClone(s);assert.equal(U.set(s,'money','5000'),false);assert.equal(U.set(s,'theme','unknown'),false);assert.deepEqual(s,before);U.set(s,'theme','timber');U.set(s,'seasonal','false');delete s.uiArt;delete before.uiArt;assert.deepEqual(s,before);});
+test('four seasonal motifs and festival labels follow the actual 112-day calendar',()=>{const s=C.initial(),paths=[];for(let season=0;season<4;season++){s.day=season*28;assert.equal(U.season(s).index,season);paths.push(U.season(s).path);s.day+=13;assert.equal(U.season(s).label,D.festivals[season]);}assert.equal(new Set(paths).size,4);U.set(s,'seasonal','false');assert.equal(U.season(s).label,'禾溪 · 慢生活');});
+test('preferences are isolated between different save slots',()=>{const a=C.initial(),b=C.initial();U.set(a,'theme','porcelain');assert.equal(b.uiArt.theme,'paper');});
+function lum(hex){const rgb=hex.slice(1).match(/../g).map(v=>parseInt(v,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;}
+function contrast(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+test('all themes meet readable text contrast on paper and primary buttons',()=>{for(const t of Object.values(U.themes)){assert(contrast(t.ink,t.paper)>=7,t.name+' body');assert(contrast(t.muted,t.paper)>=4.5,t.name+' secondary');assert(contrast('#fffbee',t.accent)>=4.5,t.name+' button');}});
+test('settings render selected theme and preserve accessible controls without changing the state',()=>{const s=C.initial();U.set(s,'theme','porcelain');const before=structuredClone(s),html=U.settings(s);assert(html.includes('value="porcelain" selected'));assert(html.includes('aria-label="手账主题"'));assert(html.includes('aria-label="四季边饰"'));assert.deepEqual(s,before);});
