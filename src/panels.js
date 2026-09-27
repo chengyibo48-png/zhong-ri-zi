@@ -160,7 +160,7 @@
       case'e-festival':return use(C.festival(s,val('festival-dish'),Number(data.choice),Number(id)));
       case'e-small-event':return use(C.smallEvent(s,id));
       case'e-year-plan':return use(C.yearPlan(s,Number(id)));
-      case'e-appearance':s.name=(val('appearance-name')||s.name).trim().slice(0,12)||s.name;s.gender=val('appearance-gender');s.appearance={shirt:Number(val('appearance-shirt')),hair:Number(val('appearance-hair')),skin:Number(val('appearance-skin')),hat:document.getElementById('appearance-hat').checked};save();update();toast('换好了，还是熟悉的你。');break;
+      case'e-appearance':s.name=(val('appearance-name')||s.name).trim().slice(0,12)||s.name;s.gender=val('appearance-gender');s.appearance={shirt:Number(val('appearance-shirt')),hair:Number(val('appearance-hair')),skin:Number(val('appearance-skin')),hat:document.getElementById('appearance-hat').checked,...(root.ZRZCharacters?root.ZRZCharacters.extras({outfit:val('appearance-outfit'),hairColor:Number(val('appearance-hairColor')),bag:document.getElementById('appearance-bag').checked,weatherDress:document.getElementById('appearance-weatherDress').checked}):{})};save();update();toast('换好了，还是熟悉的你。');break;
       case'e-setting-toggle':s.settings[id]=!s.settings[id];save();update();refresh();break;
       case'e-reveal':finishTyping();break;
     }

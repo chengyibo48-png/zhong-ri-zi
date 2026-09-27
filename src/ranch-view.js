@@ -1,6 +1,7 @@
 (function(root){
 'use strict';
 const R=root.ZRZRanch,V=root.ZRZVillage,C=root.ZRZCore,D=root.ZRZData,cache=new WeakMap(),poses=new WeakMap();
+R.visualPose=a=>poses.get(a);
 function runtime(s){if(!cache.has(s))cache.set(s,{clock:0,actors:{}});return cache.get(s);}
 function state(room){return {village:{interior:room||null}};}
 function walk(p,target,room,dt,speed,rt){if(!rt.target||Math.hypot(rt.target.x-target.x,rt.target.y-target.y)>18||rt.room!==room){rt.target=target;rt.room=room;rt.path=V.route(state(room),target.x,target.y,p);}const q=rt.path?.[0];p.walking=false;if(!q)return;const d=Math.hypot(q.x-p.x,q.y-p.y),n=Math.min(d,speed*dt);if(d>.01){const dx=(q.x-p.x)/d*n,dy=(q.y-p.y)/d*n;p.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';if(V.blocked(state(room),p.x+dx,p.y+dy)){rt.target=null;rt.path=[];return;}p.x+=dx;p.y+=dy;p.walking=true;}if(d<=n+.1)rt.path.shift();}

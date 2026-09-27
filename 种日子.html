@@ -136,6 +136,9 @@
 
 /* Target hints yield gently; semantic notifications remain keyboard reachable. */
 .interaction-prompt{opacity:0;visibility:hidden;transition:opacity .14s ease,visibility .14s}.interaction-prompt.visible{opacity:1;visibility:visible}.toast[data-action="feedback"]{pointer-events:auto;cursor:pointer;text-align:left;border:1px solid #728463}.toast[data-action="feedback"]:focus-visible{outline:3px solid #ba7d35;outline-offset:3px}.reduced-feedback .k-pot i{animation:none!important}
+.character-preview{display:grid;grid-template-columns:128px 1fr;gap:20px;align-items:center;padding:16px;background:#e7e4cd;border:1px solid #c7c8a7;border-radius:8px;margin:18px 0}.character-preview canvas{image-rendering:pixelated;max-width:100%;height:auto;border-radius:3px}.character-turns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.character-turns figure{margin:0;text-align:center}.character-turns figcaption{font-size:11px;color:#67765b;padding-top:5px}.character-preview-controls{display:flex;gap:16px;flex-wrap:wrap}.character-preview-controls label{display:flex;align-items:center;gap:8px}.character-preview-controls select{padding:6px;border:1px solid #b6bd99;border-radius:3px;background:#f8f1d9}@media(max-width:560px){.character-preview{grid-template-columns:80px 1fr;gap:10px;padding:10px}.character-turns{grid-template-columns:repeat(2,1fr);gap:5px}.character-turns canvas{max-height:90px;width:auto}.character-preview-controls{gap:10px}}
+
+.character-preview-controls label{white-space:nowrap}.character-preview-controls select{min-width:105px}.appearance-form label:has(input[type=checkbox]){flex-direction:row;align-items:center;gap:8px}.appearance-form input[type=checkbox]{width:auto;margin:0}@media(min-width:750px){.appearance-form{grid-template-columns:repeat(3,1fr)}.character-preview{position:sticky;top:0;z-index:2;margin:12px 0;padding:10px;grid-template-columns:104px 1fr}.character-preview [data-character-portrait]{width:104px}.character-turns canvas{width:80px}}
 
 </style>
 </head>
@@ -999,7 +1002,7 @@
     if(a.hat){R(c,12,20,43,4,'#b5904c');R(c,18,10,31,10,'#d5b46e');R(c,20,9,25,3,'#e7cd8b');R(c,18,18,31,3,'#876f3e');}if(a.cap){R(c,20,16,28,7,a.accent);R(c,28,22,24,3,a.accent);}
     if(a.apron)R(c,24,64,19,16,a.accent);if(a.vest){R(c,18,61,9,19,a.accent);R(c,39,61,9,19,a.accent);}accessory(c,a,43,71,1.1);R(c,0,0,64,2,'#a6b493');R(c,0,78,64,2,'#a6b493');c.restore();
   }
-  const api={seasons,styles,R,poly,rand,ellipse,text,shadow,label,roof,house,tree,bamboo,basket,jar,prop,character,portrait};root.ZRZArt=api;if(typeof module!=='undefined')module.exports=api;
+  const api={seasons,styles,hair,accessory,R,poly,rand,ellipse,text,shadow,label,roof,house,tree,bamboo,basket,jar,prop,character,portrait};root.ZRZArt=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:window);
 
 </script><script>
@@ -1688,6 +1691,7 @@ root.ZRZRanch=R;if(typeof module!=='undefined')module.exports=R;
 (function(root){
 'use strict';
 const R=root.ZRZRanch,V=root.ZRZVillage,C=root.ZRZCore,D=root.ZRZData,cache=new WeakMap(),poses=new WeakMap();
+R.visualPose=a=>poses.get(a);
 function runtime(s){if(!cache.has(s))cache.set(s,{clock:0,actors:{}});return cache.get(s);}
 function state(room){return {village:{interior:room||null}};}
 function walk(p,target,room,dt,speed,rt){if(!rt.target||Math.hypot(rt.target.x-target.x,rt.target.y-target.y)>18||rt.room!==room){rt.target=target;rt.room=room;rt.path=V.route(state(room),target.x,target.y,p);}const q=rt.path?.[0];p.walking=false;if(!q)return;const d=Math.hypot(q.x-p.x,q.y-p.y),n=Math.min(d,speed*dt);if(d>.01){const dx=(q.x-p.x)/d*n,dy=(q.y-p.y)/d*n;p.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';if(V.blocked(state(room),p.x+dx,p.y+dy)){rt.target=null;rt.path=[];return;}p.x+=dx;p.y+=dy;p.walking=true;}if(d<=n+.1)rt.path.shift();}
@@ -2411,7 +2415,7 @@ function cancel(s){sessions.delete(s);if(active?.s===s)active=null;root.ZRZFishi
 function finish(s){const g=sessions.get(s);if(!g)return {ok:false,msg:'这一竿已经收好了。'};const plan=g.plan;cancel(s);if(!C.has(s,baits[plan.bait].needs)||!C.labor(s,Math.max(2,6-plan.rod),plan.rod===2&&plan.branch==='broad'?15:25))return {ok:false,msg:'饵料或体力已变化，这一竿没有结算。'};C.consume(s,baits[plan.bait].needs);const f=ensure(s);f.waters[plan.water]={day:s.day,casts:Math.min(200,pressure(s,plan.water)+1)};if(!g.caught){f.last={fish:null,water:plan.water,day:s.day,reason:g.hooked?'张力过高或收线不足':'错过咬钩窗口'};return {ok:true,msg:'鱼游回水里了：'+f.last.reason+'。换轻松模式也能获得鱼获。'};}
 const grade=plan.count<8&&(plan.rod>=1||g.plan.mode==='standard'&&g.safe/Math.max(.01,g.total)>.8)?1:0;T.tool(s,'rod').xp=Math.min(99999,T.tool(s,'rod').xp+1);s.stats.fish++;const rec=f.records[plan.fish]||={count:0,best:0,grade:0,waters:[]};rec.count=Math.min(1000000,rec.count+1);rec.best=Math.max(rec.best,plan.length);rec.grade=Math.max(rec.grade,grade);if(!rec.waters.includes(plan.water))rec.waters.push(plan.water);f.last={fish:plan.fish,water:plan.water,day:s.day,length:plan.length,grade,released:plan.release};if(plan.release){f.waters[plan.water].casts=Math.max(0,f.waters[plan.water].casts-2);return {ok:true,msg:'托住'+species[plan.fish].name+'轻轻放回水里。'+plan.length+' 厘米记入图鉴，水域稍作恢复。'};}C.add(s,plan.fish,1);if(grade){s.quality[plan.fish]??=[0,0,0];s.quality[plan.fish][grade-1]++;}return {ok:true,msg:'抄起'+species[plan.fish].name+' · '+plan.length+' 厘米 · '+(grade?'优质':'普通')+'。可用于'+species[plan.fish].uses+'。'};}
 const old={initial:C.initial,load:C.load};C.initial=(...args)=>{const s=old.initial(...args);ensure(s);return s;};C.load=raw=>{const v=typeof raw==='string'?JSON.parse(raw):structuredClone(raw),s=old.load(v),f=v.fishing;const int=(n,max=1e6)=>Number.isInteger(n)&&n>=0&&n<=max,bad=()=>{throw Error('垂钓手记数据无效。');};if(f!==undefined){if(!f||f.version!==1||!['relaxed','standard'].includes(f.mode)||!Object.hasOwn(baits,f.bait)||typeof f.release!=='boolean'||!f.waters||!f.records||Array.isArray(f.waters)||Array.isArray(f.records))bad();for(const[id,w]of Object.entries(f.waters))if(!Object.hasOwn(waters,id)||!w||!int(w.day,s.day)||!int(w.casts,200))bad();for(const[id,r]of Object.entries(f.records))if(!Object.hasOwn(species,id)||!r||!int(r.count)||!Number.isFinite(r.best)||r.best<0||r.best>100||!int(r.grade,3)||!Array.isArray(r.waters)||r.waters.length>5||r.waters.some(id=>!Object.hasOwn(waters,id)))bad();if(f.last&&(!int(f.last.day,s.day)||!Object.hasOwn(waters,f.last.water)||f.last.fish!==null&&(!Object.hasOwn(species,f.last.fish)||!Number.isFinite(f.last.length)||f.last.length<0||f.last.length>100||!int(f.last.grade,3)||typeof f.last.released!=='boolean')||f.last.fish===null&&!['张力过高或收线不足','错过咬钩窗口'].includes(f.last.reason)))bad();s.fishing=structuredClone(f);}ensure(s);return s;};
-function draw(c,s,t){if(s.village.interior)return;for(const p of spots){if(Math.hypot(s.player.x-p.x,s.player.y-p.y)>1100)continue;c.save();c.strokeStyle='#e1ecd077';c.lineWidth=1;for(let i=0;i<2;i++){c.beginPath();c.ellipse(p.waterX+Math.sin(t*.4+i)*9,p.waterY+i*9,10+(t*6+i*9)%22,3,0,0,7);c.stroke();}c.fillStyle='#3b6a6966';c.beginPath();c.ellipse(p.waterX+Math.sin(t*.5)*18,p.waterY+6,6,2,Math.sin(t)*.3,0,7);c.fill();c.fillStyle='#92744d';c.fillRect(p.x-3,p.y-28,4,29);c.fillStyle='#d3bc8e';c.fillRect(p.x-22,p.y-37,43,16);c.fillStyle='#536c54';c.font='10px sans-serif';c.textAlign='center';c.fillText('观漂处',p.x,p.y-25);c.restore();}}
+function draw(c,s,t){if(s.village.interior)return;for(const p of spots){if(Math.hypot(s.player.x-p.x,s.player.y-p.y)>1100)continue;c.save();c.strokeStyle='#e1ecd077';c.lineWidth=1;for(let i=0;i<2;i++){c.beginPath();c.ellipse(p.waterX+Math.sin(t*.4+i)*9,p.waterY+i*9,10+(t*6+i*9)%22,3,0,0,7);c.stroke();}if(root.ZRZCreatures){c.save();c.globalAlpha=.28;root.ZRZCreatures.fish(c,pool(s,p.water)[s.day%pool(s,p.water).length],p.waterX-7+Math.sin(t*.5)*18,p.waterY,.45,t);c.restore();}else{c.fillStyle='#3b6a6966';c.beginPath();c.ellipse(p.waterX+Math.sin(t*.5)*18,p.waterY+6,6,2,Math.sin(t)*.3,0,7);c.fill();}c.fillStyle='#92744d';c.fillRect(p.x-3,p.y-28,4,29);c.fillStyle='#d3bc8e';c.fillRect(p.x-22,p.y-37,43,16);c.fillStyle='#536c54';c.font='10px sans-serif';c.textAlign='center';c.fillText('观漂处',p.x,p.y-25);c.restore();}}
 root.ZRZFishing={species,baits,waters,spots,ensure,pressure,pool,predict,begin,phase,toggle,tick,cancel,finish,draw,current:()=>active};
 })(typeof window!=='undefined'?window:globalThis);
 
@@ -2949,6 +2953,163 @@ Object.assign(T,{base,path,drawGround,addObjects,drawLights,prop,groundTile,stat
 </script>
 <script>
 (function(root){
+'use strict';
+const A=root.ZRZArt,C=root.ZRZCore,D=root.ZRZData,R=A.R,P=A.poly;
+const outfits={field:'盘扣便衣',apron:'田间围裙',traveler:'行路马甲',festival:'节庆绣衣'};
+const hairColors=['#394337','#674c3b','#80634a','#a6a79a'],hairNames=['墨黑','栗棕','茶褐','银灰'];
+const defaults={outfit:'field',hairColor:0,bag:false,weatherDress:true};
+const shapes={granny:[.97,.95],chen:[1.12,1],yu:[1.04,1.04],an:[.96,1.05],lin:[.96,1.03],zhouSenior:[1.02,.96],luSenior:[1.04,.94],song:[1.08,.96],lan:[.88,.79],bao:[.92,.81],qi:[.84,.86],xiaohe:[.91,.87]};
+const directions=['down','left','up','right'];
+function extras(a={}){const out={};for(const[k,v]of Object.entries(defaults)){const x=a[k]===undefined?v:a[k];if(k==='outfit'?!Object.hasOwn(outfits,x):k==='hairColor'?!Number.isInteger(x)||x<0||x>=hairColors.length:typeof x!=='boolean')throw Error('角色外观数据无效，请使用存档备份。');out[k]=x;}return out;}
+function ensure(s){Object.assign(s.appearance,extras(s.appearance));return s.appearance;}
+const old={initial:C.initial,load:C.load};C.initial=(...args)=>{const s=old.initial(...args);ensure(s);return s;};C.load=raw=>{const v=typeof raw==='string'?JSON.parse(raw):structuredClone(raw),extra=extras(v.appearance),s=old.load(v);Object.assign(s.appearance,extra);return s;};
+function context(s,id=null,emotion){
+ const weather=root.ZRZEnvironment.profile(s.day,s.minutes),npc=id&&s.village.npc[id],outdoors=id?!npc?.room:!s.village.interior,actor=id&&root.ZRZVillage.stateRuntime(s).actors[id];
+ const live=actor?.emotionUntil>root.ZRZVillage.stateRuntime(s).clock?actor.emotion:null;
+ return {...(id?{id}:s.appearance),weather:outdoors&&weather.rain?'rain':weather.season===3?'cold':'fair',emotion:emotion||live||(!id&&s.stamina<20?'tired':'calm'),festival:C.calendar(s).date===14,gesture:actor&&!actor.walking?actor.gesture:null};
+}
+function resolve(color,hat,a={}){
+ const npc=a.id&&A.styles[a.id],look=npc?{...npc}:{shirt:['#427660','#506c93','#a76755','#a38b48'][a.shirt||0]||color,accent:['#dfc18d','#d8c8a1','#ecc6a7','#e2dabb'][a.shirt||0],skin:['#e3b991','#c69b74','#a87e5d'][a.skin||0],hair:['short','bob','bun','wave'][a.hair||0],hairColor:hairColors[a.hairColor||0],hat};
+ look.outfit=npc?(look.apron?'apron':look.vest?'traveler':'field'):(a.outfit||'field');
+ look.apron=look.outfit==='apron';look.vest=look.outfit==='traveler';look.bag=npc?['tao','yu','qiao','yan'].includes(a.id):!!a.bag;
+ look.shape=npc?(shapes[a.id]||[1,1]):[1,1];look.emotion=a.emotion||'calm';look.rain=a.weather==='rain'&&(npc||a.weatherDress!==false);look.cold=a.weather==='cold'&&(npc||a.weatherDress!==false);look.festival=a.festival||look.outfit==='festival';
+ return look;
+}
+function shade(hex,amount){const n=parseInt(hex.slice(1),16),mix=v=>Math.max(0,Math.min(255,v+amount)).toString(16).padStart(2,'0');return '#'+mix(n>>16)+mix((n>>8)&255)+mix(n&255);}
+function face(c,a,x,y,w,h,direction,emotion,blink=false){
+ const side=direction==='left'||direction==='right',left=direction==='left',back=direction==='up',ink='#324039';
+ R(c,x,y,w,h,shade(a.skin,-45));R(c,x+1,y+1,w-2,h-2,a.skin);R(c,x+2,y+2,2,h-5,shade(a.skin,18));R(c,x+w-3,y+4,2,h-5,shade(a.skin,-20));
+ if(back){A.hair(c,a,x-1,y-3,w+2,h,true);return;}
+ if(side){const nose=left?x-2:x+w-1;R(c,nose,y+h*.48,3,3,a.skin);R(c,left?x+2:x+w-4,y+h*.43,2,blink||emotion==='tired'?1:2,ink);}
+ else{for(const xx of [x+3,x+w-5]){R(c,xx,y+h*.43,2,blink||emotion==='tired'?1:2,ink);if(!blink&&h>20)R(c,xx,y+h*.43,1,1,'#f6ecd3');}R(c,x+w/2,y+h*.54,1,3,shade(a.skin,-33));}
+ const mx=side?(left?x+1:x+w-4):x+w/2-2,my=y+h-3;
+ if(emotion==='happy'){R(c,mx,my,4,1,'#925e4a');R(c,mx+1,my+1,2,1,'#925e4a');}
+ else if(emotion==='surprised')R(c,mx+1,my-1,2,3,'#925e4a');
+ else{R(c,mx,my,3,1,'#a46d53');if(['focus','thought','worried'].includes(emotion)){R(c,x+2,y+h*.3,4,1,'#625443');if(!side)R(c,x+w-6,y+h*.3+(emotion==='thought'?-1:0),4,1,'#625443');}}
+ A.hair(c,a,x-1,y-3,w+2,h*.75,false);
+ if(side){R(c,left?x+w-1:x-1,y+3,2,h*.7,a.hairColor);}
+ if(a.glasses){c.strokeStyle='#53554a';c.lineWidth=1;const yy=Math.round(y+h*.39);if(side)c.strokeRect(left?x+1:x+w-6,yy,5,4);else{c.strokeRect(x+1,yy,5,4);c.strokeRect(x+w-6,yy,5,4);R(c,x+w/2-1,yy+1,2,1,'#53554a');}}
+}
+function clothing(c,a,side,back,off){
+ const shirt=a.rain?'#677f70':a.shirt,dark=shade(shirt,-30),light=shade(shirt,24);
+ P(c,[[-7,-21],[6,-21],[9,-8],[-9,-8]],dark);R(c,-6,-20,12,12,shirt);R(c,-5,-19,3,9,light);R(c,5,-17,2,9,dark);R(c,-7,-9,15,2,dark);
+ if(a.skirt)P(c,[[-6,-11],[6,-11],[9,-4],[-9,-4]],shirt);
+ if(a.apron&&!back){R(c,side?off-3:-4,-17,side?6:9,11,a.accent);R(c,side?off-2:-3,-12,side?4:7,3,shade(a.accent,-22));R(c,-5,-17,11,1,shade(a.accent,18));}
+ else if(a.vest){R(c,-6,-20,side?3:4,12,a.accent);if(!side)R(c,3,-20,4,12,a.accent);R(c,-5,-13,3,3,shade(a.accent,-30));}
+ else if(!back){P(c,[[-4,-20],[0,-17],[4,-20],[4,-18],[0,-15],[-4,-18]],a.accent);for(let i=0;i<3;i++)R(c,off,-16+i*3,2,1,a.accent);}
+ if(a.festival){R(c,-6,-10,13,2,'#c5a65c');if(!back){R(c,3,-17,2,5,'#e8d08b');R(c,1,-15,6,1,'#e8d08b');}}
+ if(a.bag){if(back){R(c,-6,-19,13,13,'#7b6347');R(c,-5,-19,11,9,'#b89962');R(c,-4,-16,9,1,'#d2ba81');R(c,-1,-13,3,3,'#786e4d');}else{for(let i=0;i<11;i++)R(c,-5+i,-20+i,2,2,'#c2ae79');R(c,side?off+5:6,-11,5,7,'#b39760');}}
+ if(a.cold){R(c,-7,-21,14,4,a.accent);R(c,side?off+1:3,-18,3,8,a.accent);R(c,side?off+1:3,-11,3,1,'#e9dfbd');}
+}
+function character(c,x,y,color,t=0,walking=false,hat=false,direction='down',appearance={}){
+ const a=resolve(color,hat,appearance),side=['left','right'].includes(direction),back=direction==='up',off=direction==='left'?-2:direction==='right'?2:0,phase=Math.floor(t*(a.child?10:8))%8;
+ const lifts=[0,1,2,1,0,0,0,0],left=walking?lifts[phase]:0,right=walking?lifts[(phase+4)%8]:0,bob=walking&&phase%4===2?-1:0;
+ c.save();c.translate(Math.round(x),Math.round(y));A.shadow(c,0,1,22*a.shape[0],6);c.scale(a.shape[0],a.shape[1]);
+ const foot=(xx,lift)=>{R(c,xx,-8-lift,5,8,'#4f6058');R(c,xx+1,-7-lift,2,5,'#738073');R(c,xx-1,-lift,7,3,'#303e39');R(c,xx,-lift,5,1,'#adb29d');};
+ foot(side?-4:-6,left);foot(side?0:2,right);
+ c.save();c.translate(appearance.lean?Math.round(appearance.lean.ux*appearance.lean.reach*3):0,bob+(appearance.lean?.low?Math.round(appearance.lean.reach*3):0));
+ clothing(c,a,side,back,off);
+ const work=appearance.working||(['read','hammer','sort','knead','weave','sew','water','camera','tea','fan','fish'].includes(appearance.gesture)&&!walking);
+ if(!work){const swing=walking?left-right:0;for(const [xx,dy]of [[side?-7:-10,-swing],[side?5:8,swing]]){R(c,xx,-18+dy,3,9,a.rain?'#677f70':a.shirt);R(c,xx,-10+dy,3,3,a.skin);R(c,xx,-10+dy,1,2,shade(a.skin,15));}}
+ face(c,a,side?-5:-6,-31,side?11:13,13,direction,a.emotion,Math.floor(t*3)%17===0);
+ if(a.rain){P(c,[[-12,-32],[-6,-39],[6,-39],[12,-32]],'#b5aa72');R(c,-13,-32,27,3,'#d4c28b');R(c,-10,-30,22,1,'#7e7950');}
+ else if(a.hat){R(c,-12,-33,25,3,'#947641');R(c,-10,-34,21,2,'#d9bd79');R(c,-7,-39,15,5,'#caae6b');R(c,-6,-39,12,1,'#f0d799');R(c,-7,-35,15,1,'#866b3d');}
+ else if(a.cap){R(c,-7,-34,15,4,a.accent);R(c,off<0?-11:off>0?3:-5,-31,side?10:14,2,shade(a.accent,-15));}
+ if(a.festival&&!a.rain){R(c,6,-29,3,4,'#bb5d48');R(c,7,-26,2,4,'#e7bc6e');}
+ if(a.prop&&!work)A.accessory(c,a,back?0:side?(off<0?-8:9):8,back?-10:-8,.65);
+ c.restore();c.restore();
+}
+function portrait(c,w,h,n,appearance){
+ const options=appearance||{id:n?.id},a=resolve(n?.color||'#427660',options.hat,options);c.save();c.imageSmoothingEnabled=false;c.clearRect(0,0,w,h);c.scale(w/64,h/80);
+ R(c,0,0,64,80,'#e7ddbd');R(c,2,2,60,76,a.rain?'#bbcbd0':a.cold?'#c4d2cf':'#d3ddbf');P(c,[[2,64],[14,48],[31,57],[50,37],[62,48],[62,78],[2,78]],'#a6bba0');
+ for(let i=0;i<4;i++){R(c,7+i*2,8+i*5,1,13,'#94ab8c');R(c,4+i*2,10+i*5,7,1,'#94ab8c');}
+ c.save();c.translate(32,99);c.scale(2.35,2.2);clothing(c,a,false,false,0);c.restore();
+ R(c,28,43,11,11,shade(a.skin,-15));
+ P(c,[[20,25],[23,21],[42,21],[46,26],[46,39],[42,46],[37,49],[29,49],[23,45],[20,38]],shade(a.skin,-32));
+ P(c,[[22,25],[25,23],[41,23],[44,27],[44,38],[40,44],[36,47],[29,46],[24,42],[22,37]],a.skin);
+ R(c,19,31,3,7,a.skin);R(c,45,31,3,7,a.skin);R(c,24,28,2,10,shade(a.skin,17));R(c,40,38,3,4,shade(a.skin,-13));
+ const ey=33,closed=a.emotion==='tired';for(const x of [26,37]){R(c,x,ey-3,5,1,a.hairColor);R(c,x,ey,4,closed?1:3,'#394237');if(!closed)R(c,x+1,ey,1,1,'#faf1d9');}
+ R(c,32,36,2,4,shade(a.skin,-28));R(c,33,39,3,1,shade(a.skin,16));R(c,25,39,4,1,'#d79d80');R(c,39,39,3,1,'#d79d80');
+ R(c,31,43,5,1,'#98654e');if(a.emotion==='happy')R(c,32,44,3,1,'#98654e');if(a.emotion==='surprised')R(c,32,42,3,3,'#98654e');
+ if(['thought','worried','focus'].includes(a.emotion))R(c,27,29,a.emotion==='focus'?4:2,1,a.hairColor);
+ A.hair(c,a,20,20,26,19,false);R(c,23,23,5,3,a.hairColor);R(c,28,23,4,2,a.hairColor);
+ if(a.glasses){c.strokeStyle='#53554a';c.lineWidth=1;c.strokeRect(24,32,8,5);c.strokeRect(35,32,8,5);R(c,32,33,3,1,'#53554a');}
+ if(a.hat||a.rain){const col=a.rain?'#aa9d65':'#c5a361';P(c,[[13,21],[22,10],[43,10],[53,21]],col);R(c,10,21,46,4,'#d9c087');R(c,18,19,29,2,'#876f3e');R(c,23,11,17,2,'#e8d297');}
+ if(a.cap&&!a.rain){R(c,20,15,29,7,a.accent);R(c,29,21,24,3,shade(a.accent,-15));}
+ if(a.festival){R(c,45,27,4,5,'#b85848');R(c,46,32,2,6,'#e8c77c');}
+ if(a.prop)A.accessory(c,a,48,69,.85);
+ if(a.cold){R(c,24,51,18,5,a.accent);R(c,38,55,5,16,a.accent);R(c,38,68,5,2,'#ebe2c6');}
+ if(a.rain){R(c,7,30,1,8,'#e7f0db');R(c,54,9,1,7,'#e7f0db');}
+ R(c,0,0,64,2,'#9dab8c');R(c,0,78,64,2,'#9dab8c');c.restore();
+}
+A.character=character;A.portrait=portrait;root.ZRZWorld.character=character;root.ZRZWorld.portrait=portrait;
+root.ZRZCharacters={outfits,hairColors,hairNames,defaults,directions,ensure,extras,context,resolve,shade,character,portrait,frameCount:8,anchor:'feet-center'};
+})(typeof window!=='undefined'?window:globalThis);
+
+
+</script>
+<script>
+(function(root){
+'use strict';
+const A=root.ZRZArt,R=root.ZRZRanch,W=root.ZRZWorld,Chr=root.ZRZCharacters,box=A.R,poly=A.poly;
+function blob(c,x,y,w,h,col){poly(c,[[x+3,y],[x+w-3,y],[x+w,y+3],[x+w,y+h-3],[x+w-3,y+h],[x+3,y+h],[x,y+h-3],[x,y+3]],col);}
+function state(a,t=0){const p=a.position?.room?a.position.inside:a.position||{},pose=R.visualPose?.(a),active=pose&&t<pose.until;
+ return {direction:p.direction||'down',walking:!!p.walking,young:!R.mature(a),sick:a.illness>=20,sleepy:!!a.rest,hungry:a.hunger<35,dirty:a.clean<45,eating:active&&pose.action==='feed',happy:active&&['pet','clean'].includes(pose.action),sheared:active&&pose.action==='collect'&&a.type==='sheep',tail:a.trait==='friendly'?1.5:a.trait==='shy'?.5:1};
+}
+function animal(c,a,x,y,t=0){
+ const v=state(a,t),bird=['hen','duck'].includes(a.type),side=['left','right'].includes(v.direction),back=v.direction==='up',size=v.young?.64:a.type==='cow'?1.23:1;
+ const coat=a.breed==='hardy'?'#a38c6e':a.breed==='productive'?'#e2ccad':R.species[a.type].color,shade=Chr.shade(coat,-26),highlight=Chr.shade(coat,20),phase=Math.floor(t*9)%8,lift=v.walking?[0,1,2,1,0,0,0,0][phase]:0;
+ c.save();c.translate(Math.round(x),Math.round(y));A.shadow(c,0,1,(bird?31:49)*size,8*size);c.scale(size*(v.direction==='left'?-1:1),size);
+ // Feet remain anchored; only the swinging foot lifts above the ground.
+ for(const [i,lx]of (bird?[[-1,-7],[1,7]]:side?[[-1,-18],[1,-9],[1,12],[-1,21]]:[[-1,-11],[1,7]])){const l=i<0?lift:v.walking?[0,1,2,1,0,0,0,0][(phase+4)%8]:0;box(c,lx,-10-l,bird?3:5,10,bird?'#b48845':'#937957');box(c,lx-1,-l,bird?7:7,3,bird?'#d0a052':'#464c40');}
+ const bw=bird?(side?33:25):(side?51:33),bh=bird?23:(side?29:34),by=bird?-32:-39;
+ blob(c,-bw/2,by,bw,bh,shade);blob(c,-bw/2+2,by+1,bw-4,bh-4,coat);box(c,-bw/2+5,by+3,bw-12,3,highlight);
+ if(a.type==='sheep'&&!v.sheared){for(let i=0;i<10;i++){const xx=-bw/2+2+i%5*(bw-5)/5,yy=by-2+Math.floor(i/5)*9;blob(c,xx,yy,10,9,i%2?'#dfd9c3':'#ede8d5');}}
+ else if(a.type==='cow'){box(c,-bw/2+8,by+6,9,8,shade);box(c,2,by+16,8,7,shade);}
+ else if(bird){blob(c,-bw/2+3,by+10,side?15:18,10,a.type==='duck'?'#aab7a0':'#c2a16f');box(c,-bw/2+6,by+14,10,1,highlight);}
+ if(v.dirty)for(let i=0;i<6;i++)box(c,-bw/2+5+i*4,by+bh-6-(i%2)*3,3,2,'#8d7956');
+ const headX=side?(bird?15:25):0,hy=(bird?-37:-32)+(v.eating?Math.round(3+Math.sin(t*9)*2):v.hungry&&!v.walking?3:0),headW=bird?15:a.type==='pig'?22:20;
+ if(!back||side){
+ blob(c,headX-headW/2,hy,headW,bird?17:21,a.type==='sheep'?'#9b8b72':coat);
+ if(!bird){box(c,headX-headW/2-4,hy+1,6,5,coat);box(c,headX+headW/2-2,hy+1,6,5,coat);if(a.type==='cow'){box(c,headX-9,hy-6,3,8,'#dcd9b7');box(c,headX+7,hy-6,3,8,'#dcd9b7');}}
+ const closed=v.sleepy||v.sick||Math.floor(t*3+a.age)%19===0;
+ const eye=xx=>{box(c,xx,hy+6,2,closed?1:3,'#2e4138');if(!closed)box(c,xx,hy+6,1,1,'#f6efd2');};
+ eye(headX+(side?2:-5));if(!side)eye(headX+4);
+ if(bird){box(c,side?headX+6:headX-3,hy+11,a.type==='duck'?10:7,4,'#d5a052');if(a.type==='hen'){box(c,headX-3,hy-4,7,v.young?2:4,'#b65e4c');box(c,headX+2,hy+16,3,4,'#b65e4c');}else box(c,headX-5,hy+17,10,2,'#729387');}
+ else{blob(c,side?headX+3:headX-8,hy+12,17,9,a.type==='pig'?'#bd8981':'#c7b391');box(c,side?headX+10:headX-4,hy+16,2,2,'#796252');if(a.type==='pig'||!side)box(c,side?headX+15:headX+3,hy+16,2,2,'#796252');}
+ }else{box(c,-6,by-3,12,6,coat);if(a.type==='hen')box(c,-3,by-5,6,3,'#b65e4c');}
+ if(!bird){const tx=side?-28:0,ty=side?-23:-16,wiggle=Math.round(Math.sin(t*4)*v.tail*2);box(c,tx,ty,2,13,'#9d8968');box(c,tx-1+wiggle,ty+11,4,4,a.type==='pig'?'#b4897b':'#76644a');if(!back){box(c,headX-8,hy+20,16,3,a.trait==='shy'?'#72959c':a.trait==='friendly'?'#b25c4c':'#789257');box(c,headX,hy+23,3,3,'#dcc07a');}}
+ c.restore();
+ const symbol=v.sick?'!':a.lost?'!':v.sleepy?'z':v.hungry?'…':a.ready||a.feathers?'✦':v.happy?'♡':'';
+ if(symbol){c.save();c.font='bold 12px Microsoft YaHei';c.textAlign='center';blob(c,x-9,y-59*size,18,16,v.sick||a.lost?'#ac7350':'#6a8c70');c.fillStyle='#fff2d2';c.fillText(symbol,x,y-47*size);c.restore();}
+}
+function pet(c,s,t=0){
+ const p=s.ranch.pet.position,cat=s.pet.type==='cat',left=p.direction==='left',back=p.direction==='up',side=left||p.direction==='right',rest=s.ranch.pet.energy<15||s.minutes>=1140,coat=cat?'#c49c66':'#b58758',wag=Math.round(Math.sin(t*(rest?1:5))*(rest?1:3));
+ c.save();c.translate(Math.round(p.x),Math.round(p.y));c.scale(left?-1:1,1);A.shadow(c,0,1,32,6);
+ for(const x of [-10,8]){box(c,x,-9,4,10,'#80644a');box(c,x-1,0,6,2,'#5c5543');}
+ blob(c,side?-18:-13,-24,side?34:26,19,coat);const hx=side?13:0;blob(c,hx-9,-34,18,20,'#d9b886');
+ if(cat){poly(c,[[hx-9,-31],[hx-9,-41],[hx-2,-35]],coat);poly(c,[[hx+2,-35],[hx+9,-41],[hx+9,-31]],coat);}
+ else{box(c,hx-11,-33,5,13,'#796049');box(c,hx+7,-33,5,13,'#796049');}
+ if(!back){box(c,hx-4,-28,2,rest?1:3,'#334237');box(c,hx+4,-28,2,rest?1:3,'#334237');box(c,hx,-22,3,2,'#735846');if(cat){box(c,hx-13,-22,8,1,'#e7d6ac');box(c,hx+7,-22,8,1,'#e7d6ac');}}
+ box(c,side?-21:0,-24+wag,4,15,coat);box(c,hx-8,-16,17,3,'#ae6250');box(c,hx,-13,3,3,'#e2c77d');c.restore();
+}
+const fishColors={fish:['#bfc6a1','#648f88'],perch:['#a1bba0','#537b73'],loach:['#a98e60','#766c48'],shrimp:['#d2b591','#976f53'],crab:['#b39465','#785f43']};
+function fish(c,id,x,y,scale=1,t=0){
+ const [base,dark]=fishColors[id]||fishColors.fish;c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);const tail=Math.round(Math.sin(t*5)*2);
+ if(id==='crab'){for(const sign of [-1,1]){for(let i=0;i<3;i++){box(c,16+sign*(7+i),18+i*3,sign<0?5:6,2,dark);}box(c,sign<0?2:25,8,4,9,base);box(c,sign<0?1:28,5,3,5,dark);}blob(c,8,11,18,14,base);box(c,12,9,2,3,dark);box(c,21,9,2,3,dark);box(c,11,13,12,2,'#d6bc88');}
+ else if(id==='shrimp'){for(let i=0;i<6;i++)blob(c,6+i*3,11+Math.round(i*i*.3),7,6,i%2?base:dark);box(c,5,11,2,2,'#35463a');for(let i=0;i<3;i++)box(c,8+i*4,18+i,1,5,dark);box(c,1,7,10,1,dark);box(c,3,5,9,1,base);poly(c,[[25,24],[32,22+tail],[30,28],[25,27]],base);}
+ else{const slim=id==='loach',yy=slim?16:12,hh=slim?8:15;poly(c,[[24,yy+hh/2],[31,yy+tail],[30,yy+hh-tail]],dark);blob(c,3,yy,23,hh,dark);blob(c,4,yy+1,20,hh-3,base);box(c,7,yy+2,11,2,'#e0d9b5');box(c,6,yy+4,2,2,'#30483c');box(c,6,yy+4,1,1,'#f5ebca');if(!slim){poly(c,[[12,yy],[17,yy-5],[21,yy+1]],dark);for(let i=0;i<4;i++)box(c,12+i*3,yy+6,1,5,id==='perch'?dark:'#a2af8c');}else{box(c,2,yy+6,4,1,dark);box(c,1,yy+8,4,1,dark);}}
+ c.restore();
+}
+const baseItem=W.item;W.item=(c,id,x,y,scale=1)=>fishColors[id]?fish(c,id,x,y,scale,0):baseItem(c,id,x,y,scale);
+R.drawAnimal=animal;R.drawPet=pet;
+root.ZRZCreatures={state,animal,pet,fish,fishColors};
+})(typeof window!=='undefined'?window:globalThis);
+
+
+</script>
+<script>
+(function(root){
   'use strict';
   const V=root.ZRZVillage,W=root.ZRZWorld,A=root.ZRZArt,C=root.ZRZCore,D=root.ZRZData,L=root.ZRZLandscape;
   const R=A.R,E=A.ellipse,P=A.poly;
@@ -3039,7 +3200,7 @@ Object.assign(T,{base,path,drawGround,addObjects,drawLights,prop,groundTile,stat
   }
   function glow(c,x,y,r,color){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,color+'66');g.addColorStop(.35,color+'25');g.addColorStop(1,color+'00');c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2);}
   function actionPose(c,s,t,walking){const rt=V.stateRuntime(s),a=rt.action,age=a?rt.clock-a.at:9,active=a&&age<a.duration,p=s.player;const bend=active&&['hoe','seed','harvest','gather','brush','inspect'].includes(a.kind)?Math.sin(age/a.duration*Math.PI)*4:0;
-    cast(c,p.x,p.y,22,30,s);if(rt.sequence&&p.direction==='up')root.ZRZActions.draw(c,s,rt.sequence,t);A.character(c,p.x,p.y,['#427660','#506c93','#a76755','#a38b48'][s.appearance.shirt],t,walking,s.appearance.hat,p.direction,{...s.appearance,working:!!rt.sequence,lean:rt.sequence?root.ZRZActions.pose(s,rt.sequence):null});
+    cast(c,p.x,p.y,22,30,s);if(rt.sequence&&p.direction==='up')root.ZRZActions.draw(c,s,rt.sequence,t);A.character(c,p.x,p.y,['#427660','#506c93','#a76755','#a38b48'][s.appearance.shirt],t,walking,s.appearance.hat,p.direction,{...(root.ZRZCharacters?.context(s)||s.appearance),working:!!rt.sequence,lean:rt.sequence?root.ZRZActions.pose(s,rt.sequence):null});
     if(s.village.riding){c.strokeStyle='#435d53';c.lineWidth=2;for(const x of [-15,17]){c.beginPath();c.arc(p.x+x,p.y+3,11,0,7);c.stroke();}P(c,[[p.x-15,p.y+3],[p.x,p.y-12],[p.x+17,p.y+3]],'#91a69c88');}
     if(rt.sequence){if(p.direction!=='up')root.ZRZActions.draw(c,s,rt.sequence,t);return;}if(active){c.save();c.translate(p.x+13,p.y-14);c.rotate(Math.sin(age/a.duration*Math.PI)*1.1-.55);if(['water','fish'].includes(a.kind)){W.item(c,a.kind==='water'?'water':'rod',-6,-13,.7);}else if(['hoe','gather','brush','compost'].includes(a.kind)){R(c,-1,-15,3,27,'#b89154');R(c,-10,-16,22,5,'#8bada7');}else{R(c,0,-4,6,13,'#ddb28a');}c.restore();}
   }
@@ -3079,7 +3240,7 @@ Object.assign(T,{base,path,drawGround,addObjects,drawLights,prop,groundTile,stat
     }
     if(root.ZRZRanch){for(const a of s.animals){const p=root.ZRZRanch.point(s,a);if(p&&visible(p))objects.push({y:p.y,draw:()=>root.ZRZRanch.drawAnimal(c,a,p.x,p.y,time)});}const p=root.ZRZRanch.petPoint(s);if(!indoor&&visible(p))objects.push({y:p.y,draw:()=>root.ZRZRanch.drawPet(c,s,time)});}
     if(!indoor&&root.ZRZRanch)for(const b of Object.values(root.ZRZRanch.barns)){const h=V.houses.find(h=>h.id===b.house);if(visible(h))objects.push({y:h.y+h.h+.2,draw:()=>root.ZRZRanch.drawBarn(c,s,b,h,time)});}
-    root.ZRZTiles?.addObjects(c,s,time,objects,visible);root.ZRZInteriors?.addObjects(c,s,time,objects,furniture);root.ZRZBuild?.addObjects(c,s,time,objects,visible);root.ZRZEconomy?.addObjects(c,s,time,objects,visible);for(const n of D.npcs){const p=V.npcPoint(s,n);if(p&&visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,22,28,s);const a=rt.actors[n.id];A.character(c,p.x,p.y,n.color,time,a?.walking,false,p.direction||'down',{id:n.id,emotion:a?.emotionUntil>time?a.emotion:null});root.ZRZNpc?.draw?.(c,s,n,p,a,time);if(!root.ZRZNpc&&a?.phase==='work'&&!a.walking&&!indoor){R(c,p.x+12,p.y-11+Math.sin(time*3)*2,6,5,A.styles[n.id].accent);}}});}
+    root.ZRZTiles?.addObjects(c,s,time,objects,visible);root.ZRZInteriors?.addObjects(c,s,time,objects,furniture);root.ZRZBuild?.addObjects(c,s,time,objects,visible);root.ZRZEconomy?.addObjects(c,s,time,objects,visible);for(const n of D.npcs){const p=V.npcPoint(s,n);if(p&&visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,22,28,s);const a=rt.actors[n.id];A.character(c,p.x,p.y,n.color,time,a?.walking,false,p.direction||'down',root.ZRZCharacters?root.ZRZCharacters.context(s,n.id):{id:n.id,emotion:a?.emotionUntil>time?a.emotion:null});root.ZRZNpc?.draw?.(c,s,n,p,a,time);if(!root.ZRZNpc&&a?.phase==='work'&&!a.walking&&!indoor){R(c,p.x+12,p.y-11+Math.sin(time*3)*2,6,5,A.styles[n.id].accent);}}});}
     objects.push({y:s.player.y,draw:()=>actionPose(c,s,time,walking)});objects.sort((a,b)=>a.y-b.y).forEach(o=>o.draw());
     root.ZRZTools?.drawPreview(c,s,hover);if(hover){c.strokeStyle='#fff0b2';c.lineWidth=1.5;c.beginPath();c.ellipse(hover.x,hover.y+3,22,8,0,0,7);c.stroke();}fx(c,s);root.ZRZRanch?.drawAction(c,s,time);
     if(!indoor)atmosphere(c,s,time,view);root.ZRZBuild?.drawLights(c,s,time);root.ZRZTiles?.drawLights(c,s,time,view);c.restore();
@@ -3286,7 +3447,7 @@ Object.assign(T,{base,path,drawGround,addObjects,drawLights,prop,groundTile,stat
       case'e-festival':return use(C.festival(s,val('festival-dish'),Number(data.choice),Number(id)));
       case'e-small-event':return use(C.smallEvent(s,id));
       case'e-year-plan':return use(C.yearPlan(s,Number(id)));
-      case'e-appearance':s.name=(val('appearance-name')||s.name).trim().slice(0,12)||s.name;s.gender=val('appearance-gender');s.appearance={shirt:Number(val('appearance-shirt')),hair:Number(val('appearance-hair')),skin:Number(val('appearance-skin')),hat:document.getElementById('appearance-hat').checked};save();update();toast('换好了，还是熟悉的你。');break;
+      case'e-appearance':s.name=(val('appearance-name')||s.name).trim().slice(0,12)||s.name;s.gender=val('appearance-gender');s.appearance={shirt:Number(val('appearance-shirt')),hair:Number(val('appearance-hair')),skin:Number(val('appearance-skin')),hat:document.getElementById('appearance-hat').checked,...(root.ZRZCharacters?root.ZRZCharacters.extras({outfit:val('appearance-outfit'),hairColor:Number(val('appearance-hairColor')),bag:document.getElementById('appearance-bag').checked,weatherDress:document.getElementById('appearance-weatherDress').checked}):{})};save();update();toast('换好了，还是熟悉的你。');break;
       case'e-setting-toggle':s.settings[id]=!s.settings[id];save();update();refresh();break;
       case'e-reveal':finishTyping();break;
     }
@@ -3605,7 +3766,7 @@ const old={render:X.render,after:X.after,dispatch:X.dispatch};X.panels.push('for
 (function(root){
 'use strict';const F=root.ZRZFishing,X=root.ZRZPanels,D=root.ZRZData;
 const button=(text,op,id)=>'<button class="secondary" data-action="fi-'+op+'" data-id="'+id+'">'+text+'</button>';
-function render(s,A){const f=F.ensure(s);return A.head('水畔垂钓手记','观察鱼影、顺着时令备饵。抛竿、咬钩、收放线与抄鱼都有过程，完成后才扣饵和收获。')+'<div class="button-row">'+button((f.mode==='relaxed'?'✓ ':'')+'轻松观漂 · 自动收放线','mode','relaxed')+button((f.mode==='standard'?'✓ ':'')+'手动收放线 · 空格或按钮','mode','standard')+button(f.release?'✓ 观察后放流':'鱼获带回家','release','')+'</div><p class="subtitle">手动模式：浮漂下沉时按空格提竿，随后按空格切换收线 / 放线；尽量让张力保持在 15–78。Esc 可随时取消，不消耗饵料。</p><h3>这一竿用什么饵</h3><div class="sc-targets">'+Object.entries(F.baits).map(([id,b])=>'<article><h3>'+b.name+'</h3><p>'+b.tip+'</p><small>'+ (Object.entries(b.needs).map(([k,n])=>D.items[k].name+' ×'+n).join('、')||'免费基础饵')+'</small><div class="button-row">'+button((f.bait===id?'✓ 已选':'选用'),'bait',id)+'</div></article>').join('')+'</div><h3>水域与时令</h3><div class="sc-targets">'+F.spots.map(p=>'<article><h3>'+p.name+'</h3><p>'+F.waters[p.water].tip+'</p><small>可能遇见：'+[...new Set(F.pool(s,p.water))].map(id=>F.species[id].name).join('、')+' · 今日垂钓 '+F.pressure(s,p.water)+' 次</small><div class="button-row">'+button('沿路去水边','go',p.id)+'</div></article>').join('')+'</div><h3>鱼获图鉴 · 尺寸纪录</h3><div class="sc-targets">'+Object.entries(F.species).map(([id,d])=>'<article><h3>'+d.name+'</h3><p>'+d.behavior+' · '+d.seasons.map(i=>['春','夏','秋','冬'][i]).join(' / ')+'</p><p>'+(f.records[id]?'已观察 '+f.records[id].count+' 尾 · 最长 '+f.records[id].best+' 厘米':'尚未观察')+'</p><small>'+d.uses+'</small></article>').join('')+'</div><p class="subtitle">反复垂钓同一水域会让等漂略慢，次日恢复；常见鲫鱼始终可遇见。放流保留图鉴并缓解当日扰动。</p>';}
+function render(s,A){const f=F.ensure(s);return A.head('水畔垂钓手记','观察鱼影、顺着时令备饵。抛竿、咬钩、收放线与抄鱼都有过程，完成后才扣饵和收获。')+'<div class="button-row">'+button((f.mode==='relaxed'?'✓ ':'')+'轻松观漂 · 自动收放线','mode','relaxed')+button((f.mode==='standard'?'✓ ':'')+'手动收放线 · 空格或按钮','mode','standard')+button(f.release?'✓ 观察后放流':'鱼获带回家','release','')+'</div><p class="subtitle">手动模式：浮漂下沉时按空格提竿，随后按空格切换收线 / 放线；尽量让张力保持在 15–78。Esc 可随时取消，不消耗饵料。</p><h3>这一竿用什么饵</h3><div class="sc-targets">'+Object.entries(F.baits).map(([id,b])=>'<article><h3>'+b.name+'</h3><p>'+b.tip+'</p><small>'+ (Object.entries(b.needs).map(([k,n])=>D.items[k].name+' ×'+n).join('、')||'免费基础饵')+'</small><div class="button-row">'+button((f.bait===id?'✓ 已选':'选用'),'bait',id)+'</div></article>').join('')+'</div><h3>水域与时令</h3><div class="sc-targets">'+F.spots.map(p=>'<article><h3>'+p.name+'</h3><p>'+F.waters[p.water].tip+'</p><small>可能遇见：'+[...new Set(F.pool(s,p.water))].map(id=>F.species[id].name).join('、')+' · 今日垂钓 '+F.pressure(s,p.water)+' 次</small><div class="button-row">'+button('沿路去水边','go',p.id)+'</div></article>').join('')+'</div><h3>鱼获图鉴 · 尺寸纪录</h3><div class="sc-targets">'+Object.entries(F.species).map(([id,d])=>'<article><canvas width="80" height="80" data-item="'+id+'" aria-label="'+d.name+'图鉴形象"></canvas><h3>'+d.name+'</h3><p>'+d.behavior+' · '+d.seasons.map(i=>['春','夏','秋','冬'][i]).join(' / ')+'</p><p>'+(f.records[id]?'已观察 '+f.records[id].count+' 尾 · 最长 '+f.records[id].best+' 厘米':'尚未观察')+'</p><small>'+d.uses+'</small></article>').join('')+'</div><p class="subtitle">反复垂钓同一水域会让等漂略慢，次日恢复；常见鲫鱼始终可遇见。放流保留图鉴并缓解当日扰动。</p>';}
 const old={render:X.render,after:X.after,dispatch:X.dispatch};X.panels.push('fishing');X.render=(n,arg,s,A)=>n==='fishing'?render(s,A):old.render(n,arg,s,A);X.after=(n,s,A)=>old.after(n,s,A)+(['menu','map','weather','forage'].includes(n)?'<div class="button-row"><button class="secondary" data-action="fishing">水畔垂钓手记</button></div>':'');X.dispatch=(a,id,data,ctx)=>{if(!a.startsWith('fi-'))return old.dispatch(a,id,data,ctx);const f=F.ensure(ctx.s);if(a==='fi-mode'&&['relaxed','standard'].includes(id))f.mode=id;if(a==='fi-bait'&&F.baits[id])f.bait=id;if(a==='fi-release')f.release=!f.release;if(a==='fi-go'){const p=F.spots.find(p=>p.id===id);if(p)ctx.navigate({...p,kind:'walk'});return true;}ctx.save();ctx.render();return true;};
 const hud=document.createElement('aside');hud.id='fishing-hud';hud.hidden=true;hud.setAttribute('aria-label','实时垂钓');hud.innerHTML='<strong id="fish-phase"></strong><span id="fish-tip"></span><label>鱼线张力 <meter id="fish-tension" min="0" max="100" low="15" high="78" optimum="45" value="35"></meter></label><label>收线进度 <progress id="fish-progress" max="100" value="0"></progress></label><button id="fish-control">提竿 / 收放线 · 空格</button>';document.getElementById('game-root').appendChild(hud);hud.querySelector('button').addEventListener('click',()=>F.toggle());document.addEventListener('keydown',e=>{if(e.code==='Space'&&F.current()){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat)F.toggle();}},true);
 F.renderHUD=g=>{hud.hidden=!g;if(!g)return;const phase=F.phase(g);hud.querySelector('#fish-phase').textContent=F.waters[g.plan.water].name+' · '+phase;hud.querySelector('#fish-tip').textContent=phase==='咬钩'?'浮漂下沉了，按空格或按钮提竿！':g.missed?'这一竿收空了，可换轻松模式再试。':g.caught?'托住鱼身，慢慢抄起。':g.hooked?(g.holding?'正在收线；张力接近 78 时放线。':'正在放线；张力降下来再收线。'):'看水面的鱼影，耐心等漂。';hud.querySelector('#fish-tension').value=g.tension;hud.querySelector('#fish-progress').value=g.progress*100;hud.querySelector('#fish-control').textContent=g.plan.mode==='relaxed'?'轻松模式 · 自动照看鱼线':phase==='咬钩'?'提竿！ · 空格':g.holding?'放线 · 空格':'收线 · 空格';hud.querySelector('#fish-control').disabled=g.plan.mode==='relaxed'||g.caught||g.missed;};
@@ -3676,6 +3837,32 @@ X.after=(name,s,A)=>old.after(name,s,A)+(['menu','journal','settings'].includes(
 X.dispatch=(a,id,data,ctx)=>{if(!a.startsWith('fb-'))return old.dispatch(a,id,data,ctx);if(a==='fb-tab'){ui.tab=id;ctx.render();}else if(a==='fb-filter'){ui.type=document.getElementById('fb-type').value;ui.search=document.getElementById('fb-search').value.trim().slice(0,40);ctx.render();}else if(a==='fb-read'){F.mark(ctx.s,id);ctx.save();ctx.render();ctx.update();}else if(a==='fb-open'){if(F.links.includes(id))ctx.open(id);}return true;};
 F.preference=(s,key,value)=>{const p=F.ensure(s).prefs,allowed={pace:['normal','brisk'],motion:['full','reduced'],floating:['normal','compact','off'],seconds:['5','8','12'],quiet:['true','false']};if(!allowed[key]?.includes(value))return false;p[key]=key==='seconds'?Number(value):key==='quiet'?value==='true':value;return true;};
 })(typeof window!=='undefined'?window:globalThis);
+
+</script>
+<script>
+(function(root){
+'use strict';
+const X=root.ZRZPanels,H=root.ZRZCharacters,A=root.ZRZArt;
+const select=(id,entries)=>'<select id="'+id+'">'+entries.map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')+'</select>';
+let previewState=null,running=false;
+const original={render:X.render,mount:X.mount};
+X.render=(name,arg,s,api)=>{
+ let html=original.render(name,arg,s,api);if(name!=='appearance')return html;
+ const preview='<section class="character-preview" aria-label="换装预览"><div><canvas width="128" height="160" data-character-portrait aria-label="主角半身肖像"></canvas></div><div class="character-turns">'+H.directions.map((d,i)=>'<figure><canvas width="96" height="100" data-character-direction="'+d+'" aria-label="'+['正面','左侧','背面','右侧'][i]+'人物预览"></canvas><figcaption>'+['正面','左侧','背面','右侧'][i]+'</figcaption></figure>').join('')+'</div></section><div class="character-preview-controls"><label>试试看'+select('character-motion',[['idle','站立'],['walk','行走'],['work','试用水壶']])+'</label><label>试衣天气'+select('character-weather-preview',[['fair','晴日'],['rain','雨日'],['cold','冬日']])+'</label></div><p class="subtitle">四向造型与肖像共用外观。试衣不会改变天气或消耗物品；换好衣服的动作结束后保存。</p>';
+ html=html.replace('<div class="appearance-form">',preview+'<div class="appearance-form">');
+ const more='<label>服装样式'+select('appearance-outfit',Object.entries(H.outfits))+'</label><label>发色'+select('appearance-hairColor',H.hairNames.map((v,i)=>[i,v]))+'</label><label><input id="appearance-bag" type="checkbox"> 背上帆布挎包</label><label><input id="appearance-weatherDress" type="checkbox"> 自动搭配雨披与冬围巾（纯外观）</label>';
+ return html.replace('<label><input id="appearance-hat"',more+'<label><input id="appearance-hat"');
+};
+function draft(s){const a={...s.appearance};for(const k of ['shirt','hair','skin','hairColor']){const el=document.getElementById('appearance-'+k);if(el)a[k]=Number(el.value);}for(const k of ['hat','bag','weatherDress']){const el=document.getElementById('appearance-'+k);if(el)a[k]=el.checked;}a.outfit=document.getElementById('appearance-outfit')?.value||a.outfit;a.weather=document.getElementById('character-weather-preview')?.value||'fair';return a;}
+function draw(time){const portrait=document.querySelector('[data-character-portrait]');if(!portrait||!previewState)return false;const a=draft(previewState),motion=document.getElementById('character-motion').value,quiet=previewState.feedback?.prefs.motion==='reduced',t=quiet?0:time/1000;A.portrait(portrait.getContext('2d'),128,160,null,a);
+ for(const el of document.querySelectorAll('[data-character-direction]')){const c=el.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,96,100);c.fillStyle=a.weather==='cold'?'#d1ddd6':'#dce2c9';c.fillRect(0,0,96,100);c.save();c.translate(48,86);c.scale(2,2);const direction=el.dataset.characterDirection,ux=direction==='left'?-1:direction==='right'?1:0;const virtual={...previewState,appearance:a,player:{x:0,y:0,direction}},sequence={kind:'water',progress:quiet?.5:(t%2)/2,x:ux*32,y:direction==='up'?-28:direction==='down'?28:0};if(motion==='work'&&direction==='up')root.ZRZActions.draw(c,virtual,sequence,t);A.character(c,0,0,null,t,motion==='walk'&&!quiet,a.hat,direction,{...a,working:motion==='work',lean:motion==='work'?root.ZRZActions.pose(virtual,sequence):null});if(motion==='work'&&direction!=='up')root.ZRZActions.draw(c,virtual,sequence,t);c.restore();}
+ return !quiet;
+}
+function tick(t){if(!draw(t)){running=false;return;}requestAnimationFrame(tick);}
+X.mount=s=>{original.mount(s);if(!document.getElementById('appearance-outfit'))return;previewState=s;H.ensure(s);for(const k of ['outfit','hairColor'])document.getElementById('appearance-'+k).value=s.appearance[k];for(const k of ['bag','weatherDress'])document.getElementById('appearance-'+k).checked=s.appearance[k];draw(0);if(!running&&s.feedback?.prefs.motion!=='reduced'){running=true;requestAnimationFrame(tick);}};
+document.addEventListener('change',e=>{if(previewState&&/^(appearance-|character-)/.test(e.target.id))draw(performance.now());});
+})(typeof window!=='undefined'?window:globalThis);
+
 
 </script>
 <script>
@@ -3843,11 +4030,11 @@ F.preference=(s,key,value)=>{const p=F.ensure(s).prefs,allowed={pace:['normal','
     document.querySelector('.energy-track').classList.toggle('low',s.stamina<25);
     $('fullscreen-btn').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'进入全屏');
     $('fullscreen-btn').setAttribute('aria-pressed',String(!!document.fullscreenElement));
-    const pc=$('portrait');W.portrait(pc.getContext('2d'),pc.width,pc.height,{color:['#57826a','#647e9b','#b17d67','#ac9a65'][s.appearance.shirt]},s.appearance);
+    const pc=$('portrait');W.portrait(pc.getContext('2d'),pc.width,pc.height,{color:['#57826a','#647e9b','#b17d67','#ac9a65'][s.appearance.shirt]},window.ZRZCharacters?.context(s)||s.appearance);
     const seedCtx=$('seed-icon').getContext('2d');seedCtx.clearRect(0,0,24,24);W.item(seedCtx,s.seed,0,0,.75);
     drawIcons();
   }
-  function drawIcons(){const mini=$('area-map');if(mini)W.mapView(mini.getContext('2d'),s);document.querySelectorAll('canvas[data-item]').forEach(el=>{const c=el.getContext('2d');c.clearRect(0,0,el.width,el.height);if(el.closest('#toolbelt')&&T.defs[el.dataset.item])T.drawTool(c,el.dataset.item,T.tool(s,el.dataset.item).level,el.width/2,el.height*.7,el.width/58);else W.item(c,el.dataset.item,0,0,el.width/32);});document.querySelectorAll('canvas[data-npc]').forEach(el=>{const n=D.npcs.find(n=>n.id===el.dataset.npc);if(n){const c=el.getContext('2d');W.portrait(c,el.width,el.height,n,{id:n.id,emotion:el.dataset.emotion});}});}
+  function drawIcons(){const mini=$('area-map');if(mini)W.mapView(mini.getContext('2d'),s);document.querySelectorAll('canvas[data-item]').forEach(el=>{const c=el.getContext('2d');c.clearRect(0,0,el.width,el.height);if(el.closest('#toolbelt')&&T.defs[el.dataset.item])T.drawTool(c,el.dataset.item,T.tool(s,el.dataset.item).level,el.width/2,el.height*.7,el.width/58);else W.item(c,el.dataset.item,0,0,el.width/32);});document.querySelectorAll('canvas[data-npc]').forEach(el=>{const n=D.npcs.find(n=>n.id===el.dataset.npc);if(n){const c=el.getContext('2d');W.portrait(c,el.width,el.height,n,window.ZRZCharacters?window.ZRZCharacters.context(s,n.id,el.dataset.emotion):{id:n.id,emotion:el.dataset.emotion});}});}
   function head(title,subtitle='在这里，时间会等你。'){return '<h2 id="modal-title">'+title+'</h2><p class="subtitle">'+subtitle+'</p>';}
   const button=(label,action,id='',cls='primary',extra='')=>'<button class="'+cls+'" data-action="'+action+'"'+(id?' data-id="'+id+'"':'')+' '+extra+'>'+label+'</button>';
   const itemCanvas=id=>'<canvas width="32" height="32" data-item="'+id+'"></canvas>';
@@ -3936,7 +4123,7 @@ F.preference=(s,key,value)=>{const p=F.ensure(s).prefs,allowed={pace:['normal','
       html+='<div class="settings-row"><label>琴音与交互音</label>'+button(s.settings.sound?'已开启':'已关闭','sound','','secondary')+'</div><div class="settings-row"><label>音量</label><input id="volume-setting" type="range" min="0" max="1" step=".05" value="'+s.settings.volume+'" aria-label="音量"></div>';
       html+='<div class="settings-row"><label>生活提示<small>显示画面里的心愿便条与操作提示；H 可临时收起全部界面。</small></label>'+button(s.settings.hints?'已开启':'已关闭','toggle-hints','','secondary')+'</div>';
       html+='<div class="settings-row"><label>自定义按键<small>方向键、空格和 Esc 始终保留，也可以更换 8 个字母快捷键。</small></label>'+button('修改按键','controls','','secondary')+'</div>';
-      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.17.0 · 乡路有景，四时有声<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
+      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.18.0 · 各有模样，各有日常<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
     } else if(name==='controls'){
       html=head('把操作换成顺手的样子','点击一个按键，再按想使用的字母。重复按键会交换位置。Esc 取消修改。');
       html+='<div class="key-grid">'+Object.entries(bindingNames).map(([id,name])=>'<div class="key-row"><span>'+name+'</span>'+button(keyLabel(id),'bind-key',id,'key-button')+'</div>').join('')+'</div>';

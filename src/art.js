@@ -149,5 +149,5 @@
     if(a.hat){R(c,12,20,43,4,'#b5904c');R(c,18,10,31,10,'#d5b46e');R(c,20,9,25,3,'#e7cd8b');R(c,18,18,31,3,'#876f3e');}if(a.cap){R(c,20,16,28,7,a.accent);R(c,28,22,24,3,a.accent);}
     if(a.apron)R(c,24,64,19,16,a.accent);if(a.vest){R(c,18,61,9,19,a.accent);R(c,39,61,9,19,a.accent);}accessory(c,a,43,71,1.1);R(c,0,0,64,2,'#a6b493');R(c,0,78,64,2,'#a6b493');c.restore();
   }
-  const api={seasons,styles,R,poly,rand,ellipse,text,shadow,label,roof,house,tree,bamboo,basket,jar,prop,character,portrait};root.ZRZArt=api;if(typeof module!=='undefined')module.exports=api;
+  const api={seasons,styles,hair,accessory,R,poly,rand,ellipse,text,shadow,label,roof,house,tree,bamboo,basket,jar,prop,character,portrait};root.ZRZArt=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:window);
