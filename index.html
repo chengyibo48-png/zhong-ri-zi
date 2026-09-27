@@ -35,7 +35,7 @@
         </section>
         <div class="tool-dock">
           <div class="tool-name" id="tool-name">双手 · 收获 / 交互</div>
-          <div class="toolbar-wrap"><div id="toolbelt" role="group" aria-label="随身工具"></div><span class="toolbar-divider"></span><button class="bag-button" data-action="bag" title="打开背包 · B"><span data-icon="bag"></span><span>背包<small id="bag-count"></small></span><kbd>B</kbd></button><button class="seed-button" data-action="seeds" title="选择种子 · Q"><canvas id="seed-icon" width="24" height="24"></canvas><span id="seed-label">小青菜种子<small>选择播种</small></span><span>⌄</span></button></div>
+          <div class="toolbar-wrap"><div id="toolbelt" role="group" aria-label="随身工具"></div><span class="toolbar-divider"></span><button class="bag-button" data-action="bag" aria-label="打开随身背包" title="打开背包 · B"><span data-icon="bag"></span><span>背包<small id="bag-count"></small></span><kbd>B</kbd></button><button class="seed-button" data-action="seeds" title="选择种子 · Q"><canvas id="seed-icon" width="24" height="24"></canvas><span id="seed-label">小青菜种子<small>选择播种</small></span><span>⌄</span></button></div>
           <div class="controls-footer" id="controls-hint"></div>
         </div>
         <div class="quiet-corner"><span id="save-status">此刻，安心生活</span><button data-action="sound" id="sound-btn" aria-label="声音开关" title="声音开关"></button><button data-action="toggle-hud" title="收起界面 · H" aria-label="收起界面"><span data-icon="eye"></span></button></div>
@@ -56,9 +56,12 @@
 <script src="src/building-view.js"></script>
 <script src="src/tools.js"></script>
 <script src="src/tools-view.js"></script>
+<script src="src/economy.js"></script>
+<script src="src/economy-view.js"></script>
 <script src="src/village-view.js"></script>
   <script src="src/camera.js"></script><script src="src/panels.js"></script><script src="src/farming-ui.js"></script><script src="src/ranch-ui.js"></script>
 <script src="src/kitchen-ui.js"></script><script src="src/building-ui.js"></script>
 <script src="src/tools-ui.js"></script>
+<script src="src/economy-ui.js"></script>
 <script src="src/app.js"></script>
 </body></html>

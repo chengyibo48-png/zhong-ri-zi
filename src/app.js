@@ -278,7 +278,7 @@
   let lastDialogue='';
   function interact(p){
     if(!p||currentPanel||inputLocked)return;
-    if(p.kind==='build-task'){const r=B.perform(s,p);if(r.ok)V.feedback(s,p,'hoe',r.msg,1.7);apply(r);return;}
+    if(p.kind==='build-task'){const r=B.perform(s,p);if(r.ok)V.feedback(s,p,p.op?.startsWith('economy-')?'harvest':'hoe',r.msg,1.7);apply(r);return;}
     if(p.kind==='build-piece'){if(p.service==='water'){const r=F.fillWater(s);V.feedback(s,p,'water',r.msg,1.5);apply(r);}else if(p.service==='rest'){V.feedback(s,p,'steam','在自己的小院里歇一歇。',1.5);apply(C.rest(s));}else if(p.service)openPanel(p.service);else{V.feedback(s,p,'spark','这处小景，是你亲手安置的。',1.5);sound('soft');}return;}
     if(p.kind==='kitchen-station'){if(['stove','steam'].includes(p.station))openPanel('cook',{tab:'recipes'});else openPanel('processing',{station:p.station});return;}
     if(p.kind==='kitchen-task'){if(s.village.interior!==K.house().id){queueKitchen(p);return;}if(p.op==='manual'){openPanel('kitchen-heat',p);return;}const r=K.perform(s,p);if(r.ok)V.feedback(s,p,'steam',r.msg,2,p.op==='make'||p.op==='sub'?p.id:null);apply(r);return;}
