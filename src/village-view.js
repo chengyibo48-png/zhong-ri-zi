@@ -109,7 +109,7 @@
     if(weather==='晴'&&light.night<.2){c.save();c.globalAlpha=.035;for(let i=0;i<3;i++)E(c,x+(i*360+t*9)%(w+350)-175,y+i*112,170,50,'#244c42');c.restore();}
   }
   function draw(canvas,s,t,hover,walking,effect,view){const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);c.save();c.translate(-view.x,-view.y);const indoor=!!s.village.interior,season=C.calendar(s).season,rt=V.stateRuntime(s),time=rt.clock;
-    if(indoor){R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#253c37');if(!root.ZRZRanch?.drawRoom(c,s,time))room(c,s,time);}else{R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#7c9d62');for(const r of V.regions){if(r.x>view.x+view.viewWidth||r.x+1920<view.x||r.y>view.y+view.viewHeight||r.y+1152<view.y)continue;c.drawImage(terrain(r,s),r.x,r.y);}
+    if(indoor){R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#253c37');if(!root.ZRZKitchen?.drawRoom(c,s,time)&&!root.ZRZRanch?.drawRoom(c,s,time))room(c,s,time);}else{R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#7c9d62');for(const r of V.regions){if(r.x>view.x+view.viewWidth||r.x+1920<view.x||r.y>view.y+view.viewHeight||r.y+1152<view.y)continue;c.drawImage(terrain(r,s),r.x,r.y);}
       root.ZRZRanch?.drawGround(c,s,time);root.ZRZFarming?.drawCoverage(c,s);for(let i=0;i<72;i++){const p=V.plotPosition(i);if(Math.abs(p.x-s.player.x)<900&&Math.abs(p.y-s.player.y)<700)plot(c,s,i,time);}
     }
     const visible=p=>p.x>view.x-300&&p.x<view.x+view.viewWidth+160&&p.y>view.y-50&&p.y<view.y+view.viewHeight+260,objects=[];

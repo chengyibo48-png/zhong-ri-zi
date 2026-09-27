@@ -29,7 +29,7 @@
   function has(s, needs, n = 1) { return Object.entries(needs).every(([id, qty]) => (s.bag[id] || 0) >= qty * n); }
   function consume(s, needs, n = 1) { Object.entries(needs).forEach(([id, qty]) => { const q=s.quality?.[id]; if(q){const normal=Math.max(0,(s.bag[id]||0)-q.reduce((a,b)=>a+b,0));let remaining=Math.max(0,qty*n-normal);for(let i=0;i<q.length;i++){const used=Math.min(q[i],remaining);q[i]-=used;remaining-=used;}} s.bag[id] -= qty * n; if (!s.bag[id]) delete s.bag[id]; }); }
   function log(s, text) { s.journal.unshift({ day: s.day, text }); s.journal = s.journal.slice(0, 60); }
-  function labor(s, cost, minutes = 8) { cost=Math.max(1,cost-(s.skills?.farming.choice==='gentle'?1:0)-(s.buffs?.laborDay===s.day?1:0)-(s._laborTool&&s.toolUpgrades?.[s._laborTool]?1:0)); if (s.stamina < cost) return false; s.stamina -= cost; s.minutes = Math.min(1320, s.minutes + minutes); return true; }
+  function labor(s, cost, minutes = 8) { cost=Math.max(1,cost-(s.skills?.farming.choice==='gentle'?1:0)-(s.buffs?.laborDay===s.day?1:0)-(s.kitchen?.buff&&s.kitchen.buff.until>s.day*1440+s.minutes&&['饱足','暖胃'].includes(s.kitchen.buff.kind)?1:0)-(s._laborTool&&s.toolUpgrades?.[s._laborTool]?1:0)); if (s.stamina < cost) return false; s.stamina -= cost; s.minutes = Math.min(1320, s.minutes + minutes); return true; }
   function plotAction(s, index, tool) {
     const p = s.plots[index]; if (!p) return fail('这块地不在院子里。');
     if (tool === 'hoe') {
