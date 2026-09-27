@@ -1,8 +1,8 @@
 {
   "name": "种日子",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "platform": "Windows 桌面浏览器 / 单机离线 HTML",
-  "generatedAt": "2026-09-27T15:12:02.026Z",
+  "generatedAt": "2026-09-27T15:47:31.978Z",
   "runtimeDependencies": [],
   "remoteAssets": [],
   "assets": "像素美术、图标、四季琴音及环境音均由项目代码绘制或合成；系统字体不随包分发。",
@@ -12,13 +12,13 @@
   "files": [
     {
       "name": "种日子.html",
-      "bytes": 872466,
-      "sha256": "ee954fa4a88d58de1f55ca6936f6e9f2c032ba656442679d6a3ad0bc9b389639"
+      "bytes": 890683,
+      "sha256": "6ac41b5a51d8cd7a613e054b8f604d038da1f31d5b83f35a0152371d04adcbd0"
     },
     {
       "name": "index.html",
-      "bytes": 7875,
-      "sha256": "adae751c1ea9a3473bf64d91081aaaa6ada8139e68b217ed109734d8e2ffdef5"
+      "bytes": 7900,
+      "sha256": "304e90471c273f1088ca8ada1372df7eacd1a7900df6128465cba5926cf606cd"
     },
     {
       "name": "style.css",
@@ -27,8 +27,8 @@
     },
     {
       "name": "build.cjs",
-      "bytes": 1141,
-      "sha256": "54a9f9d7a3156f98abb24437e4bd741ca4bd1b8820d1947639aaddaf80e82045"
+      "bytes": 1153,
+      "sha256": "db1c71e861bab1481bd4eb976674f67f6e8ac995914a4f6b0394ff0f936eac0e"
     },
     {
       "name": "server.cjs",
@@ -37,8 +37,8 @@
     },
     {
       "name": "package.json",
-      "bytes": 789,
-      "sha256": "ae68ab8f503711d55d903873572db88ed009e0e7dfe02f9c2fcd46b021ac346e"
+      "bytes": 818,
+      "sha256": "7e2334d2a4fb8ac0dad9922cd0b572fae280220345dcb36d0b28d632f9c2bba7"
     },
     {
       "name": "src/actions.js",
@@ -47,8 +47,8 @@
     },
     {
       "name": "src/app.js",
-      "bytes": 87061,
-      "sha256": "44670deedd413f48d0b6f41c8943ba1485589908eb48bb3ac459f63c966cdb9c"
+      "bytes": 87106,
+      "sha256": "1b227384182022971e0a3f53eca46aff854f7a816eb920e0d9e6b437b42a0e26"
     },
     {
       "name": "src/art.js",
@@ -92,8 +92,8 @@
     },
     {
       "name": "src/debug.js",
-      "bytes": 13183,
-      "sha256": "0b2f1e4f8bc197e119f83b69e1c0f4d7006f22e66a7b596b1bebcb75d9833623"
+      "bytes": 13561,
+      "sha256": "109ebbcfee973e84a8bef8bb28831e6d236a6bc50147f3028e3b0c5c8706ef50"
     },
     {
       "name": "src/economy-ui.js",
@@ -152,8 +152,8 @@
     },
     {
       "name": "src/feedback.js",
-      "bytes": 20234,
-      "sha256": "041f6ab700f1a377def0fef8a6ea4b1f856d8c8de5ddcec1ce868635594739b3"
+      "bytes": 20299,
+      "sha256": "18d49e2bb7b338ce785bdc51602509a37458c32683b266e7884f4ff88f1b0698"
     },
     {
       "name": "src/fishing-ui.js",
@@ -247,13 +247,23 @@
     },
     {
       "name": "src/scenes.js",
-      "bytes": 8525,
-      "sha256": "693815a7d684d402dcc882e067622fd31db3be8aa513b4b1f47a889e476d779e"
+      "bytes": 8633,
+      "sha256": "94b97455ec430acf201790eb3a0148fc685e3693987cbd9faf1399643748e496"
     },
     {
       "name": "src/systems.js",
       "bytes": 37834,
       "sha256": "bcd27ef5703ea7d6e1e1bd448686cdfc242c74c656d6e7b322af23441bf17bf9"
+    },
+    {
+      "name": "src/tiles-view.js",
+      "bytes": 11114,
+      "sha256": "e0224549e7a8fcef077e40baf88e5fb8cf32cc932ca09bd3990755df74ef3047"
+    },
+    {
+      "name": "src/tiles.js",
+      "bytes": 6930,
+      "sha256": "6a8811464f58f86fe094d0bc334d2aeba19ea70bf71f7d7b86b5ddd379a8cd85"
     },
     {
       "name": "src/tools-ui.js",
@@ -272,8 +282,8 @@
     },
     {
       "name": "src/village-view.js",
-      "bytes": 31567,
-      "sha256": "186db2ad98c2635481f342b3d535907df3b9078bcd4fca685435518224470a49"
+      "bytes": 31581,
+      "sha256": "868098ba812462bdef33acad7250512c56043e043d26f6b14268c193c54c96e5"
     },
     {
       "name": "src/village.js",
@@ -282,8 +292,8 @@
     },
     {
       "name": "src/world.js",
-      "bytes": 26589,
-      "sha256": "e092a6bd4afaf6f7fa186cdc24149f895778ee02edad2acb871e456a742aee24"
+      "bytes": 26544,
+      "sha256": "9437857201fa654df955b76f3e70346fef96e126849d7ef886dc6431dbeb461c"
     }
   ]
 }

@@ -78,6 +78,7 @@ function poll(s){
 }
 function laborCost(s,base,kit=null,labor=null){const probe={...s,stamina:100,_kitAction:kit,_laborTool:labor};C.labor(probe,base,0);return Math.round((100-probe.stamina)*10)/10;}
 function describe(s,p,tool='hand'){
+ if(p.scenery&&root.ZRZTiles)return root.ZRZTiles.describe(s,p);
  let name=p.name||'手边物件',verb='查看',state='走近后互动',reason='',detail='',energy=0;
  if(p.kind==='plot'){
   const a=s.plots[p.index],b=s.farm.beds[p.index],ripe=a.crop&&a.growth>=D.crops[a.crop].days;name=(p.index+1)+' 号田 · '+(a.crop?D.crops[a.crop].name:'菜地');state=F.stage(s,p.index);detail='水分 '+Math.round(b.moisture)+' · 肥力 '+Math.round(b.fertility);

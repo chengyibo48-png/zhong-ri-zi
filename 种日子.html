@@ -1096,10 +1096,10 @@
   function plotAt(x,y){const col=Math.floor((x-771)/42),row=Math.floor((y-559)/36);return col>=0&&col<6&&row>=0&&row<4&&x<771+col*42+38&&y<559+row*36+31?row*6+col:-1;}
   function hit(s,x,y){if(s.scene==='farm'){const index=plotAt(x,y);if(index>=0)return {id:'plot-'+index,kind:'plot',index,...plotPosition(index),name:'菜地'};}return points(s).filter(p=>Math.abs(x-p.x)<25&&y>p.y-36&&y<p.y+16).sort((a,b)=>Math.hypot(x-a.x,y-a.y)-Math.hypot(x-b.x,y-b.y))[0]||null;}
   function terrain(c,s){
-    const season=C.calendar(s).season,P=A.seasons[season],m=L.maps[s.scene],r=A.rand(929+season);A.R(c,0,0,W,H,P.grass);
-    for(let i=0;i<7500;i++){const x=r()*W,y=r()*H;A.R(c,x,y,r()>.7?4:1,1,i%3?P.light:P.dark);}
+    const season=C.calendar(s).season,P=A.seasons[season],m=L.maps[s.scene],r=A.rand(929+season);if(root.ZRZTiles?.base)root.ZRZTiles.base(c,s);else A.R(c,0,0,W,H,P.grass);
+    for(let i=0;i<(root.ZRZTiles?0:7500);i++){const x=r()*W,y=r()*H;A.R(c,x,y,r()>.7?4:1,1,i%3?P.light:P.dark);}
     // Quiet clusters and low edges leave the paths visually readable.
-    for(const p of m.paths){A.R(c,p.x-3,p.y-3,p.w+6,p.h+6,'#798751');A.R(c,p.x,p.y,p.w,p.h,p.kind==='wood'?'#90724b':p.kind==='earth'?P.earth:'#a8b5a1');
+    for(const p of m.paths){if(root.ZRZTiles?.path?.(c,p,season))continue;A.R(c,p.x-3,p.y-3,p.w+6,p.h+6,'#798751');A.R(c,p.x,p.y,p.w,p.h,p.kind==='wood'?'#90724b':p.kind==='earth'?P.earth:'#a8b5a1');
       if(p.kind==='wood'){for(let y=p.y+2;y<p.y+p.h;y+=9){A.R(c,p.x+2,y,p.w-4,7,'#c4a26c');A.R(c,p.x+5,y+1,p.w-10,1,'#e0c18a');}}
       else if(p.kind==='stone'){for(let y=p.y+2;y<p.y+p.h-4;y+=13)for(let x=p.x+2;x<p.x+p.w-5;x+=23){const ww=Math.min(20,p.x+p.w-x-2),hh=Math.min(11,p.y+p.h-y-1);A.R(c,x+(Math.floor(y/13)%2)*2,y,ww,hh,['#bdc3aa','#c5c8b0','#adb9a4'][Math.floor(r()*3)]);A.R(c,x+2,y+1,Math.max(2,ww-4),1,'#d6d5bd');}}
       else for(let i=0;i<p.w*p.h/110;i++)A.R(c,p.x+r()*p.w,p.y+r()*p.h,2,1,'#a8956b');
@@ -2156,6 +2156,7 @@ for(const a of s.animals){const p=R.point(s,a),h=V.houses.find(h=>h.id===a.posit
 for(const p of V.points(out,true).filter(p=>p.kind==='gather'&&(root.ZRZForage?root.ZRZForage.known(s,p.id)&&root.ZRZForage.status(s,p).ready:s.collected[p.id]!==s.day)))rows.push({...p,id:'resource-'+p.id,kind:'walk',type:'resources',region:V.regionAt(p.x,p.y).id,detail:root.ZRZForage?root.ZRZForage.describe(s,p):'今日尚未采集 · 到达后动手'});
 for(const p of root.ZRZFishing?.spots||[])rows.push({...p,type:'services',kind:'walk',region:V.regionAt(p.x,p.y).id,detail:root.ZRZFishing.waters[p.water].tip});
 for(const p of a.pins)rows.push({...p,name:p.label,kind:'walk',type:'pins',region:V.regionAt(p.x,p.y).id,detail:'自己记下的地点'});
+for(const p of root.ZRZTiles?.points(out)||[])rows.push({...p,type:"services",kind:"walk",detail:p.story});
 return rows;
 }
 function resolve(s,t){if(!t)return null;return targets(s).find(p=>p.id===t.id)||(!t.id&&Number.isFinite(t.x)&&Number.isFinite(t.y)?{...t,kind:'walk',name:t.name||'地图落点'}:null);}
@@ -2710,6 +2711,7 @@ function poll(s){
 }
 function laborCost(s,base,kit=null,labor=null){const probe={...s,stamina:100,_kitAction:kit,_laborTool:labor};C.labor(probe,base,0);return Math.round((100-probe.stamina)*10)/10;}
 function describe(s,p,tool='hand'){
+ if(p.scenery&&root.ZRZTiles)return root.ZRZTiles.describe(s,p);
  let name=p.name||'手边物件',verb='查看',state='走近后互动',reason='',detail='',energy=0;
  if(p.kind==='plot'){
   const a=s.plots[p.index],b=s.farm.beds[p.index],ripe=a.crop&&a.growth>=D.crops[a.crop].days;name=(p.index+1)+' 号田 · '+(a.crop?D.crops[a.crop].name:'菜地');state=F.stage(s,p.index);detail='水分 '+Math.round(b.moisture)+' · 肥力 '+Math.round(b.fertility);
@@ -2779,6 +2781,170 @@ F.draw=function(c,s,dt,point,tool,view){const r=F.runtime(s),prefs=F.ensure(s).p
  }
  c.restore();};
 })(typeof window!=='undefined'?window:globalThis);
+
+</script>
+<script>
+(function(root){
+'use strict';
+const V=root.ZRZVillage,C=root.ZRZCore,B=root.ZRZBuild;
+const TILE=32;
+const biomes={
+ farm:{name:'稻香小院',material:'earth',accent:'#bb9c61',plants:'flowers'},
+ town:{name:'禾溪老街',material:'stone',accent:'#9fa799',plants:'planter'},
+ river:{name:'柳岸水乡',material:'sand',accent:'#bbc3a1',plants:'reeds'},
+ bamboo:{name:'竹影山坞',material:'leaves',accent:'#819266',plants:'fern'},
+ mountain:{name:'青岚茶山',material:'gravel',accent:'#9aa18c',plants:'tea'},
+ pasture:{name:'东坡牧场',material:'earth',accent:'#b4a476',plants:'clover'}
+};
+// Each asset shares a bottom-centre anchor between painting and collision.
+// Ground decoration is deliberately traversable; only the visible base blocks feet.
+const assets={
+ bench:{name:'竹木歇脚凳',w:64,h:29,box:[-30,-9,60,13],service:'rest'},
+ teaRack:{name:'竹匾晾茶架',w:76,h:43,box:[-35,-10,70,14],service:'forage'},
+ grainMat:{name:'簸箕晒谷席',w:84,h:18,box:null,service:'farmcare',layer:'ground'},
+ loom:{name:'竹篾编织架',w:70,h:66,box:[-32,-8,64,12],service:'tools'},
+ washstone:{name:'青石洗衣台',w:70,h:26,box:[-33,-14,66,19],service:'forage'},
+ board:{name:'乡村物产牌',w:52,h:62,box:[-24,-7,48,11],service:'economy'},
+ jars:{name:'封泥酱缸',w:68,h:33,box:[-30,-13,60,18],service:'processing'},
+ hayrack:{name:'草料编栏',w:72,h:43,box:[-34,-11,68,16],service:'animals'},
+ weather:{name:'竹竿风向标',w:56,h:83,box:[-6,-5,12,10],service:'weather'},
+ lamp:{name:'防雨石脚灯',w:22,h:67,box:[-8,-5,16,10]},
+ woodpile:{name:'码齐的柴垛',w:44,h:25,box:[-20,-9,40,12]},
+ basket:{name:'竹编生活篮',w:24,h:20,box:null},
+ plants:{name:'乡土植物丛',w:34,h:30,box:null},
+ stones:{name:'苔石地脚',w:32,h:12,box:null,layer:'ground'}
+};
+for(const [id,name]of Object.entries({seedTray:"分格育苗盘",scale:"木座杆秤",netCoil:"收拢渔网",bambooBundle:"分捆竹料",teaCrate:"竹筐茶青",haybale:"扎绳草捆"}))assets[id]={...assets.woodpile,name};
+for(const a of Object.values(assets))Object.assign(a,{anchor:'bottom-center',layer:a.layer||'objects',fixed:true,seasons:[0,1,2,3],biomes:Object.keys(biomes)});
+const plans=[
+ ['farm','晒谷小场','grainMat',2695,2142,'稻谷摊成薄层，木耙留下细细的纹路。'],
+ ['farm','育苗歇脚角','bench',3115,1382,'竹凳旁的陶盆里，幼苗顺着日光长。'],
+ ['farm','田边观风处','weather',2855,1502,'看布尾与风向，再决定灌溉和遮雨。'],
+ ['town','供销点货角','board',3335,530,'算盘、秤砣与货签，记着禾溪的物产行情。'],
+ ['town','酱香晒缸巷','jars',3695,930,'深浅不同的酱缸系着布盖，石板留下日常磨痕。'],
+ ['town','街口茶凳','bench',3455,1010,'旧长凳、搪瓷杯，给赶集人留一处歇脚。'],
+ ['river','石埠洗衣角','washstone',515,2454,'搓衣石磨得光滑，岸边芦苇依着风轻摆。'],
+ ['river','渔家晒篾架','loom',1455,2694,'竹篾与晒网分层搭开，留出走向水边的路。'],
+ ['river','芦岸歇脚处','bench',1675,2654,'望水歇脚，沙地上留下零碎足印。'],
+ ['bamboo','竹匠编篾角','loom',395,1982,'竹篾按长短收拢，编到一半的纹样挂在架上。'],
+ ['bamboo','林缘药草匾','teaRack',1455,1942,'竹匾旁的蕨叶遮着湿土，先辨认再采集。'],
+ ['bamboo','竹荫茶凳','bench',695,2162,'落叶铺在石头边，凳下留出干爽的脚踏。'],
+ ['mountain','茶青晾晒坪','teaRack',1715,690,'嫩叶薄薄铺开，山风从竹匾间穿过。'],
+ ['mountain','山路歇肩处','bench',355,710,'挑担的人把竹篮放在石旁，坐下喝口茶。'],
+ ['mountain','茶坡望风标','weather',1155,310,'风向布尾越过茶坡，远处碎石仍留出山道。'],
+ ['pasture','草料整理角','hayrack',2195,2874,'干草按捆摆放，通往圈门的道路保持宽敞。'],
+ ['pasture','轮牧歇脚处','bench',2675,3094,'矮凳旁长着三叶草，隔着围栏看伙伴散步。'],
+ ['pasture','南坡物产亭牌','board',3635,2774,'羊毛、鲜乳与谷物各有去处，交货前先看行情。']
+];
+const intersects=(a,b,p=0)=>a.x<b.x+b.w+p&&a.x+a.w>b.x-p&&a.y<b.y+b.h+p&&a.y+a.h>b.y-p;
+const hash=(x,y,z=0)=>{let n=Math.imul(x+374761393,668265263)^Math.imul(y+z*73,1274126177);n=Math.imul(n^(n>>>13),1274126177);return (n^(n>>>16))>>>0;};
+function material(region,x,y){const cx=Math.floor(x/6),cy=Math.floor(y/6),n=hash(cx,cy,Object.keys(biomes).indexOf(region));const dx=x-cx*6-(1+n%4),dy=y-cy*6-(1+(n>>>4)%4);return n%5===0&&dx*dx+dy*dy<3.4?biomes[region].material:'grass';}
+function tile(region,x,y){const kind=material(region,x,y);let edges=0;for(const [i,dx,dy]of [[0,0,-1],[1,1,0],[2,0,1],[3,-1,0]])if(material(region,x+dx,y+dy)!==kind)edges|=1<<i;return {kind,edges,variant:hash(x,y)%4};}
+const sites=[],objects=[],collisions=[];
+for(const [region,name,asset,ax,ay,story]of plans){
+ const p={x:ax,y:ay};
+ const site={id:'scenery-'+sites.length,region,name,asset,x:p.x,y:p.y,story};
+ sites.push(site);
+ const secondary={farm:'seedTray',town:'scale',river:'netCoil',bamboo:'bambooBundle',mountain:'teaCrate',pasture:'haybale'}[region];
+ const props=[[asset,0,0],['lamp',sites.length%2?76:-76,-5],['plants',sites.length%2?-74:74,-22],['plants',66,38],['basket',-56,18],['stones',-78,42],[secondary,sites.length%3===0?-52:52,-38]];
+ for(const [kind,dx,dy]of props){
+  const a=assets[kind],o={id:site.id+'-'+kind+'-'+dx,site:site.id,region,kind,x:p.x+dx,y:p.y+dy,variant:sites.length%4};
+  objects.push(o);if(a.box){const [x,y,w,h]=a.box,b=[o.x+x,o.y+y,w,h];collisions.push(b);V.solids.push(b);}
+ }
+}
+const navigation=B.navigationKey;B.navigationKey=s=>navigation(s)+'/scenery-v17';
+function points(s){return s.village.interior?[]:sites.map(p=>({id:p.id,name:p.name,kind:assets[p.asset].service,scenery:true,region:p.region,x:p.x,y:p.y+27,top:p.y-assets[p.asset].h,story:p.story}));}
+const oldPoints=V.points;V.points=(s,all=false)=>oldPoints(s,all).concat(points(s).filter(p=>all||Math.abs(p.x-s.player.x)<1200&&Math.abs(p.y-s.player.y)<900));root.ZRZWorld.points=V.points;
+const oldDestination=V.destination;V.destination=(s,type,id)=>points({...s,village:{...s.village,interior:null}}).find(p=>p.id===id)||oldDestination(s,type,id);
+function describe(s,p){const verbs={rest:'坐下歇脚',forage:'翻看山野手记',farmcare:'查看田间照料',weather:'观察风向与天气',tools:'查看工具养护',economy:'查看物产行情',processing:'查看加工与料理',animals:'查看伙伴照料'};return {name:p.name,verb:verbs[p.kind],state:p.kind==='rest'?'歇脚恢复体力 · 时间照常流逝':p.kind==='weather'?C.weather(s.day)+' · '+root.ZRZEnvironment.profile(s.day).label:'乡村生活设施',detail:p.story,reason:'',ready:true};}
+root.ZRZTiles={TILE,assets,biomes,sites,objects,collisions,hash,material,tile,points,describe,intersects};
+})(typeof window!=='undefined'?window:globalThis);
+
+
+</script>
+<script>
+(function(root){
+'use strict';
+const T=root.ZRZTiles,A=root.ZRZArt,C=root.ZRZCore,R=A.R,E=A.ellipse,P=A.poly;
+const cache=new Map(),LIMIT=256;
+const colors={earth:['#b8a178','#c8b18a','#9e8963'],stone:['#a9b1a0','#c5c8b2','#859181'],sand:['#bac3a0','#d6d4af','#9ba98e'],leaves:['#85935e','#a8ad70','#677a52'],gravel:['#9da68a','#c1c7ae','#7f8d78']};
+function groundTile(region,season,kind,variant,edges){
+ const key=[region,season,kind,variant,edges].join('/');if(cache.has(key)){const v=cache.get(key);cache.delete(key);cache.set(key,v);return v;}
+ const c=document.createElement('canvas');c.width=c.height=32;const q=c.getContext('2d'),pal=A.seasons[season],r=A.rand(variant*137+season*39+region.length*83);
+ const col=kind==='grass'?[pal.grass,pal.light,pal.dark]:colors[kind];R(q,0,0,32,32,col[0]);
+ for(let i=0;i<(kind==='grass'?6:12);i++){const x=Math.floor(r()*30),y=Math.floor(r()*30);R(q,x,y,kind==='stone'?5:2+i%3,1,col[1+i%2]);if(kind==='leaves')R(q,x+2,y+1,2,2,col[2]);if(kind==='gravel')R(q,x,y-1,3,1,col[1]);}
+ if(kind==='stone'){R(q,0,15,32,1,col[2]);R(q,14,0,1,15,col[2]);R(q,25,16,1,16,col[2]);}
+ if(kind!=='grass')for(let i=0;i<4;i++)if(edges&(1<<i))for(let j=0;j<32;j+=2){const d=2+(T.hash(j,i,variant)%4);if(i===0)R(q,j,0,2,d,pal.grass);if(i===1)R(q,32-d,j,d,2,pal.grass);if(i===2)R(q,j,32-d,2,d,pal.grass);if(i===3)R(q,0,j,d,2,pal.grass);}
+ if(season===3){q.globalAlpha=.38;for(let i=0;i<8;i++)R(q,r()*30,r()*30,4,2,'#e4e9da');q.globalAlpha=1;}
+ cache.set(key,c);while(cache.size>LIMIT)cache.delete(cache.keys().next().value);return c;
+}
+function base(c,s){const season=C.calendar(s).season;for(let y=0;y<1152;y+=32)for(let x=0;x<1920;x+=32){const t=T.tile(s.scene,x/32,y/32);c.drawImage(groundTile(s.scene,season,t.kind,t.variant,t.edges),x,y);}}
+function path(c,p,season){const pal=A.seasons[season],kind=p.kind==='earth'?'earth':'stone';
+ if(p.kind==='wood')return false;
+ c.save();c.beginPath();c.rect(p.x-4,p.y-4,p.w+8,p.h+8);c.clip();
+ for(let y=Math.floor((p.y-4)/32)*32;y<p.y+p.h+4;y+=32)for(let x=Math.floor((p.x-4)/32)*32;x<p.x+p.w+4;x+=32)c.drawImage(groundTile('farm',season,kind,T.hash(x,y)%4,0),x,y);
+ c.restore();
+ // Uneven sod, inset stones and tread marks soften the hard rectangle without altering navigation.
+ for(let x=p.x-4;x<p.x+p.w+4;x+=7){const d=2+T.hash(x,p.y)%4;R(c,x,p.y-4,4,d,pal.grass);R(c,x,p.y+p.h+4-d,3,d,pal.grass);}
+ for(let y=p.y;y<p.y+p.h;y+=9){R(c,p.x-4,y,3,4,pal.grass);R(c,p.x+p.w+1,y,3,3,pal.grass);}
+ return true;
+}
+function plants(c,o,s,t){const season=C.calendar(s).season,pal=A.seasons[season],type=T.biomes[o.region].plants,wind=root.ZRZEnvironment.profile(s.day).wind||0;
+ const sway=Math.round(Math.sin(t*1.7+o.x)*Math.min(2,1+wind*.01));
+ for(let i=0;i<5;i++){const x=o.x-15+i*7,y=o.y-(i%2)*3,h=type==='reeds'?23+i%3*7:type==='fern'?13+i%2*6:12+i%3*4;
+ R(c,x,y-h,1,h,pal.deep);if(type==='reeds'){R(c,x+sway,y-h-4,3,7,season===3?'#d9d9bf':'#ab9360');R(c,x-3,y-8,4,2,pal.tip);}
+ else{R(c,x-5+sway,y-h+5,5,2,pal.leaf);R(c,x+1+sway,y-h+1,6,3,pal.tip);if(type==='flowers'&&season!==3)R(c,x+sway-2,y-h-2,5,3,['#ead794','#d49a85','#dcca9e'][i%3]);if(type==='fern')for(let j=0;j<3;j++)R(c,x-6+j,y-h+3+j*4,12-j*2,1,pal.leaf);}}
+ if(type==='planter'||o.region==='farm'&&o.site==='scenery-1'){R(c,o.x-20,o.y-5,40,10,'#9b6950');R(c,o.x-22,o.y-8,44,4,'#c0976b');}
+ if(type==='clover')for(let i=0;i<3;i++)E(c,o.x-9+i*9,o.y-9,4,2,'#c4c69a');
+}
+function prop(c,o,s,t){
+ const x=o.x,y=o.y,k=o.kind,season=C.calendar(s).season,pal=A.seasons[season],r=A.rand(T.hash(x,y)),night=s.minutes<420||s.minutes>1080;
+ if(k==='plants'){plants(c,o,s,t);return;}
+ if(k==='stones'){for(let i=0;i<3;i++){P(c,[[x-14+i*11,y],[x-17+i*11,y-6-i%2*4],[x-9+i*11,y-10],[x-4+i*11,y-4]],'#8b9782');R(c,x-12+i*11,y-7,6,2,pal.tip);}return;}
+ A.shadow(c,x,y,Math.min(72,T.assets[k].w),8);
+ if(k==='bench'){R(c,x-29,y-12,5,16,'#6c543a');R(c,x+23,y-12,5,16,'#6c543a');R(c,x-33,y-18,66,8,'#9a7950');R(c,x-31,y-20,62,4,'#cfb27c');for(let i=0;i<4;i++)R(c,x-25+i*16,y-19,1,8,'#816b42');R(c,x+15,y-26,7,7,'#e4dfc3');R(c,x+17,y-27,4,2,'#548d87');}
+ else if(k==='teaRack'||k==='grainMat'){const ground=k==='grainMat',yy=y-(ground?5:24);if(!ground)for(const dx of [-31,28]){R(c,x+dx,yy,4,27,'#80603d');R(c,x+dx-2,yy+10,8,3,'#bca775');}
+ E(c,x,yy,ground?41:37,ground?12:14,'#79673e');E(c,x,yy-2,ground?39:35,ground?11:12,'#d0b171');
+ for(let i=0;i<8;i++)R(c,x-30+i*8,yy-9,1,15,'#a18750');
+ for(let i=0;i<65;i++){const xx=(r()-.5)*63,dy=(r()-.5)*15;if(xx*xx/1050+dy*dy/56<1)R(c,x+xx,yy-3+dy,2,1,ground?(i%2?'#e8c56e':'#c59c48'):(i%2?'#739054':'#3f7146'));}
+ if(ground){R(c,x+27,y-13,3,23,'#957344');R(c,x+20,y+7,17,3,'#b39759');}}
+ else if(k==='loom'){for(const dx of [-32,29])R(c,x+dx,y-62,4,66,'#8d7145');R(c,x-34,y-64,70,4,'#c9b27c');R(c,x-28,y-54,56,41,o.region==='river'?'#8c9e88':'#cab684');for(let i=0;i<9;i++)R(c,x-27+i*6,y-54,1,41,'#6a785866');for(let i=0;i<7;i++)R(c,x-28,y-51+i*6,56,1,'#e4ce9866');R(c,x-32,y-14,64,4,'#a58854');R(c,x+22,y-11,2,17,'#d6bd7a');}
+ else if(k==='washstone'){R(c,x-34,y-14,68,19,'#6b7f78');P(c,[[x-34,y-14],[x-22,y-25],[x+29,y-25],[x+34,y-14]],'#abb9a4');for(let i=0;i<7;i++)R(c,x-17,y-22+i*2,33,1,'#7f9587');R(c,x-30,y-11,59,2,'#c7c9ac');R(c,x+20,y-26,12,7,'#557f8b');R(c,x+22,y-24,2,11,'#9bb9b4');}
+ else if(k==='board'){for(const dx of [-20,17])R(c,x+dx,y-54,4,59,'#74573d');R(c,x-26,y-60,52,43,'#936d45');R(c,x-23,y-57,46,36,'#e1d3a9');for(let i=0;i<4;i++){R(c,x-17,y-50+i*7,23-i%2*7,2,'#6b7560');R(c,x+12,y-50+i*7,5,2,'#aa7052');}P(c,[[x-30,y-61],[x,y-68],[x+30,y-61]],'#607b75');R(c,x-28,y-61,56,4,'#799389');}
+ else if(k==='jars'){for(let i=0;i<3;i++){const xx=x-23+i*23,yy=y-i%2*8;A.jar(c,xx,yy,.65+i%2*.15);E(c,xx,yy-24-i%2*4,10,3,['#b56d52','#718b87','#c9b585'][i]);R(c,xx-6,yy-25-i%2*4,12,2,'#decaa0');}}
+ else if(k==='hayrack'){for(const dx of [-34,30])R(c,x+dx,y-31,4,37,'#886944');for(let i=0;i<24;i++)R(c,x-29+i*2.5,y-39+i%5*2,2,31,'#c4b36a');for(let i=0;i<3;i++)R(c,x-35,y-21+i*9,70,4,'#aa8753');R(c,x-35,y-21,70,1,'#d2b577');}
+ else if(k==='weather'){R(c,x-3,y-79,6,83,'#7e7149');for(let i=0;i<6;i++)R(c,x-3,y-70+i*12,6,2,'#b2b87b');const sway=Math.sin(t*(1+root.ZRZEnvironment.profile(s.day).wind/12)+x)*(2+root.ZRZEnvironment.profile(s.day).wind/6);R(c,x-17,y-70,35,3,'#d0bd85');P(c,[[x+1,y-73],[x+29,y-69+sway],[x+21,y-61+sway],[x+1,y-64]],'#af624c');R(c,x+2,y-71,10,2,'#dfad78');E(c,x,y-81,4,3,'#d1bd82');}
+ else if(k==='lamp'){R(c,x-6,y-7,12,11,'#7f8e7e');R(c,x-2,y-61,4,55,'#776245');R(c,x-9,y-57,18,20,'#75613d');R(c,x-7,y-55,14,16,night?'#e6bf70':'#c5b786');R(c,x-1,y-55,2,17,'#876e42');R(c,x-9,y-39,18,3,'#665d41');P(c,[[x-13,y-58],[x,y-66],[x+13,y-58]],'#5b7a71');R(c,x-11,y-58,22,2,'#94a38a');}
+ else if(k==='seedTray'){R(c,x-22,y-16,44,18,'#947344');R(c,x-20,y-15,40,12,'#635f3d');for(let i=0;i<6;i++){const xx=x-16+i%3*13,yy=y-11+Math.floor(i/3)*7;R(c,xx-4,yy,10,1,'#c1a56d');R(c,xx,yy-7,1,7,'#588345');R(c,xx-3,yy-6,3,2,pal.tip);R(c,xx+1,yy-8,4,2,pal.leaf);}}
+ else if(k==='scale'){R(c,x-23,y-6,46,9,'#a48752');R(c,x-1,y-28,3,24,'#80653e');R(c,x-22,y-27,44,2,'#bcaa71');for(const dx of [-18,18]){R(c,x+dx,y-24,1,12,'#777a60');E(c,x+dx,y-10,9,3,'#b7b58c');}R(c,x-13,y-8,5,4,'#63796e');}
+ else if(k==='netCoil'){for(let i=0;i<6;i++){E(c,x+i%2*3,y-3-i*2,20-i,4,'#a6aa7f');E(c,x+i%2*3,y-4-i*2,15-i,2,'#778a73');}R(c,x-8,y-14,3,15,'#c6bd81');}
+ else if(k==='bambooBundle'){for(let i=0;i<5;i++){R(c,x-22,y-5-i*4,43,3,i%2?'#8fa165':'#b7ba79');for(let j=0;j<4;j++)R(c,x-18+j*11,y-5-i*4,1,3,'#597953');}R(c,x-11,y-23,3,22,'#b99559');R(c,x+12,y-23,3,22,'#b99559');}
+ else if(k==='teaCrate'){R(c,x-21,y-20,42,23,'#997b47');R(c,x-18,y-19,36,10,'#527c48');for(let i=0;i<15;i++)R(c,x-17+r()*32,y-21+r()*10,3,2,pal.tip);for(let i=0;i<5;i++)R(c,x-20+i*9,y-11,3,13,'#c8ab70');R(c,x-22,y-5,44,3,'#b39357');}
+ else if(k==='haybale'){R(c,x-21,y-22,42,25,'#b8a75f');for(let i=0;i<14;i++)R(c,x-20+i*3,y-20+i%3,1,20,'#d6c67d');R(c,x-10,y-23,3,26,'#78815a');R(c,x+10,y-23,3,26,'#78815a');R(c,x-21,y-2,42,3,'#927d47');}
+ else if(k==='woodpile'){for(let row=0;row<3;row++)for(let i=0;i<3-row;i++){const xx=x-16+i*14+row*7,yy=y-row*7;R(c,xx-4,yy-7,16,6,'#806445');E(c,xx+10,yy-4,4,3,'#c8a66f');R(c,xx+9,yy-5,2,2,'#90764c');}R(c,x-10,y-24,2,24,'#667c58');}
+ else if(k==='basket'){E(c,x,y-5,12,8,'#9f814e');E(c,x,y-12,12,5,'#cfb379');E(c,x,y-13,9,3,'#806a43');for(let i=0;i<5;i++)R(c,x-9+i*4,y-9,1,8,'#dec18a');}
+ if(season===3&&!['grainMat','basket'].includes(k)){const h=T.assets[k].h;R(c,x-Math.min(25,T.assets[k].w/3),y-h+4,Math.min(50,T.assets[k].w*.66),3,'#e1e7d9');}
+}
+function drawGround(c,s,t,view){
+ if(s.village.interior)return;
+ for(const site of T.sites){if(site.x<view.x-160||site.x>view.x+view.viewWidth+160||site.y<view.y-120||site.y>view.y+view.viewHeight+120)continue;
+ const season=C.calendar(s).season,kind=T.biomes[site.region].material;
+ c.save();c.beginPath();for(let i=0;i<16;i++){const a=i*Math.PI/8,rx=80+T.hash(i,site.x)%17,ry=45+T.hash(i,site.y)%12,x=site.x+Math.round(Math.cos(a)*rx/3)*3,y=site.y+9+Math.round(Math.sin(a)*ry/3)*3;if(i)c.lineTo(x,y);else c.moveTo(x,y);}c.closePath();c.clip();
+ const region=root.ZRZVillage.offsets[site.region],roads=root.ZRZVillage.maps[site.region].paths.map(p=>({...p,x:p.x+region.x,y:p.y+region.y})).concat(root.ZRZVillage.corridors);
+ for(const road of roads)if(T.intersects({x:site.x-96,y:site.y-48,w:192,h:120},road)){c.beginPath();c.rect(site.x-100,site.y-70,200,150);c.rect(road.x,road.y,road.w,road.h);c.clip('evenodd');}
+ for(let y=site.y-48;y<site.y+72;y+=32)for(let x=site.x-96;x<site.x+96;x+=32)c.drawImage(groundTile(site.region,season,kind,T.hash(x,y)%4,0),x,y);
+ c.restore();
+ if(root.ZRZEnvironment.profile(s.day).rain){E(c,site.x+22,site.y+38,18,4,'#6e968066');R(c,site.x+13,site.y+37,19,1,'#d1ddbd99');}
+ // Worn footprints lead to the interaction space; they never define collision.
+ for(let i=0;i<5;i++){R(c,site.x-3+i%2*7,site.y+31+i*6,3,2,'#817b5755');}
+ }
+ for(const o of T.objects)if(T.assets[o.kind].layer==='ground'&&o.x>view.x-100&&o.x<view.x+view.viewWidth+100&&o.y>view.y-80&&o.y<view.y+view.viewHeight+80)prop(c,o,s,t);
+}
+function addObjects(c,s,t,objects,visible){if(s.village.interior)return;for(const o of T.objects)if(T.assets[o.kind].layer!=='ground'&&visible(o))objects.push({y:o.y,draw:()=>{const a=T.assets[o.kind],behind=Math.abs(s.player.x-o.x)<a.w/2+8&&s.player.y<o.y&&s.player.y>o.y-a.h;c.save();c.globalAlpha=behind?.45:1;prop(c,o,s,t);c.restore();}});}
+function drawLights(c,s,t,view){if(s.village.interior)return;const n=root.ZRZEnvironment.daylight(s.minutes,s.day).night;if(n<.12)return;for(const o of T.objects)if(o.kind==='lamp'&&o.x>view.x-80&&o.x<view.x+view.viewWidth+80&&o.y>view.y-80&&o.y<view.y+view.viewHeight+150){const g=c.createRadialGradient(o.x,o.y-45,2,o.x,o.y-35,60);g.addColorStop(0,'#ffdc9666');g.addColorStop(1,'#ffdc9600');c.fillStyle=g;c.fillRect(o.x-60,o.y-95,120,120);R(c,o.x-6,o.y-54,12,14,'#f2d797');}}
+Object.assign(T,{base,path,drawGround,addObjects,drawLights,prop,groundTile,stats:()=>({tiles:cache.size,limit:LIMIT,sites:T.sites.length,objects:T.objects.length})});
+})(typeof window!=='undefined'?window:globalThis);
+
 
 </script>
 <script>
@@ -2895,7 +3061,7 @@ F.draw=function(c,s,dt,point,tool,view){const r=F.runtime(s),prefs=F.ensure(s).p
   }
   function draw(canvas,s,t,hover,walking,effect,view){const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);c.save();c.translate(-view.x,-view.y);const indoor=!!s.village.interior,season=C.calendar(s).season,rt=V.stateRuntime(s),time=rt.clock;
     if(indoor){R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#253c37');if(!root.ZRZInteriors?.draw(c,s,time)&&!root.ZRZBuild?.drawRoom(c,s,time)&&!root.ZRZKitchen?.drawRoom(c,s,time)&&!root.ZRZRanch?.drawRoom(c,s,time))room(c,s,time);}else{R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#7c9d62');for(const r of V.regions){if(r.x>view.x+view.viewWidth||r.x+1920<view.x||r.y>view.y+view.viewHeight||r.y+1152<view.y)continue;c.drawImage(terrain(r,s),r.x,r.y);}
-      root.ZRZForage?.drawSouth(c,s,time,view);root.ZRZFishing?.draw(c,s,time);root.ZRZEnvironment?.drawGround(c,s,time,view);root.ZRZRanch?.drawGround(c,s,time);root.ZRZBuild?.drawGround(c,s);root.ZRZFarming?.drawCoverage(c,s);for(let i=0;i<72;i++){const p=V.plotPosition(i);if(Math.abs(p.x-s.player.x)<900&&Math.abs(p.y-s.player.y)<700)plot(c,s,i,time);}
+      root.ZRZForage?.drawSouth(c,s,time,view);root.ZRZFishing?.draw(c,s,time);root.ZRZTiles?.drawGround(c,s,time,view);root.ZRZEnvironment?.drawGround(c,s,time,view);root.ZRZRanch?.drawGround(c,s,time);root.ZRZBuild?.drawGround(c,s);root.ZRZFarming?.drawCoverage(c,s);for(let i=0;i<72;i++){const p=V.plotPosition(i);if(Math.abs(p.x-s.player.x)<900&&Math.abs(p.y-s.player.y)<700)plot(c,s,i,time);}
     }
     const visible=p=>p.x>view.x-300&&p.x<view.x+view.viewWidth+160&&p.y>view.y-50&&p.y<view.y+view.viewHeight+260,objects=[];
     if(!indoor){root.ZRZForage?.fences(c,s,objects,visible);for(const a of root.ZRZFarming?.ensure(s).facilities||[]){const p=V.plotPosition(a.anchor);if(visible(p))objects.push({y:p.y+14,draw:()=>root.ZRZFarming.drawFacility(c,s,a,time)});}for(const p of V.allProps.filter(p=>visible(p)&&!root.ZRZBuild?.hideProp(s,p))){const bottom=p.kind==='house'?p.y+p.h:p.y;objects.push({y:bottom,draw(){if(p.kind==='house')cast(c,p.x+p.w/2,bottom,p.w,100,s);const v=sprite(p,season),under=p.kind==='house'?s.player.x>p.x&&s.player.x<p.x+p.w&&s.player.y>p.y&&s.player.y<p.y+55:['tree','bamboo','willow','orchard','blossom'].includes(p.kind)&&Math.abs(s.player.x-p.x)<55&&s.player.y<p.y&&s.player.y>p.y-110;c.globalAlpha=under?.42:1;c.drawImage(v.canvas,p.x+v.dx,p.y+v.dy);c.globalAlpha=1;}});}
@@ -2913,10 +3079,10 @@ F.draw=function(c,s,dt,point,tool,view){const r=F.runtime(s),prefs=F.ensure(s).p
     }
     if(root.ZRZRanch){for(const a of s.animals){const p=root.ZRZRanch.point(s,a);if(p&&visible(p))objects.push({y:p.y,draw:()=>root.ZRZRanch.drawAnimal(c,a,p.x,p.y,time)});}const p=root.ZRZRanch.petPoint(s);if(!indoor&&visible(p))objects.push({y:p.y,draw:()=>root.ZRZRanch.drawPet(c,s,time)});}
     if(!indoor&&root.ZRZRanch)for(const b of Object.values(root.ZRZRanch.barns)){const h=V.houses.find(h=>h.id===b.house);if(visible(h))objects.push({y:h.y+h.h+.2,draw:()=>root.ZRZRanch.drawBarn(c,s,b,h,time)});}
-    root.ZRZInteriors?.addObjects(c,s,time,objects,furniture);root.ZRZBuild?.addObjects(c,s,time,objects,visible);root.ZRZEconomy?.addObjects(c,s,time,objects,visible);for(const n of D.npcs){const p=V.npcPoint(s,n);if(p&&visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,22,28,s);const a=rt.actors[n.id];A.character(c,p.x,p.y,n.color,time,a?.walking,false,p.direction||'down',{id:n.id,emotion:a?.emotionUntil>time?a.emotion:null});root.ZRZNpc?.draw?.(c,s,n,p,a,time);if(!root.ZRZNpc&&a?.phase==='work'&&!a.walking&&!indoor){R(c,p.x+12,p.y-11+Math.sin(time*3)*2,6,5,A.styles[n.id].accent);}}});}
+    root.ZRZTiles?.addObjects(c,s,time,objects,visible);root.ZRZInteriors?.addObjects(c,s,time,objects,furniture);root.ZRZBuild?.addObjects(c,s,time,objects,visible);root.ZRZEconomy?.addObjects(c,s,time,objects,visible);for(const n of D.npcs){const p=V.npcPoint(s,n);if(p&&visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,22,28,s);const a=rt.actors[n.id];A.character(c,p.x,p.y,n.color,time,a?.walking,false,p.direction||'down',{id:n.id,emotion:a?.emotionUntil>time?a.emotion:null});root.ZRZNpc?.draw?.(c,s,n,p,a,time);if(!root.ZRZNpc&&a?.phase==='work'&&!a.walking&&!indoor){R(c,p.x+12,p.y-11+Math.sin(time*3)*2,6,5,A.styles[n.id].accent);}}});}
     objects.push({y:s.player.y,draw:()=>actionPose(c,s,time,walking)});objects.sort((a,b)=>a.y-b.y).forEach(o=>o.draw());
     root.ZRZTools?.drawPreview(c,s,hover);if(hover){c.strokeStyle='#fff0b2';c.lineWidth=1.5;c.beginPath();c.ellipse(hover.x,hover.y+3,22,8,0,0,7);c.stroke();}fx(c,s);root.ZRZRanch?.drawAction(c,s,time);
-    if(!indoor)atmosphere(c,s,time,view);root.ZRZBuild?.drawLights(c,s,time);c.restore();
+    if(!indoor)atmosphere(c,s,time,view);root.ZRZBuild?.drawLights(c,s,time);root.ZRZTiles?.drawLights(c,s,time,view);c.restore();
   }
   function nativeLabel(c,x,y,text,color='#fff3d7',bg='#30483ee8',max=280){c.font='500 12px "Microsoft YaHei",sans-serif';c.textAlign='center';let lines=[],line='';for(const ch of text){if(c.measureText(line+ch).width>max){lines.push(line);line=ch;}else line+=ch;}if(line)lines.push(line);const w=Math.min(max,Math.max(...lines.map(l=>c.measureText(l).width)))+20,h=lines.length*20+10;c.fillStyle=bg;c.beginPath();c.roundRect(x-w/2,y-h,w,h,4);c.fill();c.fillStyle=color;lines.forEach((l,i)=>c.fillText(l,x,y-h+20+i*20));}
   function labels(canvas,s,view){const c=canvas.getContext('2d'),d=canvas.width/view.width;c.save();c.scale(d,d);const pos=(x,y)=>({x:(x-view.x)*view.scale,y:(y-view.y)*view.scale}),indoor=s.village.interior;
@@ -3770,7 +3936,7 @@ F.preference=(s,key,value)=>{const p=F.ensure(s).prefs,allowed={pace:['normal','
       html+='<div class="settings-row"><label>琴音与交互音</label>'+button(s.settings.sound?'已开启':'已关闭','sound','','secondary')+'</div><div class="settings-row"><label>音量</label><input id="volume-setting" type="range" min="0" max="1" step=".05" value="'+s.settings.volume+'" aria-label="音量"></div>';
       html+='<div class="settings-row"><label>生活提示<small>显示画面里的心愿便条与操作提示；H 可临时收起全部界面。</small></label>'+button(s.settings.hints?'已开启':'已关闭','toggle-hints','','secondary')+'</div>';
       html+='<div class="settings-row"><label>自定义按键<small>方向键、空格和 Esc 始终保留，也可以更换 8 个字母快捷键。</small></label>'+button('修改按键','controls','','secondary')+'</div>';
-      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.16.0 · 手边的事，有了回响<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
+      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.17.0 · 乡路有景，四时有声<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
     } else if(name==='controls'){
       html=head('把操作换成顺手的样子','点击一个按键，再按想使用的字母。重复按键会交换位置。Esc 取消修改。');
       html+='<div class="key-grid">'+Object.entries(bindingNames).map(([id,name])=>'<div class="key-row"><span>'+name+'</span>'+button(keyLabel(id),'bind-key',id,'key-button')+'</div>').join('')+'</div>';
@@ -3968,7 +4134,7 @@ F.preference=(s,key,value)=>{const p=F.ensure(s).prefs,allowed={pace:['normal','
     Feedback.draw(camera.buffer.getContext('2d'),s,currentPanel||document.hidden?0:dt,feedbackTarget,tool,camera.view);
     camera.paint();W.drawLabels?.($('world'),s,camera.view);diagnostics.renderMs=Math.round((performance.now()-renderStart)*100)/100;diagnostics.averageRenderMs=Math.round(((diagnostics.averageRenderMs||diagnostics.renderMs)*.95+diagnostics.renderMs*.05)*100)/100;
     drawJourney(dt);
-    const near=feedbackTarget,info=near&&Feedback.describe(s,near,tool),prompt=$('interaction-prompt');prompt.hidden=false;prompt.classList.toggle('visible',!!near);prompt.setAttribute('aria-hidden',String(!near));if(near){const point=camera.toScreen(s.player.x,s.player.y-43);prompt.style.left=Math.max(125,Math.min(camera.view.width-125,point.x))+'px';prompt.style.top=Math.max(110,Math.min(camera.view.height-145,point.y))+'px';prompt.classList.toggle('unavailable',!info.ready);prompt.innerHTML='<kbd>'+(inputMode==='pad'?'A':inputMode==='touch'?'点按':keyLabel('interact'))+'</kbd><strong>'+escape(info.verb+' · '+info.name)+'</strong><small>'+escape(info.reason||info.state)+(info.detail?'<br>'+escape(info.detail):'')+'</small>';}
+    const near=feedbackTarget,info=near&&Feedback.describe(s,near,tool),prompt=$('interaction-prompt');prompt.hidden=false;prompt.classList.toggle('visible',!!near);prompt.setAttribute('aria-hidden',String(!near));if(near){const point=camera.toScreen(near.scenery?near.x:s.player.x,near.scenery?near.top-10:s.player.y-43);prompt.style.left=Math.max(125,Math.min(camera.view.width-125,point.x))+'px';prompt.style.top=Math.max(110,Math.min(camera.view.height-145,point.y))+'px';prompt.classList.toggle('unavailable',!info.ready);prompt.innerHTML='<kbd>'+(inputMode==='pad'?'A':inputMode==='touch'?'点按':keyLabel('interact'))+'</kbd><strong>'+escape(info.verb+' · '+info.name)+'</strong><small>'+escape(info.reason||info.state)+(info.detail?'<br>'+escape(info.detail):'')+'</small>';}
 
     updateContext(near);
     requestAnimationFrame(frame);

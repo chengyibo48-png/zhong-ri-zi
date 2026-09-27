@@ -17,6 +17,7 @@ for(const a of s.animals){const p=R.point(s,a),h=V.houses.find(h=>h.id===a.posit
 for(const p of V.points(out,true).filter(p=>p.kind==='gather'&&(root.ZRZForage?root.ZRZForage.known(s,p.id)&&root.ZRZForage.status(s,p).ready:s.collected[p.id]!==s.day)))rows.push({...p,id:'resource-'+p.id,kind:'walk',type:'resources',region:V.regionAt(p.x,p.y).id,detail:root.ZRZForage?root.ZRZForage.describe(s,p):'今日尚未采集 · 到达后动手'});
 for(const p of root.ZRZFishing?.spots||[])rows.push({...p,type:'services',kind:'walk',region:V.regionAt(p.x,p.y).id,detail:root.ZRZFishing.waters[p.water].tip});
 for(const p of a.pins)rows.push({...p,name:p.label,kind:'walk',type:'pins',region:V.regionAt(p.x,p.y).id,detail:'自己记下的地点'});
+for(const p of root.ZRZTiles?.points(out)||[])rows.push({...p,type:"services",kind:"walk",detail:p.story});
 return rows;
 }
 function resolve(s,t){if(!t)return null;return targets(s).find(p=>p.id===t.id)||(!t.id&&Number.isFinite(t.x)&&Number.isFinite(t.y)?{...t,kind:'walk',name:t.name||'地图落点'}:null);}

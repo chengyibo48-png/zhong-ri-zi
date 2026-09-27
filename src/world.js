@@ -91,10 +91,10 @@
   function plotAt(x,y){const col=Math.floor((x-771)/42),row=Math.floor((y-559)/36);return col>=0&&col<6&&row>=0&&row<4&&x<771+col*42+38&&y<559+row*36+31?row*6+col:-1;}
   function hit(s,x,y){if(s.scene==='farm'){const index=plotAt(x,y);if(index>=0)return {id:'plot-'+index,kind:'plot',index,...plotPosition(index),name:'菜地'};}return points(s).filter(p=>Math.abs(x-p.x)<25&&y>p.y-36&&y<p.y+16).sort((a,b)=>Math.hypot(x-a.x,y-a.y)-Math.hypot(x-b.x,y-b.y))[0]||null;}
   function terrain(c,s){
-    const season=C.calendar(s).season,P=A.seasons[season],m=L.maps[s.scene],r=A.rand(929+season);A.R(c,0,0,W,H,P.grass);
-    for(let i=0;i<7500;i++){const x=r()*W,y=r()*H;A.R(c,x,y,r()>.7?4:1,1,i%3?P.light:P.dark);}
+    const season=C.calendar(s).season,P=A.seasons[season],m=L.maps[s.scene],r=A.rand(929+season);if(root.ZRZTiles?.base)root.ZRZTiles.base(c,s);else A.R(c,0,0,W,H,P.grass);
+    for(let i=0;i<(root.ZRZTiles?0:7500);i++){const x=r()*W,y=r()*H;A.R(c,x,y,r()>.7?4:1,1,i%3?P.light:P.dark);}
     // Quiet clusters and low edges leave the paths visually readable.
-    for(const p of m.paths){A.R(c,p.x-3,p.y-3,p.w+6,p.h+6,'#798751');A.R(c,p.x,p.y,p.w,p.h,p.kind==='wood'?'#90724b':p.kind==='earth'?P.earth:'#a8b5a1');
+    for(const p of m.paths){if(root.ZRZTiles?.path?.(c,p,season))continue;A.R(c,p.x-3,p.y-3,p.w+6,p.h+6,'#798751');A.R(c,p.x,p.y,p.w,p.h,p.kind==='wood'?'#90724b':p.kind==='earth'?P.earth:'#a8b5a1');
       if(p.kind==='wood'){for(let y=p.y+2;y<p.y+p.h;y+=9){A.R(c,p.x+2,y,p.w-4,7,'#c4a26c');A.R(c,p.x+5,y+1,p.w-10,1,'#e0c18a');}}
       else if(p.kind==='stone'){for(let y=p.y+2;y<p.y+p.h-4;y+=13)for(let x=p.x+2;x<p.x+p.w-5;x+=23){const ww=Math.min(20,p.x+p.w-x-2),hh=Math.min(11,p.y+p.h-y-1);A.R(c,x+(Math.floor(y/13)%2)*2,y,ww,hh,['#bdc3aa','#c5c8b0','#adb9a4'][Math.floor(r()*3)]);A.R(c,x+2,y+1,Math.max(2,ww-4),1,'#d6d5bd');}}
       else for(let i=0;i<p.w*p.h/110;i++)A.R(c,p.x+r()*p.w,p.y+r()*p.h,2,1,'#a8956b');

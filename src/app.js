@@ -255,7 +255,7 @@
       html+='<div class="settings-row"><label>琴音与交互音</label>'+button(s.settings.sound?'已开启':'已关闭','sound','','secondary')+'</div><div class="settings-row"><label>音量</label><input id="volume-setting" type="range" min="0" max="1" step=".05" value="'+s.settings.volume+'" aria-label="音量"></div>';
       html+='<div class="settings-row"><label>生活提示<small>显示画面里的心愿便条与操作提示；H 可临时收起全部界面。</small></label>'+button(s.settings.hints?'已开启':'已关闭','toggle-hints','','secondary')+'</div>';
       html+='<div class="settings-row"><label>自定义按键<small>方向键、空格和 Esc 始终保留，也可以更换 8 个字母快捷键。</small></label>'+button('修改按键','controls','','secondary')+'</div>';
-      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.16.0 · 手边的事，有了回响<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
+      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.17.0 · 乡路有景，四时有声<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
     } else if(name==='controls'){
       html=head('把操作换成顺手的样子','点击一个按键，再按想使用的字母。重复按键会交换位置。Esc 取消修改。');
       html+='<div class="key-grid">'+Object.entries(bindingNames).map(([id,name])=>'<div class="key-row"><span>'+name+'</span>'+button(keyLabel(id),'bind-key',id,'key-button')+'</div>').join('')+'</div>';
@@ -453,7 +453,7 @@
     Feedback.draw(camera.buffer.getContext('2d'),s,currentPanel||document.hidden?0:dt,feedbackTarget,tool,camera.view);
     camera.paint();W.drawLabels?.($('world'),s,camera.view);diagnostics.renderMs=Math.round((performance.now()-renderStart)*100)/100;diagnostics.averageRenderMs=Math.round(((diagnostics.averageRenderMs||diagnostics.renderMs)*.95+diagnostics.renderMs*.05)*100)/100;
     drawJourney(dt);
-    const near=feedbackTarget,info=near&&Feedback.describe(s,near,tool),prompt=$('interaction-prompt');prompt.hidden=false;prompt.classList.toggle('visible',!!near);prompt.setAttribute('aria-hidden',String(!near));if(near){const point=camera.toScreen(s.player.x,s.player.y-43);prompt.style.left=Math.max(125,Math.min(camera.view.width-125,point.x))+'px';prompt.style.top=Math.max(110,Math.min(camera.view.height-145,point.y))+'px';prompt.classList.toggle('unavailable',!info.ready);prompt.innerHTML='<kbd>'+(inputMode==='pad'?'A':inputMode==='touch'?'点按':keyLabel('interact'))+'</kbd><strong>'+escape(info.verb+' · '+info.name)+'</strong><small>'+escape(info.reason||info.state)+(info.detail?'<br>'+escape(info.detail):'')+'</small>';}
+    const near=feedbackTarget,info=near&&Feedback.describe(s,near,tool),prompt=$('interaction-prompt');prompt.hidden=false;prompt.classList.toggle('visible',!!near);prompt.setAttribute('aria-hidden',String(!near));if(near){const point=camera.toScreen(near.scenery?near.x:s.player.x,near.scenery?near.top-10:s.player.y-43);prompt.style.left=Math.max(125,Math.min(camera.view.width-125,point.x))+'px';prompt.style.top=Math.max(110,Math.min(camera.view.height-145,point.y))+'px';prompt.classList.toggle('unavailable',!info.ready);prompt.innerHTML='<kbd>'+(inputMode==='pad'?'A':inputMode==='touch'?'点按':keyLabel('interact'))+'</kbd><strong>'+escape(info.verb+' · '+info.name)+'</strong><small>'+escape(info.reason||info.state)+(info.detail?'<br>'+escape(info.detail):'')+'</small>';}
 
     updateContext(near);
     requestAnimationFrame(frame);
