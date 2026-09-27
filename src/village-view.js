@@ -3,18 +3,18 @@
   const V=root.ZRZVillage,W=root.ZRZWorld,A=root.ZRZArt,C=root.ZRZCore,D=root.ZRZData,L=root.ZRZLandscape;
   const R=A.R,E=A.ellipse,P=A.poly;
   const terrainCache=new Map(),spriteCache=new Map(),miniCache=new Map(),portraitCache=new Map();
-  function terrain(r,s){const season=C.calendar(s).season,key=r.id+'/'+season;let c=terrainCache.get(key);if(c)return c;c=document.createElement('canvas');c.width=1920;c.height=1152;const q=c.getContext('2d');
+  function terrain(r,s){const season=C.calendar(s).season,key=r.id+'/'+season;let c=terrainCache.get(key);if(c){terrainCache.delete(key);terrainCache.set(key,c);return c;}c=document.createElement('canvas');c.width=1920;c.height=1152;const q=c.getContext('2d');
     const original=L.maps[r.id];L.maps[r.id]=V.maps[r.id];W.terrain(q,{...s,scene:r.id});if(original)L.maps[r.id]=original;else delete L.maps[r.id];
     const tint={mountain:'#596e7140',town:'#b9a17c13',river:'#75b6ad16',bamboo:'#164f4529',farm:'#f3d47108',pasture:'#ddd78415'}[r.id];R(q,0,0,1920,1152,tint);
     // Region boundaries are continuous roads, never travel triggers.
     for(const road of V.corridors){const x=road.x-r.x,y=road.y-r.y;if(x>1920||y>1152||x+road.w<0||y+road.h<0)continue;R(q,x-3,y-3,road.w+6,road.h+6,'#798266');R(q,x,y,road.w,road.h,'#b8b39a');q.save();q.beginPath();q.rect(x,y,road.w,road.h);q.clip();for(let yy=Math.max(0,y);yy<Math.min(1152,y+road.h);yy+=15)for(let xx=Math.max(0,x);xx<Math.min(1920,x+road.w);xx+=28){R(q,xx+1,yy+1,24,11,'#c9c6ad');R(q,xx+3,yy+1,19,1,'#e1ddbf');}q.restore();}
     for(const water of V.maps[r.id].water)for(const road of V.corridors){const rx=road.x-r.x,ry=road.y-r.y,x=Math.max(rx,water.x-12),y=Math.max(ry,water.y-12),ww=Math.min(rx+road.w,water.x+water.w+12)-x,hh=Math.min(ry+road.h,water.y+water.h+12)-y;if(ww<=0||hh<=0)continue;R(q,x,y,ww,hh,'#6c583c');for(let yy=y+2;yy<y+hh;yy+=8)R(q,x+2,yy,ww-4,6,'#c2a271');}
     for(const h of V.houses.filter(h=>h.region===r.id&&h.owner)){const x=h.x-r.x,y=h.y-r.y;R(q,x-15,y+h.h+8,h.w+30,50,'#bbb497');for(let i=0;i<7;i++)R(q,x-10+i*26,y+h.h+10,23,19,'#ccc5a5');}
-    terrainCache.set(key,c);return c;
+    terrainCache.set(key,c);while(terrainCache.size>4)terrainCache.delete(terrainCache.keys().next().value);return c;
   }
   function sprite(p,season){const key=JSON.stringify(p)+'/'+season;if(spriteCache.has(key))return spriteCache.get(key);const c=document.createElement('canvas'),h=p.kind==='house';c.width=Math.max(320,(p.w||0)+100);c.height=Math.max(260,(p.h||0)+130);const q=c.getContext('2d'),x=h?40:110,y=h?40:190;q.imageSmoothingEnabled=false;A.prop(q,{...p,x,y,name:p.kind==='house'?'':p.name},season);
     if(h&&p.owner){const col=V.themes[p.theme][0];R(q,x+22,y+p.h-56,28,4,col);R(q,x+22,y+p.h-28,28,3,col);A.jar(q,x+p.w+13,y+p.h,.7);}
-    const v={canvas:c,dx:-x,dy:-y};spriteCache.set(key,v);return v;
+    const v={canvas:c,dx:-x,dy:-y};spriteCache.set(key,v);while(spriteCache.size>300)spriteCache.delete(spriteCache.keys().next().value);return v;
   }
   function daylight(minutes){if(minutes<420)return {night:.19,warm:.16,sun:-1};if(minutes<510)return {night:Math.max(0,(480-minutes)/500),warm:(510-minutes)/430,sun:-.7};if(minutes<990)return {night:0,warm:0,sun:(minutes-750)/400};if(minutes<1140)return {night:(minutes-990)/800,warm:Math.sin((minutes-990)/150*Math.PI)*.24,sun:1.1};return {night:Math.min(.63,.2+(minutes-1140)/320),warm:0,sun:1.2};}
   function cast(c,x,y,w,h,s){const light=daylight(s.minutes);c.save();c.globalAlpha=.16+(light.night?.03:0);P(c,[[x-w/2,y],[x+w/2,y],[x+w/2+light.sun*h*.8,y+h*.36],[x-w/2+light.sun*h*.8,y+h*.36]],'#203b38');c.restore();}
@@ -147,5 +147,5 @@
     if(root.ZRZRanch){for(const a of s.animals.filter(a=>a.lost)){c.fillStyle='#a14c30';c.beginPath();c.arc(a.position.x*k,a.position.y*k,5,0,7);c.fill();c.fillStyle='#fff1ca';c.font='bold 10px sans-serif';c.fillText('!',a.position.x*k-2,a.position.y*k+3);}}
     const p=s.village.interior?s.village.returnPoint:s.player;c.fillStyle='#d24c36';c.beginPath();c.arc(p.x*k,p.y*k,6,0,7);c.fill();c.strokeStyle='#fff6d8';c.lineWidth=2;c.stroke();
   }
-  root.ZRZWorld={...W,draw,drawLabels:labels,mapView};root.ZRZVillageView={daylight};
+  root.ZRZWorld={...W,draw,drawLabels:labels,mapView};root.ZRZVillageView={daylight,cacheStats:()=>({terrain:terrainCache.size,sprites:spriteCache.size,terrainLimit:4,spriteLimit:300})};
 })(window);

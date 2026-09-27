@@ -43,6 +43,24 @@
   let queuedDestination=null, chaseAt=0, farmQueue=[],farmNextAt=0,farmCompleted=0;
   const F=window.ZRZFarming,R=window.ZRZRanch;
   let kitchenTask=null,buildTask=null;
+  const S=window.ZRZScenes,Actions=window.ZRZActions,sequence=new Actions.Sequence();
+  let replayUI=false,miniAt=0,sceneFade=0;
+  function startAction(spec,point,commit,cancel=()=>{}){
+    if(inputLocked||sequence.active)return false;
+    const identity=s,room=s.village.interior;keys.clear();walking=false;
+    const dx=point.x-s.player.x,dy=point.y-s.player.y;
+    if(Math.hypot(dx,dy)>1)s.player.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';
+    inputLocked=true;V.feedback(s,point,spec.kind,'',spec.duration);sound('soft');
+    sequence.start({...spec,x:point.x,y:point.y},()=>{
+      inputLocked=false;
+      if(s!==identity||s.village.interior!==room){cancel();return;}
+      try{commit();if(spec.door)sceneFade=.3;}catch(err){diagnostics.errors.push(String(err));toast('这次操作未能完成，请重试。',true);}
+      finally{inputLocked=false;}
+    },()=>{inputLocked=false;V.stateRuntime(s).action=null;V.stateRuntime(s).fx=[];cancel();});
+    return true;
+  }
+  function cancelAction(){if(!sequence.cancel())return;path=[];pending=null;queuedDestination=null;farmQueue=[];ranchQueue=[];kitchenTask=null;buildTask=null;keys.clear();toast('已停下手边的动作，未结算这次操作。');}
+
   const K=window.ZRZKitchen,B=window.ZRZBuild,T=window.ZRZTools;
   let ranchQueue=[],ranchNextAt=0,ranchCompleted=0;
   function queueFarm(tasks){closePanel();ranchQueue=[];kitchenTask=null;buildTask=null;farmQueue=tasks.slice();farmCompleted=0;advanceFarm();}
@@ -276,8 +294,9 @@
   function toggleHud(){hudVisible=!hudVisible;$('game-root').classList.toggle('hud-hidden',!hudVisible);$('hud-restore').hidden=hudVisible;}
   async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if($('game-root').requestFullscreen)await $('game-root').requestFullscreen();else throw new Error('unsupported');}catch(_){toast('画面已铺满当前窗口。此浏览器不支持原生全屏，可以用 Edge 或 Chrome 打开。',true);}camera.update(s,0,true);update();}
   let lastDialogue='';
-  function interact(p){
+  function interact(p,performed=false){
     if(!p||currentPanel||inputLocked)return;
+    if(!performed){const spec=Actions.point(p,tool);if(spec){startAction(spec,p,()=>interact(p,true));return;}}
     if(p.kind==='build-task'){const r=B.perform(s,p);if(r.ok)V.feedback(s,p,p.op?.startsWith('economy-')?'harvest':'hoe',r.msg,1.7);apply(r);return;}
     if(p.kind==='build-piece'){if(p.service==='water'){const r=F.fillWater(s);V.feedback(s,p,'water',r.msg,1.5);apply(r);}else if(p.service==='rest'){V.feedback(s,p,'steam','在自己的小院里歇一歇。',1.5);apply(C.rest(s));}else if(p.service)openPanel(p.service);else{V.feedback(s,p,'spark','这处小景，是你亲手安置的。',1.5);sound('soft');}return;}
     if(p.kind==='kitchen-station'){if(['stove','steam'].includes(p.station))openPanel('cook',{tab:'recipes'});else openPanel('processing',{station:p.station});return;}
@@ -297,7 +316,7 @@
     if(p.kind==='animal'){const a=s.animals.find(a=>a.id===p.id);if(!a)return;queueRanch([{animalId:a.id,action:a.ready||a.feathers?'collect':a.hunger<90&&a.care.feed!==s.day?'feed':'pet',arg:s.ranch.feed}]);return;}
     if(p.kind==='gather'){const r=C.gather(s,p.id,p.item);if(r.ok)V.feedback(s,p,'gather',r.msg,1.2,p.item);apply(r);return;}
     if(p.kind==='rest'){const r=C.rest(s);V.feedback(s,p,'steam','坐一坐，看看眼前的日子。',2);apply(r);return;}
-    if(p.kind==='fish'){if(s.stamina<2){toast('先休息或吃点东西。',true);return;}path=[];pending=null;inputLocked=true;V.feedback(s,p,'fish','抛竿——等鱼漂轻轻动一动。',2.2);sound('soft');fishTimer=setTimeout(()=>{fishTimer=null;inputLocked=false;const before={...s.bag},r=C.fish(s),caught=Object.keys(s.bag).find(id=>s.bag[id]>(before[id]||0));V.feedback(s,p,r.ok?'harvest':'steam',r.msg,1.4,caught);apply(r);},1800);return;}
+    if(p.kind==='fish'){const before={...s.bag},r=C.fish(s),caught=Object.keys(s.bag).find(id=>s.bag[id]>(before[id]||0));if(r.ok)V.feedback(s,p,'harvest',r.msg,.8,caught);apply(r);return;}
     if(p.kind==='pet'){const r=C.pet(s);V.feedback(s,p,'pet',r.msg,1.2);apply(r);return;}
     if(p.kind==='story')openPanel('stories');else openPanel(p.kind);
   }
@@ -306,7 +325,7 @@
     if(!s.village.interior){const index=W.plotAt(p.x,p.y+9);if(index>=0)pts.push({kind:'plot',index,...W.plotPosition(index),name:'照料菜地'});for(let i=0;i<s.plots.length;i++)pts.push({kind:'plot',index:i,...W.plotPosition(i),name:'照料菜地'});}
     const sorted=pts.map(v=>({...v,dist:Math.hypot(v.x-p.x,v.y-p.y)})).filter(v=>v.dist<49).sort((a,b)=>a.dist-b.dist);
     if(hovered&&Math.hypot(hovered.x-p.x,hovered.y-p.y)<53)return hovered;
-    return sorted[0];
+    return S.nearest(s,pts,hovered);
   }
   function setTool(id){tool=id;T.equipped=id;update();sound();if(id==='build')openPanel('decor');}
   document.addEventListener('click',e=>{
@@ -314,7 +333,7 @@
     if(a==='v-walk-activity'){navigate(V.outdoorActions.find(p=>p.id===id));return;}
     if(a==='v-walk-region'){navigate(V.destination(s,'region',id));return;}if(a==='v-walk-house'){navigate(V.destination(s,'house',id));return;}if(a==='v-npc-talk'){lastDialogue=C.talk(s,id).msg;openPanel('npc',id);return;}if(a==='v-npc-gift'){openPanel('gifts',id);return;}if(a==='v-bike'){if(s.village.interior){toast('先走出小屋再骑车。');return;}s.village.riding=!s.village.riding;update();return;}if(a==='v-stop'){path=[];pending=null;queuedDestination=null;farmQueue=[];ranchQueue=[];kitchenTask=null;buildTask=null;return;}
     if(window.ZRZ_DEV&&a==='debug'){openPanel('debug');return;}
-    if(X.dispatch(a,id,b.dataset,{s,apply,open:openPanel,render:()=>renderPanel(currentPanel,panelArg),save,update,toast,close:closePanel,queueFarm,queueRanch,queueKitchen,queueBuild,equipTool:setTool,equipSeed:()=>setTool('seed')}))return;
+    if(X.dispatch(a,id,b.dataset,{s,apply,open:openPanel,render:()=>renderPanel(currentPanel,panelArg),save,update,toast,close:closePanel,queueFarm,queueRanch,queueKitchen,queueBuild,navigate,equipTool:setTool,equipSeed:()=>setTool('seed')}))return;
     if(a==='walk-landmark'){const point=W.points(s).find(p=>p.id===id);closePanel();if(point)walkTo(point);return;}
     if(['menu','controls','bag','shop','recipes','relations','orders','build','journal','settings','save','help','seeds','map','project','sleep'].includes(a)){openPanel(a);return;}
     if(a==='calendar'){calSeason=C.calendar(s).season;openPanel(a);return;}
@@ -363,7 +382,7 @@
   document.addEventListener('keydown',e=>{
     if(capturing){e.preventDefault();if(e.key==='Escape'){capturing=null;renderPanel('controls');return;}const key=e.key.toLowerCase();if(!C.bindingKeyAllowed(key)){toast('请选择字母键；C、F、H、Q 是固定功能键。',true);return;}const old=s.settings.bindings[capturing],other=Object.keys(s.settings.bindings).find(k=>s.settings.bindings[k]===key);if(other)s.settings.bindings[other]=old;s.settings.bindings[capturing]=key;capturing=null;save();update();renderPanel('controls');toast('按键已经换好了，下次打开也会记住。');return;}
     if(e.key==='Tab'&&currentPanel){const focusable=[...$('modal').querySelectorAll('button:not([disabled]):not([hidden]),input,select')].filter(el=>el.offsetParent!==null);if(!focusable.length)return;const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}return;}
-    if(e.key==='Escape'){e.preventDefault();currentPanel?closePanel():openPanel('menu');return;}
+    if(e.key==='Escape'){e.preventDefault();if(sequence.active){cancelAction();return;}currentPanel?closePanel():openPanel('menu');return;}
     if(currentPanel||inputLocked||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;
     if(e.ctrlKey||e.metaKey||e.altKey)return;
     const key=e.key.toLowerCase(),bindings=s.settings.bindings;
@@ -410,12 +429,15 @@
   function frame(now){diagnostics.frames++;pollGamepad(now);const dt=Math.min(.05,(now-(lastTime||now))/1000);lastTime=now;frameTime=now/1000;
     if(!currentPanel&&!document.hidden&&V.update(s,dt)){diagnostics.sceneChanges++;update();}
     if(!currentPanel&&!document.hidden&&!inputLocked){walking=move(dt);s.minutes=Math.min(1320,s.minutes+dt*(s.settings.speed==='normal'?1.55:1.04));tick+=dt;if(tick>1){tick=0;update();if(s.minutes>=1320)openPanel('sleep');}ambient(frameTime);}else walking=false;
+    sequence.tick(dt,document.hidden);sceneFade=Math.max(0,sceneFade-dt);
     camera.update(s,dt);
     if(pointer&&!currentPanel){const point=camera.toWorld(pointer.x,pointer.y);hovered=W.hit(s,point.x,point.y);hoverInfo();positionHover();}
     const renderStart=performance.now();T.equipped=tool;W.draw(camera.buffer,s,frameTime,hovered,walking,effect,camera.view);
+    const animation=sequence.snapshot();if(animation){const c=camera.buffer.getContext('2d');c.save();c.translate(-camera.view.x,-camera.view.y);Actions.draw(c,s,animation,frameTime);c.restore();}
     if(path.length){const c=camera.buffer.getContext('2d');c.save();c.translate(-camera.view.x,-camera.view.y);c.fillStyle='#fff3b8a0';path.forEach((p,i)=>{if(i%2===0)c.fillRect(Math.round(p.x)-1,Math.round(p.y)-1,2,2);});const dest=path[path.length-1],radius=7+Math.sin(frameTime*5)*2;c.strokeStyle='#fff0ab';c.lineWidth=1.5;c.beginPath();c.ellipse(dest.x,dest.y,radius,radius*.5,0,0,Math.PI*2);c.stroke();c.restore();}
     camera.paint();W.drawLabels?.($('world'),s,camera.view);diagnostics.renderMs=Math.round((performance.now()-renderStart)*100)/100;diagnostics.averageRenderMs=Math.round(((diagnostics.averageRenderMs||diagnostics.renderMs)*.95+diagnostics.renderMs*.05)*100)/100;
-    const near=!currentPanel?nearest():null;$('interaction-prompt').hidden=!near;if(near){let label=near.name;if(near.kind==='plot'){const p=s.plots[near.index];label=p.crop&&p.growth>=D.crops[p.crop].days?'成熟了 · 用双手收获':tools.find(v=>v.id===tool).desc+' · '+(p.crop?D.crops[p.crop].name:'菜地');}const point=camera.toScreen(s.player.x,s.player.y-43);$('interaction-prompt').style.left=Math.max(110,Math.min(camera.view.width-110,point.x))+'px';$('interaction-prompt').style.top=Math.max(60,Math.min(camera.view.height-145,point.y))+'px';$('interaction-prompt').innerHTML='<kbd>'+keyLabel('interact')+'</kbd>'+escape(label);}
+    drawJourney(dt);
+    const near=!currentPanel&&!inputLocked?nearest():null;$('interaction-prompt').hidden=!near;if(near){let label=near.name;if(near.kind==='plot'){const p=s.plots[near.index];label=p.crop&&p.growth>=D.crops[p.crop].days?'成熟了 · 用双手收获':tools.find(v=>v.id===tool).desc+' · '+(p.crop?D.crops[p.crop].name:'菜地');}const point=camera.toScreen(s.player.x,s.player.y-43);$('interaction-prompt').style.left=Math.max(110,Math.min(camera.view.width-110,point.x))+'px';$('interaction-prompt').style.top=Math.max(60,Math.min(camera.view.height-145,point.y))+'px';$('interaction-prompt').innerHTML='<kbd>'+keyLabel('interact')+'</kbd>'+escape(label);}
     updateContext(near);
     requestAnimationFrame(frame);
   }
@@ -423,13 +445,30 @@
   function updateContext(near){const key=(currentPanel?'menu':near?.kind+'/'+(near?.id??near?.index))+'/'+s.village.riding+'/'+!!path.length;if(key!==contextKey){contextKey=key;contextual.hidden=!!currentPanel;let html='';if(near?.kind==='plot')html=button('查看这块田','f-inspect',String(near.index),'context-btn')+button('四时农事','farmcare','','context-btn');else if(near?.kind==='animal')html=button('看看这位伙伴','r-open',near.id,'context-btn')+button('喂一份','r-task',near.id,'context-btn','data-op="feed"')+button('摸摸它','r-task',near.id,'context-btn','data-op="pet"');else if(near?.kind==='npc')html=button('继续聊聊','v-npc-talk',near.id,'context-btn')+button('送份心意','v-npc-gift',near.id,'context-btn')+button('去他家看看','v-walk-house',V.homeOf(near.id).id,'context-btn');else if(!s.village.interior)html=button(s.village.riding?'下车慢慢走':'骑自行车','v-bike','','context-btn');if(path.length)html+='<span id="walk-progress"></span>'+button('停止带路','v-stop','','context-btn');contextual.innerHTML=html;}
     if(path.length){let dist=0,last=s.player;for(const p of path){dist+=Math.hypot(p.x-last.x,p.y-last.y);last=p;}const el=$('walk-progress');if(el)el.textContent=(queuedDestination?'先出门':pending?.name||'前往标记')+' · 约 '+Math.max(1,Math.ceil(dist/(s.village.riding?355:195)))+' 秒';}
   }
-  document.addEventListener('click',e=>{if(e.target.id!=='area-map')return;const r=e.target.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*V.WIDTH,y=(e.clientY-r.top)/r.height*V.HEIGHT,h=V.houses.find(h=>Math.hypot(h.door.x-x,h.door.y-y)<90);navigate(h?V.destination(s,'house',h.id):{kind:'walk',name:'地图标记',...V.safePosition({village:{}},{x,y})});});
+  const journey=document.createElement('div');journey.id='journey-hud';journey.innerHTML='<button id="mini-toggle" data-action="map" aria-label="打开行路地图"><canvas id="mini-map" width="264" height="106"></canvas><span id="mini-title"></span></button><div id="route-compass" hidden></div>';document.getElementById('game-hud').appendChild(journey);
+  const actionHud=document.createElement('div');actionHud.id='action-progress';actionHud.hidden=true;actionHud.innerHTML='<span id="action-label"></span><div id="action-meter" role="progressbar" aria-label="动作进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="action-fill"></i></div><small id="action-phase"></small><button id="action-cancel" aria-label="取消当前动作">停下 · Esc</button>';document.getElementById('game-root').appendChild(actionHud);
+  const fade=document.createElement('div');fade.id='door-fade';fade.hidden=true;document.getElementById('game-root').appendChild(fade);
+  $('action-cancel').addEventListener('click',cancelAction);
+  function drawJourney(dt){const a=sequence.snapshot();actionHud.hidden=!a;if(a){$('action-label').textContent=a.label;$('action-fill').style.width=(a.progress*100)+'%';$('action-meter').setAttribute('aria-valuenow',Math.round(a.progress*100));$('action-phase').textContent=a.phase+' · 完成后结算';}
+    const darkness=a?.door?Math.max(0,(a.progress-.6)/.4)*.7:a?.kind==='sleep'?Math.sin(a.progress*Math.PI)*.6:sceneFade/ .3*.7;fade.hidden=!darkness;fade.style.opacity=darkness||0;
+    journey.hidden=!!currentPanel||!S.ensure(s).minimap;miniAt-=dt;if(miniAt<=0&&!journey.hidden){miniAt=.3;const target=S.resolve(s,s.atlas.tracking);S.drawMap($('mini-map').getContext('2d'),s,{mini:true,path:s.village.interior?[]:path,selected:target,view:camera.view});$('mini-title').textContent=S.scope(s).name+(s.village.interior?' · 屋内':' · 点开地图');}
+    const target=path.length?path[path.length-1]:S.resolve(s,s.atlas.tracking),indicator=$('route-compass');indicator.hidden=!target||!!s.village.interior;if(target){const dx=target.x-s.player.x,dy=target.y-s.player.y;indicator.textContent=(Math.abs(dx)>Math.abs(dy)?dx>0?'向东 →':'← 向西':dy>0?'向南 ↓':'向北 ↑')+' · '+(pending?.name||target.name||'地图目标')+(path.length?' · 行进中':' · 地图可继续带路');}
+  }
+  document.addEventListener('click',e=>{if(e.target.id!=='area-map'||inputLocked)return;const r=e.target.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*V.WIDTH,y=(e.clientY-r.top)/r.height*V.HEIGHT;S.pick(s,S.clickPoint(s,x,y,s.atlas.layer));renderPanel('map');});
+  // Hide the panel without discarding its form values, show the world action, then dispatch once.
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled||replayUI)return;if(inputLocked){e.stopImmediatePropagation();e.preventDefault();return;}const spec=Actions.ui(b.dataset.action,b.textContent.trim());if(!spec)return;
+    e.stopImmediatePropagation();e.preventDefault();const prior=currentPanel,arg=panelArg,scroll=$('modal-body').scrollTop;
+    if(b.dataset.action==='k-finish')b.dataset.actionHeat=parseFloat($('k-needle')?.style.left)||0;
+    closePanel();path=[];pending=null;queuedDestination=null;farmQueue=[];ranchQueue=[];kitchenTask=null;buildTask=null;
+    const restore=()=>{if(prior){currentPanel=prior;panelArg=arg;$('modal-overlay').hidden=false;$('game-root').classList.add('menu-open');$('modal-body').scrollTop=scroll;}};
+    startAction({...spec,item:b.dataset.id},s.player,()=>{currentPanel=prior;panelArg=arg;replayUI=true;try{b.click();}finally{replayUI=false;delete b.dataset.actionHeat;}if(currentPanel){$('modal-overlay').hidden=false;$('game-root').classList.add('menu-open');$('modal-body').scrollTop=scroll;}},restore);
+  },true);
   W.restorePosition(s);camera.update(s,0,true);update();requestAnimationFrame(frame);
   if(!s.flags.introDone)openPanel('welcome');else if(startupNotice)toast(startupNotice,true);
   // Read-only snapshot for diagnostics; state mutations stay inside the game.
   window.ZRZSnapshot=()=>JSON.parse(JSON.stringify(s));
   window.ZRZView=()=>({...camera.view});
-  window.ZRZDiagnostics=()=>JSON.parse(JSON.stringify(diagnostics));
+  window.ZRZDiagnostics=()=>JSON.parse(JSON.stringify({...diagnostics,action:sequence.snapshot(),navigation:{remaining:path.length,pending:pending?.kind||null},cache:window.ZRZVillageView.cacheStats()}));
   if(window.ZRZ_DEV)window.ZRZDeveloper={replace(next){s=C.load(next);W.restorePosition(s);save();update();camera.update(s,0,true);openPanel('debug');},state:()=>C.load(s),walk:travel,open:()=>openPanel('debug')};
 })();
 

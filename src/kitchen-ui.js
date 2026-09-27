@@ -27,7 +27,7 @@
     if(act==='collect'){const j=s.kitchen.jobs.find(j=>j.key===Number(id));if(j)queueKitchen({op:act,id,station:j.station});}
     if(['clean','upgrade'].includes(act))queueKitchen({op:act,id,station:id});
     if(act==='experiment'||act==='repeat'){const parts=act==='repeat'?id.split('+'):['k-first','k-second'].map(k=>document.getElementById(k).value);queueKitchen({op:'experiment',id:parts[0],second:parts[1],station:'stove'});}
-    if(act==='finish'||act==='assist'){const h=ui.heat;if(!h)return true;const level=act==='assist'?null:(Math.sin((performance.now()-h.started)/1100-Math.PI/2)+1)*50;const result=K.make(s,h.id,h.n||1,false,level);if(result.ok){ui.heat=null;close();V.feedback(s,s.player,'steam',result.msg,2,h.id);apply(result);save();update();}else use(result);}
+    if(act==='finish'||act==='assist'){const h=ui.heat;if(!h)return true;const level=act==='assist'?null:data.actionHeat!==undefined?Number(data.actionHeat):(Math.sin((performance.now()-h.started)/1100-Math.PI/2)+1)*50;const result=K.make(s,h.id,h.n||1,false,level);if(result.ok){ui.heat=null;close();V.feedback(s,s.player,'steam',result.msg,2,h.id);apply(result);save();update();}else use(result);}
     if(act==='store')use(C.storageMove(s,id,1,data.side==='bag'));if(act==='eat')use(C.eat(s,id));if(act==='cold')use(K.cold(s));if(act==='upgrades')open('build');
     if(act==='buy')return old.dispatch('e-recipe-buy',id,data,ctx);
     return true;
