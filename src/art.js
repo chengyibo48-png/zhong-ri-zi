@@ -132,13 +132,13 @@
   function character(c,x,y,color='#648974',t=0,walking=false,hat=false,direction='down',appearance={}){
     const a=look(color,hat,appearance),child=a.child?.86:1; c.save();c.translate(Math.round(x),Math.round(y));c.scale(child,child);shadow(c,0,0,22,7);const step=walking?Math.round(Math.sin(t*13)*2):0,side=direction==='left'||direction==='right',off=direction==='left'?-2:direction==='right'?2:0;
     R(c,-6,-7+step,5,8,'#3e5050');R(c,2,-7-step,5,8,'#3e5050');R(c,-7,0+step,7,3,'#303e39');R(c,2,0-step,7,3,'#303e39');R(c,-7,0+step,5,1,'#a2a58b');
-    poly(c,[[-7,-19],[7,-19],[9,-7],[-9,-7]],'#344b43');R(c,-6,-19,13,13,a.shirt);R(c,-5,-18,4,11,'#ffffff12');R(c,-9,-17-step,3,9,a.shirt);R(c,8,-17+step,3,9,a.shirt);R(c,-9,-9-step,3,4,a.skin);R(c,8,-9+step,3,4,a.skin);R(c,-3,-20,6,3,a.skin);
+    c.save();if(appearance.lean){const q=appearance.lean;c.translate(q.ux*q.reach*3,q.low?q.reach*3:0);}poly(c,[[-7,-19],[7,-19],[9,-7],[-9,-7]],'#344b43');R(c,-6,-19,13,13,a.shirt);R(c,-5,-18,4,11,'#ffffff12');if(!appearance.working){R(c,-9,-17-step,3,9,a.shirt);R(c,8,-17+step,3,9,a.shirt);R(c,-9,-9-step,3,4,a.skin);R(c,8,-9+step,3,4,a.skin);}R(c,-3,-20,6,3,a.skin);
     if(a.skirt)poly(c,[[-6,-10],[6,-10],[9,-4],[-9,-4]],a.shirt);if(a.apron){R(c,-4,-15,9,10,a.accent);R(c,-5,-9,10,2,'#fff4d338');}else if(a.vest){R(c,-6,-18,4,11,a.accent);R(c,3,-18,4,11,a.accent);}else{R(c,0,-15,1,8,a.accent);R(c,-4,-17,8,2,a.accent);}
     if(direction==='up'&&a.prop){accessory(c,a,0,-11,.75);}
     R(c,-6,-29,13,12,'#5b4b38');R(c,-5,-28,11,11,a.skin);R(c,-5,-28,3,7,'#f5d9aa33');hair(c,a,-6,-31,13,12,direction==='up');
     if(direction!=='up'){R(c,-3+off,-24,2,2,'#29372e');if(!side)R(c,3,-24,2,2,'#29372e');R(c,1+off,-20,2,1,'#b07356');if(a.glasses){c.strokeStyle='#514c3e';c.lineWidth=1;c.strokeRect(-5,-26,5,4);c.strokeRect(2,-26,5,4);R(c,0,-25,2,1,'#514c3e');}}
     if(a.hat){R(c,-11,-31,23,3,'#b98f4b');R(c,-7,-36,15,5,'#dabe77');R(c,-6,-36,12,1,'#ebd597');R(c,-7,-32,15,2,'#8d6e3e');}if(a.cap){R(c,-7,-32,15,4,a.accent);R(c,-3+off,-29,12,2,a.accent);}
-    if(direction!=='up')accessory(c,a,side?(off<0?-9:10):8,-8,.65);c.restore();
+    if(direction!=='up')accessory(c,a,side?(off<0?-9:10):8,-8,.65);c.restore();c.restore();
   }
   function portrait(c,w,h,n,appearance){
     const a=look(n?.color||'#648974',appearance?.hat,appearance||{id:n?.id});c.save();c.imageSmoothingEnabled=false;c.clearRect(0,0,w,h);c.scale(w/64,h/80);

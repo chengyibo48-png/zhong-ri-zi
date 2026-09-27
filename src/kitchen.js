@@ -41,7 +41,7 @@
     const jobs=s.kitchen.jobs.filter(j=>j.station===id);if(jobs.length>=2+eq.level)return no('工位已满，先收取成品或升级容量。');if(!C.has(s,ingredients,n))return no('原料还没备齐。');
     const grade=quality(s,r,ingredients,n);if(!C.labor(s,2,5))return no('体力不足，歇一歇再投料。');C.consume(s,ingredients,n);
     const start=Math.max(now(s),...jobs.map(j=>j.ready)),duration=Math.ceil(r.minutes*(1-eq.level*.15));
-    s.kitchen.jobs.push({key:s.kitchen.nextId++,recipe:r.id,id:r.out||r.id,qty:(r.qty||1)*n,station:id,start,ready:start+duration,grade,cooking,weatherDelay:0});eq.clean=Math.max(0,eq.clean-8*n);s.flags.firstCook||=cooking;s.skills[cooking?'cooking':'craft'].xp=Math.min(99999,s.skills[cooking?'cooking':'craft'].xp+2*n);
+    s.kitchen.jobs.push({key:s.kitchen.nextId++,recipe:r.id,id:r.out||r.id,qty:(r.qty||1)*n,station:id,start,ready:id==='dry'&&root.ZRZEnvironment?root.ZRZEnvironment.dryingReady(start,duration,eq.level):start+duration,grade,cooking,weatherDelay:0});eq.clean=Math.max(0,eq.clean-8*n);s.flags.firstCook||=cooking;s.skills[cooking?'cooking':'craft'].xp=Math.min(99999,s.skills[cooking?'cooking':'craft'].xp+2*n);
     return yes('已在'+stations[id].name+'投料，'+n+' 份原料合为一批，完成后走近收取。');
   }
   function start(s,id,n=1){const r=processing.find(r=>r.id===id);return r?enqueue(s,r,n,r.needs):no('没有这份加工配方。');}
@@ -79,9 +79,9 @@
   // Older actions use core-local inventory helpers; reconcile their pantry lots before saving.
   for(const name of ['gift','buy','gather','fish','deliver','joinFestival','upgrade','repair','talk'])if(C[name]){const action=C[name];C[name]=(...args)=>{ensure(args[0]);const result=action(...args);ensure(args[0]);return result;};}
   const oldCraft=R.craft;R.craft=(s,id,n=1)=>['cream','yogurt'].includes(id)?start(s,id,n):oldCraft(s,id,n);
-  C.nextDay=s=>{ensure(s);const existing=copy(s.kitchen.lots),oldDay=s.day,w=C.weather(oldDay);for(const side of ['bag','storage'])for(const lots of Object.values(existing[side]))for(const l of lots)l.age=Math.min(3650,l.age+(side==='storage'?(s.kitchen.cold?.25:.5):1));s.kitchen.lots=existing;
+  C.nextDay=s=>{ensure(s);const existing=copy(s.kitchen.lots),oldDay=s.day,w=C.weather(oldDay);for(const side of ['bag','storage'])for(const lots of Object.values(existing[side]))for(const l of lots)l.age=Math.min(3650,l.age+(root.ZRZEnvironment?root.ZRZEnvironment.aging(oldDay,side,s.kitchen.cold):(side==='storage'?(s.kitchen.cold?.25:.5):1)));s.kitchen.lots=existing;
     // Delay only unfinished drying; queued batches shift together, at most once per wet day.
-    if(['雨','台风'].includes(w)&&s.kitchen.equipment.dry.level<2){for(const j of s.kitchen.jobs.filter(j=>j.station==='dry'&&j.ready>now(s))){j.ready+=1440;j.weatherDelay++;if(j.start>now(s))j.start+=1440;}}
+    if(!root.ZRZEnvironment&&['雨','台风'].includes(w)&&s.kitchen.equipment.dry.level<2){for(const j of s.kitchen.jobs.filter(j=>j.station==='dry'&&j.ready>now(s))){j.ready+=1440;j.weatherDelay++;if(j.start>now(s))j.start+=1440;}}
     const r=old.nextDay(s);ensure(s);return r;};
   function validate(v,s){if(!v.kitchen){ensure(s);return;}const k=v.kitchen,bad=()=>{throw new Error('厨房存档字段无效，请使用备份。');},num=(x,a,b)=>Number.isFinite(x)&&x>=a&&x<=b,int=(x,a,b)=>Number.isInteger(x)&&num(x,a,b),obj=x=>x&&typeof x==='object'&&!Array.isArray(x);if(k.version!==1||!int(k.nextId,1,1e9)||typeof k.cold!=='boolean'||!obj(k.equipment)||!obj(k.mastery)||!obj(k.lots)||!Array.isArray(k.jobs)||k.jobs.length>40||!Array.isArray(k.experiments)||k.experiments.length>40)bad();
     for(const id of Object.keys(stations)){const e=k.equipment[id];if(!e||!int(e.level,0,2)||!num(e.clean,0,100))bad();}

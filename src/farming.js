@@ -90,11 +90,11 @@ function performAction(s,i,action,arg){
  return no('请选择农事动作。');
 }
 function daily(s,day){
- const f=ensure(s),weather=C.weather(day),season=C.calendar({day}).season,rain=['雨','台风'].includes(weather),prior=f.beds.map(b=>({pests:b.pests,disease:b.disease}));
+ const env=root.ZRZEnvironment?.profile(day),f=ensure(s),weather=C.weather(day),season=C.calendar({day}).season,rain=['雨','台风'].includes(weather),prior=f.beds.map(b=>({pests:b.pests,disease:b.disease}));
  for(let i=0;i<s.plots.length;i++){
   const p=s.plots[i],b=f.beds[i],types=new Set(coverage(s,i).map(v=>v.type)),has=k=>types.has(k),crop=p.crop?profile(p.crop):null;
   if(!p.tilled||b.removed){b.fertility=clamp(b.fertility+1);sync(s,i);continue;}
-  b.moisture=clamp(b.moisture+(rain?(weather==='台风'?48:34):0)-soils[b.type].evap*(weather==='高温'?1.5:1)*(has('shade')?.65:1));
+  b.moisture=clamp(b.moisture+(env?env.rain:rain?(weather==='台风'?48:34):0)-soils[b.type].evap*(env?env.evaporation:weather==='高温'?1.5:1)*(has('shade')?.65:1));
   if(has('drain')&&b.moisture>80)b.moisture=75;
   if(p.crop&&has('sprinkler')&&b.moisture<f.threshold&&f.water>0){f.water--;b.moisture=65;b.irrigated=s.day;}
   if(s.projects.canal&&s.day%7===0&&D.npcs.some(n=>s.relations[n.id].points>=30))b.moisture=Math.max(55,b.moisture);

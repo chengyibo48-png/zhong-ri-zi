@@ -3,7 +3,7 @@
 const V=root.ZRZVillage,C=root.ZRZCore,D=root.ZRZData,W=root.ZRZWorld,F=root.ZRZFarming,R=root.ZRZRanch,K=root.ZRZKitchen,B=root.ZRZBuild;
 const copy=v=>JSON.parse(JSON.stringify(v)),layers=['all','homes','neighbors','services','harvest','water','animals','resources','pins'];
 const descriptions={mountain:'茶垄与山石，清晨看云，沿石阶寻茶。',town:'青瓦老街，杂货、手艺和邻里买卖。',river:'柳岸水网，木桥与河埠串起人家。',bamboo:'竹影、木作与山坞小院，听风慢行。',farm:'菜畦、水井与晾晒场，家就在稻香里。',pasture:'草甸、塘边和四间畜舍，伙伴沿路归家。'};
-function ensure(s){return s.atlas||=( {version:1,visited:[],pins:[],nextId:1,tracking:null,layer:'all',minimap:true});}
+function ensure(s){return s.atlas||=( {version:1,visited:[],pins:[],nextId:1,tracking:null,layer:'all',minimap:false});}
 function scope(s){const h=V.houses.find(h=>h.id===s.village.interior);return h?{id:h.id,name:h.name,region:h.region,bounds:V.ROOM,door:h.door}:{id:'world',name:V.regionAt(s.player.x,s.player.y).name,region:V.regionAt(s.player.x,s.player.y).id,bounds:{width:V.WIDTH,height:V.HEIGHT}};}
 const outside=s=>({...s,village:{...s.village,interior:null}});
 function visit(s){const a=ensure(s),id=scope(s).region;if(!a.visited.includes(id))a.visited.push(id);}

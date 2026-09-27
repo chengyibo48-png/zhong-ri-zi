@@ -12,7 +12,7 @@ R.points=s=>s.animals.map(a=>R.point(s,a)).filter(Boolean);
 R.petPoint=s=>({...s.ranch.pet.position,id:'pet',kind:'pet',name:s.pet.name+' · 陪伴与训练'});
 R.destination=(s,id)=>{const a=s.animals.find(v=>v.id===id);if(!a)return null;if(a.position.room&&a.position.room!==s.village.interior){const h=R.houseOf(a);return {...h.door,id:h.id,house:h.id,kind:'enter',name:h.name};}return {...R.position(s,id),kind:'animal',id,name:a.name,room:a.position.room};};
 R.update=(s,dt)=>{R.ensure(s);const rt=runtime(s);rt.clock+=dt;const focus=V.stateRuntime(s).animalFocus;
- for(const [i,a]of s.animals.entries()){const ar=rt.actors[a.id]??={},p=a.position,h=R.houseOf(a),out=R.safeOut(s,a);if(ar.hold>rt.clock){R.position(s,a.id).walking=false;continue;}
+ for(const [i,a]of s.animals.entries()){const ar=rt.actors[a.id]??={},p=a.position,h=R.houseOf(a),out=R.safeOut(s,a);if(ar.hold>rt.clock||V.stateRuntime(s).sequence?.animalId===a.id){R.position(s,a.id).walking=false;continue;}
   if(p.room){if(out||a.lost){walk(p.inside,{x:480,y:567},p.room,dt,38,ar);if(Math.hypot(p.inside.x-480,p.inside.y-567)<5){Object.assign(p,V.safePosition(state(),{x:h.door.x,y:h.door.y+8}));p.room=null;ar.target=null;}}
    else{if(!ar.wander||rt.clock>(ar.next||0)){ar.wander=V.safePosition(state(p.room),{x:335+(i%6)*55+Math.sin(rt.clock+i)*24,y:485+(i%2)*38});ar.next=rt.clock+8;ar.target=null;}walk(p.inside,ar.wander,p.room,dt,a.rest?12:23,ar);}}
   else if(!out&&!a.lost){walk(p,h.door,null,dt,55,ar);if(Math.hypot(p.x-h.door.x,p.y-h.door.y)<7){p.room=h.id;p.inside={x:480,y:560,direction:'up'};ar.target=null;ar.wander=null;}}
@@ -64,7 +64,7 @@ R.drawBarn=(c,s,def,h,t)=>{const id=Object.keys(R.barns).find(k=>R.barns[k]===de
  if(b.durability<25){rect(c,x+45,h.y+36,14,6,'#3a4b46');}
 };
 const perform=R.perform;
-R.perform=(s,t)=>{const result=perform(s,t);if(result.ok){const rt=runtime(s),id=t.animalId||'pet',a=s.animals.find(a=>a.id===id);(rt.actors[id]??={}).hold=rt.clock+2.2;if(a){poses.set(a,{action:t.action,until:V.stateRuntime(s).clock+2.2});rt.action={id,kind:t.action,at:V.stateRuntime(s).clock,room:a.position.room};}}return result;};
+R.perform=(s,t)=>{const result=perform(s,t);if(result.ok){const rt=runtime(s),id=t.animalId||'pet',a=s.animals.find(a=>a.id===id);(rt.actors[id]??={}).hold=rt.clock+2.2;if(a){poses.set(a,{action:t.action,until:V.stateRuntime(s).clock+2.2});rt.action=V.stateRuntime(s).resolvedSequence?null:{id,kind:t.action,at:V.stateRuntime(s).clock,room:a.position.room};}}return result;};
 R.drawAction=(c,s,time)=>{const fx=runtime(s).action;if(!fx||time-fx.at>2.2||fx.room!==s.village.interior)return;const a=s.animals.find(a=>a.id===fx.id),p=a&&R.position(s,a.id);if(!p)return;const age=time-fx.at;
  if(fx.kind==='feed'){oval(c,p.x+26,p.y+1,12,5,'#866b46');oval(c,p.x+26,p.y-1,10,3,'#cbb679');for(let i=0;i<7;i++)rect(c,p.x+22+i%3*3,p.y-11+(age*14+i*3)%10,2,2,'#e2ca7a');}
  if(fx.kind==='collect'&&a.type==='cow'){rect(c,p.x+18,p.y-2,15,15,'#8ba7a0');oval(c,p.x+25,p.y-1,7,3,'#eee9cc');rect(c,p.x+25,p.y-12,1,10,'#eee8d0');}

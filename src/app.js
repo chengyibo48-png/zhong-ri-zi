@@ -50,12 +50,12 @@
     const identity=s,room=s.village.interior;keys.clear();walking=false;
     const dx=point.x-s.player.x,dy=point.y-s.player.y;
     if(Math.hypot(dx,dy)>1)s.player.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';
-    inputLocked=true;V.feedback(s,point,spec.kind,'',spec.duration);sound('soft');
-    sequence.start({...spec,x:point.x,y:point.y},()=>{
+    inputLocked=true;V.stateRuntime(s).action=null;V.stateRuntime(s).fx=[];sound('soft');
+    sequence.start({...spec,x:point.x,y:point.y,targetKind:point.kind,animalId:point.animalId,animalType:point.animalId?s.animals.find(a=>a.id===point.animalId)?.type:null,item:point.animalId?s.animals.find(a=>a.id===point.animalId)?.product:point.kind==='farm-task'?s.plots[point.index]?.crop:spec.item},()=>{
       inputLocked=false;
       if(s!==identity||s.village.interior!==room){cancel();return;}
-      try{commit();if(spec.door)sceneFade=.3;}catch(err){diagnostics.errors.push(String(err));toast('这次操作未能完成，请重试。',true);}
-      finally{inputLocked=false;}
+      try{V.stateRuntime(s).resolvedSequence=true;commit();if(spec.door)sceneFade=.3;}catch(err){diagnostics.errors.push(String(err));toast('这次操作未能完成，请重试。',true);}
+      finally{inputLocked=false;V.stateRuntime(s).resolvedSequence=false;}
     },()=>{inputLocked=false;V.stateRuntime(s).action=null;V.stateRuntime(s).fx=[];cancel();});
     return true;
   }
@@ -136,9 +136,9 @@
     const c = C.calendar(s), hr = Math.floor(s.minutes / 60), minute = Math.floor(s.minutes % 60 / 10) * 10;
     $('year-label').textContent = '在禾溪的第 ' + c.year + ' 年';
     $('season-date').innerHTML = D.seasons[c.season] + ' <b>' + String(c.date).padStart(2,'0') + '</b><small>日</small>';
-    $('solar-term').textContent = c.term;$('weather-today').innerHTML = svg(C.weather(s.day)==='晴'?'sun':C.weather(s.day)==='雨'?'rain':'cloud') + C.weather(s.day);
+    $('solar-term').textContent = c.term;$('weather-today').innerHTML = svg(C.weather(s.day)==='晴'?'sun':C.weather(s.day)==='雨'?'rain':'cloud') + window.ZRZEnvironment.profile(s.day).label+' '+window.ZRZEnvironment.profile(s.day,s.minutes).temperature+'°';
     $('clock-label').textContent = String(hr).padStart(2,'0')+':'+String(minute).padStart(2,'0')+' · '+(hr<8?'清晨':hr<12?'上午':hr<17?'午后':hr<20?'傍晚':'夜间');
-    $('forecast').textContent = '明日 '+C.weather(s.day+1)+' · '+C.weatherAdvice(s.day+1);
+    $('forecast').textContent = window.ZRZEnvironment.warning(s.day);
     $('player-name').textContent = s.name;$('money').innerHTML = svg('coin') + s.money;$('energy-text').textContent = Math.floor(s.stamina)+' / 100';$('energy-fill').style.width = s.stamina+'%';
     $('scene-title').textContent=V.title(s);$('location-pill').textContent='禾溪村 · '+V.title(s);
     $('sound-btn').innerHTML=svg(s.settings.sound?'sound':'mute');$('sound-btn').setAttribute('aria-pressed',String(s.settings.sound));
@@ -282,7 +282,7 @@
   function announceScene(){const el=$('scene-arrival');clearTimeout(arrivalTimer);el.hidden=true;void el.offsetWidth;el.innerHTML=D.scenes[s.scene].name+'<small>'+D.scenes[s.scene].subtitle+'</small>';el.hidden=false;arrivalTimer=setTimeout(()=>el.hidden=true,2700);}
   function navigate(point){if(!point)return;closePanel();keys.clear();hovered=null;pointer=null;if(s.village.interior){queuedDestination=point;walkTo(V.points(s).find(p=>p.kind==='exit'));toast('先走出小屋，再沿村道出发。');return;}walkTo(point);toast('沿村道前往：'+point.name+'。方向键可随时取消导航。');}
   function travel(id){if(inputLocked)return;navigate(V.destination(s,'region',id));}
-  function walkTo(point){if(!point)return;path=W.route(s,point.x,point.y+5);pending=path.length?point:null;if(!path.length)toast('这条路暂时走不过去，试试旁边的空地。',true);}
+  function walkTo(point){if(!point)return;const stand=Actions.approach(s,point);path=W.route(s,stand.x,stand.y);pending=path.length?point:null;if(!path.length)toast('这条路暂时走不过去，试试旁边的空地。',true);}
   function goToPoint(scene,kind,id){let p=V.destination(s,kind,id||scene);if(!p&&kind==='cook')p=V.houses.find(h=>h.name==='禾溪小灶');if(p?.door)p=V.destination(s,'house',p.id);navigate(p);}
   function guide(){
     if(!s.flags.firstHarvest){setTool('hand');const i=s.plots.findIndex(p=>p.crop&&p.growth>=D.crops[p.crop].days);if(i>=0)navigate({kind:'plot',index:i,...W.plotPosition(i),name:'成熟的菜地'});else toast('这一轮作物还在长。选水壶照料，明早再来看看。');}
@@ -419,7 +419,7 @@
     }
     padPrevious=pad.buttons.map(b=>b.pressed);
   }
-  function move(dt){if(buildTask&&!path.length&&!pending&&!queuedDestination)advanceBuild();if(kitchenTask&&!path.length&&!pending&&!queuedDestination)advanceKitchen();if(ranchQueue.length&&!path.length&&!pending&&!queuedDestination&&frameTime>=ranchNextAt)advanceRanch();if(farmQueue.length&&!path.length&&!pending&&!queuedDestination&&frameTime>=farmNextAt)advanceFarm();if(['npc','animal'].includes(pending?.kind)&&frameTime>chaseAt){chaseAt=frameTime+.7;const target=V.destination(s,pending.kind,pending.id);if(target&&Math.hypot(target.x-pending.x,target.y-pending.y)>30){path=W.route(s,target.x,target.y+5);pending=target;}}const bindings=s.settings.bindings;let dx=(keys.has(bindings.right)||keys.has('arrowright')?1:0)-(keys.has(bindings.left)||keys.has('arrowleft')?1:0),dy=(keys.has(bindings.down)||keys.has('arrowdown')?1:0)-(keys.has(bindings.up)||keys.has('arrowup')?1:0);const speed=(s.village.riding?355:keys.has('shift')?265:195)*(K.activeBuff(s)?.kind==='轻快'?1.12:1)*dt;
+  function move(dt){if(buildTask&&!path.length&&!pending&&!queuedDestination)advanceBuild();if(kitchenTask&&!path.length&&!pending&&!queuedDestination)advanceKitchen();if(ranchQueue.length&&!path.length&&!pending&&!queuedDestination&&frameTime>=ranchNextAt)advanceRanch();if(farmQueue.length&&!path.length&&!pending&&!queuedDestination&&frameTime>=farmNextAt)advanceFarm();if(['npc','animal'].includes(pending?.kind)&&frameTime>chaseAt){chaseAt=frameTime+.7;const target=V.destination(s,pending.kind,pending.id);if(target&&Math.hypot(target.x-pending.x,target.y-pending.y)>30){path=W.route(s,target.x,target.y+5);pending=target;}}const bindings=s.settings.bindings;let dx=(keys.has(bindings.right)||keys.has('arrowright')?1:0)-(keys.has(bindings.left)||keys.has('arrowleft')?1:0),dy=(keys.has(bindings.down)||keys.has('arrowdown')?1:0)-(keys.has(bindings.up)||keys.has('arrowup')?1:0);const speed=(s.village.riding?355:keys.has('shift')?265:195)*(K.activeBuff(s)?.kind==='轻快'?1.12:1)*(window.ZRZEnvironment?.speed(s)||1)*dt;
     dx+=padX;dy+=padY;
     if(path.length&&!dx&&!dy){const n=path[0],dist=Math.hypot(n.x-s.player.x,n.y-s.player.y);if(dist<=speed){s.player.x=n.x;s.player.y=n.y;path.shift();if(!path.length&&pending){const p=pending;pending=null;interact(p);}return true;}dx=(n.x-s.player.x)/dist;dy=(n.y-s.player.y)/dist;}
     const norm=Math.hypot(dx,dy);if(!norm)return false;dx=dx/norm*speed;dy=dy/norm*speed;const p=s.player;
@@ -432,8 +432,8 @@
     sequence.tick(dt,document.hidden);sceneFade=Math.max(0,sceneFade-dt);
     camera.update(s,dt);
     if(pointer&&!currentPanel){const point=camera.toWorld(pointer.x,pointer.y);hovered=W.hit(s,point.x,point.y);hoverInfo();positionHover();}
-    const renderStart=performance.now();T.equipped=tool;W.draw(camera.buffer,s,frameTime,hovered,walking,effect,camera.view);
-    const animation=sequence.snapshot();if(animation){const c=camera.buffer.getContext('2d');c.save();c.translate(-camera.view.x,-camera.view.y);Actions.draw(c,s,animation,frameTime);c.restore();}
+    const renderStart=performance.now();V.stateRuntime(s).sequence=sequence.snapshot();T.equipped=tool;W.draw(camera.buffer,s,frameTime,hovered,walking,effect,camera.view);
+
     if(path.length){const c=camera.buffer.getContext('2d');c.save();c.translate(-camera.view.x,-camera.view.y);c.fillStyle='#fff3b8a0';path.forEach((p,i)=>{if(i%2===0)c.fillRect(Math.round(p.x)-1,Math.round(p.y)-1,2,2);});const dest=path[path.length-1],radius=7+Math.sin(frameTime*5)*2;c.strokeStyle='#fff0ab';c.lineWidth=1.5;c.beginPath();c.ellipse(dest.x,dest.y,radius,radius*.5,0,0,Math.PI*2);c.stroke();c.restore();}
     camera.paint();W.drawLabels?.($('world'),s,camera.view);diagnostics.renderMs=Math.round((performance.now()-renderStart)*100)/100;diagnostics.averageRenderMs=Math.round(((diagnostics.averageRenderMs||diagnostics.renderMs)*.95+diagnostics.renderMs*.05)*100)/100;
     drawJourney(dt);
@@ -451,7 +451,7 @@
   $('action-cancel').addEventListener('click',cancelAction);
   function drawJourney(dt){const a=sequence.snapshot();actionHud.hidden=!a;if(a){$('action-label').textContent=a.label;$('action-fill').style.width=(a.progress*100)+'%';$('action-meter').setAttribute('aria-valuenow',Math.round(a.progress*100));$('action-phase').textContent=a.phase+' · 完成后结算';}
     const darkness=a?.door?Math.max(0,(a.progress-.6)/.4)*.7:a?.kind==='sleep'?Math.sin(a.progress*Math.PI)*.6:sceneFade/ .3*.7;fade.hidden=!darkness;fade.style.opacity=darkness||0;
-    journey.hidden=!!currentPanel||!S.ensure(s).minimap;miniAt-=dt;if(miniAt<=0&&!journey.hidden){miniAt=.3;const target=S.resolve(s,s.atlas.tracking);S.drawMap($('mini-map').getContext('2d'),s,{mini:true,path:s.village.interior?[]:path,selected:target,view:camera.view});$('mini-title').textContent=S.scope(s).name+(s.village.interior?' · 屋内':' · 点开地图');}
+    journey.hidden=true;miniAt-=dt;if(miniAt<=0&&!journey.hidden){miniAt=.3;const target=S.resolve(s,s.atlas.tracking);S.drawMap($('mini-map').getContext('2d'),s,{mini:true,path:s.village.interior?[]:path,selected:target,view:camera.view});$('mini-title').textContent=S.scope(s).name+(s.village.interior?' · 屋内':' · 点开地图');}
     const target=path.length?path[path.length-1]:S.resolve(s,s.atlas.tracking),indicator=$('route-compass');indicator.hidden=!target||!!s.village.interior;if(target){const dx=target.x-s.player.x,dy=target.y-s.player.y;indicator.textContent=(Math.abs(dx)>Math.abs(dy)?dx>0?'向东 →':'← 向西':dy>0?'向南 ↓':'向北 ↑')+' · '+(pending?.name||target.name||'地图目标')+(path.length?' · 行进中':' · 地图可继续带路');}
   }
   document.addEventListener('click',e=>{if(e.target.id!=='area-map'||inputLocked)return;const r=e.target.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*V.WIDTH,y=(e.clientY-r.top)/r.height*V.HEIGHT;S.pick(s,S.clickPoint(s,x,y,s.atlas.layer));renderPanel('map');});
