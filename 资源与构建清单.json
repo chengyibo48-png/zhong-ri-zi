@@ -1,8 +1,8 @@
 {
   "name": "种日子",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "platform": "Windows 桌面浏览器 / 单机离线 HTML",
-  "generatedAt": "2026-09-27T02:03:29.102Z",
+  "generatedAt": "2026-09-27T02:35:02.094Z",
   "runtimeDependencies": [],
   "remoteAssets": [],
   "assets": "像素美术、图标、四季琴音及环境音均由项目代码绘制或合成；系统字体不随包分发。",
@@ -12,23 +12,23 @@
   "files": [
     {
       "name": "种日子.html",
-      "bytes": 617357,
-      "sha256": "8fc289e15dfbd2b9ac53836810a6115f1435aeec1ce1d2bc5c9401d828187262"
+      "bytes": 653517,
+      "sha256": "add9a805d0712e8df57516417e6ea0f4952633e425a361169192724a9a2bdb88"
     },
     {
       "name": "index.html",
-      "bytes": 6784,
-      "sha256": "423a63a8fbeae2560b805b98a14ba35e500c8317e08be9cf9d5923982d21f5c6"
+      "bytes": 6903,
+      "sha256": "8f2131287794875b95b2a36677151ab94a650e274deeebdfb3c9963e154ff442"
     },
     {
       "name": "style.css",
-      "bytes": 62600,
-      "sha256": "e8bb0d804caa9fe70e672ce96a81315a0cf62a1cf89f9f97168dbdee74e2edf5"
+      "bytes": 67045,
+      "sha256": "98946f7c6580dc63f049d0a635ec66c68d8fa103de09fb3312c2af68e6cd4b42"
     },
     {
       "name": "build.cjs",
-      "bytes": 853,
-      "sha256": "88abea358f7a664569aefc811b5639eda3f6e729bf5bfcdd97176c90eb7f7761"
+      "bytes": 885,
+      "sha256": "1682197279de51075b9b6afc25a829ff7b51d36429c7ab638a591c61e8c119ab"
     },
     {
       "name": "server.cjs",
@@ -37,13 +37,13 @@
     },
     {
       "name": "package.json",
-      "bytes": 521,
-      "sha256": "445234ffedbef59268bfec44f8cd7665aff438cce7868f99032403b94abe90df"
+      "bytes": 551,
+      "sha256": "3b4584b230cdc13700515016d15129dcb465659b28436dd90006ac93aeb2f67a"
     },
     {
       "name": "src/app.js",
-      "bytes": 74980,
-      "sha256": "0e901bdd9577b858bd882ff3fb60f66574d74c28669019bfc29409ef2c7b6b82"
+      "bytes": 75763,
+      "sha256": "d0caef53928050d3e3af7c942a92eecafd2192294db5e3ace9de6cfd71e922ff"
     },
     {
       "name": "src/art.js",
@@ -87,23 +87,23 @@
     },
     {
       "name": "src/debug.js",
-      "bytes": 8095,
-      "sha256": "db72a7966d81f24268160a460e97b2100870f5e1bf64f028baa091d83c19e5a1"
+      "bytes": 9237,
+      "sha256": "3fca5a65754547977972b5e05f2c630c69e4934b4ec00739d786345009d9808a"
     },
     {
       "name": "src/farming-ui.js",
-      "bytes": 17346,
-      "sha256": "a4b30faef50edec479671ecdcbe3e8f160451af2867119ea50c7a8dfaf0f7d44"
+      "bytes": 17716,
+      "sha256": "1c76a7b3c19cee98d86030f5264ad6560b2b716ef71aa2be0861fea93f87186c"
     },
     {
       "name": "src/farming-view.js",
-      "bytes": 5123,
-      "sha256": "494197996eba74046bee75dd6076e08e87cc552effe8cd1d192e02ceb5364597"
+      "bytes": 5163,
+      "sha256": "1fdf517750c0143b51104435a53979dc54667a502efb20af01fffa7155d8b097"
     },
     {
       "name": "src/farming.js",
-      "bytes": 26094,
-      "sha256": "1b40ac7b1f12e1cbb62ac0f6f11e7370db31d51a258aa80918f34d3d6318ccb2"
+      "bytes": 26181,
+      "sha256": "489bee6f7eb8582e943c332c9ff899c5c7ebae28fbb5b1152d58c29bec224e58"
     },
     {
       "name": "src/kitchen-ui.js",
@@ -127,8 +127,8 @@
     },
     {
       "name": "src/panels.js",
-      "bytes": 37012,
-      "sha256": "311c2946d347fb489b4383daecbb7deba9d665b2a2816556955371386fd064a4"
+      "bytes": 37079,
+      "sha256": "6853a2449f68437f18d20c8f2e7600147de9b913b47b71c00e0fbd1e6319ac8d"
     },
     {
       "name": "src/ranch-ui.js",
@@ -151,9 +151,24 @@
       "sha256": "bcd27ef5703ea7d6e1e1bd448686cdfc242c74c656d6e7b322af23441bf17bf9"
     },
     {
+      "name": "src/tools-ui.js",
+      "bytes": 12154,
+      "sha256": "eae3a18755904b575bf885e1300ae628c4f5d5928718891c1ce3f323b5484157"
+    },
+    {
+      "name": "src/tools-view.js",
+      "bytes": 2601,
+      "sha256": "730679495d3a7b1a1c099a86d388539c49ad19fa2073aaad0a09623acffe46e8"
+    },
+    {
+      "name": "src/tools.js",
+      "bytes": 15515,
+      "sha256": "97a00696306e0838c7e4a2f44f487b24ad4b74568f9e016f67796df9ea2bbcbb"
+    },
+    {
       "name": "src/village-view.js",
-      "bytes": 29871,
-      "sha256": "55425e0e89bc7d1497da27ad717b2cc7a34cfab36862e094c78f59c64da35ef0"
+      "bytes": 29909,
+      "sha256": "e8340802ec33b2c5f6a62806841c363df295a2bab35b1d8ec4a38dfb0fc40b89"
     },
     {
       "name": "src/village.js",

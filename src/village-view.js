@@ -130,7 +130,7 @@
     if(!indoor&&root.ZRZRanch)for(const b of Object.values(root.ZRZRanch.barns)){const h=V.houses.find(h=>h.id===b.house);if(visible(h))objects.push({y:h.y+h.h+.2,draw:()=>root.ZRZRanch.drawBarn(c,s,b,h,time)});}
     root.ZRZBuild?.addObjects(c,s,time,objects,visible);for(const n of D.npcs){const p=V.npcPoint(s,n);if(p&&visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,22,28,s);const a=rt.actors[n.id];A.character(c,p.x,p.y,n.color,time,a?.walking,false,p.direction||'down',{id:n.id});if(a?.phase==='work'&&!a.walking&&!indoor){R(c,p.x+12,p.y-11+Math.sin(time*3)*2,6,5,A.styles[n.id].accent);}}});}
     objects.push({y:s.player.y,draw:()=>actionPose(c,s,time,walking)});objects.sort((a,b)=>a.y-b.y).forEach(o=>o.draw());
-    if(hover){c.strokeStyle='#fff0b2';c.lineWidth=1.5;c.beginPath();c.ellipse(hover.x,hover.y+3,22,8,0,0,7);c.stroke();}fx(c,s);root.ZRZRanch?.drawAction(c,s,time);
+    root.ZRZTools?.drawPreview(c,s,hover);if(hover){c.strokeStyle='#fff0b2';c.lineWidth=1.5;c.beginPath();c.ellipse(hover.x,hover.y+3,22,8,0,0,7);c.stroke();}fx(c,s);root.ZRZRanch?.drawAction(c,s,time);
     if(!indoor)atmosphere(c,s,time,view);root.ZRZBuild?.drawLights(c,s,time);c.restore();
   }
   function nativeLabel(c,x,y,text,color='#fff3d7',bg='#30483ee8',max=280){c.font='500 12px "Microsoft YaHei",sans-serif';c.textAlign='center';let lines=[],line='';for(const ch of text){if(c.measureText(line+ch).width>max){lines.push(line);line=ch;}else line+=ch;}if(line)lines.push(line);const w=Math.min(max,Math.max(...lines.map(l=>c.measureText(l).width)))+20,h=lines.length*20+10;c.fillStyle=bg;c.beginPath();c.roundRect(x-w/2,y-h,w,h,4);c.fill();c.fillStyle=color;lines.forEach((l,i)=>c.fillText(l,x,y-h+20+i*20));}

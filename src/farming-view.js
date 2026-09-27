@@ -27,7 +27,7 @@ F.drawPlot=function(c,s,i,t){
  if(b.moisture>60){rect(c,x+33,y+25,2,4,'#77c5d5');rect(c,x+34,y+24,1,3,'#d0eee4');}
  if(b.health<30&&p.crop){rect(c,x+1,y-5,2,5,'#efbb71');rect(c,x+1,y+2,2,1,'#efbb71');}
 };
-F.drawCoverage=function(c,s){if(!F.ensure(s).overlay)return;c.save();for(const a of s.farm.facilities){if(!a.enabled||a.durability<=0)continue;const p=V.plotPosition(a.anchor);c.strokeStyle='#edf8bbcc';c.fillStyle='#c8e4a51c';c.setLineDash([4,5]);c.beginPath();c.arc(p.x,p.y,F.facilities[a.type].radius,0,Math.PI*2);c.fill();c.stroke();}c.restore();};
+F.drawCoverage=function(c,s){if(!F.ensure(s).overlay)return;c.save();for(const a of s.farm.facilities){if(!a.enabled||a.durability<=0)continue;const p=V.plotPosition(a.anchor);c.strokeStyle='#edf8bbcc';c.fillStyle='#c8e4a51c';c.setLineDash([4,5]);c.beginPath();c.arc(p.x,p.y,(root.ZRZTools?root.ZRZTools.radius(a):F.facilities[a.type].radius),0,Math.PI*2);c.fill();c.stroke();}c.restore();};
 F.drawFacility=function(c,s,a,t){
  const p=V.plotPosition(a.anchor),same=s.farm.facilities.filter(v=>v.anchor===a.anchor),side=same.indexOf(a)%2?1:-1,x=p.x+side*19,y=p.y+13,disabled=!a.enabled||a.durability<=0;
  c.save();c.globalAlpha=disabled?.5:1;rect(c,x-4,y,11,3,'#304c3b55');

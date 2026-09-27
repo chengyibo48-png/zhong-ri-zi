@@ -22,7 +22,7 @@ function profile(id){const c=D.crops[id],wet=['rice','lotus','taro'].includes(id
 function fresh(p){return {type:'loam',fertility:clamp(p.soil*50),moisture:p.watered?65:45,health:100,pests:p.pest?20:0,disease:0,weeds:0,stress:0,ripeDays:0,kind:'normal',density:'balanced',compacted:0,fallow:false,removed:false,condition:75,ticks:0,fertilized:-1,treated:-1,slow:0,penalty:0,companion:null,irrigated:-1};}
 function ensure(s){if(!s.farm)s.farm={version:1,beds:s.plots.map(fresh),facilities:[],water:0,threshold:40,seedKind:'normal',density:'balanced',autoSeed:false,overlay:false,collection:{}};return s.farm;}
 function sync(s,i){const b=ensure(s).beds[i],p=s.plots[i];p.soil=b.fertility/50;p.watered=b.moisture>=35;p.pest=b.pests>=15||b.disease>=15;}
-function coverage(s,i){const a=V.plotPosition(i);return ensure(s).facilities.filter(f=>f.durability>0&&f.enabled&&Math.hypot(a.x-V.plotPosition(f.anchor).x,a.y-V.plotPosition(f.anchor).y)<=facilities[f.type].radius);}
+function coverage(s,i){const a=V.plotPosition(i);return ensure(s).facilities.filter(f=>f.durability>0&&f.enabled&&Math.hypot(a.x-V.plotPosition(f.anchor).x,a.y-V.plotPosition(f.anchor).y)<=(root.ZRZTools?root.ZRZTools.radius(f):facilities[f.type].radius));}
 const covered=(s,i,type)=>coverage(s,i).some(f=>f.type===type);
 function compatible(a,b){if(a===b)return -1;const x=D.crops[a],y=D.crops[b];if(x.group===y.group)return -1;if(x.group==='豆类'||y.group==='豆类')return 1;if(x.group==='叶菜'&&y.group==='根菜'||y.group==='叶菜'&&x.group==='根菜')return 1;return 0;}
 function neighbors(s,i){const p=V.plotPosition(i);return s.plots.map((_,j)=>j).filter(j=>j!==i&&Math.hypot(p.x-V.plotPosition(j).x,p.y-V.plotPosition(j).y)<63);}
@@ -120,7 +120,7 @@ function daily(s,day){
   if(b.companion)b.companion.growth=Math.min(D.crops[b.companion.crop].days,b.companion.growth+rate*.9);
   sync(s,i);
  }
- for(const a of f.facilities)a.durability=clamp(a.durability-(weather==='台风'?7:1));
+ for(const a of f.facilities)a.durability=clamp(a.durability-(root.ZRZTools?root.ZRZTools.decay(a,weather):(weather==='台风'?7:1)));
 }
 function facility(s,i,type,mode='build',target=null){const f=ensure(s),spec=facilities[type];if(!Object.hasOwn(facilities,type)||!s.plots[i])return no('请选择设施与地块。');let a=f.facilities.find(v=>v.anchor===i&&v.type===type),err;
  if(mode==='build'){if(a)return no('这里已有同类设施。');if(f.facilities.filter(v=>v.anchor===i).length>=2)return no('田埂最多放两座设施，请换一处位置。');if(spec.day&&s.day<spec.day)return no('小暖棚在第三季开放，现在可先准备木材与竹料。');const stock=(s.furniture[type]||0)>0;if(err=pay(s,3,stock?{}:spec.needs,stock?0:spec.cost))return err;if(stock)s.furniture[type]--;f.facilities.push({type,anchor:i,durability:100,enabled:true});return yes(spec.name+'安在田埂上，仅影响覆盖内的地块。');}
