@@ -17,8 +17,8 @@ const groups={
  pack:['ec-transfer','ec-tidy','ec-lock','ec-pin','e-store','e-take','e-store-all','e-take-all','r-store','r-withdraw','k-store','b-store','b-withdraw','e-mail','e-achievement','b-claim','r-adopt','r-confirm'],
  build:['repair','upgrade','b-apply','b-recover','b-mode','b-style','b-room','b-showcase','e-project','e-craft','e-place','e-tool-upgrade','k-cold'],
  eat:['eat','ec-eat','k-eat'],steam:['cook-item','e-sub-cook','e-trial','e-process','k-finish','k-assist'],
- read:['e-story-choice','e-chapter','e-small-event','e-year-plan','e-skill','e-pet-name','e-animal-name','r-rename','r-policy','r-pet-mode','e-free-range','t-branch','t-shape','f-selection','f-threshold','f-auto-seed','sc-pin','sc-remove'],
- dress:['e-appearance'],pet:['e-pet','e-animal'],greet:['v-npc-talk','e-separate'],water:['e-fill-water'],hoe:['e-fertilize','e-pest'],sleep:['next-day'],bike:['v-bike']};
+ read:['e-chapter','e-small-event','e-year-plan','e-skill','e-pet-name','e-animal-name','r-rename','r-policy','r-pet-mode','e-free-range','t-branch','t-shape','f-selection','f-threshold','f-auto-seed','sc-pin','sc-remove'],
+ dress:['e-appearance'],pet:['e-pet','e-animal'],greet:['v-npc-talk','e-story-choice','e-separate'],water:['e-fill-water'],hoe:['e-fertilize','e-pest'],sleep:['next-day'],bike:['v-bike']};
 const uiMap=new Map(Object.entries(groups).flatMap(([kind,ids])=>ids.map(id=>[id,kind])));
 function ui(id,label){return uiMap.has(id)?spec(uiMap.get(id),label):null;}
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),smooth=v=>{v=clamp(v);return v*v*(3-2*v);},lerp=(a,b,t)=>a+(b-a)*t;

@@ -42,7 +42,7 @@
       if(n.tier==='romance'&&s.stories[n.id].step>=4){if(s.marriage.spouse===n.id)h+=b('我们的共同生活','home');else if(s.partners[n.id]!=='dating')h+=b('认真表达心意','e-date',n.id,'secondary');else if(!s.marriage.spouse)h+=b('商量婚礼','e-wedding-open',n.id,'secondary');}return h;
     }
     if(name==='story'){
-      const n=D.npcs.find(n=>n.id===arg);if(!n)return head('邻里故事');const st=s.stories[arg],arc=D.arcs[arg],event=arc[st.step],ready=C.storyReady(s,arg),near=s.scene===C.npcScene(s,n);
+      const n=D.npcs.find(n=>n.id===arg);if(!n)return head('邻里故事');const st=s.stories[arg],arc=D.arcs[arg],event=arc[st.step],ready=C.storyReady(s,arg),near=root.ZRZNpc?root.ZRZNpc.near(s,arg):s.scene===C.npcScene(s,n);
       let h=head(n.name+' · '+(event?event.title:'这一段，已经好好记下。'),'故事 '+st.step+' / '+arc.length+' · 错过日期不会失去剧情。');
       if(event){h+='<p class="dialogue-quote typed-text">'+e(event.text)+'</p>'+(event.needs?needs(event.needs):'')+'<div class="paper-note">'+ready.msg+'</div>';if(ready.ok&&near)h+='<div class="story-choices">'+event.choices.map((v,i)=>b(v.label,'e-story-choice',arg,'secondary','data-choice="'+i+'"')).join('')+'</div>';else h+=b('去找'+n.name,'find-npc',arg,'secondary');}
       if(st.step){h+='<div class="section-divider">旧事回看</div>'+arc.slice(0,st.step).map((v,i)=>'<details class="memory-page"><summary>'+v.title+'</summary><p>'+v.text+'</p><p>你的回应：'+v.choices[st.choices[i]].label+'</p><p>'+v.choices[st.choices[i]].reply+'</p></details>').join('');}
