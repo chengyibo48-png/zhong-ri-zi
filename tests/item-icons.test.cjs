@@ -1,0 +1,26 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm');
+global.ZRZData=require('../src/content.js');global.ZRZCore=require('../src/core.js');global.ZRZLandscape=require('../src/landscape.js');global.ZRZArt=require('../src/art.js');global.window=global;
+for(const n of ['world','village','farming','farming-view','ranch','ranch-view','kitchen','kitchen-view','building','building-view','tools','tools-view','economy','economy-view','scenes','actions','environment','environment-view','forage','interiors','fishing','npc-content','npc','npc-view','feedback','feedback-view','tiles','tiles-view'])vm.runInThisContext(fs.readFileSync(require.resolve('../src/'+n+'.js'),'utf8'));
+
+for(const n of ['characters','creatures-view','item-icons','panels','economy-ui','item-icons-ui'])vm.runInThisContext(fs.readFileSync(require.resolve('../src/'+n+'.js'),'utf8'));
+const I=ZRZItemIcons,C=ZRZCore,E=ZRZEconomy,K=ZRZKitchen,D=ZRZData,U=ZRZItemIconsUI;
+function canvas(){const calls=[],ctx=new Proxy({fillStyle:'',strokeStyle:''},{get:(o,k)=>o[k]||((...a)=>calls.push([k,o.fillStyle,...a])),set:(o,k,v)=>(o[k]=v,true)});return {calls,ctx};}
+function rendered(id){const c=canvas();I.draw(c.ctx,id);return c.calls;}
+test('every registered inventory item has metadata and paints a nonempty icon',()=>{for(const id of Object.keys(D.items)){assert.notEqual(I.describe(id).family,'fallback',id);assert(rendered(id).some(c=>c[0]==='fillRect'||c[0]==='fill'),id);}});
+test('all icon geometry remains finite at actual inventory sizes',()=>{for(const id of Object.keys(D.items))for(const scale of [1,1.5,2,3]){const c=canvas();I.draw(c.ctx,id,0,0,scale);assert(c.calls.flat().filter(v=>typeof v==='number').every(Number.isFinite),id);}});
+test('all crop seeds resolve their real crop and three distinct package variants',()=>{for(const crop of Object.keys(D.crops)){const calls=[];for(const kind of Object.keys(ZRZFarming.kinds)){const id=ZRZFarming.seedId(crop,kind);assert.equal(I.seedMap[id].crop,crop);calls.push(JSON.stringify(rendered(id)));}assert.equal(new Set(calls).size,3,crop);}});
+test('wool, yarn, cloth and feather have different silhouettes',()=>{assert.equal(new Set(['wool','yarn','cloth','feather'].map(id=>JSON.stringify(rendered(id)))).size,4);});
+test('fresh products and processed forms do not reuse identical icons',()=>{for(const [a,b]of [['milk','cream'],['milk','cheese'],['fish','driedFish'],['mushroom','driedMushroom'],['tea','dryTea'],['berry','berryJam'],['feed','flour'],['egg','duckEgg'],['egg','fertileHenEgg']])assert.notDeepEqual(rendered(a),rendered(b));});
+test('meals use ingredients and preparation silhouettes',()=>{const ids=['fishSoup','mushroomSoup','riceDumpling','sesameCake','spinachNoodle','tomatoEgg','pumpkinCake'];assert.equal(new Set(ids.map(id=>JSON.stringify(rendered(id)))).size,ids.length);});
+test('unknown assets render a visible fallback and explicit metadata',()=>{assert.equal(I.describe('missing').family,'fallback');assert(rendered('missing').some(c=>c[0]==='fillRect'));});
+test('all supported tools and currency have visible icons',()=>{for(const id of [...Object.keys(ZRZTools.defs),'coin'])assert(rendered(id).some(c=>c[0]==='fillRect'));});
+test('mixed inventory quality never gets mislabeled as its highest grade',()=>{const s=C.initial();s.bag.cabbage=6;s.quality.cabbage=[2,0,1];assert.equal(I.status(s,'cabbage').quality,'混合品质');assert.deepEqual(I.status(s,'cabbage').grades,[0,1,3]);});
+test('storage badges read storage quality and count rather than bag',()=>{const s=C.initial();s.bag.cabbage=1;s.quality.cabbage=[0,0,0];s.storage.cabbage=3;s.storageQuality.cabbage=[0,3,0];const b=I.status(s,'cabbage','storage');assert.equal(b.qty,3);assert.equal(b.quality,'上品');});
+test('freshness marker follows the entire real stack and does not mutate gameplay',()=>{const s=C.initial();C.add(s,'milk',2);K.ensure(s);s.kitchen.lots.bag.milk.forEach(l=>l.age=K.shelf('milk'));const before=structuredClone(s),v=I.status(s,'milk');assert(v.urgent);assert.equal(v.fresh,'陈放');assert.deepEqual(s,before);});
+test('lock badge comes from actual economy protection',()=>{const s=C.initial();E.lock(s,'cabbage');assert(U.badges(s,'cabbage').includes('已锁定'));E.lock(s,'cabbage');assert(!U.badges(s,'cabbage').includes('已锁定'));});
+test('empty and mixed quality states remain readable without only color cues',()=>{const s=C.initial();assert(U.badges(s,'cheese').includes('暂无库存'));s.bag.cheese=4;s.quality.cheese=[1,0,0];assert(U.badges(s,'cheese').includes('混合品质'));});
+test('catalog is informational and preserves discoveries, recipes and inventory',()=>{const s=C.initial(),before=structuredClone(s),html=U.catalog(s);assert(html.includes('不代表已经获得或解锁配方'));assert(html.includes('data-item="cabbage"'));assert(html.includes('来源：'));assert.deepEqual(s,before);});
+
+test('all 190 registered item drawings are distinct, including processed foods and seed variants',()=>{const rows=Object.keys(D.items).map(id=>[id,JSON.stringify(rendered(id))]);assert.equal(new Set(rows.map(r=>r[1])).size,rows.length);});
+
+test('seed details explain planting seasons and seasonal greenhouse restrictions',()=>{assert(E.details('tomatoSeed').uses[0].includes('播种番茄'));assert(E.details('tomato_seasonal').uses[1].includes('不支持'));assert(E.details('tomato_heirloom').sources.includes('春十五'));});

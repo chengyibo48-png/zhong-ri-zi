@@ -5,7 +5,7 @@
   const btn=(text,action,id='',extra='')=>'<button class="mini-btn" data-action="k-'+action+'" data-id="'+esc(id)+'" '+extra+'>'+text+'</button>';
   const select=(id,items,value)=>'<select id="'+id+'">'+items.map(([k,n])=>'<option value="'+esc(k)+'" '+(k===value?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select>';
   const icon=id=>'<canvas width="48" height="48" data-item="'+id+'" aria-hidden="true"></canvas>';
-  const needs=(s,map,n=1)=>'<div class="k-ingredients">'+Object.entries(map).map(([id,q])=>'<span class="'+((s.bag[id]||0)<q*n?'missing':'')+'">'+icon(id)+D.items[id].name+' <b>'+(s.bag[id]||0)+' / '+q*n+'</b></span>').join('')+'</div>';
+  const needs=(s,map,n=1)=>'<div class="k-ingredients">'+Object.entries(map).map(([id,q])=>'<span class="'+((s.bag[id]||0)<q*n?'missing':'')+'">'+icon(id)+D.items[id].name+' <b>'+(s.bag[id]||0)+' / '+q*n+'</b>'+((s.bag[id]||0)<q*n?'<small>缺 '+(q*n-(s.bag[id]||0))+' 份</small>':'')+'</span>').join('')+'</div>';
   const batch=()=>'<label class="k-batch">批量份数 '+select('k-batch',[1,3,5,10,15,20].map(n=>[String(n),n+' 份']),String(ui.batch))+' · 卡片展示每份用料，投料前请按份数备齐。</label>';
   const duration=n=>n>=1440?(n/1440).toFixed(1).replace('.0','')+' 天':Math.ceil(n)+' 分钟';
   const source=r=>r.source==='known'?'家传手写菜谱':r.source==='experiment'?'自由试配 / 累计做 5 份料理':r.source==='market'?'配方摊':r.source.startsWith('festival')?D.festivals[Number(r.source.at(-1))]:(D.npcs.find(n=>n.id===r.source)?.name||'乡亲')+'传授';

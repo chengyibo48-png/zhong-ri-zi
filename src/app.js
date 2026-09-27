@@ -163,10 +163,10 @@
     $('fullscreen-btn').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'进入全屏');
     $('fullscreen-btn').setAttribute('aria-pressed',String(!!document.fullscreenElement));
     const pc=$('portrait');W.portrait(pc.getContext('2d'),pc.width,pc.height,{color:['#57826a','#647e9b','#b17d67','#ac9a65'][s.appearance.shirt]},window.ZRZCharacters?.context(s)||s.appearance);
-    const seedCtx=$('seed-icon').getContext('2d');seedCtx.clearRect(0,0,24,24);W.item(seedCtx,s.seed,0,0,.75);
+    const seedCtx=$('seed-icon').getContext('2d');seedCtx.clearRect(0,0,24,24);W.item(seedCtx,F.seedId(s.seed,s.farm.seedKind),0,0,.75);
     drawIcons();
   }
-  function drawIcons(){const mini=$('area-map');if(mini)W.mapView(mini.getContext('2d'),s);document.querySelectorAll('canvas[data-item]').forEach(el=>{const c=el.getContext('2d');c.clearRect(0,0,el.width,el.height);if(el.closest('#toolbelt')&&T.defs[el.dataset.item])T.drawTool(c,el.dataset.item,T.tool(s,el.dataset.item).level,el.width/2,el.height*.7,el.width/58);else W.item(c,el.dataset.item,0,0,el.width/32);});document.querySelectorAll('canvas[data-npc]').forEach(el=>{const n=D.npcs.find(n=>n.id===el.dataset.npc);if(n){const c=el.getContext('2d');W.portrait(c,el.width,el.height,n,window.ZRZCharacters?window.ZRZCharacters.context(s,n.id,el.dataset.emotion):{id:n.id,emotion:el.dataset.emotion});}});}
+  function drawIcons(){const mini=$('area-map');if(mini)W.mapView(mini.getContext('2d'),s);document.querySelectorAll('canvas[data-item]').forEach(el=>{const c=el.getContext('2d');c.clearRect(0,0,el.width,el.height);c.imageSmoothingEnabled=false;el.setAttribute('role','img');el.setAttribute('aria-label',D.items[el.dataset.item]?.name||T.defs[el.dataset.item]?.name||({coin:'金币',seed:'种子袋',hand:'双手',build:'布置工具'}[el.dataset.item]||el.dataset.item));if(T.defs[el.dataset.item])T.drawTool(c,el.dataset.item,T.tool(s,el.dataset.item).level,el.width/2,el.height*.7,el.width/58);else W.item(c,el.dataset.item,0,0,el.width/32);});document.querySelectorAll('canvas[data-npc]').forEach(el=>{const n=D.npcs.find(n=>n.id===el.dataset.npc);if(n){const c=el.getContext('2d');W.portrait(c,el.width,el.height,n,window.ZRZCharacters?window.ZRZCharacters.context(s,n.id,el.dataset.emotion):{id:n.id,emotion:el.dataset.emotion});}});}
   function head(title,subtitle='在这里，时间会等你。'){return '<h2 id="modal-title">'+title+'</h2><p class="subtitle">'+subtitle+'</p>';}
   const button=(label,action,id='',cls='primary',extra='')=>'<button class="'+cls+'" data-action="'+action+'"'+(id?' data-id="'+id+'"':'')+' '+extra+'>'+label+'</button>';
   const itemCanvas=id=>'<canvas width="32" height="32" data-item="'+id+'"></canvas>';
@@ -213,7 +213,7 @@
       html+=dishes.length?dishes.map(([id,q])=>'<div class="row-card">'+itemCanvas(id)+'<div class="row-text"><h3>'+D.items[id].name+' ×'+q+'</h3><p>'+(n.likes.includes(id)?'是对方喜欢的口味。':'亲手做的菜，就是好心意。')+'</p></div>'+button('送一份','gift-item',id,'mini-btn','data-npc="'+n.id+'"')+'</div>').join(''):'<div class="empty-state">还没有做好的料理。先去小厨房点起灶火吧。</div>';
     } else if(name==='orders'){
       html=head('邻里手记','一点力所能及的帮助，一份有来有往的心意。这里的委托没有截止日期。');
-      html+=D.orders.map(o=>'<div class="row-card"><div class="row-text"><h3>'+o.title+' '+(s.flags[o.id]?'<span class="tag">已经送达</span>':'')+'</h3><p>'+o.text+'</p>'+(!s.flags[o.id]?ingredients(o.needs):'')+'<p>回礼：'+o.money+' 元 · '+Object.entries(o.reward).map(([id,n])=>D.items[id].name+' ×'+n).join('、')+'</p></div>'+button(s.flags[o.id]?'已完成':'送去料理','deliver',o.id,'mini-btn',s.flags[o.id]||!C.has(s,o.needs)?'disabled':'')+'</div>').join('');
+      html+=D.orders.map(o=>'<div class="row-card"><div class="row-text"><h3>'+o.title+' '+(s.flags[o.id]?'<span class="tag">已经送达</span>':'')+'</h3><p>'+o.text+'</p>'+(!s.flags[o.id]?ingredients(o.needs):'')+'<p class="item-rewards">回礼：'+itemCanvas('coin')+o.money+' 元 · '+Object.entries(o.reward).map(([id,n])=>itemCanvas(id)+D.items[id].name+' ×'+n).join('、')+'</p></div>'+button(s.flags[o.id]?'已完成':'送去料理','deliver',o.id,'mini-btn',s.flags[o.id]||!C.has(s,o.needs)?'disabled':'')+'</div>').join('');
       html+='<div class="section-divider">大家一起做的事</div>'+projectCard();
       if(s.flags.bridge)html+='<div class="paper-note">从一把青菜到一顿家常饭，再到一座修好的河埠，你已经完成了基础版的主体验。继续认识邻居，试试下一季的菜吧。</div>';
     } else if(name==='project'){
@@ -255,7 +255,7 @@
       html+='<div class="settings-row"><label>琴音与交互音</label>'+button(s.settings.sound?'已开启':'已关闭','sound','','secondary')+'</div><div class="settings-row"><label>音量</label><input id="volume-setting" type="range" min="0" max="1" step=".05" value="'+s.settings.volume+'" aria-label="音量"></div>';
       html+='<div class="settings-row"><label>生活提示<small>显示画面里的心愿便条与操作提示；H 可临时收起全部界面。</small></label>'+button(s.settings.hints?'已开启':'已关闭','toggle-hints','','secondary')+'</div>';
       html+='<div class="settings-row"><label>自定义按键<small>方向键、空格和 Esc 始终保留，也可以更换 8 个字母快捷键。</small></label>'+button('修改按键','controls','','secondary')+'</div>';
-      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.18.0 · 各有模样，各有日常<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
+      html+='<div class="button-row">'+button('保存与读档','save','','secondary')+button('生活指南','help','','secondary')+button('重新开始','new-confirm','','secondary danger')+'</div><div class="mode-tag">种日子 v0.19.0 · 一物一形，一篮日常<br>24 位村民、28 种作物、30 道菜、8 条成年关系线。</div>';
     } else if(name==='controls'){
       html=head('把操作换成顺手的样子','点击一个按键，再按想使用的字母。重复按键会交换位置。Esc 取消修改。');
       html+='<div class="key-grid">'+Object.entries(bindingNames).map(([id,name])=>'<div class="key-row"><span>'+name+'</span>'+button(keyLabel(id),'bind-key',id,'key-button')+'</div>').join('')+'</div>';
