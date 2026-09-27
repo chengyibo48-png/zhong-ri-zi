@@ -1,0 +1,84 @@
+(function(root){
+'use strict';
+const R=root.ZRZRanch,V=root.ZRZVillage,C=root.ZRZCore,D=root.ZRZData,cache=new WeakMap(),poses=new WeakMap();
+function runtime(s){if(!cache.has(s))cache.set(s,{clock:0,actors:{}});return cache.get(s);}
+function state(room){return {village:{interior:room||null}};}
+function walk(p,target,room,dt,speed,rt){if(!rt.target||Math.hypot(rt.target.x-target.x,rt.target.y-target.y)>18||rt.room!==room){rt.target=target;rt.room=room;rt.path=V.route(state(room),target.x,target.y,p);}const q=rt.path?.[0];p.walking=false;if(!q)return;const d=Math.hypot(q.x-p.x,q.y-p.y),n=Math.min(d,speed*dt);if(d>.01){const dx=(q.x-p.x)/d*n,dy=(q.y-p.y)/d*n;p.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';p.x+=dx;p.y+=dy;p.walking=true;}if(d<=n+.1)rt.path.shift();}
+R.hold=(s,id)=>{const rt=runtime(s);(rt.actors[id]??={}).hold=rt.clock+35;};
+R.position=(s,id)=>{const a=s.animals.find(v=>v.id===id);return a?.position.room?a.position.inside:a?.position;};
+R.visible=(s,a)=>(a.position.room||null)===(s.village.interior||null);
+R.point=(s,a)=>R.visible(s,a)?{...R.position(s,a.id),kind:'animal',id:a.id,name:a.name+' · '+R.species[a.type].name+(a.ready?' · 可收产物':a.lost?' · 带回家':''),room:a.position.room}:null;
+R.points=s=>s.animals.map(a=>R.point(s,a)).filter(Boolean);
+R.petPoint=s=>({...s.ranch.pet.position,id:'pet',kind:'pet',name:s.pet.name+' · 陪伴与训练'});
+R.destination=(s,id)=>{const a=s.animals.find(v=>v.id===id);if(!a)return null;if(a.position.room&&a.position.room!==s.village.interior){const h=R.houseOf(a);return {...h.door,id:h.id,house:h.id,kind:'enter',name:h.name};}return {...R.position(s,id),kind:'animal',id,name:a.name,room:a.position.room};};
+R.update=(s,dt)=>{R.ensure(s);const rt=runtime(s);rt.clock+=dt;const focus=V.stateRuntime(s).animalFocus;
+ for(const [i,a]of s.animals.entries()){const ar=rt.actors[a.id]??={},p=a.position,h=R.houseOf(a),out=R.safeOut(s,a);if(ar.hold>rt.clock){R.position(s,a.id).walking=false;continue;}
+  if(p.room){if(out||a.lost){walk(p.inside,{x:480,y:567},p.room,dt,38,ar);if(Math.hypot(p.inside.x-480,p.inside.y-567)<5){Object.assign(p,V.safePosition(state(),{x:h.door.x,y:h.door.y+8}));p.room=null;ar.target=null;}}
+   else{if(!ar.wander||rt.clock>(ar.next||0)){ar.wander=V.safePosition(state(p.room),{x:335+(i%6)*55+Math.sin(rt.clock+i)*24,y:485+(i%2)*38});ar.next=rt.clock+8;ar.target=null;}walk(p.inside,ar.wander,p.room,dt,a.rest?12:23,ar);}}
+  else if(!out&&!a.lost){walk(p,h.door,null,dt,55,ar);if(Math.hypot(p.x-h.door.x,p.y-h.door.y)<7){p.room=h.id;p.inside={x:480,y:560,direction:'up'};ar.target=null;ar.wander=null;}}
+  else{const gathering=focus&&V.stateRuntime(s).clock<focus.until;const z=a.lost?{x:5600,y:2250}:gathering?focus:R.zones[a.type==='duck'?0:s.ranch.zone];if(!ar.wander||rt.clock>(ar.next||0)||ar.gathering!==gathering){ar.wander=V.safePosition(state(),{x:z.x+Math.sin(i*2.4+rt.clock*.05)*100,y:z.y+Math.cos(i*1.8+rt.clock*.07)*65});ar.next=rt.clock+9;ar.gathering=gathering;ar.target=null;}walk(p,ar.wander,null,dt,gathering?70:a.type==='cow'?30:38,ar);}
+ }
+ const pet=s.ranch.pet,pr=rt.actors.pet??={},home={x:2775,y:1690},target=pet.energy<15||pet.hunger<15||s.minutes>=1140?home:pet.mode==='follow'&&!s.village.interior?{x:s.player.x-35,y:s.player.y+22}:pet.mode==='patrol'?{x:5260+Math.sin(rt.clock*.025)*170,y:1800+Math.cos(rt.clock*.025)*110}:home;if(!(pr.hold>rt.clock))walk(pet.position,V.safePosition(state(),target),null,dt,pet.mode==='follow'?185:82,pr);
+};
+const oval=(c,x,y,rx,ry,color)=>{c.fillStyle=color;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fill();};
+const rect=(c,x,y,w,h,color)=>{c.fillStyle=color;c.fillRect(Math.round(x),Math.round(y),w,h);};
+R.drawAnimal=(c,a,x,y,t=0)=>{const p=a.position?.room?a.position.inside:a.position||{},young=!R.mature(a),size=young?.64:a.type==='cow'?1.23:1,bob=p.walking?Math.sin(t*11)*1.4:Math.sin(t*2+a.age)*.5,dir=p.direction==='left'?-1:1,coat=a.breed==='hardy'?'#8f7861':a.breed==='productive'?'#ebcfab':R.species[a.type].color;
+ const pose=poses.get(a);c.save();c.translate(x,y);if(pose&&t<pose.until&&pose.action==='feed')c.rotate(Math.sin(t*10)*.045);c.scale(size,size);oval(c,0,1,23,7,'#203b3540');c.scale(dir,1);c.translate(0,bob);
+ if(['hen','duck'].includes(a.type)){const duck=a.type==='duck';rect(c,-7,-6,3,8,'#b68136');rect(c,8,-6,3,8,'#b68136');rect(c,-8,1,8,2,'#c7974b');rect(c,8,1,8,2,'#c7974b');oval(c,0,-16,17,13,coat);oval(c,-4,-17,10,8,duck?'#aeaf8d':'#c49862');rect(c,-20,-21,8,9,duck?'#a8b4a0':'#9e784b');oval(c,13,-28,9,10,coat);rect(c,18,-29,duck?12:7,4,'#dcaa4f');rect(c,13,-31,3,3,'#253d35');rect(c,14,-32,1,1,'#fff6d6');if(!duck){rect(c,9,-40,9,4,'#b74f41');rect(c,15,-23,3,5,'#b74f41');}else rect(c,7,-20,10,3,'#698f7b');}
+ else{const pig=a.type==='pig',sheep=a.type==='sheep',leg=p.walking?Math.sin(t*10)*4:0;for(const [lx,off]of [[-15,1],[-8,-1],[11,-1],[19,1]]){rect(c,lx,-12,5,14+leg*off,sheep?'#89785e':'#9b7958');rect(c,lx,1+leg*off,6,3,'#4d5040');}oval(c,0,-23,pig?25:27,17,coat);oval(c,-6,-29,20,10,sheep?'#f2ecd7':pig?'#e5b2a0':'#cfaa73');if(sheep){for(let j=0;j<9;j++)oval(c,-19+j%5*9,-29+Math.floor(j/5)*11,8,7,j%2?'#ddd8c0':'#ede8d3');}else if(!pig){rect(c,-16,-28,10,9,'#9e7748');rect(c,2,-21,9,9,'#a98557');}oval(c,24,-23,sheep?10:13,13,sheep?'#8b7b64':coat);oval(c,31,-15,pig?10:9,6,pig?'#bc817d':'#d7b88d');rect(c,28,-28,3,3,'#263b34');rect(c,28,-28,1,1,'#fff6dd');oval(c,15,-35,6,4,coat);oval(c,31,-35,5,4,coat);if(a.type==='cow'){rect(c,18,-40,3,8,'#eee2bc');rect(c,32,-40,3,8,'#eee2bc');}if(pig){rect(c,29,-16,2,3,'#925d61');rect(c,35,-16,2,3,'#925d61');c.strokeStyle='#a4756e';c.lineWidth=2;c.beginPath();c.arc(-27,-23,4,0,5);c.stroke();}else{rect(c,-28,-22,2,17,'#9c865b');rect(c,-31,-8,6,4,'#5d5847');}rect(c,18,-13,13,3,a.trait==='shy'?'#7998a1':a.trait==='friendly'?'#b95448':'#75905d');rect(c,24,-10,3,4,'#dab45e');}
+ c.restore();c.save();c.font='bold 13px sans-serif';c.textAlign='center';if(a.ready||a.illness>=20||a.lost){oval(c,x,y-54*size,10,10,a.lost||a.illness>=20?'#a76743':'#698e64');c.fillStyle='#fff3d1';c.fillText(a.lost||a.illness>=20?'!':'✦',x,y-50*size);}if(a.rest){c.fillStyle='#75959d';c.fillText('z',x+22,y-38*size);}c.restore();};
+R.drawPet=(c,s,t)=>{const p=s.ranch.pet.position,cat=s.pet.type==='cat';c.save();c.translate(p.x,p.y);const b=p.walking?Math.sin(t*13):0;oval(c,0,0,17,5,'#203b3540');oval(c,0,-14+b,17,10,cat?'#c79761':'#b88653');rect(c,-11,-10,4,12+b,'#79573e');rect(c,9,-10,4,12-b,'#79573e');oval(c,15,-22+b,9,10,'#dec197');rect(c,10,-34,4,6,cat?'#9e7753':'#705440');rect(c,20,-34,4,6,cat?'#9e7753':'#705440');rect(c,18,-24,2,2,'#263a33');rect(c,21,-18,4,3,'#6d5343');rect(c,-22,-22,5,14,'#a27e50');rect(c,11,-13,12,3,'#af5546');c.restore();};
+R.drawRoom=(c,s,t)=>{const id=Object.keys(R.barns).find(k=>R.barns[k].house===s.village.interior);if(!id)return false;const b=s.ranch.barns[id],pal=id==='pigpen'?'#b0a18a':id==='poultry'?'#cab582':'#bbab83';
+ rect(c,0,0,960,672,'#293d39');rect(c,92,118,780,506,'#233b34');rect(c,99,107,764,500,'#826d51');rect(c,108,195,742,409,pal);
+ for(let y=209;y<594;y+=27)for(let x=119;x<838;x+=45){rect(c,x+(y%2)*5,y,39,1,'#8d816344');rect(c,x+13,y+11,3,2,'#e6d3a855');}
+ rect(c,99,107,764,99,'#cab894');rect(c,100,194,760,15,'#705d45');for(let x of [110,340,610,840]){rect(c,x,111,9,475,'#927449');rect(c,x+2,112,2,470,'#bea06b');}
+ for(let x of [205,477,752]){rect(c,x-42,120,84,65,'#755f43');rect(c,x-36,126,72,52,'#9eb5a1');rect(c,x-33,129,66,24,'#d5dfb9');rect(c,x-2,126,4,52,'#6c7562');rect(c,x-36,150,72,4,'#6c7562');}
+ const pen=(x,y,w,h)=>{rect(c,x,y,w,h,'#8e7d55');rect(c,x+5,y+5,w-10,h-10,b.clean<40?'#a29465':'#d3bc70');for(let j=0;j<40;j++){const xx=x+9+j*31%(w-19),yy=y+7+j*17%(h-13);rect(c,xx,yy,6,1,j%2?'#e9d594':'#b29a58');}for(let j=0;j<w;j+=25){rect(c,x+j,y-10,4,16,'#947744');}rect(c,x,y-4,w,3,'#c2a774');};
+ pen(166,447,142,49);pen(659,445,143,35);for(let j=0;j<5;j++)pen(340+j*57,518,47,23);
+ // All solid furniture matches the shared room collision rectangles.
+ rect(c,164,254,160,37,'#856844');rect(c,169,259,150,24,'#ac9d59');for(let j=0;j<21;j++)rect(c,173+j*7,263+j%4*4,6,2,'#d5cc86');
+ rect(c,627,248,140,40,'#756748');rect(c,633,254,128,24,'#658d8b');rect(c,637,257,120,4,'#b2d4c0');for(let j=0;j<5;j++)rect(c,640+j*22,269+Math.sin(t+j)*2,12,1,'#bedbc2');
+ rect(c,380,328,140,41,'#8a6946');rect(c,377,322,146,12,'#c6a671');rect(c,385,336,5,31,'#a27d50');rect(c,509,336,5,31,'#a27d50');
+ if(id==='poultry'){for(let j=0;j<3;j++){rect(c,190+j*42,224,35,28,'#91713f');oval(c,207+j*42,247,15,5,'#c7aa61');oval(c,207+j*42,241,5,7,'#eee2b9');}rect(c,390,299,67,23,'#aa8b52');rect(c,396,303,55,16,'#dbcca0');for(let j=0;j<3;j++)oval(c,408+j*16,311,5,7,'#f2e5bd');}
+ else if(id==='cattle'){for(let j=0;j<3;j++){rect(c,396+j*35,302,24,21,'#8da6a0');oval(c,408+j*35,302,12,4,'#e8e8cf');rect(c,399+j*35,305,3,14,'#bad0bc');}}
+ else if(id==='sheepfold'){for(let j=0;j<4;j++)oval(c,405+j*19,312,13,9,'#e9dfc9');c.strokeStyle='#546e69';c.lineWidth=3;c.beginPath();c.moveTo(477,303);c.lineTo(500,318);c.moveTo(495,303);c.lineTo(477,318);c.stroke();for(let j=0;j<4;j++){rect(c,688+j*20,402,3,35,'#866d45');rect(c,681+j*20,403,16,22,'#d6ccb3');}}
+ else{oval(c,727,460,46,12,'#8e765c');rect(c,398,304,33,18,'#b19763');rect(c,399,307,31,4,'#d0ba7f');for(let j=0;j<4;j++)rect(c,743+j*8,314,4,100,'#82786166');}
+ rect(c,702,230,3,20,'#7e704a');oval(c,703,252,8,9,'#b19457');rect(c,701,257,4,4,'#e5c883');
+ c.textAlign='center';c.fillStyle='#584f35';c.font='15px "Microsoft YaHei"';c.fillText(R.barns[id].name+' · '+(b.built?'草床暖，伙伴安':'等待修缮'),478,233);
+ rect(c,445,586,70,23,'#4b493a');rect(c,441,583,78,5,'#dcc28f');rect(c,450,591,60,3,'#ba9b63');
+ if(s.minutes>1080||s.minutes<420){rect(c,108,205,743,379,'#20344833');oval(c,477,160,15,15,'#f4d78b44');}
+ else{c.fillStyle='#fff2b317';c.beginPath();c.moveTo(442,178);c.lineTo(513,178);c.lineTo(610,435);c.lineTo(465,435);c.fill();}
+ return true;};
+R.plan=(s,ids,action)=>ids.map(id=>s.animals.find(a=>a.id===id)).filter(a=>a&&(action==='feed'?a.hunger<90&&a.care.feed!==s.day:action==='collect'?a.ready||a.feathers:action==='clean'?a.clean<95&&a.care.clean!==s.day:action==='treat'?a.illness>0&&a.care.treat!==s.day:true)).map(a=>({animalId:a.id,action,arg:s.ranch.feed}));
+R.perform=(s,t)=>t.animalId?R.action(s,t.animalId,t.action,t.arg):t.pet?R.petAction(s,t.action):t.action==='craft'?R.craft(s,t.arg):t.action==='purchase'?R.buyAnimal(s,...t.arg):t.action==='breed'?R.breed(s,...t.arg):t.action==='incubate'?R.incubate(s,t.arg):R.barnAction(s,t.barnId,t.action);
+const oldChore=V.chore;V.chore=(s,p)=>{let r;if(p.barnId){r=R.barnAction(s,p.barnId,p.action);}else if(p.action==='feed'){const ids=s.animals.filter(a=>!a.position.room&&Math.hypot(a.position.x-p.x,a.position.y-p.y)<220).map(a=>a.id),tasks=R.plan(s,ids,'feed');if(!tasks.length)return {ok:false,msg:'附近没有需要添料的伙伴；可在牧场名册安排逐只喂养。'};const needs=tasks.reduce((n,t)=>n+Math.ceil(R.species[s.animals.find(a=>a.id===t.animalId).type].feed*R.breeds[s.animals.find(a=>a.id===t.animalId).breed].feed),0);if(!C.has(s,{feed:needs})||s.stamina<tasks.length*2)return {ok:false,msg:'附近伙伴共需基础饲料 ×'+needs+'，最多 '+tasks.length*2+' 体力。'};for(const t of tasks)R.action(s,t.animalId,'feed','feed');r={ok:true,msg:'给附近 '+tasks.length+' 位伙伴添好了各自的一份饲料。'};}else if(p.action==='compost'||p.action==='churn')r=R.craft(s,p.action==='compost'?'compost':'cream');else if(p.action==='brush'){const a=s.animals.find(a=>!a.position.room&&Math.hypot(a.position.x-p.x,a.position.y-p.y)<200&&a.clean<95);r=a?R.action(s,a.id,'clean'):{ok:false,msg:'附近伙伴皮毛干净，或正在畜舍里歇息。'};}else return oldChore(s,p);if(r.ok)V.feedback(s,p,p.action,r.msg,2);return r;};
+R.roomObjects=h=>{const id=Object.keys(R.barns).find(k=>R.barns[k].house===h.id);if(!id)return null;const names={poultry:['草编巢箱','孵化观察本','小铜铃'],cattle:['乳桶与挤奶布','饮水铜勺','系绳桩'],sheepfold:['手剪与羊毛','草床观察本','羊圈铜铃'],pigpen:['食槽清单','排水观察牌','稻草玩具']}[id];return [{id:'room-exit',kind:'exit',name:'推门回到村庄',x:480,y:590},...names.map((name,i)=>({id:h.id+'-egg-'+i,kind:'egg',index:i,name:'动手看看 · '+name,x:[450,690,725][i],y:[390,302,500][i],house:h.id})),{id:h.id+'-clean',kind:'chore',barnId:id,action:'clean',name:'清扫草床 · 圈肥可熟化',x:220,y:508},{id:h.id+'-bedding',kind:'chore',barnId:id,action:'bedding',name:'铺一层干草 · 垫料 1',x:430,y:430},{id:'room-service',kind:'animals',name:'翻开牧场名册',x:620,y:536}];};
+R.drawGround=(c,s,t)=>{for(const [i,z]of R.zones.entries()){if(Math.hypot(s.player.x-z.x,s.player.y-z.y)>1300)continue;const grass=s.ranch.grass[i];oval(c,z.x,z.y,135,76,grass<25?'#a99d6928':'#59894525');for(let j=0;j<Math.floor(grass*.7);j++){const x=z.x+Math.sin(j*7.7)*126,y=z.y+Math.cos(j*2.4)*66;if(V.blocked(state(),x,y))continue;rect(c,x,y,1,4,j%3?'#819651':'#c4bd72');rect(c,x-2,y+2,4,1,'#aab36b');}rect(c,z.x-104,z.y+60,3,25,'#846744');rect(c,z.x-135,z.y+48,69,22,'#a1824e');rect(c,z.x-132,z.y+51,63,16,'#e4d6a6');c.fillStyle='#56643f';c.font='10px "Microsoft YaHei"';c.textAlign='center';c.fillText(z.name,z.x-100,z.y+63);}};
+R.drawBarn=(c,s,def,h,t)=>{const id=Object.keys(R.barns).find(k=>R.barns[k]===def),b=s.ranch.barns[id],x=h.x,y=h.y+h.h;
+ if(!b.built){rect(c,x+24,y-12,h.w-48,6,'#b79866');c.strokeStyle='#786b49';c.lineWidth=3;c.beginPath();c.moveTo(x+30,y-36);c.lineTo(x+h.w-30,y+4);c.stroke();return;}
+ for(let i=0;i<b.space+1;i++){rect(c,x+10+i*24,y+8,15,15,'#b7a062');rect(c,x+11+i*24,y+10,13,2,'#e2c87f');}
+ if(b.comfort){rect(c,x+h.w-25,y-32,2,19,'#786347');oval(c,x+h.w-24,y-14,6,8,'#bd6b42');rect(c,x+h.w-26,y-16,4,6,'#eac875');}
+ if(b.protection)for(let i=0;i<4;i++){rect(c,x+h.w+5+i*10,y-8,3,24,'#95814f');rect(c,x+h.w,y,44,3,'#b8a276');}
+ if(b.autoFeed){rect(c,x+17,y-25,30,15,'#9b794f');rect(c,x+19,y-23,26,5,s.ranch.stores.feed?'#c8c174':'#715c43');}
+ if(b.autoCollect){rect(c,x+h.w-57,y+7,28,19,'#9c7450');rect(c,x+h.w-56,y+10,26,3,'#c1a274');}
+ if(b.durability<25){rect(c,x+45,h.y+36,14,6,'#3a4b46');}
+};
+const perform=R.perform;
+R.perform=(s,t)=>{const result=perform(s,t);if(result.ok){const rt=runtime(s),id=t.animalId||'pet',a=s.animals.find(a=>a.id===id);(rt.actors[id]??={}).hold=rt.clock+2.2;if(a){poses.set(a,{action:t.action,until:V.stateRuntime(s).clock+2.2});rt.action={id,kind:t.action,at:V.stateRuntime(s).clock,room:a.position.room};}}return result;};
+R.drawAction=(c,s,time)=>{const fx=runtime(s).action;if(!fx||time-fx.at>2.2||fx.room!==s.village.interior)return;const a=s.animals.find(a=>a.id===fx.id),p=a&&R.position(s,a.id);if(!p)return;const age=time-fx.at;
+ if(fx.kind==='feed'){oval(c,p.x+26,p.y+1,12,5,'#866b46');oval(c,p.x+26,p.y-1,10,3,'#cbb679');for(let i=0;i<7;i++)rect(c,p.x+22+i%3*3,p.y-11+(age*14+i*3)%10,2,2,'#e2ca7a');}
+ if(fx.kind==='collect'&&a.type==='cow'){rect(c,p.x+18,p.y-2,15,15,'#8ba7a0');oval(c,p.x+25,p.y-1,7,3,'#eee9cc');rect(c,p.x+25,p.y-12,1,10,'#eee8d0');}
+ if(fx.kind==='collect'&&a.type==='sheep'){const x=p.x+8,y=p.y-23;c.strokeStyle='#627c78';c.lineWidth=2;c.beginPath();c.moveTo(x-9,y-8);c.lineTo(x+8,y+6);c.moveTo(x+9,y-8);c.lineTo(x-8,y+6);c.stroke();for(let i=0;i<4;i++)oval(c,p.x-15+i*10,p.y-8+age*5,4,3,'#eee6ce');}
+ if(fx.kind==='collect'&&['hen','duck'].includes(a.type)){oval(c,p.x+22,p.y-1,14,6,'#ab8652');for(let i=0;i<3;i++)oval(c,p.x+14+i*7,p.y-5,4,6,'#f0e5bf');}
+ if(fx.kind==='clean'){for(let i=0;i<8;i++)oval(c,p.x-20+i*6,p.y-20-Math.sin(age*3+i)*7,2,2,'#dfede1');}
+};
+const world=root.ZRZWorld,oldItem=world.item;
+world.item=(c,id,x=0,y=0,scale=1)=>{if(!['wool','yarn','cloth','feather','cream','yogurt','animalMedicine','manure','fertileHenEgg','fertileDuckEgg','truffle'].includes(id))return oldItem(c,id,x,y,scale);c.save();c.translate(x,y);c.scale(scale,scale);
+ if(['wool','yarn'].includes(id)){oval(c,16,19,12,10,'#c6b9a1');for(let i=0;i<5;i++)oval(c,9+i%3*7,12+Math.floor(i/3)*8,6,5,id==='yarn'?'#b28f79':'#e6ddc4');if(id==='yarn'){c.strokeStyle='#e4c4a0';for(let i=0;i<5;i++){c.beginPath();c.moveTo(8+i*3,10);c.lineTo(6+i*3,27);c.stroke();}}}
+ else if(id==='cloth'){rect(c,5,8,22,20,'#918779');rect(c,6,8,21,5,'#c0ab8b');for(let i=0;i<4;i++)rect(c,7+i*5,14,2,14,'#baab8e');}
+ else if(id==='feather'){oval(c,17,15,7,12,'#e7dfc4');rect(c,14,7,2,22,'#b9a887');}
+ else if(id.startsWith('fertile')){oval(c,16,18,10,13,id.includes('Duck')?'#ced9c1':'#e9daba');rect(c,14,16,5,5,'#85986b');}
+ else if(id==='manure'){oval(c,16,25,14,5,'#7f6744');oval(c,16,20,10,6,'#947952');rect(c,11,15,2,7,'#b89d66');}
+ else if(id==='truffle'){oval(c,16,19,11,10,'#72533e');for(let i=0;i<7;i++)rect(c,9+i%3*5,14+Math.floor(i/3)*5,3,2,'#ab8c64');}
+ else{rect(c,8,10,16,19,id==='animalMedicine'?'#8caaa3':'#c6b78a');rect(c,7,7,18,5,'#746348');rect(c,11,16,10,9,'#efead2');if(id==='animalMedicine'){rect(c,15,17,2,7,'#799e86');rect(c,12,20,8,2,'#799e86');}else oval(c,16,20,4,3,'#f9f0d3');}c.restore();};
+})(typeof window!=='undefined'?window:globalThis);

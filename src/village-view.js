@@ -109,14 +109,14 @@
     if(weather==='晴'&&light.night<.2){c.save();c.globalAlpha=.035;for(let i=0;i<3;i++)E(c,x+(i*360+t*9)%(w+350)-175,y+i*112,170,50,'#244c42');c.restore();}
   }
   function draw(canvas,s,t,hover,walking,effect,view){const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;c.clearRect(0,0,canvas.width,canvas.height);c.save();c.translate(-view.x,-view.y);const indoor=!!s.village.interior,season=C.calendar(s).season,rt=V.stateRuntime(s),time=rt.clock;
-    if(indoor){R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#253c37');room(c,s,time);}else{R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#7c9d62');for(const r of V.regions){if(r.x>view.x+view.viewWidth||r.x+1920<view.x||r.y>view.y+view.viewHeight||r.y+1152<view.y)continue;c.drawImage(terrain(r,s),r.x,r.y);}
-      root.ZRZFarming?.drawCoverage(c,s);for(let i=0;i<72;i++){const p=V.plotPosition(i);if(Math.abs(p.x-s.player.x)<900&&Math.abs(p.y-s.player.y)<700)plot(c,s,i,time);}
+    if(indoor){R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#253c37');if(!root.ZRZRanch?.drawRoom(c,s,time))room(c,s,time);}else{R(c,view.x,view.y,view.viewWidth+2,view.viewHeight+2,'#7c9d62');for(const r of V.regions){if(r.x>view.x+view.viewWidth||r.x+1920<view.x||r.y>view.y+view.viewHeight||r.y+1152<view.y)continue;c.drawImage(terrain(r,s),r.x,r.y);}
+      root.ZRZRanch?.drawGround(c,s,time);root.ZRZFarming?.drawCoverage(c,s);for(let i=0;i<72;i++){const p=V.plotPosition(i);if(Math.abs(p.x-s.player.x)<900&&Math.abs(p.y-s.player.y)<700)plot(c,s,i,time);}
     }
     const visible=p=>p.x>view.x-300&&p.x<view.x+view.viewWidth+160&&p.y>view.y-50&&p.y<view.y+view.viewHeight+260,objects=[];
     if(!indoor){for(const a of root.ZRZFarming?.ensure(s).facilities||[]){const p=V.plotPosition(a.anchor);if(visible(p))objects.push({y:p.y+14,draw:()=>root.ZRZFarming.drawFacility(c,s,a,time)});}for(const p of V.allProps.filter(visible)){const bottom=p.kind==='house'?p.y+p.h:p.y;objects.push({y:bottom,draw(){if(p.kind==='house')cast(c,p.x+p.w/2,bottom,p.w,100,s);const v=sprite(p,season),under=p.kind==='house'?s.player.x>p.x&&s.player.x<p.x+p.w&&s.player.y>p.y&&s.player.y<p.y+55:['tree','bamboo','willow','orchard','blossom'].includes(p.kind)&&Math.abs(s.player.x-p.x)<55&&s.player.y<p.y&&s.player.y>p.y-110;c.globalAlpha=under?.42:1;c.drawImage(v.canvas,p.x+v.dx,p.y+v.dy);c.globalAlpha=1;}});}
       for(const p of V.outdoorActions.filter(visible))objects.push({y:p.y,draw:()=>p.kind==='chore'?ranchObject(c,p,time,s):A.prop(c,{kind:'table',x:p.x,y:p.y},season)});
-      for(const [i,a]of s.animals.entries()){const p=V.animalPosition(s,i);if(visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,33,35,s);W.drawAnimal(c,a,p.x,p.y,time);}});}
-      const pet={x:2775,y:1690};if(visible(pet))objects.push({y:pet.y,draw:()=>{c.save();c.translate(1928,1170);W.drawPet(c,s,time);c.restore();}});
+      if(!root.ZRZRanch)for(const [i,a]of s.animals.entries()){const p=V.animalPosition(s,i);if(visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,33,35,s);W.drawAnimal(c,a,p.x,p.y,time);}});}
+      const pet={x:2775,y:1690};if(!root.ZRZRanch&&visible(pet))objects.push({y:pet.y,draw:()=>{c.save();c.translate(1928,1170);W.drawPet(c,s,time);c.restore();}});
       for(const v of s.layouts){const p=C.layoutSlots[v.slot];objects.push({y:p.y+1152,draw:()=>W.drawFurniture(c,v.id,p.x+1920,p.y+1152,season)});}
       for(const p of V.points(s).filter(p=>p.kind==='gather'&&s.collected[p.id]!==s.day&&visible(p)))objects.push({y:p.y,draw:()=>W.item(c,p.item,p.x-16,p.y-31,1)});
       if(s.projects.canal){R(c,2977,1710,9,155,'#397b82');R(c,2979,1712,5,151,'#90c9bc');}
@@ -126,9 +126,11 @@
       if(s.projects.market)objects.push({y:652,draw:()=>{R(c,2984,579,5,81,'#84613b');R(c,3150,579,5,81,'#84613b');for(let i=0;i<10;i++)R(c,2979+i*18,559,18,29,i%2?'#6b8b75':'#d9c18c');}});
       const oldHome=V.houses.find(h=>h.name==='爷爷的老屋');if(oldHome&&visible(oldHome))objects.push({y:oldHome.y+oldHome.h+.1,draw:()=>{const p=oldHome;if(!s.upgrades.roof){for(const [dx,dy]of [[41,24],[87,33],[143,17]])R(c,p.x+dx,p.y+dy,8,5,'#34494a');}else{R(c,p.x+157,p.y+78,2,17,'#826b42');E(c,p.x+158,p.y+91,7,9,'#b6533b');R(c,p.x+156,p.y+98,4,5,'#dcb575');}}});
     }
+    if(root.ZRZRanch){for(const a of s.animals){const p=root.ZRZRanch.point(s,a);if(p&&visible(p))objects.push({y:p.y,draw:()=>root.ZRZRanch.drawAnimal(c,a,p.x,p.y,time)});}const p=root.ZRZRanch.petPoint(s);if(!indoor&&visible(p))objects.push({y:p.y,draw:()=>root.ZRZRanch.drawPet(c,s,time)});}
+    if(!indoor&&root.ZRZRanch)for(const b of Object.values(root.ZRZRanch.barns)){const h=V.houses.find(h=>h.id===b.house);if(visible(h))objects.push({y:h.y+h.h+.2,draw:()=>root.ZRZRanch.drawBarn(c,s,b,h,time)});}
     for(const n of D.npcs){const p=V.npcPoint(s,n);if(p&&visible(p))objects.push({y:p.y,draw:()=>{cast(c,p.x,p.y,22,28,s);const a=rt.actors[n.id];A.character(c,p.x,p.y,n.color,time,a?.walking,false,p.direction||'down',{id:n.id});if(a?.phase==='work'&&!a.walking&&!indoor){R(c,p.x+12,p.y-11+Math.sin(time*3)*2,6,5,A.styles[n.id].accent);}}});}
     objects.push({y:s.player.y,draw:()=>actionPose(c,s,time,walking)});objects.sort((a,b)=>a.y-b.y).forEach(o=>o.draw());
-    if(hover){c.strokeStyle='#fff0b2';c.lineWidth=1.5;c.beginPath();c.ellipse(hover.x,hover.y+3,22,8,0,0,7);c.stroke();}fx(c,s);
+    if(hover){c.strokeStyle='#fff0b2';c.lineWidth=1.5;c.beginPath();c.ellipse(hover.x,hover.y+3,22,8,0,0,7);c.stroke();}fx(c,s);root.ZRZRanch?.drawAction(c,s,time);
     if(!indoor)atmosphere(c,s,time,view);c.restore();
   }
   function nativeLabel(c,x,y,text,color='#fff3d7',bg='#30483ee8',max=280){c.font='500 12px "Microsoft YaHei",sans-serif';c.textAlign='center';let lines=[],line='';for(const ch of text){if(c.measureText(line+ch).width>max){lines.push(line);line=ch;}else line+=ch;}if(line)lines.push(line);const w=Math.min(max,Math.max(...lines.map(l=>c.measureText(l).width)))+20,h=lines.length*20+10;c.fillStyle=bg;c.beginPath();c.roundRect(x-w/2,y-h,w,h,4);c.fill();c.fillStyle=color;lines.forEach((l,i)=>c.fillText(l,x,y-h+20+i*20));}
@@ -136,11 +138,13 @@
     if(!indoor)for(const h of V.houses){const p=pos(h.x+h.w*.54,h.y+h.h*.46);if(p.x<45||p.x>view.width-45||p.y<0||p.y>view.height)continue;nativeLabel(c,p.x,p.y,h.name,'#ffedc1','#665039ef',140);}
     const rt=V.stateRuntime(s);for(const b of rt.bubble){const p=pos(b.x,b.y);nativeLabel(c,Math.max(145,Math.min(view.width-145,p.x)),Math.max(115,p.y),b.text,'#354a3c','#fff2d9f5',260);}
     for(const n of D.npcs){const p=V.npcPoint(s,n);if(!p||Math.hypot(p.x-s.player.x,p.y-s.player.y)>165)continue;const q=pos(p.x,p.y-42);if(q.y>120)nativeLabel(c,q.x,q.y,n.name,'#334d3c','#f8edceef',100);}
+    if(root.ZRZRanch)for(const a of s.animals){const p=root.ZRZRanch.point(s,a);if(p&&Math.hypot(p.x-s.player.x,p.y-s.player.y)<160&&Math.hypot(p.x-s.player.x,p.y-s.player.y)>65){const q=pos(p.x,p.y-61);if(q.y>110)nativeLabel(c,q.x,q.y,a.name+' · '+root.ZRZRanch.stage(a),'#fff2d4','#4d6845e8',130);}}
     if(indoor){const h=V.houses.find(h=>h.id===indoor);for(const p of V.roomObjects(h).filter(p=>p.kind==='egg')){const q=pos(p.x,p.y-82);if(q.y>100)nativeLabel(c,q.x,q.y,p.name.replace('动手看看 · ',''),'#5e543c','#f1e1b6e6',160);}}
     c.restore();
   }
   function mapView(c,s){const season=C.calendar(s).season;c.clearRect(0,0,c.canvas.width,c.canvas.height);c.save();c.scale(c.canvas.width/V.WIDTH,c.canvas.height/V.HEIGHT);for(const r of V.regions)c.drawImage(terrain(r,s),r.x,r.y);for(const p of V.allProps){const a=sprite(p,season);c.drawImage(a.canvas,p.x+a.dx,p.y+a.dy);}for(let i=0;i<72;i++){const p=V.plotPosition(i);R(c,p.x-19,p.y-20,38,32,s.plots[i].crop?'#54783e':'#9e7d51');}for(const h of V.houses){R(c,h.x,h.y,h.w,h.h,h.owner?'#b86449':'#486d62');R(c,h.x+8,h.y+8,h.w-16,15,'#dcd7b2');}for(const road of V.corridors)R(c,road.x,road.y,road.w,road.h,'#e0cfa1');c.restore();const k=c.canvas.width/V.WIDTH;for(const r of V.regions){c.fillStyle='#fff4d8';c.fillRect((r.x+80)*k,(r.y+40)*k,92,24);c.fillStyle='#3c5847';c.font='bold 13px "Microsoft YaHei"';c.fillText(r.name,(r.x+100)*k,(r.y+40)*k+17);}
     for(const n of D.npcs){const h=V.homeOf(n.id),x=h.door.x*k,y=h.door.y*k;c.fillStyle='#a4573e';c.beginPath();c.arc(x,y,4,0,7);c.fill();}
+    if(root.ZRZRanch){for(const a of s.animals.filter(a=>a.lost)){c.fillStyle='#a14c30';c.beginPath();c.arc(a.position.x*k,a.position.y*k,5,0,7);c.fill();c.fillStyle='#fff1ca';c.font='bold 10px sans-serif';c.fillText('!',a.position.x*k-2,a.position.y*k+3);}}
     const p=s.village.interior?s.village.returnPoint:s.player;c.fillStyle='#d24c36';c.beginPath();c.arc(p.x*k,p.y*k,6,0,7);c.fill();c.strokeStyle='#fff6d8';c.lineWidth=2;c.stroke();
   }
   root.ZRZWorld={...W,draw,drawLabels:labels,mapView};root.ZRZVillageView={daylight};
