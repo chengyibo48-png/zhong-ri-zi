@@ -175,9 +175,9 @@
     s.gender = ['不设定', '女', '男'].includes(v.gender) ? v.gender : '不设定';
     s.bag = {}; for (const [id, qty] of Object.entries(v.bag)) { if (!D.items[id] || !Number.isInteger(qty) || !finite(qty, 0, 999999)) throw new Error('背包物品数据无效。'); if (qty > 0) s.bag[id] = qty; }
     s.plots = v.plots.map(p => { if (!p || (p.crop !== null && !D.crops[p.crop]) || !finite(p.growth, 0, 12) || !finite(p.soil, 0, 2)) throw new Error('农地数据无效。'); return { tilled: !!p.tilled, crop: p.crop, growth: p.growth, soil: p.soil, watered: !!p.watered, lastGroup: ['叶菜', '根菜', '豆类', '谷物', '果实'].includes(p.lastGroup) ? p.lastGroup : null, repeats: clamp(Number(p.repeats) || 0, 0, 1000) }; });
-    if(v.worldRevision!==undefined&&![2,3].includes(v.worldRevision))throw new Error('地图版本不兼容。');
-    const expanded=v.worldRevision>=2,continuous=v.worldRevision===3;
-    if(v.player&&finite(v.player.x,expanded?24:16,continuous?5736:expanded?1896:944)&&finite(v.player.y,expanded?38:48,continuous?2280:expanded?1128:556))s.player={x:v.player.x+(expanded?0:480),y:v.player.y+(expanded?0:288),direction:['up','down','left','right'].includes(v.player.direction)?v.player.direction:'down'};
+    if(v.worldRevision!==undefined&&![2,3,4].includes(v.worldRevision))throw new Error('地图版本不兼容。');
+    const expanded=v.worldRevision>=2,continuous=v.worldRevision>=3;
+    if(v.player&&finite(v.player.x,expanded?24:16,v.worldRevision===4?3816:continuous?5736:expanded?1896:944)&&finite(v.player.y,expanded?38:48,v.worldRevision===4?3816:continuous?2280:expanded?1128:556))s.player={x:v.player.x+(expanded?0:480),y:v.player.y+(expanded?0:288),direction:['up','down','left','right'].includes(v.player.direction)?v.player.direction:'down'};
     s.worldRevision=2;
     if (D.crops[v.seed]) s.seed = v.seed;
     for (const a of s.animals) { const prev = Array.isArray(v.animals) && v.animals.find(x => x.id === a.id); if (prev) { a.bond = clamp(Number(prev.bond) || 0, 0, 100); a.fed = !!prev.fed; a.ready = clamp(Math.floor(Number(prev.ready) || 0), 0, 7); if(typeof prev.name==='string')a.name=prev.name.slice(0,12)||a.name; } }

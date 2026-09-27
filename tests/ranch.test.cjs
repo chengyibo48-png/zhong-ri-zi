@@ -64,7 +64,7 @@ test('animals travel physically, enter only through doors, and are clickable onl
  for(let i=0;i<1200;i++)R.update(s,.05);assert.equal(a.position.room,h.id);assert(!R.points(s).some(p=>p.id===a.id));s.village.interior=h.id;assert(R.points(s).some(p=>p.id===a.id));
 });
 test('dynamic flock positions and selection survive save/load with no fixed-index spawn overflow',()=>{
- const s=rich();for(const id of Object.keys(R.barns)){s.ranch.barns[id].built=true;s.ranch.barns[id].space=3;}for(let i=0;i<8;i++){s.stamina=100;ok(R.buyAnimal(s,['hen','duck','sheep','pig'][i%4],'female','local',false));}const v=C.load(s);assert.equal(v.animals.length,11);for(const a of v.animals){assert(a.position.x<5760&&a.position.y<2304);assert(R.destination(v,a.id));}assert.equal(new Set(v.animals.map(a=>a.id)).size,11);
+ const s=rich();for(const id of Object.keys(R.barns)){s.ranch.barns[id].built=true;s.ranch.barns[id].space=3;}for(let i=0;i<8;i++){s.stamina=100;ok(R.buyAnimal(s,['hen','duck','sheep','pig'][i%4],'female','local',false));}const v=C.load(s);assert.equal(v.animals.length,11);for(const a of v.animals){assert(a.position.x<V.WIDTH&&a.position.y<V.HEIGHT);assert(R.destination(v,a.id));}assert.equal(new Set(v.animals.map(a=>a.id)).size,11);
 });
 test('corrupt husbandry records fail safely rather than silently creating products or animals',()=>{
  for(const mutate of [s=>s.animals[0].qualityStock=[999,0,0,0],s=>s.animals[1].id=s.animals[0].id,s=>s.ranch.stores.feed=-1,s=>s.animals[0].position.room='unknown',s=>s.ranch.barns.poultry.space=99]){const s=C.initial();mutate(s);assert.throws(()=>C.load(s));}

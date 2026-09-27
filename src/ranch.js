@@ -24,11 +24,11 @@ const orders=[
  {id:'ranchWool',title:'素琴的暖冬毛线',npc:'luo',needs:{wool:3},money:220,reward:{grainFeed:3},text:'罗素琴想试试用本村羊毛纺线，三份羊毛就够开工。'},
  {id:'ranchYogurt',title:'食堂的陶罐酸奶',npc:'mei',needs:{yogurt:2},money:185,reward:{bedding:4},text:'方梅想给邻里的饭桌添两小罐酸奶，做好了随时送去。'}
 ];D.orders.push(...orders);
-const zones=[{name:'塘边草甸',x:5470,y:1755},{name:'南坡牧草',x:5310,y:2130}];
+const zones=[{name:'近菜园草圈',x:2690,y:2735},{name:'塘边轮牧圈',x:3340,y:3030}];
 function installWorld(){
  const existing=V.houses.find(h=>h.name==='东坡牧舍');barns.cattle.house=existing.id;
- for(const[id,x,y,w,h,name]of [['poultry',1080,745,190,110,'东坡鸡鸭舍'],['sheepfold',1390,745,185,110,'东坡羊圈'],['pigpen',1610,920,180,100,'东坡猪圈']]){
-  const local={kind:'house',x,y,w,h,name,style:'brick'},q={...local,x:x+3840,y:y+1152,id:'ranch-'+id,region:'pasture',owner:null,theme:'wood',door:{x:x+3840+w*.48,y:y+1152+h+23}};
+ for(const[id,x,y,w,h,name]of [['poultry',760,95,190,110,'东坡鸡鸭舍'],['sheepfold',1390,95,185,110,'东坡羊圈'],['pigpen',1610,95,180,100,'东坡猪圈']]){
+  const local={kind:'house',x,y,w,h,name,style:'brick'},q={...local,x:x+V.offsets.pasture.x,y:y+V.offsets.pasture.y,id:'ranch-'+id,region:'pasture',owner:null,theme:'wood',door:{x:x+V.offsets.pasture.x+w*.48,y:y+V.offsets.pasture.y+h+23}};
   V.maps.pasture.props.push(local);V.allProps.push(q);V.houses.push(q);V.solids.push([q.x+8,q.y+55,w-16,h-52]);
  }
 }
