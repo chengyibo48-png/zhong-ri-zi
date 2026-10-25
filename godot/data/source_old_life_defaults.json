@@ -1,0 +1,222 @@
+{
+  "fields": {
+    "storage": {},
+    "quality": {},
+    "storageQuality": {},
+    "knownRecipes": [
+      "greens",
+      "eggRice",
+      "bambooRice",
+      "fishSoup",
+      "mushroomSoup",
+      "pickles"
+    ],
+    "stories": {
+      "granny": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "qiao": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "lin": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "chen": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "xu": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "zhou": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "mei": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "ning": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "an": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "yu": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "yan": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "luo": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "liang": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "wu": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "jiang": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "zhouSenior": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "luSenior": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "tao": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "he": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "song": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "lan": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "bao": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "qi": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      },
+      "xiaohe": {
+        "step": 0,
+        "choices": [],
+        "lastDay": -1
+      }
+    },
+    "partners": {},
+    "marriage": {
+      "spouse": null,
+      "day": -1,
+      "weekly": {},
+      "memories": []
+    },
+    "projects": {
+      "bridge": false
+    },
+    "chapters": {},
+    "letters": [
+      {
+        "id": "welcome",
+        "day": 0,
+        "title": "院门口的便条",
+        "from": "林阿婆",
+        "text": "先收菜，再做一碗饭。屋里的储物柜、院子的改造和邻里故事，都可以从生活簿找到。心愿没有截止日期。",
+        "gift": {
+          "cabbageSeed": 2
+        }
+      }
+    ],
+    "mailRead": [],
+    "layouts": [],
+    "furniture": {},
+    "skills": {
+      "farming": {
+        "xp": 0,
+        "choice": null
+      },
+      "cooking": {
+        "xp": 0,
+        "choice": null
+      },
+      "craft": {
+        "xp": 0,
+        "choice": null
+      },
+      "social": {
+        "xp": 0,
+        "choice": null
+      }
+    },
+    "toolUpgrades": {},
+    "archives": [
+      "key"
+    ],
+    "achievements": [],
+    "buffs": {
+      "laborDay": -1
+    },
+    "appearance": {
+      "shirt": 0,
+      "hair": 0,
+      "skin": 0,
+      "hat": true
+    },
+    "pet": {
+      "type": "cat",
+      "name": "小团",
+      "bond": 0,
+      "patted": -1
+    },
+    "seasonEvents": {},
+    "waterReserve": 0,
+    "greenhouse": false,
+    "freeRange": true,
+    "animalCare": {},
+    "resourcePressure": {},
+    "lastGifts": {},
+    "marketDays": [],
+    "yearPlans": {},
+    "eventLog": []
+  },
+  "settings": {
+    "music": 0.35,
+    "ambient": 0.3,
+    "effects": 0.6,
+    "textSpeed": "instant",
+    "textScale": 1,
+    "contrast": false,
+    "vibration": false,
+    "gamepad": true,
+    "fishAssist": true
+  }
+}

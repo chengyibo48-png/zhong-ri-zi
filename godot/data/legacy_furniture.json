@@ -1,0 +1,2750 @@
+{
+  "slots": [
+    {
+      "x": 2456,
+      "y": 2026
+    },
+    {
+      "x": 2564,
+      "y": 2026
+    },
+    {
+      "x": 2672,
+      "y": 2026
+    },
+    {
+      "x": 2952,
+      "y": 2026
+    },
+    {
+      "x": 3060,
+      "y": 2026
+    },
+    {
+      "x": 3168,
+      "y": 2026
+    },
+    {
+      "x": 2456,
+      "y": 2078
+    },
+    {
+      "x": 2564,
+      "y": 2078
+    },
+    {
+      "x": 2672,
+      "y": 2078
+    },
+    {
+      "x": 2952,
+      "y": 2078
+    },
+    {
+      "x": 3060,
+      "y": 2078
+    },
+    {
+      "x": 3168,
+      "y": 2078
+    },
+    {
+      "x": 2456,
+      "y": 2130
+    },
+    {
+      "x": 2564,
+      "y": 2130
+    },
+    {
+      "x": 2672,
+      "y": 2130
+    },
+    {
+      "x": 2952,
+      "y": 2130
+    },
+    {
+      "x": 3060,
+      "y": 2130
+    },
+    {
+      "x": 3168,
+      "y": 2130
+    },
+    {
+      "x": 2456,
+      "y": 2182
+    },
+    {
+      "x": 2564,
+      "y": 2182
+    },
+    {
+      "x": 2672,
+      "y": 2182
+    },
+    {
+      "x": 2952,
+      "y": 2182
+    },
+    {
+      "x": 3060,
+      "y": 2182
+    },
+    {
+      "x": 3168,
+      "y": 2182
+    }
+  ],
+  "offset": {
+    "x": -96,
+    "y": -192
+  },
+  "size": {
+    "x": 224,
+    "y": 224
+  },
+  "assets": {
+    "bench/0/0": {
+      "path": "res://art/legacy_furniture/bench-0-0.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/0/1": {
+      "path": "res://art/legacy_furniture/bench-0-1.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/0/2": {
+      "path": "res://art/legacy_furniture/bench-0-2.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/0/3": {
+      "path": "res://art/legacy_furniture/bench-0-3.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/0/4": {
+      "path": "res://art/legacy_furniture/bench-0-4.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/0/5": {
+      "path": "res://art/legacy_furniture/bench-0-5.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/1/0": {
+      "path": "res://art/legacy_furniture/bench-1-0.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/1/1": {
+      "path": "res://art/legacy_furniture/bench-1-1.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/1/2": {
+      "path": "res://art/legacy_furniture/bench-1-2.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/1/3": {
+      "path": "res://art/legacy_furniture/bench-1-3.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/1/4": {
+      "path": "res://art/legacy_furniture/bench-1-4.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/1/5": {
+      "path": "res://art/legacy_furniture/bench-1-5.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/2/0": {
+      "path": "res://art/legacy_furniture/bench-2-0.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/2/1": {
+      "path": "res://art/legacy_furniture/bench-2-1.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/2/2": {
+      "path": "res://art/legacy_furniture/bench-2-2.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/2/3": {
+      "path": "res://art/legacy_furniture/bench-2-3.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/2/4": {
+      "path": "res://art/legacy_furniture/bench-2-4.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/2/5": {
+      "path": "res://art/legacy_furniture/bench-2-5.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/3/0": {
+      "path": "res://art/legacy_furniture/bench-3-0.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/3/1": {
+      "path": "res://art/legacy_furniture/bench-3-1.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/3/2": {
+      "path": "res://art/legacy_furniture/bench-3-2.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/3/3": {
+      "path": "res://art/legacy_furniture/bench-3-3.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/3/4": {
+      "path": "res://art/legacy_furniture/bench-3-4.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "bench/3/5": {
+      "path": "res://art/legacy_furniture/bench-3-5.svg",
+      "sha256": "3b59d201c6f85e0be308b391a0035bf1b2a6a5355809593b75f8dc1c5e297202",
+      "commands": 8
+    },
+    "pot/0/0": {
+      "path": "res://art/legacy_furniture/pot-0-0.svg",
+      "sha256": "5cb5125a017757ac3321997128cc3f3a7d516dfff77adc154cccf5750e20217e",
+      "commands": 10
+    },
+    "pot/0/1": {
+      "path": "res://art/legacy_furniture/pot-0-1.svg",
+      "sha256": "5cb5125a017757ac3321997128cc3f3a7d516dfff77adc154cccf5750e20217e",
+      "commands": 10
+    },
+    "pot/0/2": {
+      "path": "res://art/legacy_furniture/pot-0-2.svg",
+      "sha256": "5cb5125a017757ac3321997128cc3f3a7d516dfff77adc154cccf5750e20217e",
+      "commands": 10
+    },
+    "pot/0/3": {
+      "path": "res://art/legacy_furniture/pot-0-3.svg",
+      "sha256": "5cb5125a017757ac3321997128cc3f3a7d516dfff77adc154cccf5750e20217e",
+      "commands": 10
+    },
+    "pot/0/4": {
+      "path": "res://art/legacy_furniture/pot-0-4.svg",
+      "sha256": "5cb5125a017757ac3321997128cc3f3a7d516dfff77adc154cccf5750e20217e",
+      "commands": 10
+    },
+    "pot/0/5": {
+      "path": "res://art/legacy_furniture/pot-0-5.svg",
+      "sha256": "5cb5125a017757ac3321997128cc3f3a7d516dfff77adc154cccf5750e20217e",
+      "commands": 10
+    },
+    "pot/1/0": {
+      "path": "res://art/legacy_furniture/pot-1-0.svg",
+      "sha256": "dc9acea527777e6e08fa8b06b422bf5f4044ebd56c19cae3424a914460f0d581",
+      "commands": 10
+    },
+    "pot/1/1": {
+      "path": "res://art/legacy_furniture/pot-1-1.svg",
+      "sha256": "dc9acea527777e6e08fa8b06b422bf5f4044ebd56c19cae3424a914460f0d581",
+      "commands": 10
+    },
+    "pot/1/2": {
+      "path": "res://art/legacy_furniture/pot-1-2.svg",
+      "sha256": "dc9acea527777e6e08fa8b06b422bf5f4044ebd56c19cae3424a914460f0d581",
+      "commands": 10
+    },
+    "pot/1/3": {
+      "path": "res://art/legacy_furniture/pot-1-3.svg",
+      "sha256": "dc9acea527777e6e08fa8b06b422bf5f4044ebd56c19cae3424a914460f0d581",
+      "commands": 10
+    },
+    "pot/1/4": {
+      "path": "res://art/legacy_furniture/pot-1-4.svg",
+      "sha256": "dc9acea527777e6e08fa8b06b422bf5f4044ebd56c19cae3424a914460f0d581",
+      "commands": 10
+    },
+    "pot/1/5": {
+      "path": "res://art/legacy_furniture/pot-1-5.svg",
+      "sha256": "dc9acea527777e6e08fa8b06b422bf5f4044ebd56c19cae3424a914460f0d581",
+      "commands": 10
+    },
+    "pot/2/0": {
+      "path": "res://art/legacy_furniture/pot-2-0.svg",
+      "sha256": "68001c398cddc5dfa0a4c168c357d612d3fe7408fc12a6a1550aecf15cc77bb5",
+      "commands": 10
+    },
+    "pot/2/1": {
+      "path": "res://art/legacy_furniture/pot-2-1.svg",
+      "sha256": "68001c398cddc5dfa0a4c168c357d612d3fe7408fc12a6a1550aecf15cc77bb5",
+      "commands": 10
+    },
+    "pot/2/2": {
+      "path": "res://art/legacy_furniture/pot-2-2.svg",
+      "sha256": "68001c398cddc5dfa0a4c168c357d612d3fe7408fc12a6a1550aecf15cc77bb5",
+      "commands": 10
+    },
+    "pot/2/3": {
+      "path": "res://art/legacy_furniture/pot-2-3.svg",
+      "sha256": "68001c398cddc5dfa0a4c168c357d612d3fe7408fc12a6a1550aecf15cc77bb5",
+      "commands": 10
+    },
+    "pot/2/4": {
+      "path": "res://art/legacy_furniture/pot-2-4.svg",
+      "sha256": "68001c398cddc5dfa0a4c168c357d612d3fe7408fc12a6a1550aecf15cc77bb5",
+      "commands": 10
+    },
+    "pot/2/5": {
+      "path": "res://art/legacy_furniture/pot-2-5.svg",
+      "sha256": "68001c398cddc5dfa0a4c168c357d612d3fe7408fc12a6a1550aecf15cc77bb5",
+      "commands": 10
+    },
+    "pot/3/0": {
+      "path": "res://art/legacy_furniture/pot-3-0.svg",
+      "sha256": "d5f7742dc31806c3324bebbd0d820cd8f68ec1842a9ca2b832b1b02a214b34fc",
+      "commands": 10
+    },
+    "pot/3/1": {
+      "path": "res://art/legacy_furniture/pot-3-1.svg",
+      "sha256": "d5f7742dc31806c3324bebbd0d820cd8f68ec1842a9ca2b832b1b02a214b34fc",
+      "commands": 10
+    },
+    "pot/3/2": {
+      "path": "res://art/legacy_furniture/pot-3-2.svg",
+      "sha256": "d5f7742dc31806c3324bebbd0d820cd8f68ec1842a9ca2b832b1b02a214b34fc",
+      "commands": 10
+    },
+    "pot/3/3": {
+      "path": "res://art/legacy_furniture/pot-3-3.svg",
+      "sha256": "d5f7742dc31806c3324bebbd0d820cd8f68ec1842a9ca2b832b1b02a214b34fc",
+      "commands": 10
+    },
+    "pot/3/4": {
+      "path": "res://art/legacy_furniture/pot-3-4.svg",
+      "sha256": "d5f7742dc31806c3324bebbd0d820cd8f68ec1842a9ca2b832b1b02a214b34fc",
+      "commands": 10
+    },
+    "pot/3/5": {
+      "path": "res://art/legacy_furniture/pot-3-5.svg",
+      "sha256": "d5f7742dc31806c3324bebbd0d820cd8f68ec1842a9ca2b832b1b02a214b34fc",
+      "commands": 10
+    },
+    "path/0/0": {
+      "path": "res://art/legacy_furniture/path-0-0.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/0/1": {
+      "path": "res://art/legacy_furniture/path-0-1.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/0/2": {
+      "path": "res://art/legacy_furniture/path-0-2.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/0/3": {
+      "path": "res://art/legacy_furniture/path-0-3.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/0/4": {
+      "path": "res://art/legacy_furniture/path-0-4.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/0/5": {
+      "path": "res://art/legacy_furniture/path-0-5.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/1/0": {
+      "path": "res://art/legacy_furniture/path-1-0.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/1/1": {
+      "path": "res://art/legacy_furniture/path-1-1.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/1/2": {
+      "path": "res://art/legacy_furniture/path-1-2.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/1/3": {
+      "path": "res://art/legacy_furniture/path-1-3.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/1/4": {
+      "path": "res://art/legacy_furniture/path-1-4.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/1/5": {
+      "path": "res://art/legacy_furniture/path-1-5.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/2/0": {
+      "path": "res://art/legacy_furniture/path-2-0.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/2/1": {
+      "path": "res://art/legacy_furniture/path-2-1.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/2/2": {
+      "path": "res://art/legacy_furniture/path-2-2.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/2/3": {
+      "path": "res://art/legacy_furniture/path-2-3.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/2/4": {
+      "path": "res://art/legacy_furniture/path-2-4.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/2/5": {
+      "path": "res://art/legacy_furniture/path-2-5.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/3/0": {
+      "path": "res://art/legacy_furniture/path-3-0.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/3/1": {
+      "path": "res://art/legacy_furniture/path-3-1.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/3/2": {
+      "path": "res://art/legacy_furniture/path-3-2.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/3/3": {
+      "path": "res://art/legacy_furniture/path-3-3.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/3/4": {
+      "path": "res://art/legacy_furniture/path-3-4.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "path/3/5": {
+      "path": "res://art/legacy_furniture/path-3-5.svg",
+      "sha256": "a767a5827b42bdf95fe4d329e0e1371923664061d97eaa8788108f977f5cb064",
+      "commands": 2
+    },
+    "fence/0/0": {
+      "path": "res://art/legacy_furniture/fence-0-0.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/0/1": {
+      "path": "res://art/legacy_furniture/fence-0-1.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/0/2": {
+      "path": "res://art/legacy_furniture/fence-0-2.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/0/3": {
+      "path": "res://art/legacy_furniture/fence-0-3.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/0/4": {
+      "path": "res://art/legacy_furniture/fence-0-4.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/0/5": {
+      "path": "res://art/legacy_furniture/fence-0-5.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/1/0": {
+      "path": "res://art/legacy_furniture/fence-1-0.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/1/1": {
+      "path": "res://art/legacy_furniture/fence-1-1.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/1/2": {
+      "path": "res://art/legacy_furniture/fence-1-2.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/1/3": {
+      "path": "res://art/legacy_furniture/fence-1-3.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/1/4": {
+      "path": "res://art/legacy_furniture/fence-1-4.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/1/5": {
+      "path": "res://art/legacy_furniture/fence-1-5.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/2/0": {
+      "path": "res://art/legacy_furniture/fence-2-0.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/2/1": {
+      "path": "res://art/legacy_furniture/fence-2-1.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/2/2": {
+      "path": "res://art/legacy_furniture/fence-2-2.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/2/3": {
+      "path": "res://art/legacy_furniture/fence-2-3.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/2/4": {
+      "path": "res://art/legacy_furniture/fence-2-4.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/2/5": {
+      "path": "res://art/legacy_furniture/fence-2-5.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/3/0": {
+      "path": "res://art/legacy_furniture/fence-3-0.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/3/1": {
+      "path": "res://art/legacy_furniture/fence-3-1.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/3/2": {
+      "path": "res://art/legacy_furniture/fence-3-2.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/3/3": {
+      "path": "res://art/legacy_furniture/fence-3-3.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/3/4": {
+      "path": "res://art/legacy_furniture/fence-3-4.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "fence/3/5": {
+      "path": "res://art/legacy_furniture/fence-3-5.svg",
+      "sha256": "f0d2327a8094aed08d331bdb3ea26b6b4db7f720d1e296ddf1966b2a6c6d6366",
+      "commands": 8
+    },
+    "trellis/0/0": {
+      "path": "res://art/legacy_furniture/trellis-0-0.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/0/1": {
+      "path": "res://art/legacy_furniture/trellis-0-1.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/0/2": {
+      "path": "res://art/legacy_furniture/trellis-0-2.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/0/3": {
+      "path": "res://art/legacy_furniture/trellis-0-3.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/0/4": {
+      "path": "res://art/legacy_furniture/trellis-0-4.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/0/5": {
+      "path": "res://art/legacy_furniture/trellis-0-5.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/1/0": {
+      "path": "res://art/legacy_furniture/trellis-1-0.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/1/1": {
+      "path": "res://art/legacy_furniture/trellis-1-1.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/1/2": {
+      "path": "res://art/legacy_furniture/trellis-1-2.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/1/3": {
+      "path": "res://art/legacy_furniture/trellis-1-3.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/1/4": {
+      "path": "res://art/legacy_furniture/trellis-1-4.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/1/5": {
+      "path": "res://art/legacy_furniture/trellis-1-5.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/2/0": {
+      "path": "res://art/legacy_furniture/trellis-2-0.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/2/1": {
+      "path": "res://art/legacy_furniture/trellis-2-1.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/2/2": {
+      "path": "res://art/legacy_furniture/trellis-2-2.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/2/3": {
+      "path": "res://art/legacy_furniture/trellis-2-3.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/2/4": {
+      "path": "res://art/legacy_furniture/trellis-2-4.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/2/5": {
+      "path": "res://art/legacy_furniture/trellis-2-5.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/3/0": {
+      "path": "res://art/legacy_furniture/trellis-3-0.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/3/1": {
+      "path": "res://art/legacy_furniture/trellis-3-1.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/3/2": {
+      "path": "res://art/legacy_furniture/trellis-3-2.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/3/3": {
+      "path": "res://art/legacy_furniture/trellis-3-3.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/3/4": {
+      "path": "res://art/legacy_furniture/trellis-3-4.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "trellis/3/5": {
+      "path": "res://art/legacy_furniture/trellis-3-5.svg",
+      "sha256": "2de179f983db37708cd29c23026767e7692e11af8d917e1d5ac777f6fa8b7b6c",
+      "commands": 13
+    },
+    "orchard/0/0": {
+      "path": "res://art/legacy_furniture/orchard-0-0.svg",
+      "sha256": "3f52d4dcf004ff4aa4b7c1bfd1938d51c68e6d94bc83504b4ae6e8263fe41291",
+      "commands": 116
+    },
+    "orchard/0/1": {
+      "path": "res://art/legacy_furniture/orchard-0-1.svg",
+      "sha256": "701601170dcfa1277d62c5803e2894e9aaa0f81d3fcc2d691e1e77d1c26155f4",
+      "commands": 119
+    },
+    "orchard/0/2": {
+      "path": "res://art/legacy_furniture/orchard-0-2.svg",
+      "sha256": "a1ee284092e5d38b0d2e484fb34a3cb2ac34b2ab631e3587324f92627e5985b9",
+      "commands": 121
+    },
+    "orchard/0/3": {
+      "path": "res://art/legacy_furniture/orchard-0-3.svg",
+      "sha256": "fb0929ff96fe1ab3d12d541a0276a36e11c3992b9d6b9a42585e7862520b673c",
+      "commands": 118
+    },
+    "orchard/0/4": {
+      "path": "res://art/legacy_furniture/orchard-0-4.svg",
+      "sha256": "4c107b5b2ad351abfddc328f11f9b0c79657d3eb07bbfdfd4e794d8a4826d991",
+      "commands": 121
+    },
+    "orchard/0/5": {
+      "path": "res://art/legacy_furniture/orchard-0-5.svg",
+      "sha256": "330acd4129f1e9d5d06a71e7f0f6a8450c50a117fbe28fba3ff9438fde9bedf6",
+      "commands": 119
+    },
+    "orchard/1/0": {
+      "path": "res://art/legacy_furniture/orchard-1-0.svg",
+      "sha256": "b534b32c467f85b2be7f985b8870ed007d3357f32352e2145c41ec4181c43a62",
+      "commands": 116
+    },
+    "orchard/1/1": {
+      "path": "res://art/legacy_furniture/orchard-1-1.svg",
+      "sha256": "b097ac2c7c40b01b074ff670c83c18950000630309231dffcdad15f5b3d4fa64",
+      "commands": 119
+    },
+    "orchard/1/2": {
+      "path": "res://art/legacy_furniture/orchard-1-2.svg",
+      "sha256": "7c2d037e91000c18152bb1d6621cf7e89b6d4a28b36653aa91d771dd0fb32a01",
+      "commands": 121
+    },
+    "orchard/1/3": {
+      "path": "res://art/legacy_furniture/orchard-1-3.svg",
+      "sha256": "3ce689077eef94028cc6aadfb455849ab21ec726ef4408ed1876149a9eb2ff24",
+      "commands": 118
+    },
+    "orchard/1/4": {
+      "path": "res://art/legacy_furniture/orchard-1-4.svg",
+      "sha256": "e04bc480566d6ba4bbf334df069f4d3d8f6aaf274b4debc1f83740a6c810f9ad",
+      "commands": 121
+    },
+    "orchard/1/5": {
+      "path": "res://art/legacy_furniture/orchard-1-5.svg",
+      "sha256": "752abeff6a8fbf7e5a4e4a72c8e074d251d2fa41877af51d33dff51771180fcb",
+      "commands": 119
+    },
+    "orchard/2/0": {
+      "path": "res://art/legacy_furniture/orchard-2-0.svg",
+      "sha256": "6aed299317c93394c297d20418f61d74a9bb01f0daa7f2d59c773db1806d947a",
+      "commands": 116
+    },
+    "orchard/2/1": {
+      "path": "res://art/legacy_furniture/orchard-2-1.svg",
+      "sha256": "dfcd9c185f95d0b939cbf5d1bea5e7ef64b1c4c126750a9f9bb5aa754b402dbe",
+      "commands": 119
+    },
+    "orchard/2/2": {
+      "path": "res://art/legacy_furniture/orchard-2-2.svg",
+      "sha256": "2054f5cb598f2d11e06393d74a484aa4db041c278cc8ab9b4ade4e739bd5e85b",
+      "commands": 121
+    },
+    "orchard/2/3": {
+      "path": "res://art/legacy_furniture/orchard-2-3.svg",
+      "sha256": "15cec4bbf78224602f8ba33df95d2d6ad3d6895066aa99c512dabea923e17596",
+      "commands": 118
+    },
+    "orchard/2/4": {
+      "path": "res://art/legacy_furniture/orchard-2-4.svg",
+      "sha256": "db02c7122cee566f70d10d1722fb95f5741d869fa394dc45e6bf9a02a13b8889",
+      "commands": 121
+    },
+    "orchard/2/5": {
+      "path": "res://art/legacy_furniture/orchard-2-5.svg",
+      "sha256": "4979f79b929f7f45a75901deb83de53be01a02be11ec3cc6d2fefeca48fbde21",
+      "commands": 119
+    },
+    "orchard/3/0": {
+      "path": "res://art/legacy_furniture/orchard-3-0.svg",
+      "sha256": "786a4a735707cd77f92fc418d20ec1bd496ca419282703fe40aacf42cb0bcf7a",
+      "commands": 100
+    },
+    "orchard/3/1": {
+      "path": "res://art/legacy_furniture/orchard-3-1.svg",
+      "sha256": "7db105361fc01378a57491df680f50e13577eb35ead107c51450113b08cdff30",
+      "commands": 103
+    },
+    "orchard/3/2": {
+      "path": "res://art/legacy_furniture/orchard-3-2.svg",
+      "sha256": "7c877b217df40c8b726ed8def3d3fc72928e1f01ad7bb20ccb080ef717c13d56",
+      "commands": 105
+    },
+    "orchard/3/3": {
+      "path": "res://art/legacy_furniture/orchard-3-3.svg",
+      "sha256": "3af38a3e102f09bcc6175ae7a572c69fc3d75d2a52d17c224a9a7555d10e6e6b",
+      "commands": 102
+    },
+    "orchard/3/4": {
+      "path": "res://art/legacy_furniture/orchard-3-4.svg",
+      "sha256": "fab60844e254ec4e7dd72d911cebf2f14dd17f1cff0e59b1c845d500050d470a",
+      "commands": 105
+    },
+    "orchard/3/5": {
+      "path": "res://art/legacy_furniture/orchard-3-5.svg",
+      "sha256": "3c942da58ec1a82e3e482762927ca6d77f517eb3659d6adae7333eefa91748c8",
+      "commands": 103
+    },
+    "waterbed/0/0": {
+      "path": "res://art/legacy_furniture/waterbed-0-0.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/0/1": {
+      "path": "res://art/legacy_furniture/waterbed-0-1.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/0/2": {
+      "path": "res://art/legacy_furniture/waterbed-0-2.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/0/3": {
+      "path": "res://art/legacy_furniture/waterbed-0-3.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/0/4": {
+      "path": "res://art/legacy_furniture/waterbed-0-4.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/0/5": {
+      "path": "res://art/legacy_furniture/waterbed-0-5.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/1/0": {
+      "path": "res://art/legacy_furniture/waterbed-1-0.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/1/1": {
+      "path": "res://art/legacy_furniture/waterbed-1-1.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/1/2": {
+      "path": "res://art/legacy_furniture/waterbed-1-2.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/1/3": {
+      "path": "res://art/legacy_furniture/waterbed-1-3.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/1/4": {
+      "path": "res://art/legacy_furniture/waterbed-1-4.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/1/5": {
+      "path": "res://art/legacy_furniture/waterbed-1-5.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/2/0": {
+      "path": "res://art/legacy_furniture/waterbed-2-0.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/2/1": {
+      "path": "res://art/legacy_furniture/waterbed-2-1.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/2/2": {
+      "path": "res://art/legacy_furniture/waterbed-2-2.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/2/3": {
+      "path": "res://art/legacy_furniture/waterbed-2-3.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/2/4": {
+      "path": "res://art/legacy_furniture/waterbed-2-4.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/2/5": {
+      "path": "res://art/legacy_furniture/waterbed-2-5.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/3/0": {
+      "path": "res://art/legacy_furniture/waterbed-3-0.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/3/1": {
+      "path": "res://art/legacy_furniture/waterbed-3-1.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/3/2": {
+      "path": "res://art/legacy_furniture/waterbed-3-2.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/3/3": {
+      "path": "res://art/legacy_furniture/waterbed-3-3.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/3/4": {
+      "path": "res://art/legacy_furniture/waterbed-3-4.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "waterbed/3/5": {
+      "path": "res://art/legacy_furniture/waterbed-3-5.svg",
+      "sha256": "4f5ebef4b30686bda79d7a3f813b5d0cd217d7f8bd4d59718c0bbe512c2f5554",
+      "commands": 16
+    },
+    "scarecrow/0/0": {
+      "path": "res://art/legacy_furniture/scarecrow-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/0/1": {
+      "path": "res://art/legacy_furniture/scarecrow-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/0/2": {
+      "path": "res://art/legacy_furniture/scarecrow-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/0/3": {
+      "path": "res://art/legacy_furniture/scarecrow-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/0/4": {
+      "path": "res://art/legacy_furniture/scarecrow-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/0/5": {
+      "path": "res://art/legacy_furniture/scarecrow-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/1/0": {
+      "path": "res://art/legacy_furniture/scarecrow-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/1/1": {
+      "path": "res://art/legacy_furniture/scarecrow-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/1/2": {
+      "path": "res://art/legacy_furniture/scarecrow-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/1/3": {
+      "path": "res://art/legacy_furniture/scarecrow-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/1/4": {
+      "path": "res://art/legacy_furniture/scarecrow-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/1/5": {
+      "path": "res://art/legacy_furniture/scarecrow-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/2/0": {
+      "path": "res://art/legacy_furniture/scarecrow-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/2/1": {
+      "path": "res://art/legacy_furniture/scarecrow-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/2/2": {
+      "path": "res://art/legacy_furniture/scarecrow-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/2/3": {
+      "path": "res://art/legacy_furniture/scarecrow-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/2/4": {
+      "path": "res://art/legacy_furniture/scarecrow-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/2/5": {
+      "path": "res://art/legacy_furniture/scarecrow-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/3/0": {
+      "path": "res://art/legacy_furniture/scarecrow-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/3/1": {
+      "path": "res://art/legacy_furniture/scarecrow-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/3/2": {
+      "path": "res://art/legacy_furniture/scarecrow-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/3/3": {
+      "path": "res://art/legacy_furniture/scarecrow-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/3/4": {
+      "path": "res://art/legacy_furniture/scarecrow-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "scarecrow/3/5": {
+      "path": "res://art/legacy_furniture/scarecrow-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "photo/0/0": {
+      "path": "res://art/legacy_furniture/photo-0-0.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/0/1": {
+      "path": "res://art/legacy_furniture/photo-0-1.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/0/2": {
+      "path": "res://art/legacy_furniture/photo-0-2.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/0/3": {
+      "path": "res://art/legacy_furniture/photo-0-3.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/0/4": {
+      "path": "res://art/legacy_furniture/photo-0-4.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/0/5": {
+      "path": "res://art/legacy_furniture/photo-0-5.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/1/0": {
+      "path": "res://art/legacy_furniture/photo-1-0.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/1/1": {
+      "path": "res://art/legacy_furniture/photo-1-1.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/1/2": {
+      "path": "res://art/legacy_furniture/photo-1-2.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/1/3": {
+      "path": "res://art/legacy_furniture/photo-1-3.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/1/4": {
+      "path": "res://art/legacy_furniture/photo-1-4.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/1/5": {
+      "path": "res://art/legacy_furniture/photo-1-5.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/2/0": {
+      "path": "res://art/legacy_furniture/photo-2-0.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/2/1": {
+      "path": "res://art/legacy_furniture/photo-2-1.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/2/2": {
+      "path": "res://art/legacy_furniture/photo-2-2.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/2/3": {
+      "path": "res://art/legacy_furniture/photo-2-3.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/2/4": {
+      "path": "res://art/legacy_furniture/photo-2-4.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/2/5": {
+      "path": "res://art/legacy_furniture/photo-2-5.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/3/0": {
+      "path": "res://art/legacy_furniture/photo-3-0.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/3/1": {
+      "path": "res://art/legacy_furniture/photo-3-1.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/3/2": {
+      "path": "res://art/legacy_furniture/photo-3-2.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/3/3": {
+      "path": "res://art/legacy_furniture/photo-3-3.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/3/4": {
+      "path": "res://art/legacy_furniture/photo-3-4.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "photo/3/5": {
+      "path": "res://art/legacy_furniture/photo-3-5.svg",
+      "sha256": "dcd19e7437d5838e5ba53d3dc69591443200182fdfe4008160cf7272644c0f97",
+      "commands": 8
+    },
+    "greenhouse/0/0": {
+      "path": "res://art/legacy_furniture/greenhouse-0-0.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/0/1": {
+      "path": "res://art/legacy_furniture/greenhouse-0-1.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/0/2": {
+      "path": "res://art/legacy_furniture/greenhouse-0-2.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/0/3": {
+      "path": "res://art/legacy_furniture/greenhouse-0-3.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/0/4": {
+      "path": "res://art/legacy_furniture/greenhouse-0-4.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/0/5": {
+      "path": "res://art/legacy_furniture/greenhouse-0-5.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/1/0": {
+      "path": "res://art/legacy_furniture/greenhouse-1-0.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/1/1": {
+      "path": "res://art/legacy_furniture/greenhouse-1-1.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/1/2": {
+      "path": "res://art/legacy_furniture/greenhouse-1-2.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/1/3": {
+      "path": "res://art/legacy_furniture/greenhouse-1-3.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/1/4": {
+      "path": "res://art/legacy_furniture/greenhouse-1-4.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/1/5": {
+      "path": "res://art/legacy_furniture/greenhouse-1-5.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/2/0": {
+      "path": "res://art/legacy_furniture/greenhouse-2-0.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/2/1": {
+      "path": "res://art/legacy_furniture/greenhouse-2-1.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/2/2": {
+      "path": "res://art/legacy_furniture/greenhouse-2-2.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/2/3": {
+      "path": "res://art/legacy_furniture/greenhouse-2-3.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/2/4": {
+      "path": "res://art/legacy_furniture/greenhouse-2-4.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/2/5": {
+      "path": "res://art/legacy_furniture/greenhouse-2-5.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/3/0": {
+      "path": "res://art/legacy_furniture/greenhouse-3-0.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/3/1": {
+      "path": "res://art/legacy_furniture/greenhouse-3-1.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/3/2": {
+      "path": "res://art/legacy_furniture/greenhouse-3-2.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/3/3": {
+      "path": "res://art/legacy_furniture/greenhouse-3-3.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/3/4": {
+      "path": "res://art/legacy_furniture/greenhouse-3-4.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "greenhouse/3/5": {
+      "path": "res://art/legacy_furniture/greenhouse-3-5.svg",
+      "sha256": "3bd506b6672074be3004c406cfb7fae4a5380f745ff66a8f7b28df639d6edff5",
+      "commands": 7
+    },
+    "lantern/0/0": {
+      "path": "res://art/legacy_furniture/lantern-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/0/1": {
+      "path": "res://art/legacy_furniture/lantern-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/0/2": {
+      "path": "res://art/legacy_furniture/lantern-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/0/3": {
+      "path": "res://art/legacy_furniture/lantern-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/0/4": {
+      "path": "res://art/legacy_furniture/lantern-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/0/5": {
+      "path": "res://art/legacy_furniture/lantern-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/1/0": {
+      "path": "res://art/legacy_furniture/lantern-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/1/1": {
+      "path": "res://art/legacy_furniture/lantern-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/1/2": {
+      "path": "res://art/legacy_furniture/lantern-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/1/3": {
+      "path": "res://art/legacy_furniture/lantern-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/1/4": {
+      "path": "res://art/legacy_furniture/lantern-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/1/5": {
+      "path": "res://art/legacy_furniture/lantern-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/2/0": {
+      "path": "res://art/legacy_furniture/lantern-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/2/1": {
+      "path": "res://art/legacy_furniture/lantern-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/2/2": {
+      "path": "res://art/legacy_furniture/lantern-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/2/3": {
+      "path": "res://art/legacy_furniture/lantern-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/2/4": {
+      "path": "res://art/legacy_furniture/lantern-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/2/5": {
+      "path": "res://art/legacy_furniture/lantern-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/3/0": {
+      "path": "res://art/legacy_furniture/lantern-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/3/1": {
+      "path": "res://art/legacy_furniture/lantern-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/3/2": {
+      "path": "res://art/legacy_furniture/lantern-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/3/3": {
+      "path": "res://art/legacy_furniture/lantern-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/3/4": {
+      "path": "res://art/legacy_furniture/lantern-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "lantern/3/5": {
+      "path": "res://art/legacy_furniture/lantern-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/0/0": {
+      "path": "res://art/legacy_furniture/flowerbed-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/0/1": {
+      "path": "res://art/legacy_furniture/flowerbed-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/0/2": {
+      "path": "res://art/legacy_furniture/flowerbed-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/0/3": {
+      "path": "res://art/legacy_furniture/flowerbed-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/0/4": {
+      "path": "res://art/legacy_furniture/flowerbed-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/0/5": {
+      "path": "res://art/legacy_furniture/flowerbed-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/1/0": {
+      "path": "res://art/legacy_furniture/flowerbed-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/1/1": {
+      "path": "res://art/legacy_furniture/flowerbed-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/1/2": {
+      "path": "res://art/legacy_furniture/flowerbed-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/1/3": {
+      "path": "res://art/legacy_furniture/flowerbed-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/1/4": {
+      "path": "res://art/legacy_furniture/flowerbed-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/1/5": {
+      "path": "res://art/legacy_furniture/flowerbed-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/2/0": {
+      "path": "res://art/legacy_furniture/flowerbed-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/2/1": {
+      "path": "res://art/legacy_furniture/flowerbed-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/2/2": {
+      "path": "res://art/legacy_furniture/flowerbed-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/2/3": {
+      "path": "res://art/legacy_furniture/flowerbed-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/2/4": {
+      "path": "res://art/legacy_furniture/flowerbed-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/2/5": {
+      "path": "res://art/legacy_furniture/flowerbed-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/3/0": {
+      "path": "res://art/legacy_furniture/flowerbed-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/3/1": {
+      "path": "res://art/legacy_furniture/flowerbed-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/3/2": {
+      "path": "res://art/legacy_furniture/flowerbed-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/3/3": {
+      "path": "res://art/legacy_furniture/flowerbed-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/3/4": {
+      "path": "res://art/legacy_furniture/flowerbed-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "flowerbed/3/5": {
+      "path": "res://art/legacy_furniture/flowerbed-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/0/0": {
+      "path": "res://art/legacy_furniture/stoneLantern-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/0/1": {
+      "path": "res://art/legacy_furniture/stoneLantern-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/0/2": {
+      "path": "res://art/legacy_furniture/stoneLantern-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/0/3": {
+      "path": "res://art/legacy_furniture/stoneLantern-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/0/4": {
+      "path": "res://art/legacy_furniture/stoneLantern-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/0/5": {
+      "path": "res://art/legacy_furniture/stoneLantern-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/1/0": {
+      "path": "res://art/legacy_furniture/stoneLantern-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/1/1": {
+      "path": "res://art/legacy_furniture/stoneLantern-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/1/2": {
+      "path": "res://art/legacy_furniture/stoneLantern-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/1/3": {
+      "path": "res://art/legacy_furniture/stoneLantern-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/1/4": {
+      "path": "res://art/legacy_furniture/stoneLantern-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/1/5": {
+      "path": "res://art/legacy_furniture/stoneLantern-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/2/0": {
+      "path": "res://art/legacy_furniture/stoneLantern-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/2/1": {
+      "path": "res://art/legacy_furniture/stoneLantern-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/2/2": {
+      "path": "res://art/legacy_furniture/stoneLantern-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/2/3": {
+      "path": "res://art/legacy_furniture/stoneLantern-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/2/4": {
+      "path": "res://art/legacy_furniture/stoneLantern-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/2/5": {
+      "path": "res://art/legacy_furniture/stoneLantern-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/3/0": {
+      "path": "res://art/legacy_furniture/stoneLantern-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/3/1": {
+      "path": "res://art/legacy_furniture/stoneLantern-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/3/2": {
+      "path": "res://art/legacy_furniture/stoneLantern-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/3/3": {
+      "path": "res://art/legacy_furniture/stoneLantern-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/3/4": {
+      "path": "res://art/legacy_furniture/stoneLantern-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "stoneLantern/3/5": {
+      "path": "res://art/legacy_furniture/stoneLantern-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/0/0": {
+      "path": "res://art/legacy_furniture/sign-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/0/1": {
+      "path": "res://art/legacy_furniture/sign-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/0/2": {
+      "path": "res://art/legacy_furniture/sign-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/0/3": {
+      "path": "res://art/legacy_furniture/sign-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/0/4": {
+      "path": "res://art/legacy_furniture/sign-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/0/5": {
+      "path": "res://art/legacy_furniture/sign-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/1/0": {
+      "path": "res://art/legacy_furniture/sign-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/1/1": {
+      "path": "res://art/legacy_furniture/sign-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/1/2": {
+      "path": "res://art/legacy_furniture/sign-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/1/3": {
+      "path": "res://art/legacy_furniture/sign-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/1/4": {
+      "path": "res://art/legacy_furniture/sign-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/1/5": {
+      "path": "res://art/legacy_furniture/sign-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/2/0": {
+      "path": "res://art/legacy_furniture/sign-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/2/1": {
+      "path": "res://art/legacy_furniture/sign-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/2/2": {
+      "path": "res://art/legacy_furniture/sign-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/2/3": {
+      "path": "res://art/legacy_furniture/sign-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/2/4": {
+      "path": "res://art/legacy_furniture/sign-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/2/5": {
+      "path": "res://art/legacy_furniture/sign-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/3/0": {
+      "path": "res://art/legacy_furniture/sign-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/3/1": {
+      "path": "res://art/legacy_furniture/sign-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/3/2": {
+      "path": "res://art/legacy_furniture/sign-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/3/3": {
+      "path": "res://art/legacy_furniture/sign-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/3/4": {
+      "path": "res://art/legacy_furniture/sign-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "sign/3/5": {
+      "path": "res://art/legacy_furniture/sign-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/0/0": {
+      "path": "res://art/legacy_furniture/well-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/0/1": {
+      "path": "res://art/legacy_furniture/well-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/0/2": {
+      "path": "res://art/legacy_furniture/well-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/0/3": {
+      "path": "res://art/legacy_furniture/well-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/0/4": {
+      "path": "res://art/legacy_furniture/well-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/0/5": {
+      "path": "res://art/legacy_furniture/well-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/1/0": {
+      "path": "res://art/legacy_furniture/well-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/1/1": {
+      "path": "res://art/legacy_furniture/well-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/1/2": {
+      "path": "res://art/legacy_furniture/well-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/1/3": {
+      "path": "res://art/legacy_furniture/well-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/1/4": {
+      "path": "res://art/legacy_furniture/well-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/1/5": {
+      "path": "res://art/legacy_furniture/well-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/2/0": {
+      "path": "res://art/legacy_furniture/well-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/2/1": {
+      "path": "res://art/legacy_furniture/well-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/2/2": {
+      "path": "res://art/legacy_furniture/well-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/2/3": {
+      "path": "res://art/legacy_furniture/well-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/2/4": {
+      "path": "res://art/legacy_furniture/well-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/2/5": {
+      "path": "res://art/legacy_furniture/well-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/3/0": {
+      "path": "res://art/legacy_furniture/well-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/3/1": {
+      "path": "res://art/legacy_furniture/well-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/3/2": {
+      "path": "res://art/legacy_furniture/well-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/3/3": {
+      "path": "res://art/legacy_furniture/well-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/3/4": {
+      "path": "res://art/legacy_furniture/well-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "well/3/5": {
+      "path": "res://art/legacy_furniture/well-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/0/0": {
+      "path": "res://art/legacy_furniture/workbench-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/0/1": {
+      "path": "res://art/legacy_furniture/workbench-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/0/2": {
+      "path": "res://art/legacy_furniture/workbench-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/0/3": {
+      "path": "res://art/legacy_furniture/workbench-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/0/4": {
+      "path": "res://art/legacy_furniture/workbench-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/0/5": {
+      "path": "res://art/legacy_furniture/workbench-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/1/0": {
+      "path": "res://art/legacy_furniture/workbench-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/1/1": {
+      "path": "res://art/legacy_furniture/workbench-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/1/2": {
+      "path": "res://art/legacy_furniture/workbench-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/1/3": {
+      "path": "res://art/legacy_furniture/workbench-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/1/4": {
+      "path": "res://art/legacy_furniture/workbench-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/1/5": {
+      "path": "res://art/legacy_furniture/workbench-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/2/0": {
+      "path": "res://art/legacy_furniture/workbench-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/2/1": {
+      "path": "res://art/legacy_furniture/workbench-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/2/2": {
+      "path": "res://art/legacy_furniture/workbench-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/2/3": {
+      "path": "res://art/legacy_furniture/workbench-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/2/4": {
+      "path": "res://art/legacy_furniture/workbench-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/2/5": {
+      "path": "res://art/legacy_furniture/workbench-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/3/0": {
+      "path": "res://art/legacy_furniture/workbench-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/3/1": {
+      "path": "res://art/legacy_furniture/workbench-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/3/2": {
+      "path": "res://art/legacy_furniture/workbench-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/3/3": {
+      "path": "res://art/legacy_furniture/workbench-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/3/4": {
+      "path": "res://art/legacy_furniture/workbench-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "workbench/3/5": {
+      "path": "res://art/legacy_furniture/workbench-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/0/0": {
+      "path": "res://art/legacy_furniture/cabinet-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/0/1": {
+      "path": "res://art/legacy_furniture/cabinet-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/0/2": {
+      "path": "res://art/legacy_furniture/cabinet-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/0/3": {
+      "path": "res://art/legacy_furniture/cabinet-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/0/4": {
+      "path": "res://art/legacy_furniture/cabinet-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/0/5": {
+      "path": "res://art/legacy_furniture/cabinet-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/1/0": {
+      "path": "res://art/legacy_furniture/cabinet-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/1/1": {
+      "path": "res://art/legacy_furniture/cabinet-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/1/2": {
+      "path": "res://art/legacy_furniture/cabinet-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/1/3": {
+      "path": "res://art/legacy_furniture/cabinet-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/1/4": {
+      "path": "res://art/legacy_furniture/cabinet-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/1/5": {
+      "path": "res://art/legacy_furniture/cabinet-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/2/0": {
+      "path": "res://art/legacy_furniture/cabinet-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/2/1": {
+      "path": "res://art/legacy_furniture/cabinet-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/2/2": {
+      "path": "res://art/legacy_furniture/cabinet-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/2/3": {
+      "path": "res://art/legacy_furniture/cabinet-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/2/4": {
+      "path": "res://art/legacy_furniture/cabinet-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/2/5": {
+      "path": "res://art/legacy_furniture/cabinet-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/3/0": {
+      "path": "res://art/legacy_furniture/cabinet-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/3/1": {
+      "path": "res://art/legacy_furniture/cabinet-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/3/2": {
+      "path": "res://art/legacy_furniture/cabinet-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/3/3": {
+      "path": "res://art/legacy_furniture/cabinet-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/3/4": {
+      "path": "res://art/legacy_furniture/cabinet-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "cabinet/3/5": {
+      "path": "res://art/legacy_furniture/cabinet-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/0/0": {
+      "path": "res://art/legacy_furniture/seedrack-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/0/1": {
+      "path": "res://art/legacy_furniture/seedrack-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/0/2": {
+      "path": "res://art/legacy_furniture/seedrack-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/0/3": {
+      "path": "res://art/legacy_furniture/seedrack-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/0/4": {
+      "path": "res://art/legacy_furniture/seedrack-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/0/5": {
+      "path": "res://art/legacy_furniture/seedrack-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/1/0": {
+      "path": "res://art/legacy_furniture/seedrack-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/1/1": {
+      "path": "res://art/legacy_furniture/seedrack-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/1/2": {
+      "path": "res://art/legacy_furniture/seedrack-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/1/3": {
+      "path": "res://art/legacy_furniture/seedrack-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/1/4": {
+      "path": "res://art/legacy_furniture/seedrack-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/1/5": {
+      "path": "res://art/legacy_furniture/seedrack-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/2/0": {
+      "path": "res://art/legacy_furniture/seedrack-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/2/1": {
+      "path": "res://art/legacy_furniture/seedrack-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/2/2": {
+      "path": "res://art/legacy_furniture/seedrack-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/2/3": {
+      "path": "res://art/legacy_furniture/seedrack-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/2/4": {
+      "path": "res://art/legacy_furniture/seedrack-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/2/5": {
+      "path": "res://art/legacy_furniture/seedrack-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/3/0": {
+      "path": "res://art/legacy_furniture/seedrack-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/3/1": {
+      "path": "res://art/legacy_furniture/seedrack-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/3/2": {
+      "path": "res://art/legacy_furniture/seedrack-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/3/3": {
+      "path": "res://art/legacy_furniture/seedrack-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/3/4": {
+      "path": "res://art/legacy_furniture/seedrack-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "seedrack/3/5": {
+      "path": "res://art/legacy_furniture/seedrack-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/0/0": {
+      "path": "res://art/legacy_furniture/rug-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/0/1": {
+      "path": "res://art/legacy_furniture/rug-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/0/2": {
+      "path": "res://art/legacy_furniture/rug-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/0/3": {
+      "path": "res://art/legacy_furniture/rug-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/0/4": {
+      "path": "res://art/legacy_furniture/rug-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/0/5": {
+      "path": "res://art/legacy_furniture/rug-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/1/0": {
+      "path": "res://art/legacy_furniture/rug-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/1/1": {
+      "path": "res://art/legacy_furniture/rug-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/1/2": {
+      "path": "res://art/legacy_furniture/rug-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/1/3": {
+      "path": "res://art/legacy_furniture/rug-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/1/4": {
+      "path": "res://art/legacy_furniture/rug-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/1/5": {
+      "path": "res://art/legacy_furniture/rug-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/2/0": {
+      "path": "res://art/legacy_furniture/rug-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/2/1": {
+      "path": "res://art/legacy_furniture/rug-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/2/2": {
+      "path": "res://art/legacy_furniture/rug-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/2/3": {
+      "path": "res://art/legacy_furniture/rug-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/2/4": {
+      "path": "res://art/legacy_furniture/rug-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/2/5": {
+      "path": "res://art/legacy_furniture/rug-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/3/0": {
+      "path": "res://art/legacy_furniture/rug-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/3/1": {
+      "path": "res://art/legacy_furniture/rug-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/3/2": {
+      "path": "res://art/legacy_furniture/rug-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/3/3": {
+      "path": "res://art/legacy_furniture/rug-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/3/4": {
+      "path": "res://art/legacy_furniture/rug-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "rug/3/5": {
+      "path": "res://art/legacy_furniture/rug-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/0/0": {
+      "path": "res://art/legacy_furniture/teaTable-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/0/1": {
+      "path": "res://art/legacy_furniture/teaTable-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/0/2": {
+      "path": "res://art/legacy_furniture/teaTable-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/0/3": {
+      "path": "res://art/legacy_furniture/teaTable-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/0/4": {
+      "path": "res://art/legacy_furniture/teaTable-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/0/5": {
+      "path": "res://art/legacy_furniture/teaTable-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/1/0": {
+      "path": "res://art/legacy_furniture/teaTable-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/1/1": {
+      "path": "res://art/legacy_furniture/teaTable-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/1/2": {
+      "path": "res://art/legacy_furniture/teaTable-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/1/3": {
+      "path": "res://art/legacy_furniture/teaTable-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/1/4": {
+      "path": "res://art/legacy_furniture/teaTable-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/1/5": {
+      "path": "res://art/legacy_furniture/teaTable-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/2/0": {
+      "path": "res://art/legacy_furniture/teaTable-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/2/1": {
+      "path": "res://art/legacy_furniture/teaTable-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/2/2": {
+      "path": "res://art/legacy_furniture/teaTable-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/2/3": {
+      "path": "res://art/legacy_furniture/teaTable-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/2/4": {
+      "path": "res://art/legacy_furniture/teaTable-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/2/5": {
+      "path": "res://art/legacy_furniture/teaTable-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/3/0": {
+      "path": "res://art/legacy_furniture/teaTable-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/3/1": {
+      "path": "res://art/legacy_furniture/teaTable-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/3/2": {
+      "path": "res://art/legacy_furniture/teaTable-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/3/3": {
+      "path": "res://art/legacy_furniture/teaTable-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/3/4": {
+      "path": "res://art/legacy_furniture/teaTable-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "teaTable/3/5": {
+      "path": "res://art/legacy_furniture/teaTable-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/0/0": {
+      "path": "res://art/legacy_furniture/bookshelf-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/0/1": {
+      "path": "res://art/legacy_furniture/bookshelf-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/0/2": {
+      "path": "res://art/legacy_furniture/bookshelf-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/0/3": {
+      "path": "res://art/legacy_furniture/bookshelf-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/0/4": {
+      "path": "res://art/legacy_furniture/bookshelf-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/0/5": {
+      "path": "res://art/legacy_furniture/bookshelf-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/1/0": {
+      "path": "res://art/legacy_furniture/bookshelf-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/1/1": {
+      "path": "res://art/legacy_furniture/bookshelf-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/1/2": {
+      "path": "res://art/legacy_furniture/bookshelf-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/1/3": {
+      "path": "res://art/legacy_furniture/bookshelf-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/1/4": {
+      "path": "res://art/legacy_furniture/bookshelf-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/1/5": {
+      "path": "res://art/legacy_furniture/bookshelf-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/2/0": {
+      "path": "res://art/legacy_furniture/bookshelf-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/2/1": {
+      "path": "res://art/legacy_furniture/bookshelf-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/2/2": {
+      "path": "res://art/legacy_furniture/bookshelf-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/2/3": {
+      "path": "res://art/legacy_furniture/bookshelf-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/2/4": {
+      "path": "res://art/legacy_furniture/bookshelf-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/2/5": {
+      "path": "res://art/legacy_furniture/bookshelf-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/3/0": {
+      "path": "res://art/legacy_furniture/bookshelf-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/3/1": {
+      "path": "res://art/legacy_furniture/bookshelf-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/3/2": {
+      "path": "res://art/legacy_furniture/bookshelf-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/3/3": {
+      "path": "res://art/legacy_furniture/bookshelf-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/3/4": {
+      "path": "res://art/legacy_furniture/bookshelf-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "bookshelf/3/5": {
+      "path": "res://art/legacy_furniture/bookshelf-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/0/0": {
+      "path": "res://art/legacy_furniture/display-0-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/0/1": {
+      "path": "res://art/legacy_furniture/display-0-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/0/2": {
+      "path": "res://art/legacy_furniture/display-0-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/0/3": {
+      "path": "res://art/legacy_furniture/display-0-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/0/4": {
+      "path": "res://art/legacy_furniture/display-0-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/0/5": {
+      "path": "res://art/legacy_furniture/display-0-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/1/0": {
+      "path": "res://art/legacy_furniture/display-1-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/1/1": {
+      "path": "res://art/legacy_furniture/display-1-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/1/2": {
+      "path": "res://art/legacy_furniture/display-1-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/1/3": {
+      "path": "res://art/legacy_furniture/display-1-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/1/4": {
+      "path": "res://art/legacy_furniture/display-1-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/1/5": {
+      "path": "res://art/legacy_furniture/display-1-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/2/0": {
+      "path": "res://art/legacy_furniture/display-2-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/2/1": {
+      "path": "res://art/legacy_furniture/display-2-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/2/2": {
+      "path": "res://art/legacy_furniture/display-2-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/2/3": {
+      "path": "res://art/legacy_furniture/display-2-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/2/4": {
+      "path": "res://art/legacy_furniture/display-2-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/2/5": {
+      "path": "res://art/legacy_furniture/display-2-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/3/0": {
+      "path": "res://art/legacy_furniture/display-3-0.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/3/1": {
+      "path": "res://art/legacy_furniture/display-3-1.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/3/2": {
+      "path": "res://art/legacy_furniture/display-3-2.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/3/3": {
+      "path": "res://art/legacy_furniture/display-3-3.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/3/4": {
+      "path": "res://art/legacy_furniture/display-3-4.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    },
+    "display/3/5": {
+      "path": "res://art/legacy_furniture/display-3-5.svg",
+      "sha256": "0f6fcd163460e2282dd35ad1b06f25d9520596b17e14d32e364cbf8cde9ade3b",
+      "commands": 33
+    }
+  }
+}

@@ -1,0 +1,5729 @@
+{
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "packs": {
+    "apron": {
+      "parts": {
+        "down": {
+          "arm_left": {
+            "factor": 0.477366255144033,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/down-arm_left.png",
+            "rect": [
+              308.0,
+              59.0,
+              88.0,
+              243.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.477366255144033,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/down-arm_right.png",
+            "rect": [
+              489.0,
+              59.0,
+              87.0,
+              243.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.449612403100775,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/down-bag.png",
+            "rect": [
+              1056.0,
+              41.0,
+              138.0,
+              258.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.432835820895522,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/down-leg_left.png",
+            "rect": [
+              659.0,
+              46.0,
+              123.0,
+              268.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              53.0,
+              116.0
+            ],
+            "size": [
+              53.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.434456928838951,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/down-leg_right.png",
+            "rect": [
+              872.0,
+              47.0,
+              119.0,
+              267.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.444444444444444,
+            "offset": [
+              13.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/down-torso.png",
+            "rect": [
+              29.0,
+              47.0,
+              229.0,
+              261.0
+            ],
+            "region": [
+              13.0,
+              6.0,
+              102.0,
+              116.0
+            ],
+            "size": [
+              102.0,
+              116.0
+            ]
+          }
+        },
+        "left": {
+          "arm_left": {
+            "factor": 0.477366255144033,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/left-arm_left.png",
+            "rect": [
+              318.0,
+              354.0,
+              88.0,
+              243.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.475409836065574,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/left-arm_right.png",
+            "rect": [
+              477.0,
+              353.0,
+              87.0,
+              244.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              41.0,
+              116.0
+            ],
+            "size": [
+              41.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.453125,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/left-bag.png",
+            "rect": [
+              1073.0,
+              345.0,
+              114.0,
+              256.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.41726618705036,
+            "offset": [
+              35.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/left-leg_left.png",
+            "rect": [
+              641.0,
+              333.0,
+              138.0,
+              278.0
+            ],
+            "region": [
+              35.0,
+              6.0,
+              58.0,
+              116.0
+            ],
+            "size": [
+              58.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.415770609318996,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/left-leg_right.png",
+            "rect": [
+              875.0,
+              333.0,
+              149.0,
+              279.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.420289855072464,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/left-torso.png",
+            "rect": [
+              72.0,
+              343.0,
+              152.0,
+              276.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              64.0,
+              116.0
+            ],
+            "size": [
+              64.0,
+              116.0
+            ]
+          }
+        },
+        "right": {
+          "arm_left": {
+            "factor": 0.487394957983193,
+            "offset": [
+              42.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/right-arm_left.png",
+            "rect": [
+              314.0,
+              672.0,
+              88.0,
+              238.0
+            ],
+            "region": [
+              42.0,
+              6.0,
+              43.0,
+              116.0
+            ],
+            "size": [
+              43.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.487394957983193,
+            "offset": [
+              42.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/right-arm_right.png",
+            "rect": [
+              481.0,
+              672.0,
+              89.0,
+              238.0
+            ],
+            "region": [
+              42.0,
+              6.0,
+              43.0,
+              116.0
+            ],
+            "size": [
+              43.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.46031746031746,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/right-bag.png",
+            "rect": [
+              1076.0,
+              653.0,
+              118.0,
+              252.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              54.0,
+              116.0
+            ],
+            "size": [
+              54.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.423357664233577,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/right-leg_left.png",
+            "rect": [
+              633.0,
+              649.0,
+              149.0,
+              274.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              63.0,
+              116.0
+            ],
+            "size": [
+              63.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.421818181818182,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/right-leg_right.png",
+            "rect": [
+              874.0,
+              648.0,
+              148.0,
+              275.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.426470588235294,
+            "offset": [
+              31.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/right-torso.png",
+            "rect": [
+              59.0,
+              656.0,
+              154.0,
+              272.0
+            ],
+            "region": [
+              31.0,
+              6.0,
+              66.0,
+              116.0
+            ],
+            "size": [
+              66.0,
+              116.0
+            ]
+          }
+        },
+        "up": {
+          "arm_left": {
+            "factor": 0.462151394422311,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/up-arm_left.png",
+            "rect": [
+              312.0,
+              968.0,
+              89.0,
+              251.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              41.0,
+              116.0
+            ],
+            "size": [
+              41.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.462151394422311,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/up-arm_right.png",
+            "rect": [
+              483.0,
+              968.0,
+              89.0,
+              251.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              41.0,
+              116.0
+            ],
+            "size": [
+              41.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.442748091603053,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/up-bag.png",
+            "rect": [
+              1057.0,
+              959.0,
+              139.0,
+              262.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.420289855072464,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/up-leg_left.png",
+            "rect": [
+              657.0,
+              957.0,
+              124.0,
+              276.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.420289855072464,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/up-leg_right.png",
+            "rect": [
+              875.0,
+              957.0,
+              125.0,
+              276.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              53.0,
+              116.0
+            ],
+            "size": [
+              53.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.453125,
+            "offset": [
+              9.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/apron/up-torso.png",
+            "rect": [
+              25.0,
+              965.0,
+              241.0,
+              256.0
+            ],
+            "region": [
+              9.0,
+              6.0,
+              109.0,
+              116.0
+            ],
+            "size": [
+              109.0,
+              116.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-apron-b2d367cc80.png",
+      "sourceSha256": "b2d367cc802e99bff991eeb85638eb44e381803bc920d5d08a2056e9d2239280",
+      "visualReview": "pending_actual_scene"
+    },
+    "cold": {
+      "parts": {
+        "down": {
+          "arm_left": {
+            "factor": 0.511013215859031,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/down-arm_left.png",
+            "rect": [
+              384.0,
+              31.0,
+              83.0,
+              227.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.511013215859031,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/down-arm_right.png",
+            "rect": [
+              629.0,
+              31.0,
+              82.0,
+              227.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.557692307692308,
+            "offset": [
+              17.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/down-bag.png",
+            "rect": [
+              1311.0,
+              37.0,
+              167.0,
+              208.0
+            ],
+            "region": [
+              17.0,
+              6.0,
+              93.0,
+              116.0
+            ],
+            "size": [
+              93.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.513274336283186,
+            "offset": [
+              34.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/down-leg_left.png",
+            "rect": [
+              812.0,
+              33.0,
+              117.0,
+              226.0
+            ],
+            "region": [
+              34.0,
+              6.0,
+              60.0,
+              116.0
+            ],
+            "size": [
+              60.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.522522522522523,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/down-leg_right.png",
+            "rect": [
+              1070.0,
+              37.0,
+              118.0,
+              222.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.491525423728814,
+            "offset": [
+              6.0,
+              11.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/down-torso.png",
+            "rect": [
+              55.0,
+              29.0,
+              236.0,
+              214.0
+            ],
+            "region": [
+              6.0,
+              11.0,
+              116.0,
+              105.0
+            ],
+            "size": [
+              116.0,
+              105.0
+            ]
+          }
+        },
+        "left": {
+          "arm_left": {
+            "factor": 0.506550218340611,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/left-arm_left.png",
+            "rect": [
+              377.0,
+              271.0,
+              103.0,
+              229.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.504347826086957,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/left-arm_right.png",
+            "rect": [
+              613.0,
+              271.0,
+              103.0,
+              230.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.534562211981567,
+            "offset": [
+              27.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/left-bag.png",
+            "rect": [
+              1330.0,
+              271.0,
+              137.0,
+              217.0
+            ],
+            "region": [
+              27.0,
+              6.0,
+              73.0,
+              116.0
+            ],
+            "size": [
+              73.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.517857142857143,
+            "offset": [
+              26.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/left-leg_left.png",
+            "rect": [
+              801.0,
+              272.0,
+              145.0,
+              224.0
+            ],
+            "region": [
+              26.0,
+              6.0,
+              75.0,
+              116.0
+            ],
+            "size": [
+              75.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.520179372197309,
+            "offset": [
+              28.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/left-leg_right.png",
+            "rect": [
+              1077.0,
+              275.0,
+              138.0,
+              223.0
+            ],
+            "region": [
+              28.0,
+              6.0,
+              72.0,
+              116.0
+            ],
+            "size": [
+              72.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.524886877828054,
+            "offset": [
+              22.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/left-torso.png",
+            "rect": [
+              90.0,
+              268.0,
+              158.0,
+              221.0
+            ],
+            "region": [
+              22.0,
+              6.0,
+              83.0,
+              116.0
+            ],
+            "size": [
+              83.0,
+              116.0
+            ]
+          }
+        },
+        "right": {
+          "arm_left": {
+            "factor": 0.513274336283186,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/right-arm_left.png",
+            "rect": [
+              384.0,
+              513.0,
+              102.0,
+              226.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.513274336283186,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/right-arm_right.png",
+            "rect": [
+              607.0,
+              513.0,
+              102.0,
+              226.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.534562211981567,
+            "offset": [
+              29.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/right-bag.png",
+            "rect": [
+              1333.0,
+              518.0,
+              131.0,
+              217.0
+            ],
+            "region": [
+              29.0,
+              6.0,
+              70.0,
+              116.0
+            ],
+            "size": [
+              70.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.515555555555556,
+            "offset": [
+              26.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/right-leg_left.png",
+            "rect": [
+              817.0,
+              514.0,
+              145.0,
+              225.0
+            ],
+            "region": [
+              26.0,
+              6.0,
+              75.0,
+              116.0
+            ],
+            "size": [
+              75.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.520179372197309,
+            "offset": [
+              27.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/right-leg_right.png",
+            "rect": [
+              1080.0,
+              515.0,
+              143.0,
+              223.0
+            ],
+            "region": [
+              27.0,
+              6.0,
+              74.0,
+              116.0
+            ],
+            "size": [
+              74.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.529680365296804,
+            "offset": [
+              21.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/right-torso.png",
+            "rect": [
+              86.0,
+              512.0,
+              162.0,
+              219.0
+            ],
+            "region": [
+              21.0,
+              6.0,
+              86.0,
+              116.0
+            ],
+            "size": [
+              86.0,
+              116.0
+            ]
+          }
+        },
+        "up": {
+          "arm_left": {
+            "factor": 0.489451476793249,
+            "offset": [
+              40.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/up-arm_left.png",
+            "rect": [
+              374.0,
+              755.0,
+              96.0,
+              237.0
+            ],
+            "region": [
+              40.0,
+              6.0,
+              47.0,
+              116.0
+            ],
+            "size": [
+              47.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.489451476793249,
+            "offset": [
+              40.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/up-arm_right.png",
+            "rect": [
+              622.0,
+              755.0,
+              96.0,
+              237.0
+            ],
+            "region": [
+              40.0,
+              6.0,
+              47.0,
+              116.0
+            ],
+            "size": [
+              47.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.534562211981567,
+            "offset": [
+              20.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/up-bag.png",
+            "rect": [
+              1319.0,
+              757.0,
+              164.0,
+              217.0
+            ],
+            "region": [
+              20.0,
+              6.0,
+              88.0,
+              116.0
+            ],
+            "size": [
+              88.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.491525423728814,
+            "offset": [
+              35.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/up-leg_left.png",
+            "rect": [
+              815.0,
+              756.0,
+              115.0,
+              236.0
+            ],
+            "region": [
+              35.0,
+              6.0,
+              57.0,
+              116.0
+            ],
+            "size": [
+              57.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.491525423728814,
+            "offset": [
+              36.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/up-leg_right.png",
+            "rect": [
+              1083.0,
+              756.0,
+              113.0,
+              236.0
+            ],
+            "region": [
+              36.0,
+              6.0,
+              56.0,
+              116.0
+            ],
+            "size": [
+              56.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.473469387755102,
+            "offset": [
+              6.0,
+              11.0
+            ],
+            "path": "res://art/characters/player/wardrobe/cold/up-torso.png",
+            "rect": [
+              45.0,
+              756.0,
+              245.0,
+              221.0
+            ],
+            "region": [
+              6.0,
+              11.0,
+              116.0,
+              105.0
+            ],
+            "size": [
+              116.0,
+              105.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-cold-64035e381d.png",
+      "sourceSha256": "64035e381d8ea7a4ce2176de6f527f2c27aa853b73f06a97b5c09215a4a322c5",
+      "visualReview": "pending_actual_scene"
+    },
+    "festival": {
+      "parts": {
+        "down": {
+          "arm_left": {
+            "factor": 0.439393939393939,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/down-arm_left.png",
+            "rect": [
+              353.0,
+              62.0,
+              95.0,
+              264.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.44106463878327,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/down-arm_right.png",
+            "rect": [
+              498.0,
+              63.0,
+              96.0,
+              263.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.444444444444444,
+            "offset": [
+              31.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/down-bag.png",
+            "rect": [
+              1049.0,
+              57.0,
+              146.0,
+              261.0
+            ],
+            "region": [
+              31.0,
+              6.0,
+              65.0,
+              116.0
+            ],
+            "size": [
+              65.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.424908424908425,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/down-leg_left.png",
+            "rect": [
+              648.0,
+              59.0,
+              128.0,
+              273.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              54.0,
+              116.0
+            ],
+            "size": [
+              54.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.423357664233577,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/down-leg_right.png",
+            "rect": [
+              861.0,
+              58.0,
+              128.0,
+              274.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              54.0,
+              116.0
+            ],
+            "size": [
+              54.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.397260273972603,
+            "offset": [
+              6.0,
+              14.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/down-torso.png",
+            "rect": [
+              21.0,
+              53.0,
+              292.0,
+              250.0
+            ],
+            "region": [
+              6.0,
+              14.0,
+              116.0,
+              99.0
+            ],
+            "size": [
+              116.0,
+              99.0
+            ]
+          }
+        },
+        "left": {
+          "arm_left": {
+            "factor": 0.462151394422311,
+            "offset": [
+              42.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/left-arm_left.png",
+            "rect": [
+              328.0,
+              381.0,
+              94.0,
+              251.0
+            ],
+            "region": [
+              42.0,
+              6.0,
+              43.0,
+              116.0
+            ],
+            "size": [
+              43.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.462151394422311,
+            "offset": [
+              42.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/left-arm_right.png",
+            "rect": [
+              498.0,
+              381.0,
+              95.0,
+              251.0
+            ],
+            "region": [
+              42.0,
+              6.0,
+              44.0,
+              116.0
+            ],
+            "size": [
+              44.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.45136186770428,
+            "offset": [
+              35.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/left-bag.png",
+            "rect": [
+              1062.0,
+              359.0,
+              128.0,
+              257.0
+            ],
+            "region": [
+              35.0,
+              6.0,
+              58.0,
+              116.0
+            ],
+            "size": [
+              58.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.426470588235294,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/left-leg_left.png",
+            "rect": [
+              646.0,
+              356.0,
+              151.0,
+              272.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              64.0,
+              116.0
+            ],
+            "size": [
+              64.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.426470588235294,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/left-leg_right.png",
+            "rect": [
+              869.0,
+              356.0,
+              149.0,
+              272.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              64.0,
+              116.0
+            ],
+            "size": [
+              64.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.432835820895522,
+            "offset": [
+              24.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/left-torso.png",
+            "rect": [
+              68.0,
+              355.0,
+              183.0,
+              268.0
+            ],
+            "region": [
+              24.0,
+              6.0,
+              79.0,
+              116.0
+            ],
+            "size": [
+              79.0,
+              116.0
+            ]
+          }
+        },
+        "right": {
+          "arm_left": {
+            "factor": 0.467741935483871,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/right-arm_left.png",
+            "rect": [
+              321.0,
+              682.0,
+              98.0,
+              248.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              46.0,
+              116.0
+            ],
+            "size": [
+              46.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.462151394422311,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/right-arm_right.png",
+            "rect": [
+              500.0,
+              679.0,
+              98.0,
+              251.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              45.0,
+              116.0
+            ],
+            "size": [
+              45.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.462151394422311,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/right-bag.png",
+            "rect": [
+              1066.0,
+              670.0,
+              136.0,
+              251.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              63.0,
+              116.0
+            ],
+            "size": [
+              63.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.44106463878327,
+            "offset": [
+              31.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/right-leg_left.png",
+            "rect": [
+              660.0,
+              671.0,
+              150.0,
+              263.0
+            ],
+            "region": [
+              31.0,
+              6.0,
+              66.0,
+              116.0
+            ],
+            "size": [
+              66.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.44106463878327,
+            "offset": [
+              31.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/right-leg_right.png",
+            "rect": [
+              854.0,
+              671.0,
+              150.0,
+              263.0
+            ],
+            "region": [
+              31.0,
+              6.0,
+              66.0,
+              116.0
+            ],
+            "size": [
+              66.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.437735849056604,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/right-torso.png",
+            "rect": [
+              77.0,
+              650.0,
+              177.0,
+              265.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              77.0,
+              116.0
+            ],
+            "size": [
+              77.0,
+              116.0
+            ]
+          }
+        },
+        "up": {
+          "arm_left": {
+            "factor": 0.428044280442804,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/up-arm_left.png",
+            "rect": [
+              339.0,
+              966.0,
+              94.0,
+              271.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.428044280442804,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/up-arm_right.png",
+            "rect": [
+              500.0,
+              966.0,
+              94.0,
+              271.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.491525423728814,
+            "offset": [
+              28.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/up-bag.png",
+            "rect": [
+              1059.0,
+              981.0,
+              147.0,
+              236.0
+            ],
+            "region": [
+              28.0,
+              6.0,
+              72.0,
+              116.0
+            ],
+            "size": [
+              72.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.431226765799257,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/up-leg_left.png",
+            "rect": [
+              656.0,
+              969.0,
+              123.0,
+              269.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              53.0,
+              116.0
+            ],
+            "size": [
+              53.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.431226765799257,
+            "offset": [
+              38.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/up-leg_right.png",
+            "rect": [
+              890.0,
+              969.0,
+              120.0,
+              269.0
+            ],
+            "region": [
+              38.0,
+              6.0,
+              52.0,
+              116.0
+            ],
+            "size": [
+              52.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.390572390572391,
+            "offset": [
+              6.0,
+              15.0
+            ],
+            "path": "res://art/characters/player/wardrobe/festival/up-torso.png",
+            "rect": [
+              16.0,
+              962.0,
+              297.0,
+              250.0
+            ],
+            "region": [
+              6.0,
+              15.0,
+              116.0,
+              98.0
+            ],
+            "size": [
+              116.0,
+              98.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-festival-f52864a213.png",
+      "sourceSha256": "f52864a213eeb50059a8f6f9ba554592cf30ad714974ad2c7fc9afb06c821141",
+      "visualReview": "pending_actual_scene"
+    },
+    "field": {
+      "parts": {
+        "down": {
+          "arm_left": {
+            "factor": 0.464,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/down-arm_left.png",
+            "rect": [
+              320.0,
+              82.0,
+              91.0,
+              250.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.464,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/down-arm_right.png",
+            "rect": [
+              491.0,
+              82.0,
+              87.0,
+              250.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.447876447876448,
+            "offset": [
+              31.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/down-bag.png",
+            "rect": [
+              1038.0,
+              72.0,
+              145.0,
+              259.0
+            ],
+            "region": [
+              31.0,
+              6.0,
+              65.0,
+              116.0
+            ],
+            "size": [
+              65.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.424908424908425,
+            "offset": [
+              35.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/down-leg_left.png",
+            "rect": [
+              622.0,
+              65.0,
+              134.0,
+              273.0
+            ],
+            "region": [
+              35.0,
+              6.0,
+              57.0,
+              116.0
+            ],
+            "size": [
+              57.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.424908424908425,
+            "offset": [
+              35.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/down-leg_right.png",
+            "rect": [
+              819.0,
+              65.0,
+              133.0,
+              273.0
+            ],
+            "region": [
+              35.0,
+              6.0,
+              57.0,
+              116.0
+            ],
+            "size": [
+              57.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.464,
+            "offset": [
+              6.0,
+              13.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/down-torso.png",
+            "rect": [
+              31.0,
+              81.0,
+              250.0,
+              217.0
+            ],
+            "region": [
+              6.0,
+              13.0,
+              116.0,
+              101.0
+            ],
+            "size": [
+              116.0,
+              101.0
+            ]
+          }
+        },
+        "left": {
+          "arm_left": {
+            "factor": 0.465863453815261,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/left-arm_left.png",
+            "rect": [
+              326.0,
+              378.0,
+              86.0,
+              249.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.467741935483871,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/left-arm_right.png",
+            "rect": [
+              491.0,
+              379.0,
+              85.0,
+              248.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.481327800829876,
+            "offset": [
+              35.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/left-bag.png",
+            "rect": [
+              1065.0,
+              376.0,
+              119.0,
+              241.0
+            ],
+            "region": [
+              35.0,
+              6.0,
+              57.0,
+              116.0
+            ],
+            "size": [
+              57.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.446153846153846,
+            "offset": [
+              31.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/left-leg_left.png",
+            "rect": [
+              621.0,
+              368.0,
+              147.0,
+              260.0
+            ],
+            "region": [
+              31.0,
+              6.0,
+              66.0,
+              116.0
+            ],
+            "size": [
+              66.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.444444444444444,
+            "offset": [
+              31.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/left-leg_right.png",
+            "rect": [
+              823.0,
+              367.0,
+              148.0,
+              261.0
+            ],
+            "region": [
+              31.0,
+              6.0,
+              66.0,
+              116.0
+            ],
+            "size": [
+              66.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.485355648535565,
+            "offset": [
+              21.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/left-torso.png",
+            "rect": [
+              68.0,
+              368.0,
+              175.0,
+              239.0
+            ],
+            "region": [
+              21.0,
+              6.0,
+              85.0,
+              116.0
+            ],
+            "size": [
+              85.0,
+              116.0
+            ]
+          }
+        },
+        "right": {
+          "arm_left": {
+            "factor": 0.485355648535565,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/right-arm_left.png",
+            "rect": [
+              313.0,
+              678.0,
+              93.0,
+              239.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              45.0,
+              116.0
+            ],
+            "size": [
+              45.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.487394957983193,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/right-arm_right.png",
+            "rect": [
+              493.0,
+              677.0,
+              93.0,
+              238.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              45.0,
+              116.0
+            ],
+            "size": [
+              45.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.471544715447154,
+            "offset": [
+              36.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/right-bag.png",
+            "rect": [
+              1051.0,
+              666.0,
+              118.0,
+              246.0
+            ],
+            "region": [
+              36.0,
+              6.0,
+              56.0,
+              116.0
+            ],
+            "size": [
+              56.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.453125,
+            "offset": [
+              30.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/right-leg_left.png",
+            "rect": [
+              635.0,
+              665.0,
+              148.0,
+              256.0
+            ],
+            "region": [
+              30.0,
+              6.0,
+              67.0,
+              116.0
+            ],
+            "size": [
+              67.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.45136186770428,
+            "offset": [
+              30.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/right-leg_right.png",
+            "rect": [
+              821.0,
+              665.0,
+              149.0,
+              257.0
+            ],
+            "region": [
+              30.0,
+              6.0,
+              67.0,
+              116.0
+            ],
+            "size": [
+              67.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.485355648535565,
+            "offset": [
+              23.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/right-torso.png",
+            "rect": [
+              79.0,
+              658.0,
+              167.0,
+              239.0
+            ],
+            "region": [
+              23.0,
+              6.0,
+              81.0,
+              116.0
+            ],
+            "size": [
+              81.0,
+              116.0
+            ]
+          }
+        },
+        "up": {
+          "arm_left": {
+            "factor": 0.464,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/up-arm_left.png",
+            "rect": [
+              321.0,
+              982.0,
+              86.0,
+              250.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.464,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/up-arm_right.png",
+            "rect": [
+              485.0,
+              981.0,
+              86.0,
+              250.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.502164502164502,
+            "offset": [
+              28.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/up-bag.png",
+            "rect": [
+              1045.0,
+              988.0,
+              144.0,
+              231.0
+            ],
+            "region": [
+              28.0,
+              6.0,
+              72.0,
+              116.0
+            ],
+            "size": [
+              72.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.432835820895522,
+            "offset": [
+              34.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/up-leg_left.png",
+            "rect": [
+              625.0,
+              968.0,
+              138.0,
+              268.0
+            ],
+            "region": [
+              34.0,
+              6.0,
+              60.0,
+              116.0
+            ],
+            "size": [
+              60.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.432835820895522,
+            "offset": [
+              34.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/up-leg_right.png",
+            "rect": [
+              829.0,
+              968.0,
+              138.0,
+              268.0
+            ],
+            "region": [
+              34.0,
+              6.0,
+              60.0,
+              116.0
+            ],
+            "size": [
+              60.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.447876447876448,
+            "offset": [
+              6.0,
+              15.0
+            ],
+            "path": "res://art/characters/player/wardrobe/field/up-torso.png",
+            "rect": [
+              22.0,
+              970.0,
+              259.0,
+              219.0
+            ],
+            "region": [
+              6.0,
+              15.0,
+              116.0,
+              98.0
+            ],
+            "size": [
+              116.0,
+              98.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-field-16c3d03aa6.png",
+      "sourceSha256": "16c3d03aa6ce93e2d8e2e60e8deb74497c14e896b9427359619b1635a82e5126",
+      "visualReview": "pending_actual_scene"
+    },
+    "heads": {
+      "parts": {
+        "down": {
+          "bob": {
+            "factor": 0.630434782608696,
+            "offset": [
+              6.0,
+              16.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/down-bob.png",
+            "rect": [
+              537.0,
+              75.0,
+              184.0,
+              152.0
+            ],
+            "region": [
+              6.0,
+              16.0,
+              116.0,
+              96.0
+            ],
+            "size": [
+              116.0,
+              96.0
+            ]
+          },
+          "bun": {
+            "factor": 0.666666666666667,
+            "offset": [
+              14.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/down-bun.png",
+            "rect": [
+              811.0,
+              61.0,
+              148.0,
+              174.0
+            ],
+            "region": [
+              14.0,
+              6.0,
+              99.0,
+              116.0
+            ],
+            "size": [
+              99.0,
+              116.0
+            ]
+          },
+          "hat": {
+            "factor": 0.557692307692308,
+            "offset": [
+              6.0,
+              26.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/down-hat.png",
+            "rect": [
+              1295.0,
+              90.0,
+              208.0,
+              137.0
+            ],
+            "region": [
+              6.0,
+              26.0,
+              116.0,
+              76.0
+            ],
+            "size": [
+              116.0,
+              76.0
+            ]
+          },
+          "head": {
+            "factor": 0.711656441717791,
+            "offset": [
+              14.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/down-head.png",
+            "rect": [
+              62.0,
+              81.0,
+              140.0,
+              163.0
+            ],
+            "region": [
+              14.0,
+              6.0,
+              100.0,
+              116.0
+            ],
+            "size": [
+              100.0,
+              116.0
+            ]
+          },
+          "short": {
+            "factor": 0.694610778443114,
+            "offset": [
+              6.0,
+              19.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/down-short.png",
+            "rect": [
+              299.0,
+              79.0,
+              167.0,
+              128.0
+            ],
+            "region": [
+              6.0,
+              19.0,
+              116.0,
+              89.0
+            ],
+            "size": [
+              116.0,
+              89.0
+            ]
+          },
+          "wave": {
+            "factor": 0.601036269430052,
+            "offset": [
+              6.0,
+              19.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/down-wave.png",
+            "rect": [
+              1048.0,
+              78.0,
+              193.0,
+              149.0
+            ],
+            "region": [
+              6.0,
+              19.0,
+              116.0,
+              90.0
+            ],
+            "size": [
+              116.0,
+              90.0
+            ]
+          }
+        },
+        "left": {
+          "bob": {
+            "factor": 0.640883977900553,
+            "offset": [
+              6.0,
+              13.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/left-bob.png",
+            "rect": [
+              539.0,
+              316.0,
+              181.0,
+              159.0
+            ],
+            "region": [
+              6.0,
+              13.0,
+              116.0,
+              102.0
+            ],
+            "size": [
+              116.0,
+              102.0
+            ]
+          },
+          "bun": {
+            "factor": 0.651685393258427,
+            "offset": [
+              10.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/left-bun.png",
+            "rect": [
+              798.0,
+              301.0,
+              164.0,
+              178.0
+            ],
+            "region": [
+              10.0,
+              6.0,
+              107.0,
+              116.0
+            ],
+            "size": [
+              107.0,
+              116.0
+            ]
+          },
+          "hat": {
+            "factor": 0.588832487309645,
+            "offset": [
+              6.0,
+              22.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/left-hat.png",
+            "rect": [
+              1300.0,
+              327.0,
+              197.0,
+              141.0
+            ],
+            "region": [
+              6.0,
+              22.0,
+              116.0,
+              83.0
+            ],
+            "size": [
+              116.0,
+              83.0
+            ]
+          },
+          "head": {
+            "factor": 0.734177215189873,
+            "offset": [
+              13.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/left-head.png",
+            "rect": [
+              66.0,
+              323.0,
+              138.0,
+              158.0
+            ],
+            "region": [
+              13.0,
+              6.0,
+              101.0,
+              116.0
+            ],
+            "size": [
+              101.0,
+              116.0
+            ]
+          },
+          "short": {
+            "factor": 0.64804469273743,
+            "offset": [
+              6.0,
+              14.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/left-short.png",
+            "rect": [
+              288.0,
+              314.0,
+              179.0,
+              155.0
+            ],
+            "region": [
+              6.0,
+              14.0,
+              116.0,
+              100.0
+            ],
+            "size": [
+              116.0,
+              100.0
+            ]
+          },
+          "wave": {
+            "factor": 0.565853658536585,
+            "offset": [
+              6.0,
+              17.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/left-wave.png",
+            "rect": [
+              1040.0,
+              312.0,
+              205.0,
+              166.0
+            ],
+            "region": [
+              6.0,
+              17.0,
+              116.0,
+              94.0
+            ],
+            "size": [
+              116.0,
+              94.0
+            ]
+          }
+        },
+        "right": {
+          "bob": {
+            "factor": 0.574257425742574,
+            "offset": [
+              6.0,
+              19.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/right-bob.png",
+            "rect": [
+              527.0,
+              559.0,
+              202.0,
+              155.0
+            ],
+            "region": [
+              6.0,
+              19.0,
+              116.0,
+              89.0
+            ],
+            "size": [
+              116.0,
+              89.0
+            ]
+          },
+          "bun": {
+            "factor": 0.662857142857143,
+            "offset": [
+              7.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/right-bun.png",
+            "rect": [
+              800.0,
+              550.0,
+              172.0,
+              175.0
+            ],
+            "region": [
+              7.0,
+              6.0,
+              114.0,
+              116.0
+            ],
+            "size": [
+              114.0,
+              116.0
+            ]
+          },
+          "hat": {
+            "factor": 0.565853658536585,
+            "offset": [
+              6.0,
+              23.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/right-hat.png",
+            "rect": [
+              1304.0,
+              574.0,
+              205.0,
+              145.0
+            ],
+            "region": [
+              6.0,
+              23.0,
+              116.0,
+              82.0
+            ],
+            "size": [
+              116.0,
+              82.0
+            ]
+          },
+          "head": {
+            "factor": 0.720496894409938,
+            "offset": [
+              12.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/right-head.png",
+            "rect": [
+              60.0,
+              563.0,
+              143.0,
+              161.0
+            ],
+            "region": [
+              12.0,
+              6.0,
+              103.0,
+              116.0
+            ],
+            "size": [
+              103.0,
+              116.0
+            ]
+          },
+          "short": {
+            "factor": 0.666666666666667,
+            "offset": [
+              6.0,
+              13.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/right-short.png",
+            "rect": [
+              295.0,
+              561.0,
+              174.0,
+              153.0
+            ],
+            "region": [
+              6.0,
+              13.0,
+              116.0,
+              102.0
+            ],
+            "size": [
+              116.0,
+              102.0
+            ]
+          },
+          "wave": {
+            "factor": 0.568627450980392,
+            "offset": [
+              6.0,
+              18.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/right-wave.png",
+            "rect": [
+              1040.0,
+              558.0,
+              204.0,
+              161.0
+            ],
+            "region": [
+              6.0,
+              18.0,
+              116.0,
+              92.0
+            ],
+            "size": [
+              116.0,
+              92.0
+            ]
+          }
+        },
+        "up": {
+          "bob": {
+            "factor": 0.613756613756614,
+            "offset": [
+              6.0,
+              14.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/up-bob.png",
+            "rect": [
+              532.0,
+              789.0,
+              189.0,
+              163.0
+            ],
+            "region": [
+              6.0,
+              14.0,
+              116.0,
+              100.0
+            ],
+            "size": [
+              116.0,
+              100.0
+            ]
+          },
+          "bun": {
+            "factor": 0.651685393258427,
+            "offset": [
+              14.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/up-bun.png",
+            "rect": [
+              806.0,
+              783.0,
+              154.0,
+              178.0
+            ],
+            "region": [
+              14.0,
+              6.0,
+              100.0,
+              116.0
+            ],
+            "size": [
+              100.0,
+              116.0
+            ]
+          },
+          "hat": {
+            "factor": 0.557692307692308,
+            "offset": [
+              6.0,
+              26.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/up-hat.png",
+            "rect": [
+              1301.0,
+              814.0,
+              208.0,
+              134.0
+            ],
+            "region": [
+              6.0,
+              26.0,
+              116.0,
+              75.0
+            ],
+            "size": [
+              116.0,
+              75.0
+            ]
+          },
+          "head": {
+            "factor": 0.734177215189873,
+            "offset": [
+              10.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/up-head.png",
+            "rect": [
+              59.0,
+              803.0,
+              146.0,
+              158.0
+            ],
+            "region": [
+              10.0,
+              6.0,
+              107.0,
+              116.0
+            ],
+            "size": [
+              107.0,
+              116.0
+            ]
+          },
+          "short": {
+            "factor": 0.659090909090909,
+            "offset": [
+              6.0,
+              12.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/up-short.png",
+            "rect": [
+              294.0,
+              798.0,
+              176.0,
+              158.0
+            ],
+            "region": [
+              6.0,
+              12.0,
+              116.0,
+              104.0
+            ],
+            "size": [
+              116.0,
+              104.0
+            ]
+          },
+          "wave": {
+            "factor": 0.582914572864322,
+            "offset": [
+              6.0,
+              15.0
+            ],
+            "path": "res://art/characters/player/wardrobe/heads/up-wave.png",
+            "rect": [
+              1038.0,
+              794.0,
+              199.0,
+              168.0
+            ],
+            "region": [
+              6.0,
+              15.0,
+              116.0,
+              98.0
+            ],
+            "size": [
+              116.0,
+              98.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-heads-df1342aa68.png",
+      "sourceSha256": "df1342aa6879ed38c1c07d9b88020e4bbb8ebb42d3e61b22c6e66ca96ae12ee0",
+      "visualReview": "pending_actual_scene"
+    },
+    "props": {
+      "parts": {
+        "down": {
+          "bell": {
+            "factor": 0.508771929824561,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/down-bell.png",
+            "rect": [
+              1346.0,
+              19.0,
+              119.0,
+              228.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              61.0,
+              116.0
+            ],
+            "size": [
+              61.0,
+              116.0
+            ]
+          },
+          "book": {
+            "factor": 0.520179372197309,
+            "offset": [
+              6.0,
+              27.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/down-book.png",
+            "rect": [
+              549.0,
+              75.0,
+              223.0,
+              143.0
+            ],
+            "region": [
+              6.0,
+              27.0,
+              116.0,
+              74.0
+            ],
+            "size": [
+              116.0,
+              74.0
+            ]
+          },
+          "brush": {
+            "factor": 0.644444444444444,
+            "offset": [
+              6.0,
+              15.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/down-brush.png",
+            "rect": [
+              40.0,
+              77.0,
+              180.0,
+              151.0
+            ],
+            "region": [
+              6.0,
+              15.0,
+              116.0,
+              97.0
+            ],
+            "size": [
+              116.0,
+              97.0
+            ]
+          },
+          "hammer": {
+            "factor": 0.552380952380952,
+            "offset": [
+              23.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/down-hammer.png",
+            "rect": [
+              319.0,
+              26.0,
+              146.0,
+              210.0
+            ],
+            "region": [
+              23.0,
+              6.0,
+              81.0,
+              116.0
+            ],
+            "size": [
+              81.0,
+              116.0
+            ]
+          },
+          "ladle": {
+            "factor": 0.497854077253219,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/down-ladle.png",
+            "rect": [
+              1114.0,
+              13.0,
+              106.0,
+              233.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              53.0,
+              116.0
+            ],
+            "size": [
+              53.0,
+              116.0
+            ]
+          },
+          "parcel": {
+            "factor": 0.610526315789474,
+            "offset": [
+              6.0,
+              16.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/down-parcel.png",
+            "rect": [
+              832.0,
+              72.0,
+              190.0,
+              155.0
+            ],
+            "region": [
+              6.0,
+              16.0,
+              116.0,
+              95.0
+            ],
+            "size": [
+              116.0,
+              95.0
+            ]
+          }
+        },
+        "left": {
+          "bell": {
+            "factor": 0.515555555555556,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/left-bell.png",
+            "rect": [
+              1355.0,
+              269.0,
+              119.0,
+              225.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              61.0,
+              116.0
+            ],
+            "size": [
+              61.0,
+              116.0
+            ]
+          },
+          "book": {
+            "factor": 0.627027027027027,
+            "offset": [
+              6.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/left-book.png",
+            "rect": [
+              573.0,
+              304.0,
+              185.0,
+              183.0
+            ],
+            "region": [
+              6.0,
+              6.0,
+              116.0,
+              115.0
+            ],
+            "size": [
+              116.0,
+              115.0
+            ]
+          },
+          "brush": {
+            "factor": 0.630434782608696,
+            "offset": [
+              6.0,
+              20.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/left-brush.png",
+            "rect": [
+              41.0,
+              326.0,
+              184.0,
+              139.0
+            ],
+            "region": [
+              6.0,
+              20.0,
+              116.0,
+              88.0
+            ],
+            "size": [
+              116.0,
+              88.0
+            ]
+          },
+          "hammer": {
+            "factor": 0.513274336283186,
+            "offset": [
+              30.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/left-hammer.png",
+            "rect": [
+              341.0,
+              265.0,
+              133.0,
+              226.0
+            ],
+            "region": [
+              30.0,
+              6.0,
+              68.0,
+              116.0
+            ],
+            "size": [
+              68.0,
+              116.0
+            ]
+          },
+          "ladle": {
+            "factor": 0.511013215859031,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/left-ladle.png",
+            "rect": [
+              1109.0,
+              265.0,
+              120.0,
+              227.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              61.0,
+              116.0
+            ],
+            "size": [
+              61.0,
+              116.0
+            ]
+          },
+          "parcel": {
+            "factor": 0.597938144329897,
+            "offset": [
+              6.0,
+              16.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/left-parcel.png",
+            "rect": [
+              828.0,
+              316.0,
+              194.0,
+              161.0
+            ],
+            "region": [
+              6.0,
+              16.0,
+              116.0,
+              96.0
+            ],
+            "size": [
+              116.0,
+              96.0
+            ]
+          }
+        },
+        "right": {
+          "bell": {
+            "factor": 0.522522522522523,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/right-bell.png",
+            "rect": [
+              1359.0,
+              523.0,
+              122.0,
+              222.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              64.0,
+              116.0
+            ],
+            "size": [
+              64.0,
+              116.0
+            ]
+          },
+          "book": {
+            "factor": 0.597938144329897,
+            "offset": [
+              6.0,
+              8.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/right-book.png",
+            "rect": [
+              552.0,
+              557.0,
+              194.0,
+              185.0
+            ],
+            "region": [
+              6.0,
+              8.0,
+              116.0,
+              111.0
+            ],
+            "size": [
+              116.0,
+              111.0
+            ]
+          },
+          "brush": {
+            "factor": 0.633879781420765,
+            "offset": [
+              6.0,
+              17.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/right-brush.png",
+            "rect": [
+              42.0,
+              581.0,
+              183.0,
+              147.0
+            ],
+            "region": [
+              6.0,
+              17.0,
+              116.0,
+              93.0
+            ],
+            "size": [
+              116.0,
+              93.0
+            ]
+          },
+          "hammer": {
+            "factor": 0.527272727272727,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/right-hammer.png",
+            "rect": [
+              312.0,
+              522.0,
+              147.0,
+              220.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              78.0,
+              116.0
+            ],
+            "size": [
+              78.0,
+              116.0
+            ]
+          },
+          "ladle": {
+            "factor": 0.532110091743119,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/right-ladle.png",
+            "rect": [
+              1125.0,
+              522.0,
+              118.0,
+              218.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              63.0,
+              116.0
+            ],
+            "size": [
+              63.0,
+              116.0
+            ]
+          },
+          "parcel": {
+            "factor": 0.591836734693878,
+            "offset": [
+              6.0,
+              18.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/right-parcel.png",
+            "rect": [
+              824.0,
+              573.0,
+              196.0,
+              156.0
+            ],
+            "region": [
+              6.0,
+              18.0,
+              116.0,
+              92.0
+            ],
+            "size": [
+              116.0,
+              92.0
+            ]
+          }
+        },
+        "up": {
+          "bell": {
+            "factor": 0.515555555555556,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/up-bell.png",
+            "rect": [
+              1346.0,
+              763.0,
+              124.0,
+              225.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              64.0,
+              116.0
+            ],
+            "size": [
+              64.0,
+              116.0
+            ]
+          },
+          "book": {
+            "factor": 0.537037037037037,
+            "offset": [
+              6.0,
+              17.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/up-book.png",
+            "rect": [
+              545.0,
+              790.0,
+              216.0,
+              175.0
+            ],
+            "region": [
+              6.0,
+              17.0,
+              116.0,
+              94.0
+            ],
+            "size": [
+              116.0,
+              94.0
+            ]
+          },
+          "brush": {
+            "factor": 0.585858585858586,
+            "offset": [
+              6.0,
+              20.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/up-brush.png",
+            "rect": [
+              42.0,
+              827.0,
+              198.0,
+              149.0
+            ],
+            "region": [
+              6.0,
+              20.0,
+              116.0,
+              87.0
+            ],
+            "size": [
+              116.0,
+              87.0
+            ]
+          },
+          "hammer": {
+            "factor": 0.513274336283186,
+            "offset": [
+              24.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/up-hammer.png",
+            "rect": [
+              313.0,
+              765.0,
+              154.0,
+              226.0
+            ],
+            "region": [
+              24.0,
+              6.0,
+              79.0,
+              116.0
+            ],
+            "size": [
+              79.0,
+              116.0
+            ]
+          },
+          "ladle": {
+            "factor": 0.497854077253219,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/up-ladle.png",
+            "rect": [
+              1117.0,
+              760.0,
+              108.0,
+              233.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              54.0,
+              116.0
+            ],
+            "size": [
+              54.0,
+              116.0
+            ]
+          },
+          "parcel": {
+            "factor": 0.582914572864322,
+            "offset": [
+              6.0,
+              15.0
+            ],
+            "path": "res://art/characters/player/wardrobe/props/up-parcel.png",
+            "rect": [
+              826.0,
+              798.0,
+              199.0,
+              167.0
+            ],
+            "region": [
+              6.0,
+              15.0,
+              116.0,
+              97.0
+            ],
+            "size": [
+              116.0,
+              97.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-props-6f2cb69d35.png",
+      "sourceSha256": "6f2cb69d355b32b540d1d3f388bec08519c3779981dd85712159dd60eb6603be",
+      "visualReview": "pending_actual_scene"
+    },
+    "rain": {
+      "parts": {
+        "down": {
+          "arm_left": {
+            "factor": 0.409893992932862,
+            "offset": [
+              45.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/down-arm_left.png",
+            "rect": [
+              318.0,
+              35.0,
+              93.0,
+              283.0
+            ],
+            "region": [
+              45.0,
+              6.0,
+              38.0,
+              116.0
+            ],
+            "size": [
+              38.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.409893992932862,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/down-arm_right.png",
+            "rect": [
+              472.0,
+              35.0,
+              94.0,
+              283.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              39.0,
+              116.0
+            ],
+            "size": [
+              39.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.465863453815261,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/down-bag.png",
+            "rect": [
+              1009.0,
+              66.0,
+              165.0,
+              249.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              77.0,
+              116.0
+            ],
+            "size": [
+              77.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.390572390572391,
+            "offset": [
+              36.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/down-leg_left.png",
+            "rect": [
+              624.0,
+              26.0,
+              140.0,
+              297.0
+            ],
+            "region": [
+              36.0,
+              6.0,
+              55.0,
+              116.0
+            ],
+            "size": [
+              55.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.390572390572391,
+            "offset": [
+              36.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/down-leg_right.png",
+            "rect": [
+              838.0,
+              26.0,
+              140.0,
+              297.0
+            ],
+            "region": [
+              36.0,
+              6.0,
+              55.0,
+              116.0
+            ],
+            "size": [
+              55.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.402777777777778,
+            "offset": [
+              11.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/down-torso.png",
+            "rect": [
+              21.0,
+              35.0,
+              260.0,
+              288.0
+            ],
+            "region": [
+              11.0,
+              6.0,
+              105.0,
+              116.0
+            ],
+            "size": [
+              105.0,
+              116.0
+            ]
+          }
+        },
+        "left": {
+          "arm_left": {
+            "factor": 0.40418118466899,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/left-arm_left.png",
+            "rect": [
+              316.0,
+              349.0,
+              98.0,
+              287.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.40418118466899,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/left-arm_right.png",
+            "rect": [
+              476.0,
+              349.0,
+              101.0,
+              287.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              41.0,
+              116.0
+            ],
+            "size": [
+              41.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.471544715447154,
+            "offset": [
+              29.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/left-bag.png",
+            "rect": [
+              1030.0,
+              378.0,
+              147.0,
+              246.0
+            ],
+            "region": [
+              29.0,
+              6.0,
+              69.0,
+              116.0
+            ],
+            "size": [
+              69.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.391891891891892,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/left-leg_left.png",
+            "rect": [
+              629.0,
+              344.0,
+              137.0,
+              296.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              54.0,
+              116.0
+            ],
+            "size": [
+              54.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.393220338983051,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/left-leg_right.png",
+            "rect": [
+              845.0,
+              345.0,
+              134.0,
+              295.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              53.0,
+              116.0
+            ],
+            "size": [
+              53.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.4,
+            "offset": [
+              27.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/left-torso.png",
+            "rect": [
+              62.0,
+              349.0,
+              182.0,
+              290.0
+            ],
+            "region": [
+              27.0,
+              6.0,
+              73.0,
+              116.0
+            ],
+            "size": [
+              73.0,
+              116.0
+            ]
+          }
+        },
+        "right": {
+          "arm_left": {
+            "factor": 0.405594405594406,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/right-arm_left.png",
+            "rect": [
+              313.0,
+              663.0,
+              97.0,
+              286.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              39.0,
+              116.0
+            ],
+            "size": [
+              39.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.405594405594406,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/right-arm_right.png",
+            "rect": [
+              473.0,
+              663.0,
+              97.0,
+              286.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              39.0,
+              116.0
+            ],
+            "size": [
+              39.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.483333333333333,
+            "offset": [
+              28.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/right-bag.png",
+            "rect": [
+              1030.0,
+              697.0,
+              148.0,
+              240.0
+            ],
+            "region": [
+              28.0,
+              6.0,
+              72.0,
+              116.0
+            ],
+            "size": [
+              72.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.412811387900356,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/right-leg_left.png",
+            "rect": [
+              613.0,
+              667.0,
+              156.0,
+              281.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              64.0,
+              116.0
+            ],
+            "size": [
+              64.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.412811387900356,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/right-leg_right.png",
+            "rect": [
+              847.0,
+              667.0,
+              153.0,
+              281.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              63.0,
+              116.0
+            ],
+            "size": [
+              63.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.4,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/right-torso.png",
+            "rect": [
+              51.0,
+              665.0,
+              194.0,
+              290.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              78.0,
+              116.0
+            ],
+            "size": [
+              78.0,
+              116.0
+            ]
+          }
+        },
+        "up": {
+          "arm_left": {
+            "factor": 0.412811387900356,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/up-arm_left.png",
+            "rect": [
+              313.0,
+              969.0,
+              95.0,
+              281.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              39.0,
+              116.0
+            ],
+            "size": [
+              39.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.411347517730496,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/up-arm_right.png",
+            "rect": [
+              471.0,
+              968.0,
+              96.0,
+              282.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              39.0,
+              116.0
+            ],
+            "size": [
+              39.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.487394957983193,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/up-bag.png",
+            "rect": [
+              1012.0,
+              996.0,
+              161.0,
+              238.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              78.0,
+              116.0
+            ],
+            "size": [
+              78.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.398625429553265,
+            "offset": [
+              39.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/up-leg_left.png",
+            "rect": [
+              636.0,
+              969.0,
+              124.0,
+              291.0
+            ],
+            "region": [
+              39.0,
+              6.0,
+              49.0,
+              116.0
+            ],
+            "size": [
+              49.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.398625429553265,
+            "offset": [
+              40.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/up-leg_right.png",
+            "rect": [
+              845.0,
+              969.0,
+              119.0,
+              291.0
+            ],
+            "region": [
+              40.0,
+              6.0,
+              47.0,
+              116.0
+            ],
+            "size": [
+              47.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.409893992932862,
+            "offset": [
+              7.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/rain/up-torso.png",
+            "rect": [
+              15.0,
+              970.0,
+              276.0,
+              283.0
+            ],
+            "region": [
+              7.0,
+              6.0,
+              113.0,
+              116.0
+            ],
+            "size": [
+              113.0,
+              116.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-rain-3e7ebec758.png",
+      "sourceSha256": "3e7ebec758b5b3e5de6be5145571100dc0eced4996255c22e93e2f9f6872be40",
+      "visualReview": "pending_actual_scene"
+    },
+    "tools": {
+      "parts": {
+        "down": {
+          "axe": {
+            "factor": 0.449612403100775,
+            "offset": [
+              36.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/down-axe.png",
+            "rect": [
+              400.0,
+              81.0,
+              125.0,
+              258.0
+            ],
+            "region": [
+              36.0,
+              6.0,
+              56.0,
+              116.0
+            ],
+            "size": [
+              56.0,
+              116.0
+            ]
+          },
+          "hoe": {
+            "factor": 0.42962962962963,
+            "offset": [
+              30.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/down-hoe.png",
+            "rect": [
+              32.0,
+              62.0,
+              155.0,
+              270.0
+            ],
+            "region": [
+              30.0,
+              6.0,
+              67.0,
+              116.0
+            ],
+            "size": [
+              67.0,
+              116.0
+            ]
+          },
+          "rod": {
+            "factor": 0.402777777777778,
+            "offset": [
+              46.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/down-rod.png",
+            "rect": [
+              778.0,
+              49.0,
+              87.0,
+              288.0
+            ],
+            "region": [
+              46.0,
+              6.0,
+              35.0,
+              116.0
+            ],
+            "size": [
+              35.0,
+              116.0
+            ]
+          },
+          "sickle": {
+            "factor": 0.560386473429952,
+            "offset": [
+              21.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/down-sickle.png",
+            "rect": [
+              915.0,
+              136.0,
+              154.0,
+              207.0
+            ],
+            "region": [
+              21.0,
+              6.0,
+              86.0,
+              116.0
+            ],
+            "size": [
+              86.0,
+              116.0
+            ]
+          },
+          "spade": {
+            "factor": 0.390572390572391,
+            "offset": [
+              46.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/down-spade.png",
+            "rect": [
+              245.0,
+              47.0,
+              92.0,
+              297.0
+            ],
+            "region": [
+              46.0,
+              6.0,
+              36.0,
+              116.0
+            ],
+            "size": [
+              36.0,
+              116.0
+            ]
+          },
+          "water": {
+            "factor": 0.568627450980392,
+            "offset": [
+              28.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/down-water.png",
+            "rect": [
+              575.0,
+              135.0,
+              124.0,
+              204.0
+            ],
+            "region": [
+              28.0,
+              6.0,
+              71.0,
+              116.0
+            ],
+            "size": [
+              71.0,
+              116.0
+            ]
+          }
+        },
+        "left": {
+          "axe": {
+            "factor": 0.479338842975207,
+            "offset": [
+              40.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/left-axe.png",
+            "rect": [
+              394.0,
+              446.0,
+              98.0,
+              242.0
+            ],
+            "region": [
+              40.0,
+              6.0,
+              47.0,
+              116.0
+            ],
+            "size": [
+              47.0,
+              116.0
+            ]
+          },
+          "hoe": {
+            "factor": 0.431226765799257,
+            "offset": [
+              36.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/left-hoe.png",
+            "rect": [
+              21.0,
+              412.0,
+              130.0,
+              269.0
+            ],
+            "region": [
+              36.0,
+              6.0,
+              56.0,
+              116.0
+            ],
+            "size": [
+              56.0,
+              116.0
+            ]
+          },
+          "rod": {
+            "factor": 0.405594405594406,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/left-rod.png",
+            "rect": [
+              785.0,
+              403.0,
+              103.0,
+              286.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "sickle": {
+            "factor": 0.557692307692308,
+            "offset": [
+              28.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/left-sickle.png",
+            "rect": [
+              940.0,
+              490.0,
+              129.0,
+              208.0
+            ],
+            "region": [
+              28.0,
+              6.0,
+              72.0,
+              116.0
+            ],
+            "size": [
+              72.0,
+              116.0
+            ]
+          },
+          "spade": {
+            "factor": 0.385382059800664,
+            "offset": [
+              49.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/left-spade.png",
+            "rect": [
+              246.0,
+              402.0,
+              77.0,
+              301.0
+            ],
+            "region": [
+              49.0,
+              6.0,
+              30.0,
+              116.0
+            ],
+            "size": [
+              30.0,
+              116.0
+            ]
+          },
+          "water": {
+            "factor": 0.469635627530364,
+            "offset": [
+              6.0,
+              21.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/left-water.png",
+            "rect": [
+              513.0,
+              498.0,
+              247.0,
+              183.0
+            ],
+            "region": [
+              6.0,
+              21.0,
+              116.0,
+              86.0
+            ],
+            "size": [
+              116.0,
+              86.0
+            ]
+          }
+        },
+        "right": {
+          "axe": {
+            "factor": 0.471544715447154,
+            "offset": [
+              39.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/right-axe.png",
+            "rect": [
+              404.0,
+              799.0,
+              103.0,
+              246.0
+            ],
+            "region": [
+              39.0,
+              6.0,
+              49.0,
+              116.0
+            ],
+            "size": [
+              49.0,
+              116.0
+            ]
+          },
+          "hoe": {
+            "factor": 0.42962962962963,
+            "offset": [
+              34.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/right-hoe.png",
+            "rect": [
+              55.0,
+              769.0,
+              138.0,
+              270.0
+            ],
+            "region": [
+              34.0,
+              6.0,
+              59.0,
+              116.0
+            ],
+            "size": [
+              59.0,
+              116.0
+            ]
+          },
+          "rod": {
+            "factor": 0.402777777777778,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/right-rod.png",
+            "rect": [
+              789.0,
+              756.0,
+              105.0,
+              288.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "sickle": {
+            "factor": 0.565853658536585,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/right-sickle.png",
+            "rect": [
+              923.0,
+              847.0,
+              137.0,
+              205.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              78.0,
+              116.0
+            ],
+            "size": [
+              78.0,
+              116.0
+            ]
+          },
+          "spade": {
+            "factor": 0.384105960264901,
+            "offset": [
+              50.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/right-spade.png",
+            "rect": [
+              253.0,
+              756.0,
+              72.0,
+              302.0
+            ],
+            "region": [
+              50.0,
+              6.0,
+              28.0,
+              116.0
+            ],
+            "size": [
+              28.0,
+              116.0
+            ]
+          },
+          "water": {
+            "factor": 0.475409836065574,
+            "offset": [
+              6.0,
+              21.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/right-water.png",
+            "rect": [
+              533.0,
+              865.0,
+              244.0,
+              180.0
+            ],
+            "region": [
+              6.0,
+              21.0,
+              116.0,
+              86.0
+            ],
+            "size": [
+              116.0,
+              86.0
+            ]
+          }
+        },
+        "up": {
+          "axe": {
+            "factor": 0.446153846153846,
+            "offset": [
+              37.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/up-axe.png",
+            "rect": [
+              399.0,
+              1126.0,
+              122.0,
+              260.0
+            ],
+            "region": [
+              37.0,
+              6.0,
+              54.0,
+              116.0
+            ],
+            "size": [
+              54.0,
+              116.0
+            ]
+          },
+          "hoe": {
+            "factor": 0.432835820895522,
+            "offset": [
+              29.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/up-hoe.png",
+            "rect": [
+              29.0,
+              1116.0,
+              161.0,
+              268.0
+            ],
+            "region": [
+              29.0,
+              6.0,
+              70.0,
+              116.0
+            ],
+            "size": [
+              70.0,
+              116.0
+            ]
+          },
+          "rod": {
+            "factor": 0.390572390572391,
+            "offset": [
+              46.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/up-rod.png",
+            "rect": [
+              771.0,
+              1094.0,
+              89.0,
+              297.0
+            ],
+            "region": [
+              46.0,
+              6.0,
+              35.0,
+              116.0
+            ],
+            "size": [
+              35.0,
+              116.0
+            ]
+          },
+          "sickle": {
+            "factor": 0.563106796116505,
+            "offset": [
+              19.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/up-sickle.png",
+            "rect": [
+              912.0,
+              1184.0,
+              159.0,
+              206.0
+            ],
+            "region": [
+              19.0,
+              6.0,
+              90.0,
+              116.0
+            ],
+            "size": [
+              90.0,
+              116.0
+            ]
+          },
+          "spade": {
+            "factor": 0.386666666666667,
+            "offset": [
+              45.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/up-spade.png",
+            "rect": [
+              243.0,
+              1093.0,
+              96.0,
+              300.0
+            ],
+            "region": [
+              45.0,
+              6.0,
+              37.0,
+              116.0
+            ],
+            "size": [
+              37.0,
+              116.0
+            ]
+          },
+          "water": {
+            "factor": 0.588832487309645,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/tools/up-water.png",
+            "rect": [
+              572.0,
+              1190.0,
+              131.0,
+              197.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              77.0,
+              116.0
+            ],
+            "size": [
+              77.0,
+              116.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-tools-3d39ad6bac.png",
+      "sourceSha256": "3d39ad6bac4a1f1e78fdcd978d332a37c9e5f99003eb0ac1bbf022ffb0adcf39",
+      "visualReview": "pending_actual_scene"
+    },
+    "transport": {
+      "parts": {
+        "down": {
+          "beanie": {
+            "factor": 0.783783783783784,
+            "offset": [
+              8,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/down-beanie.png",
+            "rect": [
+              1127,
+              121,
+              142,
+              148
+            ],
+            "region": [
+              8,
+              6,
+              111,
+              116
+            ],
+            "size": [
+              111,
+              116
+            ]
+          },
+          "bike": {
+            "factor": 0.607329842931937,
+            "offset": [
+              17,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/down-bike.png",
+            "rect": [
+              107,
+              90,
+              153,
+              191
+            ],
+            "region": [
+              17,
+              6,
+              93,
+              116
+            ],
+            "size": [
+              93,
+              116
+            ]
+          },
+          "hood": {
+            "factor": 0.640883977900553,
+            "offset": [
+              14,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/down-hood.png",
+            "rect": [
+              783,
+              100,
+              154,
+              181
+            ],
+            "region": [
+              14,
+              6,
+              99,
+              116
+            ],
+            "size": [
+              99,
+              116
+            ]
+          },
+          "pony": {
+            "factor": 0.522522522522523,
+            "offset": [
+              32,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/down-pony.png",
+            "rect": [
+              474,
+              65,
+              121,
+              222
+            ],
+            "region": [
+              32,
+              6,
+              63,
+              116
+            ],
+            "size": [
+              63,
+              116
+            ]
+          }
+        },
+        "left": {
+          "beanie": {
+            "factor": 0.738853503184713,
+            "offset": [
+              7,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/left-beanie.png",
+            "rect": [
+              1113,
+              383,
+              154,
+              157
+            ],
+            "region": [
+              7,
+              6,
+              114,
+              116
+            ],
+            "size": [
+              114,
+              116
+            ]
+          },
+          "bike": {
+            "factor": 0.44106463878327,
+            "offset": [
+              6,
+              26
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/left-bike.png",
+            "rect": [
+              53,
+              374,
+              263,
+              171
+            ],
+            "region": [
+              6,
+              26,
+              116,
+              75
+            ],
+            "size": [
+              116,
+              75
+            ]
+          },
+          "hood": {
+            "factor": 0.644444444444444,
+            "offset": [
+              19,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/left-hood.png",
+            "rect": [
+              805,
+              367,
+              138,
+              180
+            ],
+            "region": [
+              19,
+              6,
+              89,
+              116
+            ],
+            "size": [
+              89,
+              116
+            ]
+          },
+          "pony": {
+            "factor": 0.511013215859031,
+            "offset": [
+              6,
+              16
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/left-pony.png",
+            "rect": [
+              425,
+              352,
+              227,
+              187
+            ],
+            "region": [
+              6,
+              16,
+              116,
+              96
+            ],
+            "size": [
+              116,
+              96
+            ]
+          }
+        },
+        "right": {
+          "beanie": {
+            "factor": 0.725,
+            "offset": [
+              6,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/right-beanie.png",
+            "rect": [
+              1129,
+              651,
+              158,
+              160
+            ],
+            "region": [
+              6,
+              6,
+              115,
+              116
+            ],
+            "size": [
+              115,
+              116
+            ]
+          },
+          "bike": {
+            "factor": 0.44106463878327,
+            "offset": [
+              6,
+              25
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/right-bike.png",
+            "rect": [
+              57,
+              633,
+              263,
+              175
+            ],
+            "region": [
+              6,
+              25,
+              116,
+              77
+            ],
+            "size": [
+              116,
+              77
+            ]
+          },
+          "hood": {
+            "factor": 0.607329842931937,
+            "offset": [
+              20,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/right-hood.png",
+            "rect": [
+              799,
+              628,
+              145,
+              191
+            ],
+            "region": [
+              20,
+              6,
+              88,
+              116
+            ],
+            "size": [
+              88,
+              116
+            ]
+          },
+          "pony": {
+            "factor": 0.483333333333333,
+            "offset": [
+              6,
+              15
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/right-pony.png",
+            "rect": [
+              427,
+              613,
+              240,
+              201
+            ],
+            "region": [
+              6,
+              15,
+              116,
+              97
+            ],
+            "size": [
+              116,
+              97
+            ]
+          }
+        },
+        "up": {
+          "beanie": {
+            "factor": 0.698795180722892,
+            "offset": [
+              11,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/up-beanie.png",
+            "rect": [
+              1120,
+              916,
+              150,
+              166
+            ],
+            "region": [
+              11,
+              6,
+              105,
+              116
+            ],
+            "size": [
+              105,
+              116
+            ]
+          },
+          "bike": {
+            "factor": 0.544600938967136,
+            "offset": [
+              23,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/up-bike.png",
+            "rect": [
+              110,
+              879,
+              151,
+              213
+            ],
+            "region": [
+              23,
+              6,
+              82,
+              116
+            ],
+            "size": [
+              82,
+              116
+            ]
+          },
+          "hood": {
+            "factor": 0.633879781420765,
+            "offset": [
+              10,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/up-hood.png",
+            "rect": [
+              783,
+              898,
+              171,
+              183
+            ],
+            "region": [
+              10,
+              6,
+              108,
+              116
+            ],
+            "size": [
+              108,
+              116
+            ]
+          },
+          "pony": {
+            "factor": 0.522522522522523,
+            "offset": [
+              32,
+              6
+            ],
+            "path": "res://art/characters/player/wardrobe/transport/up-pony.png",
+            "rect": [
+              469,
+              870,
+              122,
+              222
+            ],
+            "region": [
+              32,
+              6,
+              64,
+              116
+            ],
+            "size": [
+              64,
+              116
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-transport-e8817a3768.png",
+      "sourceSha256": "e8817a3768cd71ec2daf8e517a8fa8afa35073fee7150ec20f50de7f8f4c66a0",
+      "visualReview": "pending_actual_scene"
+    },
+    "traveler": {
+      "parts": {
+        "down": {
+          "arm_left": {
+            "factor": 0.5,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/down-arm_left.png",
+            "rect": [
+              405.0,
+              32.0,
+              79.0,
+              232.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.497854077253219,
+            "offset": [
+              44.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/down-arm_right.png",
+            "rect": [
+              618.0,
+              31.0,
+              80.0,
+              233.0
+            ],
+            "region": [
+              44.0,
+              6.0,
+              40.0,
+              116.0
+            ],
+            "size": [
+              40.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.515555555555556,
+            "offset": [
+              27.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/down-bag.png",
+            "rect": [
+              1326.0,
+              25.0,
+              143.0,
+              225.0
+            ],
+            "region": [
+              27.0,
+              6.0,
+              74.0,
+              116.0
+            ],
+            "size": [
+              74.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.481327800829876,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/down-leg_left.png",
+            "rect": [
+              829.0,
+              22.0,
+              128.0,
+              241.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.481327800829876,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/down-leg_right.png",
+            "rect": [
+              1090.0,
+              20.0,
+              128.0,
+              241.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.464,
+            "offset": [
+              6.0,
+              15.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/down-torso.png",
+            "rect": [
+              52.0,
+              33.0,
+              250.0,
+              210.0
+            ],
+            "region": [
+              6.0,
+              15.0,
+              116.0,
+              97.0
+            ],
+            "size": [
+              116.0,
+              97.0
+            ]
+          }
+        },
+        "left": {
+          "arm_left": {
+            "factor": 0.504347826086957,
+            "offset": [
+              43.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/left-arm_left.png",
+            "rect": [
+              398.0,
+              277.0,
+              84.0,
+              230.0
+            ],
+            "region": [
+              43.0,
+              6.0,
+              42.0,
+              116.0
+            ],
+            "size": [
+              42.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.5,
+            "offset": [
+              42.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/left-arm_right.png",
+            "rect": [
+              617.0,
+              275.0,
+              87.0,
+              232.0
+            ],
+            "region": [
+              42.0,
+              6.0,
+              44.0,
+              116.0
+            ],
+            "size": [
+              44.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.517857142857143,
+            "offset": [
+              33.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/left-bag.png",
+            "rect": [
+              1347.0,
+              278.0,
+              119.0,
+              224.0
+            ],
+            "region": [
+              33.0,
+              6.0,
+              62.0,
+              116.0
+            ],
+            "size": [
+              62.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.520179372197309,
+            "offset": [
+              23.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/left-leg_left.png",
+            "rect": [
+              814.0,
+              277.0,
+              156.0,
+              223.0
+            ],
+            "region": [
+              23.0,
+              6.0,
+              81.0,
+              116.0
+            ],
+            "size": [
+              81.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.513274336283186,
+            "offset": [
+              24.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/left-leg_right.png",
+            "rect": [
+              1069.0,
+              273.0,
+              155.0,
+              226.0
+            ],
+            "region": [
+              24.0,
+              6.0,
+              80.0,
+              116.0
+            ],
+            "size": [
+              80.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.513274336283186,
+            "offset": [
+              26.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/left-torso.png",
+            "rect": [
+              87.0,
+              273.0,
+              147.0,
+              226.0
+            ],
+            "region": [
+              26.0,
+              6.0,
+              75.0,
+              116.0
+            ],
+            "size": [
+              75.0,
+              116.0
+            ]
+          }
+        },
+        "right": {
+          "arm_left": {
+            "factor": 0.520179372197309,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/right-arm_left.png",
+            "rect": [
+              398.0,
+              522.0,
+              86.0,
+              223.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              45.0,
+              116.0
+            ],
+            "size": [
+              45.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.517857142857143,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/right-arm_right.png",
+            "rect": [
+              615.0,
+              521.0,
+              86.0,
+              224.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              45.0,
+              116.0
+            ],
+            "size": [
+              45.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.537037037037037,
+            "offset": [
+              32.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/right-bag.png",
+            "rect": [
+              1333.0,
+              522.0,
+              120.0,
+              216.0
+            ],
+            "region": [
+              32.0,
+              6.0,
+              64.0,
+              116.0
+            ],
+            "size": [
+              64.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.532110091743119,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/right-leg_left.png",
+            "rect": [
+              835.0,
+              524.0,
+              147.0,
+              218.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              78.0,
+              116.0
+            ],
+            "size": [
+              78.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.520179372197309,
+            "offset": [
+              24.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/right-leg_right.png",
+            "rect": [
+              1077.0,
+              519.0,
+              153.0,
+              223.0
+            ],
+            "region": [
+              24.0,
+              6.0,
+              80.0,
+              116.0
+            ],
+            "size": [
+              80.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.534562211981567,
+            "offset": [
+              25.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/right-torso.png",
+            "rect": [
+              110.0,
+              516.0,
+              144.0,
+              217.0
+            ],
+            "region": [
+              25.0,
+              6.0,
+              77.0,
+              116.0
+            ],
+            "size": [
+              77.0,
+              116.0
+            ]
+          }
+        },
+        "up": {
+          "arm_left": {
+            "factor": 0.504347826086957,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/up-arm_left.png",
+            "rect": [
+              396.0,
+              764.0,
+              90.0,
+              230.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              45.0,
+              116.0
+            ],
+            "size": [
+              45.0,
+              116.0
+            ]
+          },
+          "arm_right": {
+            "factor": 0.5,
+            "offset": [
+              41.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/up-arm_right.png",
+            "rect": [
+              608.0,
+              761.0,
+              90.0,
+              232.0
+            ],
+            "region": [
+              41.0,
+              6.0,
+              45.0,
+              116.0
+            ],
+            "size": [
+              45.0,
+              116.0
+            ]
+          },
+          "bag": {
+            "factor": 0.508771929824561,
+            "offset": [
+              28.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/up-bag.png",
+            "rect": [
+              1332.0,
+              761.0,
+              139.0,
+              228.0
+            ],
+            "region": [
+              28.0,
+              6.0,
+              71.0,
+              116.0
+            ],
+            "size": [
+              71.0,
+              116.0
+            ]
+          },
+          "leg_left": {
+            "factor": 0.491525423728814,
+            "offset": [
+              34.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/up-leg_left.png",
+            "rect": [
+              839.0,
+              761.0,
+              121.0,
+              236.0
+            ],
+            "region": [
+              34.0,
+              6.0,
+              59.0,
+              116.0
+            ],
+            "size": [
+              59.0,
+              116.0
+            ]
+          },
+          "leg_right": {
+            "factor": 0.491525423728814,
+            "offset": [
+              34.0,
+              6.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/up-leg_right.png",
+            "rect": [
+              1092.0,
+              761.0,
+              122.0,
+              236.0
+            ],
+            "region": [
+              34.0,
+              6.0,
+              60.0,
+              116.0
+            ],
+            "size": [
+              60.0,
+              116.0
+            ]
+          },
+          "torso": {
+            "factor": 0.44106463878327,
+            "offset": [
+              6.0,
+              16.0
+            ],
+            "path": "res://art/characters/player/wardrobe/traveler/up-torso.png",
+            "rect": [
+              43.0,
+              761.0,
+              263.0,
+              216.0
+            ],
+            "region": [
+              6.0,
+              16.0,
+              116.0,
+              95.0
+            ],
+            "size": [
+              116.0,
+              95.0
+            ]
+          }
+        }
+      },
+      "sourceMaster": "D:\\.codex\\游戏2\\godot\\artifacts\\characters-crops-completion-20261010\\masters\\wardrobe-traveler-ec55598474.png",
+      "sourceSha256": "ec55598474c4499c3451c0ae2a846ab2dadd24c09cd4992bbcd60db9ed31429d",
+      "visualReview": "pending_actual_scene"
+    }
+  },
+  "status": "pending_actual_scene"
+}

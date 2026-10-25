@@ -1,0 +1,20 @@
+{
+  "version": "0.29.0",
+  "date": "2026-10-17",
+  "platform": "Windows x86_64",
+  "engine": "4.7.2",
+  "archive": "D:\\作品集\\种日子-游戏作品集\\Windows试玩\\种日子-Windows-0.29.0.zip",
+  "archiveBytes": 252583982,
+  "archiveSha256": "6682b78566b2d3aff4ae4f945ff001f0f1a1836273a2d0c9de553ce42c4f4ba4",
+  "sourceTests": {
+    "suites": 19,
+    "passed": 17530,
+    "failed": 0
+  },
+  "packageHeadlessChecks": 1640,
+  "packageGPUChecks": 1641,
+  "actualExecutableStartup": true,
+  "touch": "Windows GPU simulation, not Android hardware",
+  "nativeSaveSchema": 33,
+  "questSchema": 1
+}

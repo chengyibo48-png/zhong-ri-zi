@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-16",
+  "assets": [
+    {
+      "asset": "goat",
+      "prompt": "Create a production game sprite atlas on genuinely transparent background for a gentle Chinese rural hand painted watercolor farming game. Reference image is STYLE ONLY (existing sheep atlas). New subject: small cream and tan domestic GOAT with small curved horns, beard and narrow muzzle, clearly not sheep. Exact 6 columns by 4 rows equal cells, image 1536x512, cells256x128. Row1 facing DOWN front; row2 facing LEFT; row3 facing RIGHT; row4 facing UP back. Every row has SIX consistent gentle walking frames, first frame also suitable idle. Feet at same baseline 116px within each cell, body centered at128x; animal height108px. Whole animal inside each cell, generous transparent horizontal margins, no ground, no lettering, no panels, no borders. Painterly watercolor fur, soft warm natural brown linework, no pixel art, same individual and scale throughout. Only one animal in each cell. Avoid opaque paper patches around animals. Four directions anatomically distinct.",
+      "path": "art/sources/ranch-20261016/goat.png",
+      "mode": "built-in imagegen",
+      "postprocessing": "Godot Image region cropping and resizing; source pixels preserved"
+    },
+    {
+      "asset": "rabbit",
+      "prompt": "Create a production game sprite atlas on genuinely transparent background for a gentle Chinese rural hand painted watercolor farming game. Reference image is STYLE ONLY (existing sheep atlas). New subject: a small fluffy cream and warm gray RABBIT with long upright ears, rounded compact body, dark gentle eyes and cotton tail. Exact SIX columns by FOUR rows equal cells; image1536x512, cells256x128. Row1 facing DOWN front; row2 facing LEFT; row3 facing RIGHT; row4 facing UP back. Every row SIX consecutive gentle hopping walking frames, first frame suitable idle. Feet at same baseline116px in each cell, centered128x, animal including ears108px tall. Animal wholly inside each cell, generous transparent margins, NO ground, NO lettering, NO panels. Painterly watercolor fur, warm brown linework, not pixel art, same individual and scale throughout. Only one animal in each cell. Avoid opaque paper patches.",
+      "path": "art/sources/ranch-20261016/rabbit.png",
+      "mode": "built-in imagegen",
+      "postprocessing": "Godot Image region cropping and resizing; source pixels preserved"
+    },
+    {
+      "asset": "products",
+      "prompt": "Hand painted watercolor inventory icon atlas for Chinese countryside farming game. Transparent background. Exactly four equal square cells in a single horizontal row, image2048x512. Each cell independent isolated item, large generous transparent margins. Cell1: small earthen cream milk jug with a tiny goat silhouette painted onto it, filled with fresh ivory goat milk. Cell2: a rustic rounded goat cheese wheel with one wedge cut and small herb. Cell3: a tuft of soft rabbit fur with two long ear shapes suggested in its silhouette, ivory and pale gray fluff. Cell4: a delicate fine yarn skein, pale lavender ivory fine threads with a small wooden spindle. Four distinct readable silhouettes. Soft warm brown outlines, muted rural watercolor texture, gentle top left light, NO TEXT, NO numbers, NO paper background, NO sheep/cow icons.",
+      "path": "art/sources/ranch-20261016/products.png",
+      "mode": "built-in imagegen",
+      "postprocessing": "Godot Image region cropping and resizing; source pixels preserved"
+    },
+    {
+      "asset": "fixtures",
+      "prompt": "Create a 2D game prop atlas on truly TRANSPARENT background, exactly FOUR equal square cells in one horizontal row, 2048x512. Warm hand painted watercolor Chinese countryside farming game, soft natural brushwork, brown fine outlines, subtle texture, elevated front/top three-quarter perspective. Cell1 an EMPTY long wooden farm feeding trough, rustic honey-brown planks, shape width 360 height150, no food. Cell2 a modest wooden collection chest with hinged lid half open, wicker sides, brass latch, shape width280 height250. Cell3 a comfortable low woven straw animal bed, golden straw tucked into a shallow wicker oval, small folded linen bedding, shape width380 height200. Cell4 a shallow natural duck wading pool viewed from above at game perspective, irregular oval pale jade water, subtle watercolor ripples, pebbles and sparse reeds edging the pool, feathered grassy shoreline, shape width410 height240. No animals. Each prop fully contained and centered in its cell, generous transparent margins, all separate, no shadows spilling outside cells, no lettering, no scenery backgrounds. No hard geometric flat fills.",
+      "path": "art/sources/ranch-20261016/fixtures.png",
+      "mode": "built-in imagegen",
+      "postprocessing": "Godot Image region cropping and resizing; source pixels preserved"
+    }
+  ]
+}

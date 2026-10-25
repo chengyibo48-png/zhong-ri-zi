@@ -1,0 +1,669 @@
+{
+  "version": 1,
+  "foragePoints": [
+    {
+      "id": "mountain-0",
+      "x": 750,
+      "y": 699,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain"
+    },
+    {
+      "id": "mountain-1",
+      "x": 1081,
+      "y": 563,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain"
+    },
+    {
+      "id": "mountain-2",
+      "x": 937,
+      "y": 662,
+      "kind": "gather",
+      "item": "mushroom",
+      "name": "林下菌床 · 可收 2 份 · 2 天再生",
+      "region": "mountain"
+    },
+    {
+      "id": "mountain-3",
+      "x": 625,
+      "y": 628,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain"
+    },
+    {
+      "id": "mountain-4",
+      "x": 1008,
+      "y": 558,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain"
+    },
+    {
+      "id": "mountain-5",
+      "x": 893,
+      "y": 776,
+      "kind": "gather",
+      "item": "berry",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生",
+      "region": "mountain"
+    },
+    {
+      "id": "landmark-terrace",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "x": 643,
+      "y": 361,
+      "kind": "gather",
+      "item": "tea",
+      "region": "mountain"
+    },
+    {
+      "id": "landmark-mountain-fruit",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生",
+      "x": 1675.2116570824605,
+      "y": 905.1822198309376,
+      "kind": "gather",
+      "item": "berry",
+      "region": "mountain",
+      "direction": "down"
+    },
+    {
+      "id": "landmark-river-herb",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生",
+      "x": 413,
+      "y": 3227,
+      "kind": "gather",
+      "item": "wildHerb",
+      "region": "river"
+    },
+    {
+      "id": "bamboo-0",
+      "x": 776,
+      "y": 1727,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo"
+    },
+    {
+      "id": "bamboo-1",
+      "x": 695,
+      "y": 1822,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo"
+    },
+    {
+      "id": "bamboo-2",
+      "x": 1026,
+      "y": 1726,
+      "kind": "gather",
+      "item": "shoot",
+      "name": "春笋窝 · 可收 2 份 · 3 天再生",
+      "region": "bamboo"
+    },
+    {
+      "id": "bamboo-3",
+      "x": 1171,
+      "y": 1677,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo"
+    },
+    {
+      "id": "bamboo-4",
+      "x": 661,
+      "y": 1909,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo"
+    },
+    {
+      "id": "bamboo-5",
+      "x": 942,
+      "y": 1876,
+      "kind": "gather",
+      "item": "wildHerb",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生",
+      "region": "bamboo"
+    },
+    {
+      "id": "landmark-bamboo-herb",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生",
+      "x": 465,
+      "y": 1792,
+      "kind": "gather",
+      "item": "wildHerb",
+      "region": "bamboo"
+    },
+    {
+      "id": "landmark-bamboo-shoot",
+      "name": "春笋窝 · 可收 2 份 · 3 天再生",
+      "x": 1669,
+      "y": 1647,
+      "kind": "gather",
+      "item": "shoot",
+      "region": "bamboo"
+    },
+    {
+      "id": "landmark-flower",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生",
+      "x": 2238,
+      "y": 1955,
+      "kind": "gather",
+      "item": "wildHerb",
+      "region": "farm"
+    },
+    {
+      "id": "south-forage-0",
+      "kind": "gather",
+      "item": "wood",
+      "x": 120,
+      "y": 3510,
+      "region": "river",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生"
+    },
+    {
+      "id": "south-forage-1",
+      "kind": "gather",
+      "item": "wildHerb",
+      "x": 322,
+      "y": 3745,
+      "region": "river",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-2",
+      "kind": "gather",
+      "item": "berry",
+      "x": 524,
+      "y": 3510,
+      "region": "river",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-3",
+      "kind": "gather",
+      "item": "mushroom",
+      "x": 726,
+      "y": 3745,
+      "region": "river",
+      "name": "林下菌床 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-4",
+      "kind": "gather",
+      "item": "bamboo",
+      "x": 928,
+      "y": 3510,
+      "region": "river",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-5",
+      "kind": "gather",
+      "item": "tea",
+      "x": 1130,
+      "y": 3745,
+      "region": "river",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生"
+    },
+    {
+      "id": "south-forage-6",
+      "kind": "gather",
+      "item": "wood",
+      "x": 1332,
+      "y": 3510,
+      "region": "river",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生"
+    },
+    {
+      "id": "south-forage-7",
+      "kind": "gather",
+      "item": "wildHerb",
+      "x": 1534,
+      "y": 3745,
+      "region": "river",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-8",
+      "kind": "gather",
+      "item": "berry",
+      "x": 1736,
+      "y": 3510,
+      "region": "river",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-9",
+      "kind": "gather",
+      "item": "mushroom",
+      "x": 1938,
+      "y": 3745,
+      "region": "pasture",
+      "name": "林下菌床 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-10",
+      "kind": "gather",
+      "item": "bamboo",
+      "x": 2140,
+      "y": 3510,
+      "region": "pasture",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-11",
+      "kind": "gather",
+      "item": "tea",
+      "x": 2342,
+      "y": 3745,
+      "region": "pasture",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生"
+    },
+    {
+      "id": "south-forage-12",
+      "kind": "gather",
+      "item": "wood",
+      "x": 2544,
+      "y": 3510,
+      "region": "pasture",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生"
+    },
+    {
+      "id": "south-forage-13",
+      "kind": "gather",
+      "item": "wildHerb",
+      "x": 2746,
+      "y": 3745,
+      "region": "pasture",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-14",
+      "kind": "gather",
+      "item": "berry",
+      "x": 2948,
+      "y": 3510,
+      "region": "pasture",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-15",
+      "kind": "gather",
+      "item": "mushroom",
+      "x": 3150,
+      "y": 3745,
+      "region": "pasture",
+      "name": "林下菌床 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-16",
+      "kind": "gather",
+      "item": "bamboo",
+      "x": 3352,
+      "y": 3510,
+      "region": "pasture",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生"
+    },
+    {
+      "id": "south-forage-17",
+      "kind": "gather",
+      "item": "tea",
+      "x": 3554,
+      "y": 3745,
+      "region": "pasture",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生"
+    },
+    {
+      "id": "drift-wood",
+      "kind": "gather",
+      "item": "wood",
+      "x": 1800,
+      "y": 3120,
+      "region": "river",
+      "event": "storm",
+      "name": "倒木与枯枝 · 风暴后留意漂木"
+    },
+    {
+      "id": "rain-mushroom",
+      "kind": "gather",
+      "item": "mushroom",
+      "x": 850,
+      "y": 2120,
+      "region": "bamboo",
+      "event": "rain",
+      "name": "林下菌床 · 雨后再来找新菌"
+    },
+    {
+      "id": "mist-tea",
+      "kind": "gather",
+      "item": "tea",
+      "x": 1440,
+      "y": 1095,
+      "region": "mountain",
+      "event": "mist",
+      "name": "山坡茶树 · 雾天观察嫩茶梢"
+    }
+  ],
+  "sceneryPoints": [
+    {
+      "id": "scenery-0",
+      "name": "晒谷小场",
+      "kind": "farmcare",
+      "scenery": true,
+      "region": "farm",
+      "x": 2695,
+      "y": 2169,
+      "top": 2124,
+      "story": "稻谷摊成薄层，木耙留下细细的纹路。"
+    },
+    {
+      "id": "scenery-1",
+      "name": "育苗歇脚角",
+      "kind": "rest",
+      "scenery": true,
+      "region": "farm",
+      "x": 3115,
+      "y": 1409,
+      "top": 1353,
+      "story": "竹凳旁的陶盆里，幼苗顺着日光长。"
+    },
+    {
+      "id": "scenery-2",
+      "name": "田边观风处",
+      "kind": "weather",
+      "scenery": true,
+      "region": "farm",
+      "x": 2855,
+      "y": 1529,
+      "top": 1419,
+      "story": "看布尾与风向，再决定灌溉和遮雨。"
+    },
+    {
+      "id": "scenery-3",
+      "name": "供销点货角",
+      "kind": "economy",
+      "scenery": true,
+      "region": "town",
+      "x": 3335,
+      "y": 557,
+      "top": 468,
+      "story": "算盘、秤砣与货签，记着禾溪的物产行情。"
+    },
+    {
+      "id": "scenery-4",
+      "name": "酱香晒缸巷",
+      "kind": "processing",
+      "scenery": true,
+      "region": "town",
+      "x": 3695,
+      "y": 957,
+      "top": 897,
+      "story": "深浅不同的酱缸系着布盖，石板留下日常磨痕。"
+    },
+    {
+      "id": "scenery-5",
+      "name": "街口茶凳",
+      "kind": "rest",
+      "scenery": true,
+      "region": "town",
+      "x": 3455,
+      "y": 1037,
+      "top": 981,
+      "story": "旧长凳、搪瓷杯，给赶集人留一处歇脚。"
+    },
+    {
+      "id": "scenery-6",
+      "name": "石埠洗衣角",
+      "kind": "forage",
+      "scenery": true,
+      "region": "river",
+      "x": 515,
+      "y": 2481,
+      "top": 2428,
+      "story": "搓衣石磨得光滑，岸边芦苇依着风轻摆。"
+    },
+    {
+      "id": "scenery-7",
+      "name": "渔家晒篾架",
+      "kind": "tools",
+      "scenery": true,
+      "region": "river",
+      "x": 1455,
+      "y": 2721,
+      "top": 2628,
+      "story": "竹篾与晒网分层搭开，留出走向水边的路。"
+    },
+    {
+      "id": "scenery-8",
+      "name": "芦岸歇脚处",
+      "kind": "rest",
+      "scenery": true,
+      "region": "river",
+      "x": 1675,
+      "y": 2681,
+      "top": 2625,
+      "story": "望水歇脚，沙地上留下零碎足印。"
+    },
+    {
+      "id": "scenery-9",
+      "name": "竹匠编篾角",
+      "kind": "tools",
+      "scenery": true,
+      "region": "bamboo",
+      "x": 395,
+      "y": 2009,
+      "top": 1916,
+      "story": "竹篾按长短收拢，编到一半的纹样挂在架上。"
+    },
+    {
+      "id": "scenery-10",
+      "name": "林缘药草匾",
+      "kind": "forage",
+      "scenery": true,
+      "region": "bamboo",
+      "x": 1455,
+      "y": 1969,
+      "top": 1899,
+      "story": "竹匾旁的蕨叶遮着湿土，先辨认再采集。"
+    },
+    {
+      "id": "scenery-11",
+      "name": "竹荫茶凳",
+      "kind": "rest",
+      "scenery": true,
+      "region": "bamboo",
+      "x": 695,
+      "y": 2189,
+      "top": 2133,
+      "story": "落叶铺在石头边，凳下留出干爽的脚踏。"
+    },
+    {
+      "id": "scenery-12",
+      "name": "茶青晾晒坪",
+      "kind": "forage",
+      "scenery": true,
+      "region": "mountain",
+      "x": 1715,
+      "y": 717,
+      "top": 647,
+      "story": "嫩叶薄薄铺开，山风从竹匾间穿过。"
+    },
+    {
+      "id": "scenery-13",
+      "name": "山路歇肩处",
+      "kind": "rest",
+      "scenery": true,
+      "region": "mountain",
+      "x": 355,
+      "y": 737,
+      "top": 681,
+      "story": "挑担的人把竹篮放在石旁，坐下喝口茶。"
+    },
+    {
+      "id": "scenery-14",
+      "name": "茶坡望风标",
+      "kind": "weather",
+      "scenery": true,
+      "region": "mountain",
+      "x": 1155,
+      "y": 337,
+      "top": 227,
+      "story": "风向布尾越过茶坡，远处碎石仍留出山道。"
+    },
+    {
+      "id": "scenery-15",
+      "name": "草料整理角",
+      "kind": "animals",
+      "scenery": true,
+      "region": "pasture",
+      "x": 2195,
+      "y": 2901,
+      "top": 2831,
+      "story": "干草按捆摆放，通往圈门的道路保持宽敞。"
+    },
+    {
+      "id": "scenery-16",
+      "name": "轮牧歇脚处",
+      "kind": "rest",
+      "scenery": true,
+      "region": "pasture",
+      "x": 2675,
+      "y": 3121,
+      "top": 3065,
+      "story": "矮凳旁长着三叶草，隔着围栏看伙伴散步。"
+    },
+    {
+      "id": "scenery-17",
+      "name": "南坡物产亭牌",
+      "kind": "economy",
+      "scenery": true,
+      "region": "pasture",
+      "x": 3635,
+      "y": 2801,
+      "top": 2712,
+      "story": "羊毛、鲜乳与谷物各有去处，交货前先看行情。"
+    }
+  ],
+  "regions": [
+    {
+      "id": "region-mountain",
+      "kind": "walk",
+      "name": "青岚茶山",
+      "x": 960,
+      "y": 700,
+      "type": "services",
+      "region": "mountain",
+      "detail": "茶垄与山石，清晨看云，沿石阶寻茶。"
+    },
+    {
+      "id": "region-town",
+      "kind": "walk",
+      "name": "禾溪老街",
+      "x": 2864,
+      "y": 790.3923048454133,
+      "direction": "down",
+      "type": "services",
+      "region": "town",
+      "detail": "青瓦老街，杂货、手艺和邻里买卖。"
+    },
+    {
+      "id": "region-river",
+      "kind": "walk",
+      "name": "柳岸水乡",
+      "x": 1013.6355603381247,
+      "y": 3031.423314164921,
+      "direction": "down",
+      "type": "services",
+      "region": "river",
+      "detail": "柳岸水网，木桥与河埠串起人家。"
+    },
+    {
+      "id": "region-bamboo",
+      "kind": "walk",
+      "name": "竹影山坞",
+      "x": 950,
+      "y": 1832,
+      "type": "services",
+      "region": "bamboo",
+      "detail": "竹影、木作与山坞小院，听风慢行。"
+    },
+    {
+      "id": "region-farm",
+      "kind": "walk",
+      "name": "稻香小院",
+      "x": 2920,
+      "y": 1912,
+      "type": "services",
+      "region": "farm",
+      "detail": "菜畦、水井与晾晒场，家就在稻香里。"
+    },
+    {
+      "id": "region-pasture",
+      "kind": "walk",
+      "name": "东坡牧场",
+      "x": 2940,
+      "y": 2984,
+      "type": "services",
+      "region": "pasture",
+      "detail": "草甸、塘边和四间畜舍，伙伴沿路归家。"
+    }
+  ],
+  "_float64_roundtrip": {
+    "version": 1,
+    "entries": [
+      {
+        "path": [
+          "foragePoints",
+          7,
+          "x"
+        ],
+        "bytes": "ilyivNgsmkA="
+      },
+      {
+        "path": [
+          "foragePoints",
+          7,
+          "y"
+        ],
+        "bytes": "erSrL3VJjEA="
+      },
+      {
+        "path": [
+          "regions",
+          1,
+          "y"
+        ],
+        "bytes": "5gi5cCOziEA="
+      },
+      {
+        "path": [
+          "regions",
+          2,
+          "x"
+        ],
+        "bytes": "C5eooBWtj0A="
+      },
+      {
+        "path": [
+          "regions",
+          2,
+          "y"
+        ],
+        "bytes": "ilyivNiup0A="
+      }
+    ]
+  }
+}

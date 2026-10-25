@@ -1,0 +1,35 @@
+; Engine configuration file.
+; 《种日子》 native Godot 4 migration pilot.
+config_version=5
+
+[application]
+config/name="种日子 · Godot"
+config/icon="res://art/app_icon.png"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+
+[autoload]
+GameState="*res://scripts/game_state.gd"
+AudioService="*res://scripts/audio_service.gd"
+UIArtService="*res://scripts/ui_art_service.gd"
+
+[audio]
+buses/default_bus_layout="res://audio/audio_bus_layout.tres"
+
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=600
+window/size/window_width_override=1280
+window/size/window_height_override=800
+window/stretch/mode="canvas_items"
+
+[gui]
+theme/custom_font="res://art/fonts/NotoSansCJKsc-Regular.otf"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.35, 0.48, 0.34, 1)

@@ -1,0 +1,23 @@
+const fs = require('node:fs');
+global.window = globalThis;
+for (const name of ['data','content','landscape','core','systems','art','world','village','farming','ranch','kitchen','building','tools']) require('../../src/' + name + '.js');
+const app = fs.readFileSync(require.resolve('../../src/app.js'), 'utf8');
+const match = app.match(/const tools = (\[.*?\]);/);
+if (!match) throw new Error('Original toolbar declaration missing');
+const toolbar = Function('return (' + match[1] + ')')();
+const C = global.ZRZCore, D = global.ZRZData, T = global.ZRZTools;
+const harvest = [{id:'hand',branch:'broad',shape:'cross',auto:false},{id:'sickle',branch:'broad',shape:'cross',auto:false},{id:'hand',branch:'care',shape:'single',auto:false},{id:'hand',branch:'care',shape:'single',auto:true}].map(config => {
+ const {id,branch,shape}=config;
+ const s=C.initial(); s.stamina=100; s.farm.autoSeed=config.auto;
+ const seedBefore=s.bag[D.crops.cabbage.seed]||0;
+ s.plots.forEach(p => {p.crop=null;p.growth=0;p.tilled=true;});
+ const indices=[1,6,7,8,13];
+ indices.forEach(i => {s.plots[i].crop='cabbage';s.plots[i].growth=D.crops.cabbage.days;});
+ Object.assign(s.toolkit.tools.sickle, {level:2, branch, shape, xp:0});
+ const targets=id==='hand'?[7]:T.plan(s,7,id).map(t=>t.index);
+ for (const i of targets) C.plotAction(s,i,id);
+ return {...config, targets, cleared:indices.filter(i=>!s.plots[i].crop), xp:s.toolkit.tools.sickle.xp, seedGain:(s.bag[D.crops.cabbage.seed]||0)-seedBefore};
+});
+if (!process.argv[2]) throw new Error('Pass a temporary output filename');
+fs.writeFileSync(process.argv[2],JSON.stringify({toolbar,harvest},null,2));
+console.log('Exported original 8 tools and hand/sickle harvest fixtures');

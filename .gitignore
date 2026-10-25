@@ -3,3 +3,30 @@ qa/
 *.log
 
 *.zip
+
+# Local Godot imports, SDKs, exports, test output and backups
+/godot/.godot/
+/godot/.build/
+/godot/build/
+/godot/artifacts/
+**/__pycache__/
+*.py[cod]
+*.zip
+*.exe
+*.apk
+*.aab
+*.pck
+
+# Local credentials, signing keys and personal game data
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.pem
+*.p12
+*.pfx
+*.key
+*.save
+*.save.bak
+/docs/项目记忆.md

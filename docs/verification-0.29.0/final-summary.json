@@ -1,0 +1,16 @@
+{
+  "version": "0.29.0",
+  "testsPassed": 17530,
+  "testsFailed": 0,
+  "suites": 19,
+  "packageHeadlessChecks": 1640,
+  "packageGPUChecks": 1641,
+  "actualExeStartup": true,
+  "cleanupBytes": 29182024482,
+  "obsoletePortfolioFilesRemoved": 16,
+  "obsoletePortfolioBytes": 248912564,
+  "protectedProductionFilesVerified": 6148,
+  "portfolioFilesVerified": 398,
+  "oldPortfolioBackedUp": true,
+  "unrelatedPortfolioProjectsModified": false
+}

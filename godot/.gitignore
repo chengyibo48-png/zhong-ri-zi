@@ -1,0 +1,10 @@
+.godot/
+export.cfg
+.build/
+build/
+
+# Regenerable test and Python caches
+/artifacts/test-temp/
+/artifacts/test-runtime-*/
+**/__pycache__/
+*.py[cod]

@@ -1,0 +1,39 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-17",
+  "sources": [
+    {
+      "file": "freshwater-atlas.png",
+      "grid": [
+        4,
+        3
+      ],
+      "prompt": "Create one production sprite atlas for a Chinese countryside hand-painted farming game, matching warm detailed watercolor and gouache inventory illustrations with delicate dark brown contours. TRANSPARENT background. A strict uniform grid of 4 columns by 3 rows, equal cells, generous transparent margins, no text, no labels, no shadows crossing cells. In each cell a single complete distinct freshwater creature, centered, facing left in gentle side view, naturalistic charming hand-painted illustrated species. Row1: common carp golden bronze with barbels; grass carp elongated olive green; silver carp silver small head and high body; bighead carp huge broad head dark mottled silver. Row2: Chinese bream flat diamond silver body; catfish dark wide head and long whiskers; yellow catfish golden yellow spotted body and barbels; black carp long dark charcoal olive body. Row3: pale chub small slim fish with vivid reddish fins and blue silver body; freshwater river snail curled green brown shell with soft foot; freshwater river mussel dark oval ridged shell slightly open with pearl interior; LAST CELL EMPTY. Each animal completely contained within its own cell. These must be recognizable unique fish silhouettes, not identical recolored fish. Even soft neutral illumination, no water, no scenery. Final asset is a single 4x3 game icon atlas."
+    },
+    {
+      "file": "equipment-atlas.png",
+      "grid": [
+        4,
+        2
+      ],
+      "prompt": "One inventory sprite atlas for a warm Chinese countryside hand-painted farming game. Transparent background, strict 4 columns by 2 rows equal cell grid, each object centered fully contained with wide transparent padding. Detailed watercolor/gouache with delicate brown ink contours, soft amber olive palette, matching illustrated fish game icons. No labels or text. Row 1 cells: a traditional wooden red-and-cream fishing bobber with bamboo stem and small loop (steady float); a smooth dark river-stone fishing sinker tied in brown string (gentle sinker); a small antique bronze fishing bell tied to a short bamboo handle; a beautiful complete rounded handwoven bamboo fish trap with funnel entrance, rope handle and closed wicker lid, three-quarter overhead farm game view. Row 2 cells: a small paper dish with rice-grain fish bait; a small paper dish with green herb-coated fish bait balls; a small paper dish with reddish dried shrimp fish bait morsels; LAST CELL EMPTY. Single atlas, 4x2, crisp complete outlines, isolated real alpha, no scenery and no ground plane."
+    },
+    {
+      "file": "dishes-atlas.png",
+      "grid": [
+        2,
+        1
+      ],
+      "prompt": "One single 2-column 1-row transparent game inventory food illustration atlas, two evenly spaced equal cells. Chinese rural hand-painted watercolor/gouache style, fine warm brown contours, natural soft highlights. Left cell: small rustic shallow ceramic bowl of cooked freshwater river snails in shells with chopped green leeks and glossy brown sauce, centered complete bowl. Right cell: rustic ceramic soup bowl of creamy pale radish and freshwater mussel soup, sliced white radish, mussel meat and a couple dark mussel shells with green garnish, centered complete bowl. Both from same gentle three-quarter top-down angle, no text, no labels, no table, no utensils, no cast shadow outside objects, generous transparent margins. These are standalone distinct inventory icons in one atlas; no background."
+    }
+  ],
+  "processing": "Godot Image.get_region and Lanczos resize; 20 transparent 128x128 icons; prompts and generated source atlases retained.",
+  "spacingCorrection": {
+    "mode": "edit",
+    "tool": "built-in image_gen",
+    "input": "freshwater-atlas-initial.png",
+    "output": "freshwater-atlas.png",
+    "prompt": "Edit this existing 4-column 3-row freshwater creature game icon atlas. Preserve the exact eleven species, order, hand-painted illustration style and true transparent background. Correct its packing: EACH creature must be scaled down to occupy at most 72 percent of its cell width and 70 percent of its cell height, perfectly centered inside its own equal-sized cell. Leave very wide transparent gutters between ALL cells, with at least 35 transparent pixels on every side of every object. No creature, fish tail, fin, whisker or shell may touch a cell boundary or overlap an adjacent creature. All tails and fins must be complete and uncut. Row 1 carp, grass carp, silver carp, bighead carp. Row 2 bream, catfish, yellow catfish, black carp. Row 3 pale chub, river snail, river mussel, EMPTY. No grid lines and no labels. Keep the objects deliberately smaller with generous blank space; it is a production icon atlas that must be cleanly cut into equal rectangles.",
+    "reason": "Keep complete fins and tails inside each uniform atlas cell."
+  }
+}

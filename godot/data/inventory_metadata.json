@@ -1,0 +1,1984 @@
+{
+  "bokchoy": {
+    "rank": 0,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [],
+    "likes": [],
+    "shelf": 12
+  },
+  "bokchoy_seasonal": {
+    "rank": 1,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "bokchoy_heirloom": {
+    "rank": 2,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "bokchoySeed": {
+    "rank": 3,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "radish": {
+    "rank": 4,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "萝卜鲫鱼汤",
+      "爽口萝卜干"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "radish_seasonal": {
+    "rank": 5,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "radish_heirloom": {
+    "rank": 6,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "radishSeed": {
+    "rank": 7,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "spinach": {
+    "rank": 8,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "菠菜手擀面"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "spinach_seasonal": {
+    "rank": 9,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "spinach_heirloom": {
+    "rank": 10,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "spinachNoodle": {
+    "rank": 11,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "spinachSeed": {
+    "rank": 12,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "broadbean": {
+    "rank": 13,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "蚕豆泥"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "broadbean_seasonal": {
+    "rank": 14,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "broadbean_heirloom": {
+    "rank": 15,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "broadbeanMash": {
+    "rank": 16,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "broadbeanSeed": {
+    "rank": 17,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "bioCare": {
+    "rank": 18,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "healthFeed": {
+    "rank": 19,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "feed": {
+    "rank": 20,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [
+      "熟堆肥"
+    ],
+    "likes": [],
+    "shelf": null
+  },
+  "slowFertilizer": {
+    "rank": 21,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "teaEgg": {
+    "rank": 22,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "陆言",
+      "周明山"
+    ],
+    "shelf": 7
+  },
+  "eggRice": {
+    "rank": 23,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "林溪",
+      "陈木生",
+      "陈小河"
+    ],
+    "shelf": 7
+  },
+  "rice": {
+    "rank": 24,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "蛋炒饭",
+      "竹笋焖饭",
+      "南瓜米糕",
+      "芋头饭",
+      "豌豆焖饭",
+      "竹叶米粽",
+      "腊八家常粥",
+      "河蟹焖饭"
+    ],
+    "likes": [],
+    "shelf": 21
+  },
+  "rice_seasonal": {
+    "rank": 25,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "rice_heirloom": {
+    "rank": 26,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "riceSeed": {
+    "rank": 27,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "wintermelon": {
+    "rank": 28,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "冬瓜虾汤"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "wintermelon_seasonal": {
+    "rank": 29,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "wintermelon_heirloom": {
+    "rank": 30,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "wintermelonSoup": {
+    "rank": 31,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "江渔",
+      "梁医生"
+    ],
+    "shelf": 7
+  },
+  "wintermelonSeed": {
+    "rank": 32,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "tomato": {
+    "rank": 33,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "番茄炒蛋"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "tomato_seasonal": {
+    "rank": 34,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "tomato_heirloom": {
+    "rank": 35,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "tomatoEgg": {
+    "rank": 36,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "tomatoSeed": {
+    "rank": 37,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "bedding": {
+    "rank": 38,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "driedMushroom": {
+    "rank": 39,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [],
+    "likes": [],
+    "shelf": 28
+  },
+  "grainFeed": {
+    "rank": 40,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "riceWine": {
+    "rank": 41,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [],
+    "likes": [],
+    "shelf": 28
+  },
+  "shrimp": {
+    "rank": 68,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、小院荷塘、竹林静潭、牧场大塘 · 岸边笼捕",
+    "uses": [
+      "冬瓜虾汤",
+      "活饵",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "crab": {
+    "rank": 70,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、牧场大塘 · 岸边笼捕",
+    "uses": [
+      "河蟹焖饭",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "crabRice": {
+    "rank": 44,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "sweetpotato": {
+    "rank": 45,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "红薯蒸糕"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "sweetpotato_seasonal": {
+    "rank": 46,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "sweetpotato_heirloom": {
+    "rank": 47,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "sweetpotatoCake": {
+    "rank": 48,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "sweetpotatoSeed": {
+    "rank": 49,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "carrot": {
+    "rank": 50,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [],
+    "likes": [],
+    "shelf": 12
+  },
+  "carrot_seasonal": {
+    "rank": 51,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "carrot_heirloom": {
+    "rank": 52,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "carrotSeed": {
+    "rank": 53,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "peanut": {
+    "rank": 54,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "莲藕花生汤",
+      "腊八家常粥",
+      "花生油"
+    ],
+    "likes": [],
+    "shelf": 21
+  },
+  "peanut_seasonal": {
+    "rank": 55,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "peanut_heirloom": {
+    "rank": 56,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "oil": {
+    "rank": 57,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [
+      "芝麻月饼"
+    ],
+    "likes": [],
+    "shelf": 28
+  },
+  "peanutSeed": {
+    "rank": 58,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cucumber": {
+    "rank": 59,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "拍黄瓜"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "cucumber_seasonal": {
+    "rank": 60,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cucumber_heirloom": {
+    "rank": 61,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cucumberSeed": {
+    "rank": 62,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "egg": {
+    "rank": 63,
+    "category": "鱼蛋奶肉",
+    "sources": "东坡牧场照料与收取",
+    "uses": [
+      "蛋炒饭",
+      "菌菇蛋花汤",
+      "番茄炒蛋",
+      "韭菜煎蛋",
+      "茶叶蛋",
+      "蒸奶小碗",
+      "秋葵蒸蛋"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "springBowl": {
+    "rank": 64,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "greensDumpling": {
+    "rank": 65,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "何青"
+    ],
+    "shelf": 7
+  },
+  "fish": {
+    "rank": 67,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、小院荷塘、竹林静潭、牧场大塘、茶山清泉 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "eggplant": {
+    "rank": 67,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "家常茄子煲"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "eggplant_seasonal": {
+    "rank": 68,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "eggplant_heirloom": {
+    "rank": 69,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "eggplantSeed": {
+    "rank": 70,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "eggplantPot": {
+    "rank": 71,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "pickles": {
+    "rank": 72,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "许婶"
+    ],
+    "shelf": 28
+  },
+  "mustard": {
+    "rank": 73,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "家常腌菜"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "mustard_seasonal": {
+    "rank": 74,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "mustard_heirloom": {
+    "rank": 75,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "mustardSeed": {
+    "rank": 76,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "leek": {
+    "rank": 77,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "韭菜煎蛋"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "leek_seasonal": {
+    "rank": 78,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "leek_heirloom": {
+    "rank": 79,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "leekEgg": {
+    "rank": 80,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "leekSeed": {
+    "rank": 81,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "mushroom": {
+    "rank": 82,
+    "category": "鲜蔬谷果",
+    "sources": "村道周边采集",
+    "uses": [
+      "菌菇蛋花汤",
+      "土豆炖菌菇",
+      "干香菇"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "mushroomSoup": {
+    "rank": 83,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "林溪"
+    ],
+    "shelf": 7
+  },
+  "laba": {
+    "rank": 84,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "江桂珍"
+    ],
+    "shelf": 7
+  },
+  "lotus": {
+    "rank": 85,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "莲藕花生汤"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "lotus_seasonal": {
+    "rank": 86,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "lotus_heirloom": {
+    "rank": 87,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "lotusSoup": {
+    "rank": 88,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "lotusSeed": {
+    "rank": 89,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "perch": {
+    "rank": 71,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、茶山清泉 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "fishSoup": {
+    "rank": 91,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "陈木生",
+      "周远"
+    ],
+    "shelf": 7
+  },
+  "bean": {
+    "rank": 92,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "竹叶米粽",
+      "腊八家常粥"
+    ],
+    "likes": [],
+    "shelf": 21
+  },
+  "bean_seasonal": {
+    "rank": 93,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "bean_heirloom": {
+    "rank": 94,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "beanSeed": {
+    "rank": 95,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "wood": {
+    "rank": 96,
+    "category": "材料",
+    "sources": "村道周边采集",
+    "uses": [
+      "田垄锄改良",
+      "竹嘴水壶改良",
+      "弯刃镰刀改良",
+      "竹柄斧改良",
+      "青竹钓竿改良",
+      "软刷与收奶布改良"
+    ],
+    "likes": [],
+    "shelf": null
+  },
+  "pumpkin": {
+    "rank": 97,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "南瓜米糕",
+      "南瓜奶香饼"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "pumpkin_seasonal": {
+    "rank": 98,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "pumpkin_heirloom": {
+    "rank": 99,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "pumpkinCake": {
+    "rank": 100,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "方梅",
+      "小齐"
+    ],
+    "shelf": 7
+  },
+  "autumnToast": {
+    "rank": 101,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "pumpkinSeed": {
+    "rank": 102,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "loach": {
+    "rank": 69,
+    "category": "鱼蛋奶肉",
+    "sources": "小院荷塘、竹林静潭、牧场大塘 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "cucumberSalad": {
+    "rank": 104,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "feather": {
+    "rank": 105,
+    "category": "材料",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "hay": {
+    "rank": 106,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "pepper": {
+    "rank": 107,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "家常茄子煲"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "pepper_seasonal": {
+    "rank": 108,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "pepper_heirloom": {
+    "rank": 109,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "pepperSeed": {
+    "rank": 110,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "greens": {
+    "rank": 111,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "林阿婆",
+      "沈禾",
+      "许婶",
+      "方梅",
+      "宋宁",
+      "顾安",
+      "江渔",
+      "陆言",
+      "罗素琴",
+      "梁医生",
+      "吴大成",
+      "江桂珍",
+      "周明山",
+      "陆师傅",
+      "周桃",
+      "何青",
+      "宋伯",
+      "小岚",
+      "阿宝",
+      "小齐",
+      "陈小河"
+    ],
+    "shelf": 7
+  },
+  "okra": {
+    "rank": 112,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "秋葵蒸蛋"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "okra_seasonal": {
+    "rank": 113,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "okra_heirloom": {
+    "rank": 114,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "okraEgg": {
+    "rank": 115,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "宋宁"
+    ],
+    "shelf": 7
+  },
+  "okraSeed": {
+    "rank": 116,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "manure": {
+    "rank": 117,
+    "category": "材料",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cloth": {
+    "rank": 118,
+    "category": "材料",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "wool": {
+    "rank": 119,
+    "category": "材料",
+    "sources": "东坡牧场照料与收取",
+    "uses": [
+      "软刷与收奶布改良"
+    ],
+    "likes": [],
+    "shelf": null
+  },
+  "tea": {
+    "rank": 120,
+    "category": "鲜蔬谷果",
+    "sources": "村道周边采集",
+    "uses": [
+      "山果凉饮",
+      "手焙茶"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "berry": {
+    "rank": 121,
+    "category": "鲜蔬谷果",
+    "sources": "村道周边采集",
+    "uses": [
+      "山果凉饮",
+      "山果蜜酱"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "summerDrink": {
+    "rank": 122,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "berryJam": {
+    "rank": 123,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [],
+    "likes": [],
+    "shelf": 28
+  },
+  "lettuce": {
+    "rank": 124,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [],
+    "likes": [],
+    "shelf": 12
+  },
+  "lettuce_seasonal": {
+    "rank": 125,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "lettuce_heirloom": {
+    "rank": 126,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "lettuceSeed": {
+    "rank": 127,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "flour": {
+    "rank": 128,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [
+      "菠菜手擀面",
+      "芝麻月饼",
+      "红薯蒸糕",
+      "荠菜团子",
+      "南瓜奶香饼"
+    ],
+    "likes": [],
+    "shelf": 21
+  },
+  "dryTea": {
+    "rank": 129,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [
+      "茶叶蛋"
+    ],
+    "likes": [],
+    "shelf": 28
+  },
+  "yarn": {
+    "rank": 130,
+    "category": "材料",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cream": {
+    "rank": 131,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [
+      "南瓜奶香饼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "fertileHenEgg": {
+    "rank": 132,
+    "category": "材料",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "fertileDuckEgg": {
+    "rank": 133,
+    "category": "材料",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "animalMedicine": {
+    "rank": 134,
+    "category": "材料",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "compost": {
+    "rank": 135,
+    "category": "农资",
+    "sources": "禾溪小灶加工",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "radishPickle": {
+    "rank": 136,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 28
+  },
+  "plantCare": {
+    "rank": 137,
+    "category": "农资",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "gardenSoup": {
+    "rank": 138,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "yogurt": {
+    "rank": 139,
+    "category": "料理",
+    "sources": "禾溪小灶加工",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "potato": {
+    "rank": 140,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "土豆炖菌菇"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "potato_seasonal": {
+    "rank": 141,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "potato_heirloom": {
+    "rank": 142,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "potatoStew": {
+    "rank": 143,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "宋伯"
+    ],
+    "shelf": 7
+  },
+  "potatoSeed": {
+    "rank": 144,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "pea": {
+    "rank": 145,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "豌豆焖饭"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "pea_seasonal": {
+    "rank": 146,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "pea_heirloom": {
+    "rank": 147,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "peaRice": {
+    "rank": 148,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "罗素琴"
+    ],
+    "shelf": 7
+  },
+  "peaSeed": {
+    "rank": 149,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "watermelon": {
+    "rank": 150,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [],
+    "likes": [],
+    "shelf": 12
+  },
+  "watermelon_seasonal": {
+    "rank": 151,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "watermelon_heirloom": {
+    "rank": 152,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "watermelonSeed": {
+    "rank": 153,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "milk": {
+    "rank": 154,
+    "category": "鱼蛋奶肉",
+    "sources": "东坡牧场照料与收取",
+    "uses": [
+      "蒸奶小碗",
+      "芝麻暖奶",
+      "手摇奶油",
+      "陶罐酸奶",
+      "乡村鲜奶酪"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "shoot": {
+    "rank": 155,
+    "category": "鲜蔬谷果",
+    "sources": "村道周边采集",
+    "uses": [
+      "竹笋焖饭",
+      "荠菜春笋羹"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "cheese": {
+    "rank": 156,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "wheat": {
+    "rank": 157,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "石磨面粉"
+    ],
+    "likes": [],
+    "shelf": 21
+  },
+  "wheat_seasonal": {
+    "rank": 158,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "wheat_heirloom": {
+    "rank": 159,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "wheatSeed": {
+    "rank": 160,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cabbage": {
+    "rank": 161,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "清炒时蔬",
+      "熟堆肥"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "cabbage_seasonal": {
+    "rank": 162,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cabbage_heirloom": {
+    "rank": 163,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cabbageSeed": {
+    "rank": 164,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "duckEgg": {
+    "rank": 165,
+    "category": "鱼蛋奶肉",
+    "sources": "东坡牧场照料与收取",
+    "uses": [],
+    "likes": [],
+    "shelf": 12
+  },
+  "wildHerb": {
+    "rank": 166,
+    "category": "鲜蔬谷果",
+    "sources": "村道周边采集",
+    "uses": [
+      "荠菜团子",
+      "荠菜春笋羹"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "driedFish": {
+    "rank": 167,
+    "category": "加工物",
+    "sources": "禾溪小灶加工",
+    "uses": [
+      "鱼干菜饭"
+    ],
+    "likes": [],
+    "shelf": 28
+  },
+  "fishRice": {
+    "rank": 168,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "吴大成"
+    ],
+    "shelf": 7
+  },
+  "corn": {
+    "rank": 169,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "蒸玉米"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "corn_seasonal": {
+    "rank": 170,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "corn_heirloom": {
+    "rank": 171,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "cornSeed": {
+    "rank": 172,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "taro": {
+    "rank": 173,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "芋头饭"
+    ],
+    "likes": [],
+    "shelf": 12
+  },
+  "taro_seasonal": {
+    "rank": 174,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "taro_heirloom": {
+    "rank": 175,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "taroRice": {
+    "rank": 176,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "taroSeed": {
+    "rank": 177,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "milkPudding": {
+    "rank": 178,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "顾安",
+      "小岚"
+    ],
+    "shelf": 7
+  },
+  "steamedCorn": {
+    "rank": 179,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "阿宝"
+    ],
+    "shelf": 7
+  },
+  "sesame": {
+    "rank": 180,
+    "category": "鲜蔬谷果",
+    "sources": "四时农事种植",
+    "uses": [
+      "芝麻月饼",
+      "芝麻暖奶"
+    ],
+    "likes": [],
+    "shelf": 21
+  },
+  "sesame_seasonal": {
+    "rank": 181,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "sesame_heirloom": {
+    "rank": 182,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "winterMilk": {
+    "rank": 183,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "sesameCake": {
+    "rank": 184,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "周桃"
+    ],
+    "shelf": 7
+  },
+  "sesameSeed": {
+    "rank": 185,
+    "category": "种子",
+    "sources": "杂货货架、健康作物留种",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "truffle": {
+    "rank": 186,
+    "category": "鲜蔬谷果",
+    "sources": "商店与农场生产",
+    "uses": [],
+    "likes": [],
+    "shelf": 12
+  },
+  "bamboo": {
+    "rank": 187,
+    "category": "材料",
+    "sources": "村道周边采集",
+    "uses": [
+      "田垄锄改良",
+      "竹嘴水壶改良",
+      "弯刃镰刀改良",
+      "竹柄斧改良",
+      "青竹钓竿改良",
+      "软刷与收奶布改良"
+    ],
+    "likes": [],
+    "shelf": null
+  },
+  "bambooRice": {
+    "rank": 188,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [
+      "林阿婆",
+      "沈禾",
+      "周远",
+      "陆师傅"
+    ],
+    "shelf": 7
+  },
+  "riceDumpling": {
+    "rank": 189,
+    "category": "料理",
+    "sources": "灶边菜谱与试配",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "goatMilk": {
+    "rank": 190,
+    "category": "鱼蛋奶肉",
+    "sources": "牧场养成与加工",
+    "uses": [
+      "熟成羊奶酪"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "goatCheese": {
+    "rank": 191,
+    "category": "加工物",
+    "sources": "牧场养成与加工",
+    "uses": [],
+    "likes": [],
+    "shelf": 7
+  },
+  "rabbitFur": {
+    "rank": 192,
+    "category": "材料",
+    "sources": "牧场养成与加工",
+    "uses": [
+      "纺细软兔毛线"
+    ],
+    "likes": [],
+    "shelf": null
+  },
+  "fineYarn": {
+    "rank": 193,
+    "category": "材料",
+    "sources": "牧场养成与加工",
+    "uses": [],
+    "likes": [],
+    "shelf": null
+  },
+  "carp": {
+    "rank": 72,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、小院荷塘、牧场大塘 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "grassCarp": {
+    "rank": 73,
+    "category": "鱼蛋奶肉",
+    "sources": "小院荷塘、牧场大塘 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "silverCarp": {
+    "rank": 74,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、牧场大塘 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "bigheadCarp": {
+    "rank": 75,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、牧场大塘 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "bream": {
+    "rank": 76,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、小院荷塘 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "catfish": {
+    "rank": 77,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "yellowCatfish": {
+    "rank": 78,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、竹林静潭 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "blackCarp": {
+    "rank": 79,
+    "category": "鱼蛋奶肉",
+    "sources": "牧场大塘 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "paleChub": {
+    "rank": 80,
+    "category": "鱼蛋奶肉",
+    "sources": "竹林静潭、茶山清泉 · 垂钓",
+    "uses": [
+      "鱼干",
+      "家常鱼料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "riverSnail": {
+    "rank": 81,
+    "category": "鱼蛋奶肉",
+    "sources": "小院荷塘、竹林静潭、牧场大塘 · 岸边笼捕",
+    "uses": [
+      "水产料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "riverMussel": {
+    "rank": 82,
+    "category": "鱼蛋奶肉",
+    "sources": "柳岸河流、小院荷塘、牧场大塘 · 岸边笼捕",
+    "uses": [
+      "水产料理",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 5
+  },
+  "grainBait": {
+    "rank": 405,
+    "category": "农资",
+    "sources": "水畔垂钓手记 · 制作；合作社购买",
+    "uses": [
+      "垂钓或笼捕"
+    ],
+    "likes": []
+  },
+  "herbBait": {
+    "rank": 406,
+    "category": "农资",
+    "sources": "水畔垂钓手记 · 制作；合作社购买",
+    "uses": [
+      "垂钓或笼捕"
+    ],
+    "likes": []
+  },
+  "shrimpBait": {
+    "rank": 407,
+    "category": "农资",
+    "sources": "水畔垂钓手记 · 制作；合作社购买",
+    "uses": [
+      "垂钓或笼捕"
+    ],
+    "likes": []
+  },
+  "steadyFloat": {
+    "rank": 408,
+    "category": "农资",
+    "sources": "水畔垂钓手记 · 制作；合作社购买",
+    "uses": [
+      "垂钓或笼捕"
+    ],
+    "likes": []
+  },
+  "gentleSinker": {
+    "rank": 409,
+    "category": "农资",
+    "sources": "水畔垂钓手记 · 制作；合作社购买",
+    "uses": [
+      "垂钓或笼捕"
+    ],
+    "likes": []
+  },
+  "fishBell": {
+    "rank": 410,
+    "category": "农资",
+    "sources": "水畔垂钓手记 · 制作；合作社购买",
+    "uses": [
+      "垂钓或笼捕"
+    ],
+    "likes": []
+  },
+  "fishTrap": {
+    "rank": 411,
+    "category": "农资",
+    "sources": "水畔垂钓手记 · 制作；合作社购买",
+    "uses": [
+      "垂钓或笼捕"
+    ],
+    "likes": []
+  },
+  "leekSnails": {
+    "rank": 712,
+    "category": "料理",
+    "sources": "禾溪小灶 · 家常基础菜谱",
+    "uses": [
+      "恢复体力",
+      "待客",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 7
+  },
+  "musselRadishSoup": {
+    "rank": 713,
+    "category": "料理",
+    "sources": "禾溪小灶 · 家常基础菜谱",
+    "uses": [
+      "恢复体力",
+      "待客",
+      "出售与赠礼"
+    ],
+    "likes": [],
+    "shelf": 7
+  }
+}

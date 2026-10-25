@@ -1,0 +1,2536 @@
+{
+  "entries": {
+    "achievements/harvest": {
+      "name": "第一篮收成",
+      "path": "res://art/icons/achievements/harvest.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "achievements/neighbors": {
+      "name": "有来有往",
+      "path": "res://art/icons/achievements/neighbors.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "achievements/river": {
+      "name": "河边的耐心",
+      "path": "res://art/icons/achievements/river.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "achievements/table": {
+      "name": "家常的手艺",
+      "path": "res://art/icons/achievements/table.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "archives/album": {
+      "name": "今年的村庄册页",
+      "path": "res://art/icons/archives/album.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "archives/key": {
+      "name": "老院的钥匙",
+      "path": "res://art/icons/archives/key.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "archives/photo": {
+      "name": "河埠旧合照",
+      "path": "res://art/icons/archives/photo.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "archives/recipe": {
+      "name": "阿婆的手写菜谱",
+      "path": "res://art/icons/archives/recipe.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "archives/ruler": {
+      "name": "爷爷的旧木尺",
+      "path": "res://art/icons/archives/ruler.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "archives/teaBook": {
+      "name": "山路采茶册",
+      "path": "res://art/icons/archives/teaBook.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "facilities/drain": {
+      "name": "浅沟排水渠",
+      "path": "res://art/icons/facilities/drain.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "facilities/fence": {
+      "name": "田边矮篱",
+      "path": "res://art/icons/facilities/fence.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "facilities/greenhouse": {
+      "name": "小暖棚",
+      "path": "res://art/icons/facilities/greenhouse.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "facilities/scarecrow": {
+      "name": "草帽稻草人",
+      "path": "res://art/icons/facilities/scarecrow.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "facilities/shade": {
+      "name": "竹篾遮阳网",
+      "path": "res://art/icons/facilities/shade.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "facilities/sprinkler": {
+      "name": "竹管喷灌",
+      "path": "res://art/icons/facilities/sprinkler.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "facilities/trellis": {
+      "name": "瓜豆攀爬架",
+      "path": "res://art/icons/facilities/trellis.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "furniture/bench": {
+      "name": "木长椅",
+      "path": "res://art/icons/furniture/bench.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/bookshelf": {
+      "name": "乡土书柜",
+      "path": "res://art/icons/furniture/bookshelf.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/cabinet": {
+      "name": "竹木储物架",
+      "path": "res://art/icons/furniture/cabinet.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/display": {
+      "name": "收成展示架",
+      "path": "res://art/icons/furniture/display.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/fence": {
+      "name": "竹篱笆",
+      "path": "res://art/icons/furniture/fence.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/flowerbed": {
+      "name": "四时花圃",
+      "path": "res://art/icons/furniture/flowerbed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/greenhouse": {
+      "name": "小温棚",
+      "path": "res://art/icons/furniture/greenhouse.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/lantern": {
+      "name": "竹灯笼",
+      "path": "res://art/icons/furniture/lantern.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/orchard": {
+      "name": "果树荫地",
+      "path": "res://art/icons/furniture/orchard.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/path": {
+      "name": "青石小径",
+      "path": "res://art/icons/furniture/path.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/photo": {
+      "name": "村庄合照",
+      "path": "res://art/icons/furniture/photo.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/pot": {
+      "name": "小花盆",
+      "path": "res://art/icons/furniture/pot.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/rug": {
+      "name": "靛蓝织毯",
+      "path": "res://art/icons/furniture/rug.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/scarecrow": {
+      "name": "布衣稻草人",
+      "path": "res://art/icons/furniture/scarecrow.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/seedrack": {
+      "name": "育苗竹架",
+      "path": "res://art/icons/furniture/seedrack.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/sign": {
+      "name": "木刻院牌",
+      "path": "res://art/icons/furniture/sign.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/stoneLantern": {
+      "name": "乡间石灯",
+      "path": "res://art/icons/furniture/stoneLantern.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/teaTable": {
+      "name": "竹编茶桌",
+      "path": "res://art/icons/furniture/teaTable.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/trellis": {
+      "name": "菜架",
+      "path": "res://art/icons/furniture/trellis.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/waterbed": {
+      "name": "沟边菜床",
+      "path": "res://art/icons/furniture/waterbed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/well": {
+      "name": "青石小井",
+      "path": "res://art/icons/furniture/well.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "furniture/workbench": {
+      "name": "木工长案",
+      "path": "res://art/icons/furniture/workbench.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/animalMedicine": {
+      "name": "兽用护理药",
+      "path": "res://art/icons/items/animalMedicine.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/autumnToast": {
+      "name": "南瓜奶香饼",
+      "path": "res://art/icons/items/autumnToast.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bamboo": {
+      "name": "竹材",
+      "path": "res://art/icons/items/bamboo.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bambooRice": {
+      "name": "竹笋焖饭",
+      "path": "res://art/icons/items/bambooRice.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bean": {
+      "name": "毛豆",
+      "path": "res://art/icons/items/bean.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/beanSeed": {
+      "name": "毛豆种子",
+      "path": "res://art/icons/items/beanSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bean_heirloom": {
+      "name": "毛豆·乡传良种",
+      "path": "res://art/icons/items/bean_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bean_seasonal": {
+      "name": "毛豆·节令种",
+      "path": "res://art/icons/items/bean_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bedding": {
+      "name": "干草垫料",
+      "path": "res://art/icons/items/bedding.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/berry": {
+      "name": "山果",
+      "path": "res://art/icons/items/berry.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/berryJam": {
+      "name": "山果蜜酱",
+      "path": "res://art/icons/items/berryJam.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bigheadCarp": {
+      "cell": 3,
+      "name": "鳙鱼",
+      "path": "res://art/icons/items/bigheadCarp.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/bioCare": {
+      "name": "草本护苗液",
+      "path": "res://art/icons/items/bioCare.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/blackCarp": {
+      "cell": 7,
+      "name": "青鱼",
+      "path": "res://art/icons/items/blackCarp.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/bokchoy": {
+      "name": "白菜",
+      "path": "res://art/icons/items/bokchoy.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bokchoySeed": {
+      "name": "白菜种子",
+      "path": "res://art/icons/items/bokchoySeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bokchoy_heirloom": {
+      "name": "白菜·乡传良种",
+      "path": "res://art/icons/items/bokchoy_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bokchoy_seasonal": {
+      "name": "白菜·节令种",
+      "path": "res://art/icons/items/bokchoy_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/bream": {
+      "cell": 4,
+      "name": "鳊鱼",
+      "path": "res://art/icons/items/bream.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/broadbean": {
+      "name": "蚕豆",
+      "path": "res://art/icons/items/broadbean.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/broadbeanMash": {
+      "name": "蚕豆泥",
+      "path": "res://art/icons/items/broadbeanMash.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/broadbeanSeed": {
+      "name": "蚕豆种子",
+      "path": "res://art/icons/items/broadbeanSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/broadbean_heirloom": {
+      "name": "蚕豆·乡传良种",
+      "path": "res://art/icons/items/broadbean_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/broadbean_seasonal": {
+      "name": "蚕豆·节令种",
+      "path": "res://art/icons/items/broadbean_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cabbage": {
+      "name": "小青菜",
+      "path": "res://art/icons/items/cabbage.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cabbageSeed": {
+      "name": "小青菜种子",
+      "path": "res://art/icons/items/cabbageSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cabbage_heirloom": {
+      "name": "小青菜·乡传良种",
+      "path": "res://art/icons/items/cabbage_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cabbage_seasonal": {
+      "name": "小青菜·节令种",
+      "path": "res://art/icons/items/cabbage_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/carp": {
+      "cell": 0,
+      "name": "鲤鱼",
+      "path": "res://art/icons/items/carp.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/carrot": {
+      "name": "胡萝卜",
+      "path": "res://art/icons/items/carrot.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/carrotSeed": {
+      "name": "胡萝卜种子",
+      "path": "res://art/icons/items/carrotSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/carrot_heirloom": {
+      "name": "胡萝卜·乡传良种",
+      "path": "res://art/icons/items/carrot_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/carrot_seasonal": {
+      "name": "胡萝卜·节令种",
+      "path": "res://art/icons/items/carrot_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/catfish": {
+      "cell": 5,
+      "name": "鲶鱼",
+      "path": "res://art/icons/items/catfish.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/cheese": {
+      "name": "乡村鲜奶酪",
+      "path": "res://art/icons/items/cheese.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cloth": {
+      "name": "柔软毛呢",
+      "path": "res://art/icons/items/cloth.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/compost": {
+      "name": "熟堆肥",
+      "path": "res://art/icons/items/compost.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/corn": {
+      "name": "玉米",
+      "path": "res://art/icons/items/corn.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cornSeed": {
+      "name": "玉米种子",
+      "path": "res://art/icons/items/cornSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/corn_heirloom": {
+      "name": "玉米·乡传良种",
+      "path": "res://art/icons/items/corn_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/corn_seasonal": {
+      "name": "玉米·节令种",
+      "path": "res://art/icons/items/corn_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/crab": {
+      "name": "河蟹",
+      "path": "res://art/icons/items/crab.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/crabRice": {
+      "name": "河蟹焖饭",
+      "path": "res://art/icons/items/crabRice.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cream": {
+      "name": "手摇奶油",
+      "path": "res://art/icons/items/cream.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cucumber": {
+      "name": "黄瓜",
+      "path": "res://art/icons/items/cucumber.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cucumberSalad": {
+      "name": "拍黄瓜",
+      "path": "res://art/icons/items/cucumberSalad.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cucumberSeed": {
+      "name": "黄瓜种子",
+      "path": "res://art/icons/items/cucumberSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cucumber_heirloom": {
+      "name": "黄瓜·乡传良种",
+      "path": "res://art/icons/items/cucumber_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/cucumber_seasonal": {
+      "name": "黄瓜·节令种",
+      "path": "res://art/icons/items/cucumber_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/driedFish": {
+      "name": "鱼干",
+      "path": "res://art/icons/items/driedFish.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/driedMushroom": {
+      "name": "干香菇",
+      "path": "res://art/icons/items/driedMushroom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/dryTea": {
+      "name": "手焙茶",
+      "path": "res://art/icons/items/dryTea.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/duckEgg": {
+      "name": "鸭蛋",
+      "path": "res://art/icons/items/duckEgg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/egg": {
+      "name": "鸡蛋",
+      "path": "res://art/icons/items/egg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/eggRice": {
+      "name": "蛋炒饭",
+      "path": "res://art/icons/items/eggRice.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/eggplant": {
+      "name": "茄子",
+      "path": "res://art/icons/items/eggplant.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/eggplantPot": {
+      "name": "家常茄子煲",
+      "path": "res://art/icons/items/eggplantPot.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/eggplantSeed": {
+      "name": "茄子种子",
+      "path": "res://art/icons/items/eggplantSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/eggplant_heirloom": {
+      "name": "茄子·乡传良种",
+      "path": "res://art/icons/items/eggplant_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/eggplant_seasonal": {
+      "name": "茄子·节令种",
+      "path": "res://art/icons/items/eggplant_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/feather": {
+      "name": "蓬松羽毛",
+      "path": "res://art/icons/items/feather.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/feed": {
+      "name": "草谷饲料",
+      "path": "res://art/icons/items/feed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/fertileDuckEgg": {
+      "name": "受精鸭蛋",
+      "path": "res://art/icons/items/fertileDuckEgg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/fertileHenEgg": {
+      "name": "受精鸡蛋",
+      "path": "res://art/icons/items/fertileHenEgg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/fineYarn": {
+      "name": "细软毛线",
+      "path": "res://art/icons/items/fineYarn.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/fish": {
+      "name": "鲫鱼",
+      "path": "res://art/icons/items/fish.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/fishBell": {
+      "cell": 2,
+      "name": "集鱼铃",
+      "path": "res://art/icons/items/fishBell.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/equipment-atlas.png",
+      "status": "ready"
+    },
+    "items/fishRice": {
+      "name": "鱼干菜饭",
+      "path": "res://art/icons/items/fishRice.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/fishSoup": {
+      "name": "萝卜鲫鱼汤",
+      "path": "res://art/icons/items/fishSoup.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/fishTrap": {
+      "cell": 3,
+      "name": "竹编捕笼",
+      "path": "res://art/icons/items/fishTrap.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/equipment-atlas.png",
+      "status": "ready"
+    },
+    "items/flour": {
+      "name": "石磨面粉",
+      "path": "res://art/icons/items/flour.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/gardenSoup": {
+      "name": "随手田园汤",
+      "path": "res://art/icons/items/gardenSoup.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/gentleSinker": {
+      "cell": 1,
+      "name": "缓流坠",
+      "path": "res://art/icons/items/gentleSinker.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/equipment-atlas.png",
+      "status": "ready"
+    },
+    "items/goatCheese": {
+      "name": "醇香羊奶酪",
+      "path": "res://art/icons/items/goatCheese.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/goatMilk": {
+      "name": "鲜羊奶",
+      "path": "res://art/icons/items/goatMilk.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/grainBait": {
+      "cell": 4,
+      "name": "米粒饵",
+      "path": "res://art/icons/items/grainBait.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/equipment-atlas.png",
+      "status": "ready"
+    },
+    "items/grainFeed": {
+      "name": "谷物精饲料",
+      "path": "res://art/icons/items/grainFeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/grassCarp": {
+      "cell": 1,
+      "name": "草鱼",
+      "path": "res://art/icons/items/grassCarp.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/greens": {
+      "name": "清炒时蔬",
+      "path": "res://art/icons/items/greens.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/greensDumpling": {
+      "name": "荠菜团子",
+      "path": "res://art/icons/items/greensDumpling.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/hay": {
+      "name": "青干草",
+      "path": "res://art/icons/items/hay.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/healthFeed": {
+      "name": "草本营养料",
+      "path": "res://art/icons/items/healthFeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/herbBait": {
+      "cell": 5,
+      "name": "草香饵",
+      "path": "res://art/icons/items/herbBait.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/equipment-atlas.png",
+      "status": "ready"
+    },
+    "items/laba": {
+      "name": "腊八家常粥",
+      "path": "res://art/icons/items/laba.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/leek": {
+      "name": "韭菜",
+      "path": "res://art/icons/items/leek.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/leekEgg": {
+      "name": "韭菜煎蛋",
+      "path": "res://art/icons/items/leekEgg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/leekSeed": {
+      "name": "韭菜种子",
+      "path": "res://art/icons/items/leekSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/leekSnails": {
+      "cell": 0,
+      "name": "葱香田螺",
+      "path": "res://art/icons/items/leekSnails.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/dishes-atlas.png",
+      "status": "ready"
+    },
+    "items/leek_heirloom": {
+      "name": "韭菜·乡传良种",
+      "path": "res://art/icons/items/leek_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/leek_seasonal": {
+      "name": "韭菜·节令种",
+      "path": "res://art/icons/items/leek_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lettuce": {
+      "name": "生菜",
+      "path": "res://art/icons/items/lettuce.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lettuceSeed": {
+      "name": "生菜种子",
+      "path": "res://art/icons/items/lettuceSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lettuce_heirloom": {
+      "name": "生菜·乡传良种",
+      "path": "res://art/icons/items/lettuce_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lettuce_seasonal": {
+      "name": "生菜·节令种",
+      "path": "res://art/icons/items/lettuce_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/loach": {
+      "name": "泥鳅",
+      "path": "res://art/icons/items/loach.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lotus": {
+      "name": "莲藕",
+      "path": "res://art/icons/items/lotus.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lotusSeed": {
+      "name": "莲藕种子",
+      "path": "res://art/icons/items/lotusSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lotusSoup": {
+      "name": "莲藕花生汤",
+      "path": "res://art/icons/items/lotusSoup.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lotus_heirloom": {
+      "name": "莲藕·乡传良种",
+      "path": "res://art/icons/items/lotus_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/lotus_seasonal": {
+      "name": "莲藕·节令种",
+      "path": "res://art/icons/items/lotus_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/manure": {
+      "name": "圈肥原料",
+      "path": "res://art/icons/items/manure.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/milk": {
+      "name": "鲜牛奶",
+      "path": "res://art/icons/items/milk.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/milkPudding": {
+      "name": "蒸奶小碗",
+      "path": "res://art/icons/items/milkPudding.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/mushroom": {
+      "name": "菌菇",
+      "path": "res://art/icons/items/mushroom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/mushroomSoup": {
+      "name": "菌菇蛋花汤",
+      "path": "res://art/icons/items/mushroomSoup.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/musselRadishSoup": {
+      "cell": 1,
+      "name": "萝卜河蚌汤",
+      "path": "res://art/icons/items/musselRadishSoup.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/dishes-atlas.png",
+      "status": "ready"
+    },
+    "items/mustard": {
+      "name": "芥菜",
+      "path": "res://art/icons/items/mustard.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/mustardSeed": {
+      "name": "芥菜种子",
+      "path": "res://art/icons/items/mustardSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/mustard_heirloom": {
+      "name": "芥菜·乡传良种",
+      "path": "res://art/icons/items/mustard_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/mustard_seasonal": {
+      "name": "芥菜·节令种",
+      "path": "res://art/icons/items/mustard_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/oil": {
+      "name": "花生油",
+      "path": "res://art/icons/items/oil.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/okra": {
+      "name": "秋葵",
+      "path": "res://art/icons/items/okra.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/okraEgg": {
+      "name": "秋葵蒸蛋",
+      "path": "res://art/icons/items/okraEgg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/okraSeed": {
+      "name": "秋葵种子",
+      "path": "res://art/icons/items/okraSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/okra_heirloom": {
+      "name": "秋葵·乡传良种",
+      "path": "res://art/icons/items/okra_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/okra_seasonal": {
+      "name": "秋葵·节令种",
+      "path": "res://art/icons/items/okra_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/paleChub": {
+      "cell": 8,
+      "name": "马口鱼",
+      "path": "res://art/icons/items/paleChub.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/pea": {
+      "name": "豌豆",
+      "path": "res://art/icons/items/pea.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/peaRice": {
+      "name": "豌豆焖饭",
+      "path": "res://art/icons/items/peaRice.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/peaSeed": {
+      "name": "豌豆种子",
+      "path": "res://art/icons/items/peaSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pea_heirloom": {
+      "name": "豌豆·乡传良种",
+      "path": "res://art/icons/items/pea_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pea_seasonal": {
+      "name": "豌豆·节令种",
+      "path": "res://art/icons/items/pea_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/peanut": {
+      "name": "花生",
+      "path": "res://art/icons/items/peanut.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/peanutSeed": {
+      "name": "花生种子",
+      "path": "res://art/icons/items/peanutSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/peanut_heirloom": {
+      "name": "花生·乡传良种",
+      "path": "res://art/icons/items/peanut_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/peanut_seasonal": {
+      "name": "花生·节令种",
+      "path": "res://art/icons/items/peanut_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pepper": {
+      "name": "青椒",
+      "path": "res://art/icons/items/pepper.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pepperSeed": {
+      "name": "青椒种子",
+      "path": "res://art/icons/items/pepperSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pepper_heirloom": {
+      "name": "青椒·乡传良种",
+      "path": "res://art/icons/items/pepper_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pepper_seasonal": {
+      "name": "青椒·节令种",
+      "path": "res://art/icons/items/pepper_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/perch": {
+      "name": "鲈鱼",
+      "path": "res://art/icons/items/perch.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pickles": {
+      "name": "家常腌菜",
+      "path": "res://art/icons/items/pickles.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/plantCare": {
+      "name": "速效护苗剂",
+      "path": "res://art/icons/items/plantCare.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/potato": {
+      "name": "土豆",
+      "path": "res://art/icons/items/potato.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/potatoSeed": {
+      "name": "土豆种子",
+      "path": "res://art/icons/items/potatoSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/potatoStew": {
+      "name": "土豆炖菌菇",
+      "path": "res://art/icons/items/potatoStew.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/potato_heirloom": {
+      "name": "土豆·乡传良种",
+      "path": "res://art/icons/items/potato_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/potato_seasonal": {
+      "name": "土豆·节令种",
+      "path": "res://art/icons/items/potato_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pumpkin": {
+      "name": "南瓜",
+      "path": "res://art/icons/items/pumpkin.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pumpkinCake": {
+      "name": "南瓜米糕",
+      "path": "res://art/icons/items/pumpkinCake.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pumpkinSeed": {
+      "name": "南瓜种子",
+      "path": "res://art/icons/items/pumpkinSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pumpkin_heirloom": {
+      "name": "南瓜·乡传良种",
+      "path": "res://art/icons/items/pumpkin_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/pumpkin_seasonal": {
+      "name": "南瓜·节令种",
+      "path": "res://art/icons/items/pumpkin_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/rabbitFur": {
+      "name": "柔软兔毛",
+      "path": "res://art/icons/items/rabbitFur.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/radish": {
+      "name": "白萝卜",
+      "path": "res://art/icons/items/radish.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/radishPickle": {
+      "name": "爽口萝卜干",
+      "path": "res://art/icons/items/radishPickle.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/radishSeed": {
+      "name": "白萝卜种子",
+      "path": "res://art/icons/items/radishSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/radish_heirloom": {
+      "name": "白萝卜·乡传良种",
+      "path": "res://art/icons/items/radish_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/radish_seasonal": {
+      "name": "白萝卜·节令种",
+      "path": "res://art/icons/items/radish_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/rice": {
+      "name": "稻米",
+      "path": "res://art/icons/items/rice.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/riceDumpling": {
+      "name": "竹叶米粽",
+      "path": "res://art/icons/items/riceDumpling.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/riceSeed": {
+      "name": "稻米种子",
+      "path": "res://art/icons/items/riceSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/riceWine": {
+      "name": "桂香米酿",
+      "path": "res://art/icons/items/riceWine.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/rice_heirloom": {
+      "name": "稻米·乡传良种",
+      "path": "res://art/icons/items/rice_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/rice_seasonal": {
+      "name": "稻米·节令种",
+      "path": "res://art/icons/items/rice_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/riverMussel": {
+      "cell": 10,
+      "name": "河蚌",
+      "path": "res://art/icons/items/riverMussel.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/riverSnail": {
+      "cell": 9,
+      "name": "田螺",
+      "path": "res://art/icons/items/riverSnail.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/sesame": {
+      "name": "芝麻",
+      "path": "res://art/icons/items/sesame.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sesameCake": {
+      "name": "芝麻月饼",
+      "path": "res://art/icons/items/sesameCake.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sesameSeed": {
+      "name": "芝麻种子",
+      "path": "res://art/icons/items/sesameSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sesame_heirloom": {
+      "name": "芝麻·乡传良种",
+      "path": "res://art/icons/items/sesame_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sesame_seasonal": {
+      "name": "芝麻·节令种",
+      "path": "res://art/icons/items/sesame_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/shoot": {
+      "name": "鲜竹笋",
+      "path": "res://art/icons/items/shoot.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/shrimp": {
+      "name": "河虾",
+      "path": "res://art/icons/items/shrimp.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/shrimpBait": {
+      "cell": 6,
+      "name": "河虾活饵",
+      "path": "res://art/icons/items/shrimpBait.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/equipment-atlas.png",
+      "status": "ready"
+    },
+    "items/silverCarp": {
+      "cell": 2,
+      "name": "鲢鱼",
+      "path": "res://art/icons/items/silverCarp.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/slowFertilizer": {
+      "name": "草木缓释肥",
+      "path": "res://art/icons/items/slowFertilizer.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/spinach": {
+      "name": "菠菜",
+      "path": "res://art/icons/items/spinach.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/spinachNoodle": {
+      "name": "菠菜手擀面",
+      "path": "res://art/icons/items/spinachNoodle.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/spinachSeed": {
+      "name": "菠菜种子",
+      "path": "res://art/icons/items/spinachSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/spinach_heirloom": {
+      "name": "菠菜·乡传良种",
+      "path": "res://art/icons/items/spinach_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/spinach_seasonal": {
+      "name": "菠菜·节令种",
+      "path": "res://art/icons/items/spinach_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/springBowl": {
+      "name": "荠菜春笋羹",
+      "path": "res://art/icons/items/springBowl.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/steadyFloat": {
+      "cell": 0,
+      "name": "稳漂",
+      "path": "res://art/icons/items/steadyFloat.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/equipment-atlas.png",
+      "status": "ready"
+    },
+    "items/steamedCorn": {
+      "name": "蒸玉米",
+      "path": "res://art/icons/items/steamedCorn.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/summerDrink": {
+      "name": "山果凉饮",
+      "path": "res://art/icons/items/summerDrink.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sweetpotato": {
+      "name": "红薯",
+      "path": "res://art/icons/items/sweetpotato.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sweetpotatoCake": {
+      "name": "红薯蒸糕",
+      "path": "res://art/icons/items/sweetpotatoCake.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sweetpotatoSeed": {
+      "name": "红薯种子",
+      "path": "res://art/icons/items/sweetpotatoSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sweetpotato_heirloom": {
+      "name": "红薯·乡传良种",
+      "path": "res://art/icons/items/sweetpotato_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/sweetpotato_seasonal": {
+      "name": "红薯·节令种",
+      "path": "res://art/icons/items/sweetpotato_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/taro": {
+      "name": "芋头",
+      "path": "res://art/icons/items/taro.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/taroRice": {
+      "name": "芋头饭",
+      "path": "res://art/icons/items/taroRice.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/taroSeed": {
+      "name": "芋头种子",
+      "path": "res://art/icons/items/taroSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/taro_heirloom": {
+      "name": "芋头·乡传良种",
+      "path": "res://art/icons/items/taro_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/taro_seasonal": {
+      "name": "芋头·节令种",
+      "path": "res://art/icons/items/taro_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/tea": {
+      "name": "山茶叶",
+      "path": "res://art/icons/items/tea.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/teaEgg": {
+      "name": "茶叶蛋",
+      "path": "res://art/icons/items/teaEgg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/tomato": {
+      "name": "番茄",
+      "path": "res://art/icons/items/tomato.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/tomatoEgg": {
+      "name": "番茄炒蛋",
+      "path": "res://art/icons/items/tomatoEgg.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/tomatoSeed": {
+      "name": "番茄种子",
+      "path": "res://art/icons/items/tomatoSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/tomato_heirloom": {
+      "name": "番茄·乡传良种",
+      "path": "res://art/icons/items/tomato_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/tomato_seasonal": {
+      "name": "番茄·节令种",
+      "path": "res://art/icons/items/tomato_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/truffle": {
+      "name": "猪拱菌",
+      "path": "res://art/icons/items/truffle.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/watermelon": {
+      "name": "西瓜",
+      "path": "res://art/icons/items/watermelon.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/watermelonSeed": {
+      "name": "西瓜种子",
+      "path": "res://art/icons/items/watermelonSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/watermelon_heirloom": {
+      "name": "西瓜·乡传良种",
+      "path": "res://art/icons/items/watermelon_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/watermelon_seasonal": {
+      "name": "西瓜·节令种",
+      "path": "res://art/icons/items/watermelon_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wheat": {
+      "name": "小麦",
+      "path": "res://art/icons/items/wheat.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wheatSeed": {
+      "name": "小麦种子",
+      "path": "res://art/icons/items/wheatSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wheat_heirloom": {
+      "name": "小麦·乡传良种",
+      "path": "res://art/icons/items/wheat_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wheat_seasonal": {
+      "name": "小麦·节令种",
+      "path": "res://art/icons/items/wheat_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wildHerb": {
+      "name": "野荠菜",
+      "path": "res://art/icons/items/wildHerb.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/winterMilk": {
+      "name": "芝麻暖奶",
+      "path": "res://art/icons/items/winterMilk.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wintermelon": {
+      "name": "冬瓜",
+      "path": "res://art/icons/items/wintermelon.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wintermelonSeed": {
+      "name": "冬瓜种子",
+      "path": "res://art/icons/items/wintermelonSeed.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wintermelonSoup": {
+      "name": "冬瓜虾汤",
+      "path": "res://art/icons/items/wintermelonSoup.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wintermelon_heirloom": {
+      "name": "冬瓜·乡传良种",
+      "path": "res://art/icons/items/wintermelon_heirloom.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wintermelon_seasonal": {
+      "name": "冬瓜·节令种",
+      "path": "res://art/icons/items/wintermelon_seasonal.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wood": {
+      "name": "木料",
+      "path": "res://art/icons/items/wood.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/wool": {
+      "name": "柔软羊毛",
+      "path": "res://art/icons/items/wool.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/yarn": {
+      "name": "手纺毛线",
+      "path": "res://art/icons/items/yarn.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "items/yellowCatfish": {
+      "cell": 6,
+      "name": "黄颡鱼",
+      "path": "res://art/icons/items/yellowCatfish.png",
+      "size": [
+        128,
+        128
+      ],
+      "source": "res://art/sources/fishing-20261017/freshwater-atlas.png",
+      "status": "ready"
+    },
+    "items/yogurt": {
+      "name": "陶罐酸奶",
+      "path": "res://art/icons/items/yogurt.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "stations/compost": {
+      "name": "院边堆肥篓",
+      "path": "res://art/icons/stations/compost.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/dairy": {
+      "name": "乳品发酵架",
+      "path": "res://art/icons/stations/dairy.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/dry": {
+      "name": "檐下烘干架",
+      "path": "res://art/icons/stations/dry.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/ferment": {
+      "name": "米酿木桶",
+      "path": "res://art/icons/stations/ferment.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/mill": {
+      "name": "青石磨",
+      "path": "res://art/icons/stations/mill.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/pickle": {
+      "name": "陶土腌菜缸",
+      "path": "res://art/icons/stations/pickle.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/preserve": {
+      "name": "小铜蜜酱锅",
+      "path": "res://art/icons/stations/preserve.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/press": {
+      "name": "木梁榨油机",
+      "path": "res://art/icons/stations/press.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/steam": {
+      "name": "竹蒸笼",
+      "path": "res://art/icons/stations/steam.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "stations/stove": {
+      "name": "柴火灶",
+      "path": "res://art/icons/stations/stove.png",
+      "requiredChecks": [
+        "unique_design",
+        "transparent_background",
+        "128px",
+        "actual_ui_binding"
+      ],
+      "scope": "Existing processing station or functional farm facility; inventory UI icon only, not complete placed-world art.",
+      "status": "ready"
+    },
+    "tools/axe": {
+      "name": "竹柄斧",
+      "path": "res://art/icons/tools/axe.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "tools/build": {
+      "name": "营造工具",
+      "path": "res://art/icons/tools/build.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "tools/care": {
+      "name": "软刷与收奶布",
+      "path": "res://art/icons/tools/care.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "tools/hand": {
+      "name": "徒手交互",
+      "path": "res://art/icons/tools/hand.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "tools/hoe": {
+      "name": "田垄锄",
+      "path": "res://art/icons/tools/hoe.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "tools/rod": {
+      "name": "青竹钓竿",
+      "path": "res://art/icons/tools/rod.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "tools/sickle": {
+      "name": "弯刃镰刀",
+      "path": "res://art/icons/tools/sickle.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    },
+    "tools/water": {
+      "name": "竹嘴水壶",
+      "path": "res://art/icons/tools/water.png",
+      "size": [
+        128.0,
+        128.0
+      ],
+      "status": "ready"
+    }
+  },
+  "style": "warm_hand_painted_countryside",
+  "version": 1.0
+}

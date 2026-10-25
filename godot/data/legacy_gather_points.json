@@ -1,0 +1,490 @@
+{
+  "0": [
+    {
+      "id": "mountain-0",
+      "x": 750,
+      "y": 699,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-1",
+      "x": 1081,
+      "y": 563,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-2",
+      "x": 937,
+      "y": 662,
+      "kind": "gather",
+      "item": "mushroom",
+      "name": "林下菌床 · 可收 2 份 · 2 天再生",
+      "region": "mountain",
+      "baseName": "菌菇"
+    },
+    {
+      "id": "mountain-3",
+      "x": 625,
+      "y": 628,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-4",
+      "x": 1008,
+      "y": 558,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-5",
+      "x": 893,
+      "y": 776,
+      "kind": "gather",
+      "item": "berry",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生",
+      "region": "mountain",
+      "baseName": "山果"
+    },
+    {
+      "id": "bamboo-0",
+      "x": 776,
+      "y": 1727,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-1",
+      "x": 695,
+      "y": 1822,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-2",
+      "x": 1026,
+      "y": 1726,
+      "kind": "gather",
+      "item": "shoot",
+      "name": "春笋窝 · 可收 2 份 · 3 天再生",
+      "region": "bamboo",
+      "baseName": "鲜竹笋"
+    },
+    {
+      "id": "bamboo-3",
+      "x": 1171,
+      "y": 1677,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-4",
+      "x": 661,
+      "y": 1909,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-5",
+      "x": 942,
+      "y": 1876,
+      "kind": "gather",
+      "item": "wildHerb",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "野荠菜"
+    }
+  ],
+  "1": [
+    {
+      "id": "mountain-0",
+      "x": 750,
+      "y": 699,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-1",
+      "x": 1081,
+      "y": 563,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-2",
+      "x": 937,
+      "y": 662,
+      "kind": "gather",
+      "item": "mushroom",
+      "name": "林下菌床 · 可收 2 份 · 2 天再生",
+      "region": "mountain",
+      "baseName": "菌菇"
+    },
+    {
+      "id": "mountain-3",
+      "x": 625,
+      "y": 628,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-4",
+      "x": 1008,
+      "y": 558,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-5",
+      "x": 893,
+      "y": 776,
+      "kind": "gather",
+      "item": "berry",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生",
+      "region": "mountain",
+      "baseName": "山果"
+    },
+    {
+      "id": "bamboo-0",
+      "x": 776,
+      "y": 1727,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-1",
+      "x": 695,
+      "y": 1822,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-2",
+      "x": 1026,
+      "y": 1726,
+      "kind": "gather",
+      "item": "shoot",
+      "name": "春笋窝 · 休养季 · 春可采",
+      "region": "bamboo",
+      "baseName": "鲜竹笋"
+    },
+    {
+      "id": "bamboo-3",
+      "x": 1171,
+      "y": 1677,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-4",
+      "x": 661,
+      "y": 1909,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-5",
+      "x": 942,
+      "y": 1876,
+      "kind": "gather",
+      "item": "wildHerb",
+      "name": "溪边野荠菜 · 休养季 · 春、秋可采",
+      "region": "bamboo",
+      "baseName": "野荠菜"
+    }
+  ],
+  "2": [
+    {
+      "id": "mountain-0",
+      "x": 750,
+      "y": 699,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-1",
+      "x": 1081,
+      "y": 563,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-2",
+      "x": 937,
+      "y": 662,
+      "kind": "gather",
+      "item": "mushroom",
+      "name": "林下菌床 · 可收 2 份 · 2 天再生",
+      "region": "mountain",
+      "baseName": "菌菇"
+    },
+    {
+      "id": "mountain-3",
+      "x": 625,
+      "y": 628,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-4",
+      "x": 1008,
+      "y": 558,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 可收 2 份 · 3 天再生",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-5",
+      "x": 893,
+      "y": 776,
+      "kind": "gather",
+      "item": "berry",
+      "name": "野果灌丛 · 可收 2 份 · 2 天再生",
+      "region": "mountain",
+      "baseName": "山果"
+    },
+    {
+      "id": "bamboo-0",
+      "x": 776,
+      "y": 1727,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-1",
+      "x": 695,
+      "y": 1822,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-2",
+      "x": 1026,
+      "y": 1726,
+      "kind": "gather",
+      "item": "shoot",
+      "name": "春笋窝 · 休养季 · 春可采",
+      "region": "bamboo",
+      "baseName": "鲜竹笋"
+    },
+    {
+      "id": "bamboo-3",
+      "x": 1171,
+      "y": 1677,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-4",
+      "x": 661,
+      "y": 1909,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-5",
+      "x": 942,
+      "y": 1876,
+      "kind": "gather",
+      "item": "wildHerb",
+      "name": "溪边野荠菜 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "野荠菜"
+    }
+  ],
+  "3": [
+    {
+      "id": "mountain-0",
+      "x": 750,
+      "y": 699,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-1",
+      "x": 1081,
+      "y": 563,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 休养季 · 春、夏、秋可采",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-2",
+      "x": 937,
+      "y": 662,
+      "kind": "gather",
+      "item": "mushroom",
+      "name": "林下菌床 · 休养季 · 春、夏、秋可采",
+      "region": "mountain",
+      "baseName": "菌菇"
+    },
+    {
+      "id": "mountain-3",
+      "x": 625,
+      "y": 628,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "mountain",
+      "baseName": "木料"
+    },
+    {
+      "id": "mountain-4",
+      "x": 1008,
+      "y": 558,
+      "kind": "gather",
+      "item": "tea",
+      "name": "山坡茶树 · 休养季 · 春、夏、秋可采",
+      "region": "mountain",
+      "baseName": "山茶叶"
+    },
+    {
+      "id": "mountain-5",
+      "x": 893,
+      "y": 776,
+      "kind": "gather",
+      "item": "berry",
+      "name": "野果灌丛 · 休养季 · 春、夏、秋可采",
+      "region": "mountain",
+      "baseName": "山果"
+    },
+    {
+      "id": "bamboo-0",
+      "x": 776,
+      "y": 1727,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-1",
+      "x": 695,
+      "y": 1822,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-2",
+      "x": 1026,
+      "y": 1726,
+      "kind": "gather",
+      "item": "shoot",
+      "name": "春笋窝 · 休养季 · 春可采",
+      "region": "bamboo",
+      "baseName": "鲜竹笋"
+    },
+    {
+      "id": "bamboo-3",
+      "x": 1171,
+      "y": 1677,
+      "kind": "gather",
+      "item": "bamboo",
+      "name": "成竹竹丛 · 可收 2 份 · 2 天再生",
+      "region": "bamboo",
+      "baseName": "竹材"
+    },
+    {
+      "id": "bamboo-4",
+      "x": 661,
+      "y": 1909,
+      "kind": "gather",
+      "item": "wood",
+      "name": "倒木与枯枝 · 可收 2 份 · 1 天再生",
+      "region": "bamboo",
+      "baseName": "木料"
+    },
+    {
+      "id": "bamboo-5",
+      "x": 942,
+      "y": 1876,
+      "kind": "gather",
+      "item": "wildHerb",
+      "name": "溪边野荠菜 · 休养季 · 春、秋可采",
+      "region": "bamboo",
+      "baseName": "野荠菜"
+    }
+  ]
+}

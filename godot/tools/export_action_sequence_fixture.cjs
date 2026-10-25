@@ -1,0 +1,22 @@
+const fs=require('node:fs');
+global.window=globalThis;
+for(const m of ['data','core','feedback','actions'])require('../../src/'+m+'.js');
+const A=ZRZActions;
+const specs=Object.keys(A.catalog).concat('unknown').map(k=>({kind:k,spec:A.spec(k),brisk:ZRZFeedback.duration({feedback:{prefs:{pace:'brisk'}}},A.spec(k))}));
+const ui=A.uiActions.concat('unknown').map(id=>({id,spec:A.ui(id,'按钮')})); 
+const points=[];
+function add(p,tool='hand'){points.push({p,tool,spec:A.point(p,tool)});}
+for(const kind of ['walk','animal','forage-care','enter','exit','npc','tea','rest','bed-visit','fish','pet','ambient','unknown'])add({kind,id:'test'});
+for(const action of ['harvest','companionHarvest','seedSave','water','fill','sow','companion','facility','inspect','soil'])add({kind:'farm-task',action});
+for(const action of ['collect','feed','clean','water','build','upgrade','repair','purchase','breed'])add({kind:'ranch-task',action});
+for(const op of ['collect','clean','upgrade','process','manual'])add({kind:'kitchen-task',op});
+for(const op of ['economy-buy','project'])add({kind:'build-task',op});
+for(const item of ['wood','bamboo','shoot','tea','berry'])add({kind:'gather',item});
+for(const tool of ['hand','hoe','water','sickle','axe','unknown'])add({kind:'plot'},tool);
+for(const action of ['feed','brush','water','bell','churn','unknown'])add({kind:'chore',action});
+for(const service of ['water','rest','unknown'])add({kind:'build-piece',service});
+const seq=new A.Sequence();let commits=0,cancels=0;
+seq.start({kind:'read',label:'测试',duration:.5},()=>commits++,()=>cancels++);
+const steps=[[-1,false],[1,true],[1,false],[.01,false],[.1,false],[.1,false],[.1,false],[.09,false],[1,false]];
+const trace=steps.map(([dt,paused])=>({dt,paused,finished:seq.tick(dt,paused),snapshot:seq.snapshot(),commits,cancels}));
+fs.writeFileSync(process.argv[2],JSON.stringify({specs,ui,points,trace},null,2)); console.log('Exported action catalog, UI/point mapping and sequence trace');
