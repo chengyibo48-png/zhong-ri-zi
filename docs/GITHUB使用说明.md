@@ -4,7 +4,7 @@
 
 Godot 主工程位于 `godot/project.godot`，当前版本 0.29.0，Windows x86_64。安装 Godot 4.7.2，导入该工程，等待资源导入完成后按 F5 运行。Godot 会自动生成本地 `.godot/`，无需从仓库下载缓存或引擎。
 
-可玩 Windows ZIP 位于本仓库 [v0.29.0 Release](../../releases/tag/v0.29.0)，解压后运行 `ZhongRiZi.exe`。本版没有将历史 Android/Web 导出重新标记为 0.29.0。
+可玩 Windows ZIP 位于本仓库 [v0.29.0 Release](https://github.com/chengyibo48-png/zhong-ri-zi/releases/tag/v0.29.0)，解压后运行 `ZhongRiZi.exe`。本版没有将历史 Android/Web 导出重新标记为 0.29.0。
 
 ## 目录
 

@@ -2,7 +2,7 @@
 
 中式乡村生活游戏：单人单机、无战斗，围绕种植、牧场、垂钓、加工经营、邻里与村史展陈展开。
 
-**[下载 Windows 试玩](../../releases/tag/v0.29.0)** · [源码运行与构建](docs/GITHUB使用说明.md) · [0.29.0 验收记录](godot/RELEASE_20261017.md)
+**[下载 Windows 试玩](https://github.com/chengyibo48-png/zhong-ri-zi/releases/tag/v0.29.0)** · [源码运行与构建](docs/GITHUB使用说明.md) · [0.29.0 验收记录](godot/RELEASE_20261017.md)
 
 ![0.29.0 实际游戏画面](docs/screenshots/gameplay-0.29.0.png)
 
