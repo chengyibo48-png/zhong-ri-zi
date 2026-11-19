@@ -1,12 +1,12 @@
 extends RefCounted
 ## Canonical native snapshot; disk IO and validation stay separate.
 static func capture(state: Node) -> Dictionary:
-	state._sync_farm_beds_from_plots()
-	state._museum_sync()
 	var fishing: Dictionary=state.fishing.duplicate(true)
 	fishing.queue=[]
 	return {
-		"version": 33,
+		"version": 38,
+		"commit_log":state.commit_log,
+		"village_progress":state.village_progress,
 		"player_name": state.player_name,
 		"player_gender": state.player_gender,
 		"day": state.day,
@@ -42,7 +42,7 @@ static func capture(state: Node) -> Dictionary:
 		"legacy_chapters": state.legacy_chapters,
 		"year_plans": state.year_plans,
 		"achievements": state.achievements,
-		"farm": state.farm,
+		"farm": state._save_farm_projection(),
 		"building": state.building,
 		"known_recipes": state.known_recipes,
 		"ranch": state.ranch,

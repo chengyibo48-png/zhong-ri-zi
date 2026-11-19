@@ -1,0 +1,50 @@
+{
+  "views": [
+    "front",
+    "right",
+    "back",
+    "left"
+  ],
+  "assets": [
+    {
+      "key": "flowerbed",
+      "prompt": "Production-ready transparent 2D sprite atlas for a warm hand-painted Chinese countryside farming game. Exactly FOUR complete views of the SAME rigid object in 2 columns x 2 rows, separated by very generous truly TRANSPARENT gutters and margins. Orthographic elevated camera about 40 degrees, subdued warm honey wood, grey-green stone, sage foliage, tactile gouache texture, readable silhouettes at 60-100 pixels in game. Camera fixed, object yaw changes: top-left FRONT 0deg; top-right RIGHT 90deg; bottom-left BACK 180deg; bottom-right LEFT 270deg. Keep identical physical dimensions, construction, accessory counts, and material palette across views. Show proper side/back structure. Absolutely NO floor, ground, cast shadow, brown vignette, background, scene, labels, letters, grid or glow halo. Genuine clean alpha transparency including structural openings. This is a 2D game art atlas, not a presentation board. Subject: a LOW long rectangular bamboo-edged flower planter, length twice depth, filled with cream daisies, dusty pink small blossoms and sage leaves, dark soil mostly hidden. Woven bamboo sides and four short wooden feet. Low garden border height, no upright poles, no fence, no pots beside it. Front and back broad, side views narrow and receding, SAME flower arrangement seen from opposite sides.",
+      "edit_prompt": null,
+      "source": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-fa841901-e2f7-4bef-9f7f-36535df9f76b.png",
+      "master": "res://art/furniture/source/flowerbed-four-views.png",
+      "sha256": "1768b1bcb39c8e3b683fd3d4dc50a5c1cac43775104a1b7142df8481b3c56b19",
+      "generator": "OpenAI imagegen",
+      "pipeline": "Godot native image region crop and Lanczos resize; max 512px per runtime view; alpha retained"
+    },
+    {
+      "key": "trellis",
+      "prompt": "Production-ready transparent 2D sprite atlas for a warm hand-painted Chinese countryside farming game. Exactly FOUR complete views of the SAME rigid object in 2 columns x 2 rows, separated by very generous truly TRANSPARENT gutters and margins. Orthographic elevated camera about 40 degrees, subdued warm honey wood, grey-green stone, sage foliage, tactile gouache texture, readable silhouettes at 60-100 pixels in game. Camera fixed, object yaw changes: top-left FRONT 0deg; top-right RIGHT 90deg; bottom-left BACK 180deg; bottom-right LEFT 270deg. Keep identical physical dimensions, construction, accessory counts, and material palette across views. Show proper side/back structure. Absolutely NO floor, ground, cast shadow, brown vignette, background, scene, labels, letters, grid or glow halo. Genuine clean alpha transparency including structural openings. This is a 2D game art atlas, not a presentation board. Subject: a WIDE freestanding bamboo garden trellis/pergola, length twice footprint depth, TWO thick upright support poles, shallow overhead lattice canopy, modest climbing vine with sparse muted pink flowers along upper edges, open walk-through central space. Clear bamboo cross-lashings, no planters, no pots, no ground. Rear shows rear lashings, side views narrow and receding, SAME vine arrangement rotating with frame. Elegant rustic design.",
+      "edit_prompt": "Edit target: this four-view bamboo trellis atlas. Preserve the exact four camera views, same materials, positions, flowers and transparent background. IMPORTANT gameplay correction: this is a SOLID climbing SCREEN / trellis, not a doorway or walk-through arch. Add a clearly visible diagonal bamboo lattice panel between the two support posts from just above ground up to the canopy in ALL FOUR VIEWS, with crossing slim bamboo strips and a few climbing leaves, denser in lower half. Front and back show the same lattice screen from opposite sides; side views show its shallow depth. Keep structural openings transparent between lattice strips, no solid painted brown fill. No ground, background, vignette, shadows or labels. Match existing warm gouache style.",
+      "source": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-958d2580-ee3a-493a-b2e0-da5e493f389c.png",
+      "master": "res://art/furniture/source/trellis-four-views.png",
+      "sha256": "e9d19b4c0e93e26767f12935fdab2050c5f034a4d34b763bcac4330ffca7bc34",
+      "generator": "OpenAI imagegen",
+      "pipeline": "Godot native image region crop and Lanczos resize; max 512px per runtime view; alpha retained"
+    },
+    {
+      "key": "well",
+      "prompt": "Production-ready transparent 2D sprite atlas for a warm hand-painted Chinese countryside farming game. Exactly FOUR complete views of the SAME rigid object in 2 columns x 2 rows, separated by very generous truly TRANSPARENT gutters and margins. Orthographic elevated camera about 40 degrees, subdued warm honey wood, grey-green stone, sage foliage, tactile gouache texture, readable silhouettes at 60-100 pixels in game. Camera fixed, object yaw changes: top-left FRONT 0deg; top-right RIGHT 90deg; bottom-left BACK 180deg; bottom-right LEFT 270deg. Keep identical physical dimensions, construction, accessory counts, and material palette across views. Show proper side/back structure. Absolutely NO floor, ground, cast shadow, brown vignette, background, scene, labels, letters, grid or glow halo. Genuine clean alpha transparency including structural openings. This is a 2D game art atlas, not a presentation board. Subject: a compact ROUND grey-green fieldstone water well with short circular waist-high masonry rim, dark open water shaft, TWO timber uprights supporting a small worn muted terracotta-tile pitched roof, simple wooden crossbar winding spindle, rope and ONE small wooden bucket hanging inside the opening; small crank on RIGHT upright in front view. Compact square footprint. Same crank, bucket, rope and roof from four directions. No loose buckets, no platform, no grass patch, no ground.",
+      "edit_prompt": null,
+      "source": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-5f4bb53c-19be-470c-af35-547da65102ab.png",
+      "master": "res://art/furniture/source/well-four-views.png",
+      "sha256": "d02ac228ecf1dd39f213fac719b192eca1220b6197c8b5c505a7311fb86b9a82",
+      "generator": "OpenAI imagegen",
+      "pipeline": "Godot native image region crop and Lanczos resize; max 512px per runtime view; alpha retained"
+    },
+    {
+      "key": "stoneLantern",
+      "prompt": "Production-ready transparent 2D sprite atlas for a warm hand-painted Chinese countryside farming game. Exactly FOUR complete views of the SAME rigid object in 2 columns x 2 rows, separated by very generous truly TRANSPARENT gutters and margins. Orthographic elevated camera about 40 degrees, subdued warm honey wood, grey-green stone, sage foliage, tactile gouache texture, readable silhouettes at 60-100 pixels in game. Camera fixed, object yaw changes: top-left FRONT 0deg; top-right RIGHT 90deg; bottom-left BACK 180deg; bottom-right LEFT 270deg. Keep identical physical dimensions, construction, accessory counts, and material palette across views. Show proper side/back structure. Absolutely NO floor, ground, cast shadow, brown vignette, background, scene, labels, letters, grid or glow halo. Genuine clean alpha transparency including structural openings. This is a 2D game art atlas, not a presentation board. Subject: a compact traditional Chinese countryside stone garden lantern standing on a SHORT square base and pedestal, square hollow light chamber with small warm amber candle visible through its open window, weathered grey-green stone, restrained moss in joints, shallow pagoda-style stone cap with gently upturned corners. No Japanese torii or letters. Asymmetric carved branch motif on front panel, simple rear vent, side window. Candle contained in chamber, NO emitted glow or halo outside silhouette. Four complete views of same lantern, square footprint, identical height.",
+      "edit_prompt": null,
+      "source": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-f1891015-be93-4616-859d-5720e176d0c4.png",
+      "master": "res://art/furniture/source/stoneLantern-four-views.png",
+      "sha256": "f9e9790194222957246f522473f383856ca653c1c263f2faf74b1d8b961a30f1",
+      "generator": "OpenAI imagegen",
+      "pipeline": "Godot native image region crop and Lanczos resize; max 512px per runtime view; alpha retained"
+    }
+  ]
+}

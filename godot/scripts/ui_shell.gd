@@ -12,6 +12,11 @@ func setup(owner: Node, registered: Array) -> void:
 		panels.append(p)
 		p.visibility_changed.connect(_visibility.bind(p))
 		p.set_meta("ui_shell",true)
+		var role: String="management"
+		for property: String in ["house_activity_panel","npc_dialogue","npc_story_panel","npc_history_panel","gift_panel","seed_picker","sleep_panel","separation_panel","wedding_panel","life_menu","map_panel"]:
+			if hud.get(property)==p:
+				role="dialogue" if property=="npc_dialogue" else "detail" if property in ["house_activity_panel","npc_story_panel","npc_history_panel","gift_panel","seed_picker"] else "confirmation" if property in ["sleep_panel","separation_panel"] else "management"
+		p.set_meta("ui_layout_role",role)
 	hud.get_viewport().size_changed.connect(layout)
 	layout.call_deferred()
 func _visibility(panel: Control) -> void:
@@ -59,6 +64,8 @@ func _visit(panel: Control) -> void:
 	GameState._refresh_quests()
 func _settle() -> void:
 	settling=false
+	# A deferred visibility callback may belong to the scene that just left.
+	if not is_instance_valid(hud) or not hud.is_inside_tree():return
 	if GameState.action_busy() and active()==null:
 		suspended=true;GameState.ui_open=false;return
 	while not frames.is_empty() and (not is_instance_valid(frames[-1].panel) or bool(frames[-1].get("closed",false))):frames.pop_back()
@@ -89,6 +96,7 @@ func leave() -> void:
 	muting=true
 	for panel: Control in panels:panel.hide()
 	muting=false;frames.clear();suspended=false;GameState.ui_open=false
+	if is_instance_valid(hud) and hud.is_inside_tree() and is_instance_valid(hud.layout_manager.hud):hud.layout_manager.refresh()
 func layout() -> void:
 	for panel: Control in panels:
 		if panel.visible:fit(panel)
@@ -100,11 +108,23 @@ func fit(panel: Control) -> void:
 	for child: Node in panel.get_children():
 		if not child is PanelContainer:continue
 		var paper: PanelContainer=child
-		# Root panels get a safe bounded viewport; their existing content remains intact.
-		paper.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		paper.offset_left=margin.x;paper.offset_right=-margin.x;paper.offset_top=margin.y;paper.offset_bottom=-margin.y
+		var role: String=str(panel.get_meta("ui_layout_role","management"))
+		var cap:=Vector2(1180,840)
+		if role=="detail":cap=Vector2(820,740)
+		elif role=="dialogue":cap=Vector2(860,720)
+		elif role=="confirmation":cap=Vector2(580,400)
+		if hud.get("life_menu")==panel:cap=Vector2(1060,680)
+		if view.y>view.x:cap.y=view.y-margin.y*2
+		var envelope: Vector2=Vector2(minf(cap.x,view.x-margin.x*2),minf(cap.y,view.y-margin.y*2))
+		if role in ["detail","dialogue","confirmation"] and paper.size.x>0:
+			envelope.y=minf(envelope.y,maxf(280,_content_height(paper)+24))
+		paper.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+		paper.offset_left=-envelope.x/2;paper.offset_right=envelope.x/2
+		paper.offset_top=-envelope.y/2;paper.offset_bottom=envelope.y/2
 		paper.custom_minimum_size=Vector2.ZERO
-		if not paper.has_meta("shell_scroll") and paper.get_child_count()==1:
+		if not paper.has_meta("ui_window"):
+			paper.set_meta("ui_window",true);hud.get_node("/root/UIArtService").apply_subtree(paper)
+		if not bool(panel.get_meta("ui_managed_layout",false)) and not paper.has_meta("shell_scroll") and paper.get_child_count()==1:
 			var body: Control=paper.get_child(0)
 			if not body is ScrollContainer:
 				paper.remove_child(body)
@@ -113,9 +133,40 @@ func fit(panel: Control) -> void:
 				body.custom_minimum_size.x=0;sc.add_child(body);paper.set_meta("shell_scroll",sc)
 		if paper.has_meta("shell_scroll"):
 			var sc: ScrollContainer=paper.get_meta("shell_scroll")
-			if sc.get_child_count()>0:sc.get_child(0).custom_minimum_size.y=maxf(80,view.y-margin.y*2-32)
-		_resize_children(paper,maxf(200,view.x-margin.x*2-40))
+			if sc.get_child_count()>0:sc.get_child(0).custom_minimum_size.y=maxf(80,envelope.y-40) if role=="management" else 0.0
+		if not bool(panel.get_meta("ui_managed_layout",false)):_resize_children(paper,maxf(160,envelope.x-48))
+func request_fit(panel: Control) -> void:
+	if not is_instance_valid(panel) or not panel.visible or bool(panel.get_meta("ui_fit_pending",false)):return
+	panel.set_meta("ui_fit_pending",true)
+	await hud.get_tree().process_frame
+	await hud.get_tree().process_frame
+	if is_instance_valid(panel):
+		panel.set_meta("ui_fit_pending",false)
+		if panel.visible:fit(panel)
+
+func _content_height(node: Control) -> float:
+	# Ignore scroll view height when measuring a short dialog. Wrapped text uses
+	# its measured minimum at the previous width; the late fit settles reflow.
+	if node is ScrollContainer:
+		return _content_height(node.get_child(0)) if node.get_child_count()>0 else 0.0
+	var children: Array[Control]=[]
+	for child:Node in node.get_children():
+		if child is Control and child.visible:children.append(child)
+	if node is VBoxContainer:
+		var total:float=maxi(0,children.size()-1)*node.get_theme_constant("separation")
+		for child:Control in children:total+=_content_height(child)
+		return total
+	if node is MarginContainer or node is PanelContainer:
+		var height:float=0
+		for child:Control in children:height=maxf(height,_content_height(child))
+		if node is MarginContainer:height+=node.get_theme_constant("margin_top")+node.get_theme_constant("margin_bottom")
+		else:height+=node.get_theme_stylebox("panel").get_content_margin(SIDE_TOP)+node.get_theme_stylebox("panel").get_content_margin(SIDE_BOTTOM)
+		return height
+	return node.get_combined_minimum_size().y
+
 func _resize_children(node: Control, available: float) -> void:
+	# A spatial map must retain its authored cells, not reflow like action cards.
+	if bool(node.get_meta("shell_preserve_layout", false)): return
 	if node.size.x>80 and not (node is ScrollContainer or node is ItemList):available=minf(available,node.size.x)
 	if node is ScrollContainer:
 		node.custom_minimum_size.x=minf(node.custom_minimum_size.x,available)
@@ -123,8 +174,9 @@ func _resize_children(node: Control, available: float) -> void:
 		if not node.has_meta("shell_list_width"):node.set_meta("shell_list_width",node.custom_minimum_size.x)
 		node.custom_minimum_size.x=minf(maxf(220,float(node.get_meta("shell_list_width"))),maxf(220,available*.3))
 	elif node is GridContainer:
+		if not node.has_meta("shell_grid_columns"):node.set_meta("shell_grid_columns",node.columns)
 		var min_cell:=190.0
-		node.columns=mini(node.columns,maxi(1,int(available/min_cell)))
+		if not bool(node.get_meta("ui_responsive_grid",false)):node.columns=mini(int(node.get_meta("shell_grid_columns")),maxi(1,int(available/min_cell)))
 	elif node is Button:
 		if not node.has_meta("shell_min_width"):node.set_meta("shell_min_width",node.custom_minimum_size.x)
 		var base: float=float(node.get_meta("shell_min_width"))
@@ -139,6 +191,9 @@ func _resize_children(node: Control, available: float) -> void:
 		if child is Control:_resize_children(child,available)
 
 func _late_fit(panel: Control) -> void:
-	await hud.get_tree().process_frame
-	await hud.get_tree().process_frame
+	if not is_instance_valid(hud) or not hud.is_inside_tree():return
+	var scene_tree := hud.get_tree()
+	await scene_tree.process_frame
+	await scene_tree.process_frame
+	if not is_instance_valid(hud) or not hud.is_inside_tree():return
 	if is_instance_valid(panel) and panel.visible:fit(panel)

@@ -8,6 +8,10 @@ static func describe(s:Node,p:Dictionary,_tool:String="hand")->Dictionary:
  var result:Dictionary={"name":str(p.get("name","手边物件")),"verb":"查看","state":"走近后互动","reason":"","detail":"","ready":true}
  var energy:=0
  match str(p.get("kind","")):
+  "house-fixture":
+   var v:Dictionary=load("res://scripts/house_life.gd").condition(s,p);result.verb="预览布置" if str(p.get("type",""))=="preset" else "轻轻动手";result.ready=v.ready;result.reason=v.reason;result.state="不耗时间、体力或材料 · 不领取屋主物品";return result
+  "house-activity":
+   var view:Dictionary=s.house_activity.describe(s,p);result.verb="一起动手" if str(p.get("activity",""))=="theme" else "慢慢体验";result.ready=bool(view.ready);result.reason=str(view.reason);result.state="完成后 %d 分钟 · 取消不结算"%int(view.get("minutes",5));return result
   "ranch-box","ranch-product","ranch-trough":
    result.verb="添料" if str(p.kind)=="ranch-trough" else "领取"
    result.state="物资在动作完成后转移 · 保留生产日期"

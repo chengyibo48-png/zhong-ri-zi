@@ -2,12 +2,12 @@ extends Control
 class_name SavePanel
 
 const SLOT_PATHS := {
-	"auto": "user://zhenrizhi_godot_save.json",
-	"one": "user://zhenrizhi_godot_slot_1.json",
-	"two": "user://zhenrizhi_godot_slot_2.json",
-	"three": "user://zhenrizhi_godot_slot_3.json",
-	"backup": "user://zhenrizhi_godot_backup.json",
-	"recovery": "user://zhenrizhi_godot_recovery.json"
+	"auto": "user://saves/v38/zhenrizhi_godot_save.json",
+	"one": "user://saves/v38/zhenrizhi_godot_slot_1.json",
+	"two": "user://saves/v38/zhenrizhi_godot_slot_2.json",
+	"three": "user://saves/v38/zhenrizhi_godot_slot_3.json",
+	"backup": "user://saves/v38/zhenrizhi_godot_backup.json",
+	"recovery": "user://saves/v38/zhenrizhi_godot_recovery.json"
 }
 const SLOT_NAMES := {"auto": "每日自动档", "one": "手动存档一", "two": "手动存档二", "three": "手动存档三", "backup": "操作前备份", "recovery": "读取前回退档"}
 
@@ -117,10 +117,14 @@ func open_panel() -> void:
 	preload("res://scripts/modal_status.gd").clear_message(self)
 	visible = true
 	GameState.ui_open = true
-	notice.text = ""
+	notice.text = "检测到不兼容的旧版本存档，游戏已暂停，因此人物暂时不能移动。原档已保留。请读取 v38 存档，或点击上方按钮，在确认后开始独立的新生活。" if GameState.incompatible_save else ""
+	new_game_button.text = "保留旧档，开始新生活" if GameState.incompatible_save else "重新开始生活"
 	refresh()
 
 func close() -> void:
+	if GameState.incompatible_save:
+		notice.text = "游戏仍在等待存档选择。请读取兼容存档，或确认开始新生活后再进入游戏。旧档不会被覆盖。"
+		return
 	new_game_confirmation.call("close")
 	confirm_dialog.hide()
 	file_dialog.hide()
@@ -179,14 +183,17 @@ func _confirm_save_slot() -> void:
 	pending_save_slot = ""
 
 func _write_save_slot(slot: String) -> void:
+	await GameState.wait_for_saves()
 	var path := str(SLOT_PATHS.get(slot, ""))
-	var saved: bool = GameState.save_game(path)
-	notice.text = "%s" % (str(SLOT_NAMES.get(slot, "存档")) + ("已保存。" if saved else "保存失败，原有记录仍保留。"))
+	notice.text="正在保存，完成后会显示结果。"
+	GameState.save_async(path,func(ok:bool):notice.text="已保存。" if ok else "保存失败，原有记录仍保留。";refresh())
 	refresh()
 func _load_slot(slot: String) -> void:
 	var path := str(SLOT_PATHS.get(slot, ""))
 	if path.is_empty(): return
-	var result := preload("res://scripts/save_session.gd").restore(GameState,path)
+	notice.text="等待当前记录完成……"
+	await GameState.wait_for_saves()
+	var result:Dictionary = await preload("res://scripts/save_session.gd").restore_async(GameState,path)
 	notice.text = str(result.message)
 	if not result.ok:
 		refresh()
@@ -202,7 +209,7 @@ func _choose_import() -> void:
 		browser_bridge.choose(_import_text)
 		return
 	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-	file_dialog.title = "导入浏览器或 Godot JSON 存档"
+	file_dialog.title = "导入本轮 v38 Godot JSON 存档"
 	file_dialog.current_file = ""
 	file_dialog.popup_centered(Vector2i(900, 600))
 
@@ -238,6 +245,7 @@ func _file_selected(path: String) -> void:
 	_import_text(text)
 
 func _import_text(text: String) -> void:
+	await GameState.wait_for_saves()
 	if text == "__ZRZ_TOO_LARGE__" or text.to_utf8_buffer().size() > preload("res://scripts/native_save_schema.gd").MAX_BYTES:
 		notice.text = "文件超过 16 MiB，请选择有效的存档 JSON。"
 		return
@@ -260,8 +268,8 @@ func _reload_world_scene() -> void:
 
 func _request_new_game() -> void:
 	new_game_confirmation.call("open", "重新推开院门",
-		"建议先导出当前存档，或保存到手动档。\n\n新生活会替换每日自动存档，手动档仍会保留。当前这段日子会先写入备份，可从存档簿重新读回。",
-		"开始新的生活", "留在现在的日子")
+		"即将开始一段新的生活，使用独立的 v38 存档目录。\n\n包括 v33 在内的不兼容旧存档会保留，不会自动迁入或覆盖；新生活不继承旧进度。已有 v38 生活会先写入备份。",
+		"确认开始新的生活", "返回存档选择")
 	new_game_confirmation.call("show_extra", "先导出当前存档")
 
 func _confirm_new_game() -> void:

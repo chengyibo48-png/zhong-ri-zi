@@ -3,6 +3,20 @@ extends RefCounted
 const NAVIGATION := preload("res://scripts/npc_navigation.gd")
 var navigation = NAVIGATION.new()
 var actors: Dictionary = {}
+var gates:Dictionary={}
+var occupancy:Dictionary={}
+
+func _cell(at:Vector2)->Vector2i:return Vector2i(floori(at.x/24),floori(at.y/24))
+func _gate(room:String,id:String,clock:float)->bool:
+	var slot:Dictionary=gates.get(room,{})
+	if not slot.is_empty() and str(slot.id)!=id and float(slot.until)>clock:return false
+	gates[room]={"id":id,"until":clock+1.5};return true
+func _young_with_parent(state:Node,animal:Dictionary)->bool:
+	if state.day<int(animal.get("nurseryUntil",0)):return false
+	for id:Variant in animal.get("parents",[]):
+		for parent:Dictionary in state.animals:
+			if str(parent.id)==str(id) and int(parent.age)>=int(state.system_catalog.ranch.species[str(parent.type)].adult) and parent.position.get("room") in [null,"ranch-meadow"] and not bool(parent.lost):return true
+	return false
 
 func clear(state: Node, room: String, p: Vector2) -> bool:
 	return not navigation.blocked(state,room,p.x,p.y,true)
@@ -12,6 +26,7 @@ func safe_position(state: Node, room: String, p: Vector2) -> Vector2:
 	return Vector2(q.x,q.y)
 
 func walk(state: Node, p: Dictionary, target: Dictionary, room: String, delta: float, speed: float, runtime: Dictionary) -> void:
+	navigation.traversal_profile="waterfowl" if bool(preload("res://scripts/animal_species.gd").profile(str(runtime.get("type",""))).get("waterfowl",false)) else "ground"
 	if runtime.get("target")==null or navigation.distance(runtime.target,target)>18 or runtime.get("room")!=(null if room=="" else room):
 		runtime.target=target
 		runtime.room=null if room=="" else room
@@ -24,6 +39,15 @@ func walk(state: Node, p: Dictionary, target: Dictionary, room: String, delta: f
 	if d>0.01:
 		var dx: float=(float(q.x)-float(p.x))/d*amount
 		var dy: float=(float(q.y)-float(p.y))/d*amount
+		var candidate:=Vector2(float(p.x)+dx,float(p.y)+dy)
+		var nearby:Dictionary=occupancy.get(room,{})
+		var cell:Vector2i=_cell(candidate)
+		for ox:int in [-1,0,1]:
+			for oy:int in [-1,0,1]:
+				for other:Dictionary in nearby.get(cell+Vector2i(ox,oy),[]):
+					if str(other.id)==str(runtime.get("actor_id","")):continue
+					var gap:float=candidate.distance_to(other.at)
+					if gap<9 and gap<Vector2(float(p.x),float(p.y)).distance_to(other.at)-.01 and str(runtime.get("actor_id",""))>str(other.id):return
 		p.direction=("right" if dx>0 else "left") if absf(dx)>absf(dy) else ("down" if dy>0 else "up")
 		if navigation.blocked(state,room,float(p.x)+dx,float(p.y)+dy,true):
 			runtime.target=null
@@ -37,10 +61,19 @@ func walk(state: Node, p: Dictionary, target: Dictionary, room: String, delta: f
 func safe_out(state: Node, animal: Dictionary) -> bool:
 	var spec: Dictionary = state.system_catalog.get("ranch",{}).get("species",{}).get(str(animal.get("type","")),{})
 	var weather: String = state.weather_for(state.day)
-	return not bool(animal.get("lost",false)) and int(animal.get("age",0))>=int(spec.get("adult",999999)) and not bool(animal.get("rest",false)) and not bool(animal.get("retired",false)) and float(animal.get("health",0))>=45 and float(animal.get("illness",0))<45 and str(state.ranch.get("policy","inside"))!="inside" and weather not in ["台风","寒潮","小雪","高温"] and not (str(state.ranch.get("policy","inside"))=="safe" and weather=="雨") and state.minutes>=480 and state.minutes<1050
+	return not bool(animal.get("lost",false)) and (int(animal.get("age",0))>=int(spec.get("adult",999999)) or _young_with_parent(state,animal)) and not bool(animal.get("rest",false)) and not bool(animal.get("retired",false)) and float(animal.get("health",0))>=45 and float(animal.get("illness",0))<45 and str(state.ranch.get("policy","inside"))!="inside" and weather not in ["台风","寒潮","小雪","高温"] and not (str(state.ranch.get("policy","inside"))=="safe" and weather=="雨") and state.minutes>=480 and state.minutes<1050
 
 func advance(state: Node, delta: float) -> void:
 	navigation.refresh(state)
+	preload("res://scripts/ranch_meadow.gd").ensure(state)
+	occupancy.clear()
+	for animal:Dictionary in state.animals:
+		var position:Dictionary=animal.position;var place:String=str(position.get("room","")) if position.get("room")!=null else ""
+		if place!="":position=position.get("inside",{})
+		var at:=Vector2(float(position.x),float(position.y));var key:Vector2i=_cell(at)
+		if not occupancy.has(place):occupancy[place]={}
+		if not occupancy[place].has(key):occupancy[place][key]=[]
+		occupancy[place][key].append({"id":str(animal.id),"at":at})
 	var clock: float=state.ranch_actor_clock
 	var village_clock: float=state.npc_movement.clock+delta
 	var catalog: Dictionary=state.system_catalog.ranch
@@ -53,6 +86,7 @@ func advance(state: Node, delta: float) -> void:
 		var id:=str(a.id)
 		var runtime: Dictionary=actors.get(id,{})
 		actors[id]=runtime
+		runtime.actor_id=id;runtime.type=str(a.type)
 		var p: Dictionary=a.position
 		var room: String="" if p.get("room")==null else str(p.room)
 		var spec: Dictionary=catalog.species[str(a.type)]
@@ -61,6 +95,17 @@ func advance(state: Node, delta: float) -> void:
 		if house.is_empty():continue
 		var door: Dictionary=house.door
 		var out:=safe_out(state,a)
+		if room=="ranch-meadow":
+			preload("res://scripts/ranch_meadow.gd").advance_animal(state,a,delta,runtime,self);continue
+		if room=="" and out and bool(state.ranch.meadowEnabled) and not state.ranch_actor_held(id):
+			preload("res://scripts/ranch_meadow.gd").route_to_meadow(state,a,delta,runtime,self);continue
+		if runtime.has("arrival_target"):
+			var arrival:Dictionary=runtime.arrival_target
+			var here:Dictionary=p if room=="" else p.inside
+			walk(state,here,arrival,room,delta,18,runtime)
+			state.ranch_actor_poses[id]={"action":"sniff","until":clock+.3}
+			if navigation.distance(here,arrival)<5:runtime.erase("arrival_target");runtime.target=null
+			continue
 		if out and not state.ranch_actor_held(id) and str(sequence.get("animalId",""))!=id:
 			preload("res://scripts/ranch_care.gd").graze(state,a,delta)
 		if room != "" and preload("res://scripts/ranch_care.gd").needed(state,a,state.day)>0 and float(a.hunger)<80:
@@ -88,18 +133,29 @@ func advance(state: Node, delta: float) -> void:
 				inside.merge(navigation.safe(state,room,inside,true),true)
 				runtime.target=null
 			if out or bool(a.get("lost",false)):
+				if navigation.distance(inside,{"x":480,"y":567})<35 and not _gate(room,id,clock):inside.walking=false;continue
 				walk(state,inside,{"x":480,"y":567},room,delta,38,runtime)
 				if navigation.distance(inside,{"x":480,"y":567})<5:
 					p.merge(navigation.safe(state,"",{"x":door.x,"y":float(door.y)+8},true),true)
 					p.room=null
 					runtime.target=null
 			else:
+				if int(a.age)<int(spec.adult) and not a.get("parents",[]).is_empty():
+					var mother:Dictionary={}
+					for parent:Dictionary in state.animals:
+						if str(parent.id)==str(a.parents[0]) and parent.position.get("room")==room:mother=parent;break
+					if not mother.is_empty():
+						var nearby:Dictionary=navigation.safe(state,room,{"x":float(mother.position.inside.x)+18,"y":float(mother.position.inside.y)+10},true)
+						if navigation.distance(inside,nearby)>14:walk(state,inside,nearby,room,delta,19,runtime)
+						else:inside.walking=false
+						continue
 				if runtime.get("wander")==null or clock>float(runtime.get("next",0)):
 					runtime.wander=navigation.safe(state,room,{"x":335+(index%6)*55+sin(clock+index)*24,"y":485+(index%2)*38},true)
 					runtime.next=clock+8
 					runtime.target=null
 				walk(state,inside,runtime.wander,room,delta,12 if bool(a.get("rest",false)) else 23,runtime)
 		elif not out and not bool(a.get("lost",false)):
+			if navigation.distance(p,door)<35 and not _gate(str(house.id),id,clock):p.walking=false;continue
 			walk(state,p,door,"",delta,55,runtime)
 			if navigation.distance(p,door)<7:
 				p.room=str(house.id)
@@ -107,6 +163,14 @@ func advance(state: Node, delta: float) -> void:
 				runtime.target=null
 				runtime.wander=null
 		else:
+			if int(a.age)<int(spec.adult) and not a.get("parents",[]).is_empty():
+				for parent:Dictionary in state.animals:
+					if str(parent.id)==str(a.parents[0]) and parent.position.get("room") in [null,"ranch-meadow"] and not bool(parent.lost):
+						var beside:Dictionary=navigation.safe(state,"",{"x":float(parent.position.x)+16,"y":float(parent.position.y)+12},true)
+						if navigation.distance(p,beside)>18:walk(state,p,beside,"",delta,36,runtime)
+						else:p.walking=false
+						break
+				continue
 			var zone_index:=int(spec.get("grazingZone",state.ranch.zone))
 			var center: Dictionary={"x":3680,"y":3402} if bool(a.get("lost",false)) else focus if gathering else ({"x":3258,"y":3018} if str(a.type)=="duck" else catalog.zones[zone_index])
 			if runtime.get("wander")==null or clock>float(runtime.get("next",0)) or not runtime.has("gathering") or runtime.gathering!=gathering:
@@ -123,7 +187,9 @@ func advance(state: Node, delta: float) -> void:
 	preload("res://scripts/ranch_products.gd").follow_animals(state)
 	var pet: Dictionary=state.ranch.pet
 	var pr: Dictionary=actors.get("pet",{})
-	actors.pet=pr
+	actors.pet=pr;pr.actor_id="pet"
+	if clock<float(pr.get("arrival_until",0)):
+		pet.position.walking=false;state.pet_visual_action={"kind":"sniff","until":clock+.3};return
 	var target: Dictionary={"x":2775,"y":1690}
 	if float(pet.energy)>=15 and float(pet.hunger)>=15 and state.minutes<1140:
 		if str(pet.mode)=="follow" and state.current_interior=="":

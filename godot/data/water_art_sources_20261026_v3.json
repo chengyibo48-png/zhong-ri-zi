@@ -1,0 +1,233 @@
+{
+  "revision": "water-art-20261026-v3",
+  "exported": false,
+  "sources": [
+    {
+      "family": "lotus",
+      "tool": "built-in image_gen",
+      "prompt": "Production seasonal sprite atlas for a softly hand-painted 2D Chinese countryside farming game. Exactly FOUR isolated variants of the SAME small lotus plant group arranged 2 columns by 2 rows on genuine transparency. Elevated orthographic 3/4 top-down game camera, soft gouache texture, muted sage green, warm pink, quiet earthy colors matching traditional rural game environments. Top-left SPRING: 3 small fresh curled lotus leaves on the water plane, one thin fresh stem, no blossom. Top-right SUMMER: same group with 4 rounded lotus leaves and ONE modest pale pink lotus flower, one small bud. Bottom-left AUTUMN: same plant with a few faded olive leaves and 2 brown lotus seed heads, stems still standing. Bottom-right WINTER: same root location with 3 bare graceful dried stems, one empty dark seed head with very light frost, no living green leaves. Water plane leaves form shallow ellipses; stems rise naturally. Keep same camera, base scale and root anchor in all 4 cells. Each isolated plant centered in its cell with generous transparent margin; all parts stay well inside their quadrant. No opaque water, NO ground patches, no pots, no animals, no pebbles, no separate shadows, NO scene, no labels, no text, no grid. These are small production game cutouts, not tall botanical posters. Square 2x2 atlas.",
+      "path": "art/source/visual-water-v3/lotus-master.png",
+      "sha256": "6cd846cd5d24fe8ea888716b104c4c13152a7171dd1391212ef5b8f72ed0f7c7",
+      "originalRetained": true
+    },
+    {
+      "family": "reeds",
+      "tool": "built-in image_gen",
+      "prompt": "Production seasonal sprite atlas for a softly hand-painted 2D Chinese countryside farming game. FOUR isolated seasonal variants of the SAME SMALL shoreline reed-and-iris tuft in exactly a 2-column 2-row grid on genuine transparent background. Elevated orthographic 3/4 top-down game camera, muted sage/olive and warm straw tones, fine natural gouache material finish. TOP LEFT spring: small fresh reed/iris leaves and 2 young slim reed stems, a restrained tiny pale yellow iris bloom. TOP RIGHT summer: same rooted tuft with slightly fuller narrow green leaves and 3 subtle tawny reed heads, no oversized flowers. BOTTOM LEFT autumn: same tuft turning golden straw with 3 dry seed heads. BOTTOM RIGHT winter: same tuft with sparse dry stalks and a very light dusting of frost, a few pale curled dead leaves, no living bright green leaves. Maintain SAME root contact point, scale and camera across seasons. Compact graceful silhouette, about 10-14 blades, NOT a dense grass wall. Each tuft is centered in its own equal quadrant with generous transparent padding. NO dirt mound, NO water patch, NO large shadow, no stone, no pot, no scene, no label, no gridlines, no text. Square 2x2 production sprite atlas.",
+      "path": "art/source/visual-water-v3/reeds-master.png",
+      "sha256": "1fc8aa87f1bace254ce6fe631e7f5fb85a8b3af9a086b4a2f420a7e864dcfaa3",
+      "originalRetained": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "art/world/water-v3/lotus/autumn.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "cca530e3f4b2ca60accafcd64011b37c93e4371b1d982d34fba54ad2851fd0ce",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    },
+    {
+      "path": "art/world/water-v3/lotus/spring.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "1ee8d6f3f0a45f2e19bb0ae4434319f39af9cf039f44c47153fa967f40aad732",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    },
+    {
+      "path": "art/world/water-v3/lotus/summer.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "4760b13bd55097748f358397a2852ae4b1fe4448730899263e9fb472f884bf98",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    },
+    {
+      "path": "art/world/water-v3/lotus/winter.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "c057e8859bf0ca4d156ce2c484052c5ad5987314dfa5f5b52d2109e650071b48",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    },
+    {
+      "path": "art/world/water-v3/reeds/autumn.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "ba9b7254aecd3ac3ad98adcad91fc6f1429b08efdfce91649f07c3cc9a6389b2",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    },
+    {
+      "path": "art/world/water-v3/reeds/spring.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "393951de2580b1f81cdb73385335025f470f9fd51f2e639b1cf4b7152eb91e3b",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    },
+    {
+      "path": "art/world/water-v3/reeds/summer.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "eed067d19dd16ca485dedc18e016962c9b1ba72cb7c4e30423306af64393bdd6",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    },
+    {
+      "path": "art/world/water-v3/reeds/winter.png",
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "eb155e3d2af678c97b0dd4144a38f9dde1ae83943692f4edc712b129f2691a48",
+      "anchor": [
+        256,
+        480
+      ],
+      "worldScale": 0.07,
+      "technical": "passed"
+    }
+  ],
+  "importReceipt": [
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "lotus",
+      "path": "res://art/world/water-v3/lotus/spring.png",
+      "scale": 0.823734729493892,
+      "season": 0,
+      "sha256": "1ee8d6f3f0a45f2e19bb0ae4434319f39af9cf039f44c47153fa967f40aad732"
+    },
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "lotus",
+      "path": "res://art/world/water-v3/lotus/summer.png",
+      "scale": 0.823734729493892,
+      "season": 1,
+      "sha256": "4760b13bd55097748f358397a2852ae4b1fe4448730899263e9fb472f884bf98"
+    },
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "lotus",
+      "path": "res://art/world/water-v3/lotus/autumn.png",
+      "scale": 0.823734729493892,
+      "season": 2,
+      "sha256": "cca530e3f4b2ca60accafcd64011b37c93e4371b1d982d34fba54ad2851fd0ce"
+    },
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "lotus",
+      "path": "res://art/world/water-v3/lotus/winter.png",
+      "scale": 0.823734729493892,
+      "season": 3,
+      "sha256": "c057e8859bf0ca4d156ce2c484052c5ad5987314dfa5f5b52d2109e650071b48"
+    },
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "reeds",
+      "path": "res://art/world/water-v3/reeds/spring.png",
+      "scale": 0.776014109347443,
+      "season": 0,
+      "sha256": "393951de2580b1f81cdb73385335025f470f9fd51f2e639b1cf4b7152eb91e3b"
+    },
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "reeds",
+      "path": "res://art/world/water-v3/reeds/summer.png",
+      "scale": 0.776014109347443,
+      "season": 1,
+      "sha256": "eed067d19dd16ca485dedc18e016962c9b1ba72cb7c4e30423306af64393bdd6"
+    },
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "reeds",
+      "path": "res://art/world/water-v3/reeds/autumn.png",
+      "scale": 0.776014109347443,
+      "season": 2,
+      "sha256": "ba9b7254aecd3ac3ad98adcad91fc6f1429b08efdfce91649f07c3cc9a6389b2"
+    },
+    {
+      "anchor": [
+        256,
+        480
+      ],
+      "kind": "reeds",
+      "path": "res://art/world/water-v3/reeds/winter.png",
+      "scale": 0.776014109347443,
+      "season": 3,
+      "sha256": "eb155e3d2af678c97b0dd4144a38f9dde1ae83943692f4edc712b129f2691a48"
+    }
+  ],
+  "importer": "tools/import_water_assets_v3.gd",
+  "visualReview": {
+    "lotus": "four-season actual pond scenes and summer day/night farm pond",
+    "reeds": "actual summer/winter close-ups; four-season source atlas and binding checks",
+    "reflections": "source GPU pixel-mask fixture; 0 land/bridge pixels changed"
+  },
+  "scope": "source-only water art batch; no full-game asset completion claim"
+}

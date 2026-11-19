@@ -1,7 +1,7 @@
 extends RefCounted
 ## Pure task envelope validation: safe to preload before autoloads exist.
 static func validate(value: Variant, day: int) -> bool:
-	if not value is Dictionary or int(value.get("version",-1))!=1:return false
+	if not value is Dictionary or int(value.get("version",-1))!=3:return false
 	if not value.get("collapsed") is bool or not value.get("notices") is Dictionary or not (value.get("sequence") is int or value.get("sequence") is float) or float(value.sequence)!=floor(float(value.sequence)) or float(value.sequence)<0:return false
 	if not value.get("entries") is Dictionary or not value.get("metrics") is Dictionary or not value.get("pins") is Array or value.pins.size()>2 or not value.get("seen") is Array or value.seen.size()>1024:return false
 	for id: Variant in value.entries:
@@ -19,10 +19,18 @@ static func validate(value: Variant, day: int) -> bool:
 			for field: String in ["qty","grade","bonus"]:
 				if not order.has(field) or not (order[field] is int or order[field] is float) or float(order[field])!=floor(float(order[field])) or float(order[field])<0:return false
 			if int(order.qty)<1 or int(order.qty)>999999 or int(order.grade)>3 or int(order.bonus)>10000:return false
-			if int(e.get("deadline",-1))!=(int(int(e.acceptedDay)/7)+1)*7 or int(d.get("deadline",-2))!=int(e.deadline):return false
+			if int(e.get("deadline",-1))!=int(e.acceptedDay)+2 or int(d.get("deadline",-2))!=int(e.deadline):return false
 			if d.get("needs",{})!={str(order.id):order.qty} or int(d.get("grade",-1))!=int(order.grade) or not d.get("reward",{}).is_empty() or int(d.get("money",0))!=0:return false
 	for n: Variant in value.metrics.values():
 		if not (n is int or n is float) or float(n)<0 or float(n)>1000000000 or float(n)!=floor(float(n)):return false
+	if not value.get("receipts") is Dictionary or not value.get("memorials") is Dictionary or value.receipts.size()>1024 or value.memorials.size()>24:return false
+	var journey:Variant=value.get("journey")
+	if not journey is Dictionary or not (journey.get("chapter") is int or journey.get("chapter") is float) or not (journey.get("stage") is int or journey.get("stage") is float) or float(journey.chapter)!=floor(float(journey.chapter)) or float(journey.stage)!=floor(float(journey.stage)) or int(journey.chapter)<0 or int(journey.chapter)>4 or int(journey.stage)<0 or int(journey.stage)>3:return false
+	if int(journey.chapter)==4 and int(journey.stage)!=0:return false
+	for receipt:Variant in value.receipts.values():
+		if receipt!=true:return false
+	for memory:Variant in value.memorials.values():
+		if not memory is String or memory.length()>300:return false
 	var distinct_pins: Dictionary={}
 	for id: Variant in value.pins:
 		if not id is String or distinct_pins.has(id):return false

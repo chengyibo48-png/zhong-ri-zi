@@ -17,6 +17,9 @@ static func write(path: String, data: Dictionary, preserve_recovery: bool = fals
 	if not preload("res://scripts/native_save_schema.gd").safe_tree(data): return false
 	var encoded := CODEC.encode(data)
 	if encoded.is_empty() or encoded.to_utf8_buffer().size() > preload("res://scripts/native_save_schema.gd").MAX_BYTES: return false
+	return write_encoded(path,encoded,preserve_recovery)
+static func write_encoded(path:String,encoded:String,preserve_recovery:bool=false)->bool:
+	if encoded.is_empty() or encoded.to_utf8_buffer().size()>preload("res://scripts/native_save_schema.gd").MAX_BYTES:return false
 	var target := absolute(path)
 	# Identical repeated writes must not rotate away the useful previous version.
 	if FileAccess.file_exists(target):
@@ -25,6 +28,7 @@ static func write(path: String, data: Dictionary, preserve_recovery: bool = fals
 			var equal := existing.get_length() == encoded.to_utf8_buffer().size() and existing.get_as_text() == encoded
 			existing.close()
 			if equal and FileAccess.file_exists(target+".bak"): return true
+	if DirAccess.make_dir_recursive_absolute(target.get_base_dir())!=OK:return false
 	var temporary := target+".tmp"
 	var displaced := target+(".failed" if preserve_recovery else ".bak")
 	var file := FileAccess.open(temporary,FileAccess.WRITE)

@@ -31,8 +31,12 @@ var appearance_apply_button: Button
 var appearance_dirty := false
 var appearance_syncing := false
 var content_scroll: ScrollContainer
+var active_group: String="画面"
+var group_buttons: Dictionary={}
+var group_scroll: Dictionary={}
 
 func _ready() -> void:
+	set_meta("ui_managed_layout",true)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var backdrop := ColorRect.new()
@@ -71,6 +75,9 @@ func _ready() -> void:
 	close_button.text = "关闭 Esc"
 	close_button.pressed.connect(close)
 	header.add_child(close_button)
+	var group_row:=HFlowContainer.new();group_row.add_theme_constant_override("h_separation",8);column.add_child(group_row)
+	for id:String in ["画面","生活","声音","操作","形象"]:
+		var button:=Button.new();button.text=id;button.custom_minimum_size.x=80;button.pressed.connect(_settings_group.bind(id,true));group_row.add_child(button);group_buttons[id]=button
 	content_scroll = ScrollContainer.new()
 	var scroll := content_scroll
 	scroll.follow_focus = true
@@ -84,7 +91,7 @@ func _ready() -> void:
 	fullscreen_button = Button.new()
 	fullscreen_button.text = "进入全屏"
 	fullscreen_button.pressed.connect(func(): fullscreen_requested.emit(); refresh())
-	controls.add_child(fullscreen_button)
+	fullscreen_button.set_meta("settings_group","画面");controls.add_child(fullscreen_button)
 	_add_option("时间速度", "speed", [["relaxed", "舒缓 · 约 15 分钟一天"], ["normal", "常规 · 约 10 分钟一天"]])
 	_add_option("镜头距离", "zoom", [[1.0, "标准近景"], [1.2, "再近一些 · 120%"], [1.4, "细节近景 · 140%"]])
 	_add_option("画面模式", "performance", [["auto", "自动"], ["light", "省电 · 30 帧"]])
@@ -101,7 +108,7 @@ func _ready() -> void:
 	_add_toggle("contrast", "提高文字对比度")
 	_add_toggle("fishAssist", "钓鱼轻松辅助（下一竿生效）")
 	var volume_row := HBoxContainer.new()
-	controls.add_child(volume_row)
+	volume_row.set_meta("settings_group","声音");controls.add_child(volume_row)
 	var volume_label := Label.new()
 	volume_label.text = "总音量"
 	volume_label.custom_minimum_size.x = 142
@@ -115,8 +122,11 @@ func _ready() -> void:
 	volume_row.add_child(volume_slider)
 	for row in [["music", "四季琴音"], ["ambient", "环境声"], ["effects", "交互音效"]]:
 		_add_audio_slider(str(row[0]), str(row[1]))
-	_add_ui_art_controls()
-	_add_appearance_controls()
+	var section_start:int=controls.get_child_count()
+	_add_ui_art_controls();_mark_settings(section_start,"画面")
+	section_start=controls.get_child_count()
+	_add_appearance_controls();_mark_settings(section_start,"形象")
+	section_start=controls.get_child_count()
 	var key_header := Label.new()
 	key_header.text = "自定义按键 · 点选后按一个字母键；C、F、H、Q 保留为固定功能键"
 	key_header.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -137,7 +147,10 @@ func _ready() -> void:
 	reset_bindings_button.text = "恢复默认按键"
 	reset_bindings_button.pressed.connect(_reset_bindings)
 	controls.add_child(reset_bindings_button)
+	_mark_settings(section_start,"操作")
+	_settings_group(active_group)
 	var footer := Label.new()
+	footer.set_meta("ui_role","caption")
 	footer.text = "设置会随自动存档保存。移动仍可使用方向键；手柄可用左摇杆和十字键。"
 	footer.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	column.add_child(footer)
@@ -145,8 +158,26 @@ func _ready() -> void:
 	_apply_audio()
 	visible = false
 
+func _mark_settings(start: int, id: String) -> void:
+	for index:int in range(start,controls.get_child_count()):controls.get_child(index).set_meta("settings_group",id)
+
+func _settings_group(id: String, focus: bool=false) -> void:
+	if is_instance_valid(content_scroll):group_scroll[active_group]=content_scroll.scroll_vertical
+	active_group=id;capturing=""
+	for child:Control in controls.get_children():child.visible=str(child.get_meta("settings_group","生活"))==id
+	for key:String in group_buttons:group_buttons[key].set_meta("ui_role","selected" if key==id else "tab")
+	content_scroll.set_deferred("scroll_vertical",int(group_scroll.get(id,0)))
+	if is_inside_tree():UIArtService.apply_subtree(self)
+	if focus and visible:_focus_settings.call_deferred()
+
+func _focus_settings() -> void:
+	for node:Node in controls.find_children("*","Control",true,false):
+		if node.is_visible_in_tree() and node.focus_mode==Control.FOCUS_ALL:
+			node.grab_focus();return
+
 func _add_option(title: String, key: String, choices: Array) -> void:
 	var row := HBoxContainer.new()
+	row.set_meta("settings_group","画面" if key in ["zoom","performance","textScale"] else "生活")
 	controls.add_child(row)
 	var label := Label.new()
 	label.text = title
@@ -168,12 +199,13 @@ func _add_option(title: String, key: String, choices: Array) -> void:
 func _add_toggle(key: String, title: String) -> void:
 	var toggle := CheckButton.new()
 	toggle.text = title
+	toggle.set_meta("settings_group", "声音" if key=="sound" else "操作" if key in ["gamepad","vibration","hints"] else "画面" if key=="contrast" else "生活")
 	toggle.toggled.connect(_set_toggle.bind(key))
 	controls.add_child(toggle)
 	toggles[key] = toggle
 
 func _add_visual_option(title: String, key: String, choices: Array) -> void:
-	var row := HBoxContainer.new()
+	var row := HBoxContainer.new();row.set_meta("settings_group","画面")
 	controls.add_child(row)
 	var label := Label.new()
 	label.text = title
@@ -191,6 +223,7 @@ func _add_visual_option(title: String, key: String, choices: Array) -> void:
 func _add_visual_toggle(key: String, title: String) -> void:
 	var toggle := CheckButton.new()
 	toggle.text = title
+	toggle.set_meta("settings_group","画面")
 	toggle.toggled.connect(_set_visual_toggle.bind(key))
 	controls.add_child(toggle)
 	visual_toggles[key] = toggle
@@ -204,7 +237,8 @@ func open_panel() -> void:
 	GameState.ui_open = true
 	capturing = ""
 	refresh()
-	fullscreen_button.grab_focus()
+	_settings_group(active_group)
+	_focus_settings.call_deferred()
 
 func close() -> void:
 	visible = false
@@ -326,7 +360,7 @@ func _set_volume(value: float) -> void:
 	GameState.sound_requested.emit("action")
 
 func _add_audio_slider(key: String, title: String) -> void:
-	var row := HBoxContainer.new()
+	var row := HBoxContainer.new();row.set_meta("settings_group","声音")
 	controls.add_child(row)
 	var label := Label.new()
 	label.text = title
@@ -421,6 +455,7 @@ func _add_appearance_controls() -> void:
 		appearance_toggles[str(pair[0])] = toggle
 	appearance_apply_button = Button.new()
 	appearance_apply_button.text = "换好衣服"
+	appearance_apply_button.set_meta("ui_role","primary")
 	appearance_apply_button.pressed.connect(_apply_appearance)
 	controls.add_child(appearance_apply_button)
 
@@ -459,6 +494,7 @@ func _appearance_form() -> Dictionary:
 	return form
 
 func _restore_appearance_form(form: Dictionary) -> void:
+	if active_group!="形象":_settings_group("形象")
 	appearance_syncing = true
 	player_name_edit.text = str(form.name)
 	gender_option.select(_option_index(gender_option, form.gender))
@@ -502,6 +538,7 @@ func _restore_appearance_focus(scroll_value: int, starting_day: int, starting_ro
 	content_scroll.scroll_vertical = scroll_value
 
 func _begin_capture(action: String) -> void:
+	if active_group!="操作":_settings_group("操作")
 	capturing = action
 	refresh()
 

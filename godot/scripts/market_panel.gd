@@ -47,8 +47,12 @@ var pins_row: HFlowContainer
 var pins_hint: Label
 var pin_shortcuts: Array[Button] = []
 var mode_buttons: Dictionary = {}
+var mode_row: HBoxContainer
+var content_split: BoxContainer
+var footer_hint: Label
 
 func _ready() -> void:
+	set_meta("ui_managed_layout",true)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var backdrop := ColorRect.new()
@@ -95,7 +99,8 @@ func _ready() -> void:
 	close_button.text = "关闭 Esc"
 	close_button.pressed.connect(close)
 	header.add_child(close_button)
-	var tabs := HBoxContainer.new()
+	mode_row=HBoxContainer.new()
+	var tabs := mode_row
 	column.add_child(tabs)
 	for entry in [["inventory", "背包"], ["buy", "购买"], ["sell", "出售"], ["buyback", "回购"], ["business", "合作与订单"], ["ledger", "交易流水"]]:
 		var tab := Button.new()
@@ -144,13 +149,16 @@ func _ready() -> void:
 	pins_row.add_child(pins_title)
 	pins_hint = Label.new()
 	pins_hint.text = "选物品加入，最多六样，耗尽也不换位。"
+	pins_hint.set_meta("ui_role","caption");pins_hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;
+	pins_hint.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	pins_row.add_child(pins_hint)
 	for index in range(6):
 		var shortcut := Button.new()
 		shortcut.pressed.connect(_select_pin.bind(index))
 		pins_row.add_child(shortcut)
 		pin_shortcuts.append(shortcut)
-	var body := HBoxContainer.new()
+	content_split=BoxContainer.new()
+	var body := content_split
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation", 15)
 	column.add_child(body)
@@ -231,6 +239,7 @@ func _ready() -> void:
 	transfer_button.pressed.connect(_begin_storage_transfer.bind(false))
 	right.add_child(transfer_button)
 	action_button = Button.new()
+	action_button.set_meta("ui_role","primary")
 	action_button.custom_minimum_size.y = 42
 	action_button.pressed.connect(_on_action)
 	right.add_child(action_button)
@@ -248,11 +257,14 @@ func _ready() -> void:
 	marks_line.add_child(pin_button)
 	_build_cart(right)
 	_bind_scroll_focus(self)
-	var hint := Label.new()
+	footer_hint=Label.new()
+	var hint := footer_hint
+	hint.set_meta("ui_role","caption")
 	hint.text = "↑↓ 选择 · Tab 切换 · 滚轮浏览 · Esc 返回。交易会先走到对应柜台。"
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint.add_theme_color_override("font_color", Color("c4cbaa"))
 	column.add_child(hint)
+	get_viewport().size_changed.connect(_layout)
 	GameState.changed.connect(refresh)
 	visible = false
 
@@ -311,16 +323,28 @@ func _on_quantity_changed(_value: float) -> void:
 func _trade_option_changed(_index: int) -> void:
 	_refresh_details()
 
+func _layout() -> void:
+	if not is_instance_valid(content_split):return
+	var narrow:bool=get_viewport_rect().size.x<860 or float(GameState.player_settings.get("textScale",1))>1.25 and get_viewport_rect().size.x<1100
+	content_split.vertical=narrow
+	item_list.custom_minimum_size=Vector2(0 if narrow else 250,170)
+	item_list.size_flags_horizontal=Control.SIZE_EXPAND_FILL if narrow else Control.SIZE_FILL
+	item_list.size_flags_vertical=Control.SIZE_FILL if narrow else Control.SIZE_EXPAND_FILL
+
 func refresh() -> void:
 	if cart_controls!=null: _refresh_cart()
 	if not visible or not is_instance_valid(item_list):
 		return
+	_layout()
+	mode_row.visible=mode!="inventory" or trading_allowed
+	footer_hint.text="↑↓ 选择 · Tab 切换 · Esc 返回" if mode=="inventory" else "交易先走到对应柜台 · 提交前可查看本批扣除与回报"
 	title_label.text = ("禾溪合作社" if trade_venue == "coop" else "老街货摊" if trade_venue == "stall" else "禾溪柜台") if mode!="inventory" else ("我的储物柜" if inventory_side == "storage" else "我的背包")
 	balance_label.text = "金币 %d    " % GameState.money
 	for key in mode_buttons:
 		var tab: Button = mode_buttons[key]
 		tab.visible = true
-		tab.disabled = key == mode
+		tab.disabled = false
+		tab.set_meta("ui_role","selected" if key==mode else "tab")
 	_refresh_pins()
 	_refresh_items()
 	_refresh_cart()

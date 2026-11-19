@@ -19,7 +19,6 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, 8.0 * stage, color.darkened(0.3) if not bool(state.ready) else color)
 		draw_circle(Vector2(-4, -5) * stage, 4.0 * stage, color.lightened(0.14))
 	if FarmWorld.hovered_resource == node_id:
-		draw_arc(Vector2.ZERO, 12.0, 0.0, TAU, 20, Color("e8d7a1") if bool(state.ready) else Color("aaa991"), 1.0)
 		var hint := OS.get_keycode_string(GameState.bound_key("interact",KEY_E)) + " 采集" if bool(state.ready) else "休养季" if not bool(state.get("in_season",true)) else "等待适宜天气" if not bool(state.get("event_ready",true)) else "再生中 · %d 天" % int(state.get("wait",0))
 		if int(state.get("wait",0)) > 1: hint += " · Delete 覆土"
 		draw_string(ThemeDB.fallback_font, Vector2(-25,-19), hint, HORIZONTAL_ALIGNMENT_LEFT,-1,12,Color("fff0ce"))

@@ -15,9 +15,12 @@ class FixturePaint extends Node2D:
 			for value:Variant in GameState.ranch.barns[home].get("trough",{}).values():total+=int(value)
 			for seed:int in range(mini(24,total*3)):draw_circle(Vector2(-26+fposmod(seed*7.3,49),-23+fposmod(seed*4.2,8)),1.1,Color("d2bc6c"))
 var elapsed := 0.0
+var grass_texture: Texture2D
 func _ready() -> void:
 	z_index = 0
+	grass_texture=preload("res://scripts/character_art.gd").texture("res://art/world/props/plants.png")
 	y_sort_enabled = true
+	if GameState.current_interior=="":_create_fence_bays()
 	for home: String in GameState.system_catalog.ranch.barns:
 		if str(GameState.system_catalog.ranch.barns[home].house)!=GameState.current_interior:continue
 		for spec: Array in [["bed",Vector2(240,397),Rect2(-62,-57,124,57)],["bed",Vector2(720,397),Rect2(-62,-57,124,57)],["trough",Vector2(250,489),Rect2(-40,-41,80,41)],["box",Vector2(730,489),Rect2(-30,-57,60,57)]]:
@@ -34,16 +37,16 @@ func _draw() -> void:
 	if room == "":
 		for index: int in range(GameState.system_catalog.forage.pens.size()):
 			var pen: Dictionary = GameState.system_catalog.forage.pens[index]
-			_draw_pen(pen)
+			pass # Fence bays are individual Y-sorted siblings.
 			var grass: float = float(GameState.ranch.grass[index])/100.0
 			var rect := Rect2(float(pen.x)+14,float(pen.y)+14,float(pen.w)-28,float(pen.h)-28)
 			draw_rect(rect,Color(0.32,0.45,0.24,0.10+grass*0.13))
 			for i: int in range(160):
 				var p := rect.position+Vector2(fposmod(i*73.1,rect.size.x),fposmod(i*47.7,rect.size.y))
-				if float(i)/160.0 > grass:
+				if float(i)/72.0 > grass:
 					draw_line(p,p+Vector2(5,1),Color(0.57,0.45,0.29,0.3),1.2)
 				else:
-					draw_polyline(PackedVector2Array([p+Vector2(-3,-4-grass*4),p,p+Vector2(3,-6-grass*4)]),Color(0.36,0.47,0.23,0.7),1.2,true)
+					if grass_texture!=null:draw_texture_rect(grass_texture,Rect2(p-Vector2(5,8+grass*4),Vector2(10,8+grass*4)),false,Color(.86,.95,.74,.7))
 			draw_string(ThemeDB.fallback_font,rect.position+Vector2(15,25),"草量 %d%% · 轮牧恢复" % roundi(grass*100),HORIZONTAL_ALIGNMENT_LEFT,-1,14,Color("ddd7ae"))
 		var corner:Dictionary=GameState.system_catalog.ranch.compostCorner
 		_art("box",Rect2(float(corner.x)-22,float(corner.y)-40,44,40))
@@ -118,3 +121,16 @@ func _tag(at: Vector2, text: String) -> void:
 
 func _tag_box() -> StyleBoxFlat:
 	var box:=StyleBoxFlat.new();box.bg_color=Color(0.17,0.24,0.19,0.88);box.set_corner_radius_all(4);return box
+
+func _create_fence_bays() -> void:
+	for pen: Dictionary in GameState.system_catalog.forage.pens:
+		var x:=float(pen.x);var y:=float(pen.y);var w:=float(pen.w);var h:=float(pen.h);var gate:=float(pen.gate)
+		for side: Array in [[Vector2(x,y),Vector2(gate-44,y)],[Vector2(gate+44,y),Vector2(x+w,y)],[Vector2(x,y+h),Vector2(x+w,y+h)],[Vector2(x,y),Vector2(x,y+h)],[Vector2(x+w,y),Vector2(x+w,y+h)]]:
+			var from: Vector2=side[0];var to: Vector2=side[1]
+			var vertical:=absf(to.x-from.x)<1
+			var count:=maxi(1,ceili(from.distance_to(to)/60.0))
+			for i: int in range(count):
+				var node:=preload("res://scripts/ranch_fence_segment.gd").new()
+				node.vertical=vertical;node.span=from.distance_to(to)/count
+				node.position=from.lerp(to,float(i+1)/count) if vertical else from.lerp(to,(float(i)+.5)/count)
+				get_parent().add_child.call_deferred(node)

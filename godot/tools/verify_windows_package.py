@@ -18,7 +18,12 @@ def main():
         direct = engine.with_name(engine.name.replace("_console.exe", ".exe"))
         if direct.is_file(): engine = direct
     executable = (args.package_dir or project / "build/windows").resolve() / "ZhongRiZi.exe"
-    archive_path = (args.archive or project / "build/ZhongRiZi-Windows.zip").resolve()
+    default_archive = project / "build/ZhongRiZi-Windows.zip"
+    latest = project / "build/LATEST.json"
+    if not default_archive.exists() and latest.exists():
+        info = json.loads(latest.read_text(encoding="utf8"))
+        default_archive = project / "build" / Path(info["release"]).parent / ("种日子-Windows-" + info["version"] + ".zip")
+    archive_path = (args.archive or default_archive).resolve()
     with zipfile.ZipFile(archive_path) as archive:
         manifest = json.loads(archive.read("manifest.json").decode("utf-8-sig"))
         for entry in manifest["files"]:

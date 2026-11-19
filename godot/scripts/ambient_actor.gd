@@ -41,8 +41,6 @@ func _draw() -> void:
 	var now := _clock if PRESENTATION.animate() else 0.0
 	if companion:
 		RANCH.pet(self, GameState.ranch.get("pet", {}), GameState.pet_state, Vector2.ZERO, GameState.ranch_actor_clock, GameState.minutes)
-		if FarmWorld.hovered_pet:
-			draw_arc(Vector2.ZERO, 21, 0, TAU, 24, Color("#f4e7ad"), 1.5)
 	else:
 		var local := definition.duplicate()
 		local["x"] = 0.0

@@ -50,6 +50,7 @@ func _ready() -> void:
 	actions.alignment = BoxContainer.ALIGNMENT_CENTER
 	column.add_child(actions)
 	sleep_button = Button.new()
+	sleep_button.set_meta("ui_role","primary")
 	sleep_button.text = "熄灯，迎接明天"
 	sleep_button.pressed.connect(_sleep)
 	actions.add_child(sleep_button)

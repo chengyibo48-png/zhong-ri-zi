@@ -4,9 +4,11 @@ const BLEND_SHADER := preload("res://art/shaders/cohesion_ground.gdshader")
 static var _palette: Texture2D
 static func apply(layer: TileMapLayer) -> void:
  var lookup := Image.create(120, 120, false, Image.FORMAT_RGBA8)
+ var columns: Dictionary={}
  for cell in layer.get_used_cells():
   var coordinates := layer.get_cell_atlas_coords(cell)
   var column := preload("res://scripts/world_layout.gd").ground_column(cell, coordinates.x)
+  columns[cell]=column
   lookup.set_pixelv(cell, Color(column / 255.0, coordinates.y / 255.0, 0.0, 1.0))
  var material := layer.material as ShaderMaterial
  if material == null:
@@ -28,7 +30,13 @@ static func apply(layer: TileMapLayer) -> void:
     palette.set_pixel(column, season, Color(average.x, average.y, average.z))
   _palette = ImageTexture.create_from_image(palette)
  material.set_shader_parameter("ground_atlas", preload("res://scripts/character_art.gd").texture("res://art/world/terrain/ground_cohesion_hd.png"))
- material.set_shader_parameter("cell_atlas", ImageTexture.create_from_image(lookup))
+ var cells:=ImageTexture.create_from_image(lookup)
+ material.set_shader_parameter("cell_atlas",cells)
+ var depth:=ImageTexture.create_from_image(preload("res://scripts/water_geometry.gd").depth_image(columns))
+ material.set_shader_parameter("water_depth",depth)
+ layer.set_meta("visual_columns",columns)
+ layer.set_meta("visual_cell_texture",cells)
+ layer.set_meta("visual_depth_texture",depth)
  material.set_shader_parameter("surface_palette", _palette)
  material.set_shader_parameter("shore_detail", preload("res://scripts/detail_art.gd").texture("terrain/shore"))
  material.set_shader_parameter("snow_detail", preload("res://scripts/detail_art.gd").texture("terrain/snow"))
@@ -37,6 +45,9 @@ static func apply(layer: TileMapLayer) -> void:
 
 static func shadow(target: CanvasItem, center: Vector2, width: float, depth: float) -> void:
  # Nested transparent ellipses share the warm occlusion hue of the painted materials.
+ var state:Node=target.get_tree().root.get_node_or_null("GameState") if target.is_inside_tree() else null
+ var projection:Vector2=load("res://scripts/scene_lighting.gd").sun(float(state.minutes) if state!=null else 720.0)
+ center+=projection*clampf(width/60.0,.25,1.5)
  for ring in range(6):
   var fraction := 1.0 - ring * 0.11
   var points := PackedVector2Array()

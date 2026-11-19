@@ -28,6 +28,27 @@ static func night_factor(minutes: float) -> float:
 		return 1.0 - smoothstep(360.0, 420.0, minutes)
 	return smoothstep(1140.0, 1260.0, minutes)
 
+static func prop_rectangle(data: Dictionary, row: Dictionary, texture_size: Vector2) -> Array:
+	var rectangle: Array = preload("res://scripts/world_layout.gd").house_rect(key_for(data), row.get("worldRect", []))
+	if data.has("_layout_rect"): rectangle = data._layout_rect
+	if data.has("_visual_rect"): rectangle = data._visual_rect
+	if rectangle.size() != 4: return []
+	if bool(row.get("fitSourceSize",false)) and not data.has("_layout_rect") and not data.has("_visual_rect"):
+		var desired_width:=float(data.get("w",rectangle[2]))
+		var desired_height:=float(data.get("h",rectangle[3]))
+		if desired_width<=0.0:desired_width=float(rectangle[2])
+		if desired_height<=0.0:desired_height=float(rectangle[3])
+		rectangle=[-desired_width*0.5,-desired_height,desired_width,desired_height]
+	if key_for(data) == "props/fence" and not data.has("_layout_rect"):
+		var scale_factor := clampf(float(data.get("w", 48)), 28.0, 88.0) / float(rectangle[2])
+		rectangle = [float(rectangle[0])*scale_factor,float(rectangle[1])*scale_factor,float(rectangle[2])*scale_factor,float(rectangle[3])*scale_factor]
+	if bool(row.get("fitLayout", false)):
+		var factor := minf(float(rectangle[2]) / texture_size.x, float(rectangle[3]) / texture_size.y)
+		var fitted := texture_size * factor
+		rectangle = [float(rectangle[0]) + (float(rectangle[2]) - fitted.x) * 0.5, float(rectangle[1]) + float(rectangle[3]) - fitted.y, fitted.x, fitted.y]
+	rectangle = preload("res://scripts/scenery_profile.gd").rectangle(data, rectangle)
+	return rectangle
+
 static func draw_prop(target: CanvasItem, data: Dictionary, season: int, minutes: float = 720.0) -> bool:
 	var row: Dictionary = entries().get(key_for(data), {})
 	if str(row.get("status", "missing")) != "ready" and not bool(row.get("baseReady", false)): return false
@@ -37,25 +58,9 @@ static func draw_prop(target: CanvasItem, data: Dictionary, season: int, minutes
 	if locked: path = str(row.get("path", ""))
 	var texture := preload("res://scripts/character_art.gd").texture(path)
 	if texture == null: return false
-	var rectangle: Array = preload("res://scripts/world_layout.gd").house_rect(key_for(data), row.get("worldRect", []))
-	if data.has("_layout_rect"): rectangle = data._layout_rect
-	if data.has("_visual_rect"): rectangle = data._visual_rect
-	if rectangle.size() != 4: return false
-	if bool(row.get("fitSourceSize",false)) and not data.has("_layout_rect") and not data.has("_visual_rect"):
-		var desired_width:=float(data.get("w",rectangle[2]))
-		var desired_height:=float(data.get("h",rectangle[3]))
-		if desired_width<=0.0:desired_width=float(rectangle[2])
-		if desired_height<=0.0:desired_height=float(rectangle[3])
-		rectangle=[-desired_width*0.5,-desired_height,desired_width,desired_height]
 	target.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-	if key_for(data) == "props/fence" and not data.has("_layout_rect"):
-		var scale_factor := clampf(float(data.get("w", 48)), 28.0, 88.0) / float(rectangle[2])
-		rectangle = [float(rectangle[0])*scale_factor,float(rectangle[1])*scale_factor,float(rectangle[2])*scale_factor,float(rectangle[3])*scale_factor]
-	if bool(row.get("fitLayout", false)):
-		var texture_size := Vector2(texture.get_size())
-		var factor := minf(float(rectangle[2]) / texture_size.x, float(rectangle[3]) / texture_size.y)
-		var fitted := texture_size * factor
-		rectangle = [float(rectangle[0]) + (float(rectangle[2]) - fitted.x) * 0.5, float(rectangle[1]) + float(rectangle[3]) - fitted.y, fitted.x, fitted.y]
+	var rectangle:=prop_rectangle(data,row,Vector2(texture.get_size()))
+	if rectangle.size()!=4:return false
 	var width := float(rectangle[2])
 	preload("res://scripts/ground_style.gd").shadow(target, Vector2(0.7, 0.5), width * 0.78, clampf(width * 0.08, 3.0, 10.0))
 	if bool(row.get("rapidSeasonMaterial", false)) and target.has_node("RapidSeasonArt"):

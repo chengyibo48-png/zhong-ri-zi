@@ -25,6 +25,8 @@ var yard_button: Button
 var jobs_label: Label
 var milestone_buttons: Dictionary = {}
 var furniture_list: ItemList
+var craft_preview: Control
+var layout_preview: Control
 var furniture_details: Label
 var craft_one: Button
 var craft_three: Button
@@ -241,6 +243,8 @@ func _build_craft(parent: VBoxContainer) -> void:
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	body.add_child(scroll)
 	scroll.add_child(right)
+	craft_preview = preload("res://scripts/furniture_preview.gd").new()
+	right.add_child(craft_preview)
 	furniture_details = _label(right, "選擇圖紙查看材料。", 18)
 	furniture_details.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	furniture_details.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -299,6 +303,7 @@ func _build_layout(parent: VBoxContainer) -> void:
 	furniture_option.item_selected.connect(_choose_layout_furniture)
 	controls.add_child(furniture_option)
 	grid = GridContainer.new()
+	grid.set_meta("shell_preserve_layout", true)
 	grid.columns = 8
 	grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	grid.add_theme_constant_override("h_separation", 3)
@@ -313,8 +318,10 @@ func _build_layout(parent: VBoxContainer) -> void:
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	body.add_child(scroll)
 	scroll.add_child(right)
+	layout_preview = preload("res://scripts/furniture_preview.gd").new()
+	right.add_child(layout_preview)
 	layout_details = _label(right, "点选一个格子。灰色格是道路与门口。", 15)
-	layout_details.custom_minimum_size.y = 140
+	layout_details.custom_minimum_size.y = 90
 	layout_details.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var cell_row := HBoxContainer.new()
 	_label(cell_row, "格位", 15)
@@ -604,6 +611,7 @@ func _refresh_projects() -> void:
 		milestone_buttons[id].disabled = not ready
 
 func _refresh_craft() -> void:
+	craft_preview.present(furniture_id, 0)
 	var items: Dictionary = GameState.content.get("furniture", {})
 	var ids: Array = items.keys()
 	ids.sort()
@@ -611,7 +619,7 @@ func _refresh_craft() -> void:
 	var selected_index := 0
 	for index in range(ids.size()):
 		var id := str(ids[index])
-		furniture_list.add_item("%s · 库存 %d" % [str(items[id].get("name", id)), int(GameState.furniture.get(id, 0))], preload("res://scripts/item_art.gd").texture_for(str(id), "furniture"))
+		furniture_list.add_item("%s · 库存 %d" % [str(items[id].get("name", id)), int(GameState.furniture.get(id, 0))], preload("res://scripts/built_furniture_art.gd").texture_for(id, 0) if preload("res://scripts/built_furniture_art.gd").supports(id) else preload("res://scripts/item_art.gd").texture_for(str(id), "furniture"))
 		furniture_list.set_item_metadata(index, id)
 		if id == furniture_id: selected_index = index
 	if furniture_list.item_count > 0: furniture_list.select(selected_index)
@@ -666,6 +674,8 @@ func _refresh_layout() -> void:
 	if selected_cell >= cells: selected_cell = cells - 1
 	for cell in range(cells):
 		var button := Button.new()
+		button.set_meta("compact_hud", true)
+		button.add_theme_font_size_override("font_size", 10 if cols > 8 else 14)
 		button.custom_minimum_size = Vector2(23, 25) if cols > 8 else Vector2(42, 36)
 		var piece := _piece_at(cell)
 		var reason:String = GameState.BUILDING_GEOMETRY.reserved(GameState, zone_id, cell)
@@ -680,6 +690,7 @@ func _refresh_layout() -> void:
 	selected_cell = clampi(selected_cell, -1, cells - 1)
 	cell_spin.value = selected_cell + 1 if selected_cell >= 0 else 1
 	rotation_label.text = "朝向 %d°" % (furniture_rotation * 90)
+	layout_preview.present(furniture_id, furniture_rotation)
 	var selected_piece := _draft_piece(selected_piece_key)
 	var balances := _furniture_balance(furniture_id)
 	var valid: Dictionary = {}

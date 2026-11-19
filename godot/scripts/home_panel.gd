@@ -6,6 +6,7 @@ var title_label: Label
 var spouse_label: Label
 var spouse_section: VBoxContainer
 var single_label: Label
+var life_preview: Button
 var shared_dish: OptionButton
 var shared_buttons: Dictionary = {}
 var memories_label: Label
@@ -56,6 +57,7 @@ func _ready() -> void:
  body.size_flags_horizontal=Control.SIZE_EXPAND_FILL
  body.add_theme_constant_override("separation",12)
  scroll.add_child(body)
+ life_preview=_button(body,"预览老屋生活布置",_open_life_preview)
  single_label=_label(body,"现在的小院由你安排。八位成年候选人的关系不限主角性别，友情也能走到长久的信任。")
  spouse_section=VBoxContainer.new()
  spouse_section.add_theme_constant_override("separation",10)
@@ -91,6 +93,7 @@ func _ready() -> void:
  pet_name.max_length=12;pet_name.placeholder_text="小伙伴的名字"
  body.add_child(pet_name)
  pet_type=OptionButton.new()
+ pet_type.disabled=true;pet_type.tooltip_text="更换伙伴请到牧场名册的猫狗页确认正式接回。"
  pet_type.add_item("猫");pet_type.set_item_metadata(0,"cat")
  pet_type.add_item("狗");pet_type.set_item_metadata(1,"dog")
  body.add_child(pet_type)
@@ -163,6 +166,7 @@ func _fill_dishes(option: OptionButton) -> void:
 
 func refresh() -> void:
  if not visible: return
+ life_preview.disabled=GameState.current_interior!="building-farm-12"
  var spouse := str(GameState.marriage.get("spouse",""))
  spouse_section.visible=spouse!=""
  single_label.visible=spouse==""
@@ -284,6 +288,12 @@ func _ask_separate() -> void:
 
 func _input(event: InputEvent) -> void:
  if not visible: return
+ life_preview.disabled=GameState.current_interior!="building-farm-12"
  if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
   close()
   get_viewport().set_input_as_handled()
+
+func _open_life_preview()->void:
+ if GameState.current_interior!="building-farm-12":return
+ close()
+ get_parent().house_activity_panel.open_home_preview()

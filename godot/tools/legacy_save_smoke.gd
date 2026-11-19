@@ -34,7 +34,7 @@ func _check_browser_save(version: int, world_revision: int, scene: String, x: fl
 	if loaded:
 		_check(state.player_position.is_equal_approx(expected_position) and state.player_direction == "left", "浏览器 v%d 地图坐标与朝向按地图修订号换算" % version)
 		_check(int(state.inventory.get("cabbageSeed", 0)) == 7 and int(state.inventory.get("rice", 0)) == 4, "浏览器 v%d 背包物品与种子别名保留" % version)
-		_check(state.plots.size() == 72 and str(state.plots[0].get("crop", "")) == "cabbage" and int(state.plots[0].get("repeats", 0)) == 2, "浏览器 v%d 旧田块扩展并保留作物与轮作记录" % version)
+		_check(state.plots.size() == preload("res://scripts/farm_layout.gd").TOTAL and str(state.plots[0].get("crop", "")) == "cabbage" and int(state.plots[0].get("repeats", 0)) == 2, "浏览器 v%d 旧田块扩展并保留作物与轮作记录" % version)
 		_check(int(state.animals[0].get("ready", 0)) == 3 and int(state.animals[0].get("qualityStock", [0])[0]) == 3, "浏览器 v%d 动物待收产物转为可读的品质库存" % version)
 		_check(state.legacy_systems.get("discovered", []).has("cabbageSeed"), "浏览器 v%d 旧发现条目和下划线种子别名归一化" % version)
 		_check(bool(state.legacy_systems.get("toolUpgrades", {}).get("hoe", false)) and int(state.legacy_systems.get("buffs", {}).get("laborDay", -1)) == 16, "浏览器 v%d 农具改良与劳动增益导入" % version)

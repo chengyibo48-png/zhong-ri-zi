@@ -10,16 +10,22 @@ static func data() -> Dictionary:
 	return _data
 
 static func texture(path: String) -> Texture2D:
-	if _textures.has(path): return _textures[path]
+	if _textures.has(path):
+		preload("res://scripts/texture_cache.gd").touch(_textures,path,_textures[path])
+		return _textures[path]
 	if path == "": return null
 	var result: Texture2D
 	if ResourceLoader.exists(path):
-		result = load(path) as Texture2D
+		if ResourceLoader.load_threaded_get_status(path)==ResourceLoader.THREAD_LOAD_LOADED:result=ResourceLoader.load_threaded_get(path) as Texture2D
+		elif ResourceLoader.load_threaded_get_status(path)==ResourceLoader.THREAD_LOAD_IN_PROGRESS:result=ResourceLoader.load_threaded_get(path) as Texture2D
+		else:result = load(path) as Texture2D
 	elif FileAccess.file_exists(path):
 		var image := Image.load_from_file(ProjectSettings.globalize_path(path))
 		if image == null or image.is_empty(): return null
 		result = ImageTexture.create_from_image(image)
-	if result != null: _textures[path] = result
+	if result != null:
+		_textures[path] = result
+		preload("res://scripts/texture_cache.gd").touch(_textures,path,result)
 	return result
 
 static func has_clip(actor: String, clip: String) -> bool:
@@ -28,6 +34,7 @@ static func has_clip(actor: String, clip: String) -> bool:
 	return not spec.is_empty() and (bool(entry.get("ready", false)) or bool(spec.get("ready", false)))
 
 static func draw_actor(target: CanvasItem, actor: String, clip: String, direction: String, time: float, progress: float = -1.0, player_appearance: Dictionary = {}) -> bool:
+	if actor != "player" and preload("res://scripts/canonical_character.gd").draw_actor(target,actor,clip,direction,time,progress): return true
 	var entry: Dictionary = data().get("actors", {}).get(actor, {})
 	if not has_clip(actor, clip): return false
 	# Full customization continues to use its original renderer until matching

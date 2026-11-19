@@ -28,11 +28,16 @@ const PALETTES: Array[Dictionary] = [
 
 func _ready() -> void:
 	var kind := String(data.get("kind", data.get("type", "")))
-	set_process(kind in ["tree", "willow", "orchard", "blossom"] and bool(preload("res://scripts/world_art.gd").entries().get("props/" + kind, {}).get("baseReady", false)))
-	var tree_row: Dictionary = preload("res://scripts/world_art.gd").entries().get("props/" + kind, {})
-	var bounds: Array = tree_row.get("worldRect", [])
+	var is_building:=preload("res://scripts/world_art.gd").key_for(data).begins_with("buildings/")
+	var is_tree:=kind in ["tree","willow","orchard","blossom","bamboo"]
+	set_process(is_building or kind in ["tree", "willow", "orchard", "blossom", "bamboo"] and bool(preload("res://scripts/world_art.gd").entries().get("props/" + kind, {}).get("baseReady", false)))
+	var tree_row: Dictionary = preload("res://scripts/world_art.gd").entries().get(preload("res://scripts/world_art.gd").key_for(data), {})
+	var raw_bounds: Array = data.get("_visual_rect", data.get("_layout_rect", tree_row.get("worldRect", [])))
+	if is_building:raw_bounds=preload("res://scripts/world_layout.gd").house_rect(preload("res://scripts/world_art.gd").key_for(data),raw_bounds)
+	var bounds: Array = preload("res://scripts/scenery_profile.gd").rectangle(data, raw_bounds)
 	if is_processing() and bounds.size() == 4:
 		_occlusion_rect = Rect2(float(bounds[0]), float(bounds[1]), float(bounds[2]), float(bounds[3]))
+	if is_tree and bounds.size()==4:
 		_foliage_material = ShaderMaterial.new()
 		_foliage_material.shader = preload("res://art/shaders/foliage_wind.gdshader")
 		_foliage_material.set_shader_parameter("height", maxf(1.0, _occlusion_rect.size.y))
@@ -42,7 +47,8 @@ func _ready() -> void:
 	_refresh_palette()
 	var art_row: Dictionary = preload("res://scripts/world_art.gd").entries().get(preload("res://scripts/world_art.gd").key_for(data), {})
 	if bool(art_row.get("rapidSeasonMaterial", false)) or not art_row.get("states", {}).is_empty():
-		GameState.world_changed.connect(_refresh_rapid_art)
+		GameState.domain_changed.connect(func(domain:String):
+			if domain in ["world","settings"]:_refresh_rapid_art())
 		GameState.clock_changed.connect(_refresh_rapid_art)
 	queue_redraw()
 
@@ -77,7 +83,7 @@ func _process(delta: float) -> void:
 		return
 	var feet := _occlusion_player.global_position
 	var overlaps := false
-	if feet.distance_squared_to(global_position) < 160.0 * 160.0:
+	if feet.distance_squared_to(global_position) < pow(maxf(160.0, _occlusion_rect.size.length()+50.0), 2):
 		var bounds := Rect2(global_position + _occlusion_rect.position, _occlusion_rect.size)
 		var actor_area := Rect2(feet + Vector2(-10.0, -42.0), Vector2(20.0, 42.0))
 		overlaps = global_position.y > feet.y and bounds.intersects(actor_area)
@@ -90,7 +96,14 @@ func _set_occlusion_alpha(next_alpha: float) -> void:
 	if _occlusion_tween != null:
 		_occlusion_tween.kill()
 	_occlusion_tween = create_tween()
-	_occlusion_tween.tween_property(self, "modulate:a", next_alpha, 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_occlusion_tween.tween_method(_apply_canopy_alpha, _canopy_alpha, next_alpha, 0.12).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+var _canopy_alpha:=1.0
+func _apply_canopy_alpha(value:float)->void:
+	_canopy_alpha=value
+	if material is ShaderMaterial:material.set_shader_parameter("occlusion_alpha",value)
+	var rapid:=get_node_or_null("RapidSeasonArt")
+	if rapid!=null and rapid.material is ShaderMaterial:rapid.material.set_shader_parameter("occlusion_alpha",value)
 
 func refresh_season() -> void:
 	_refresh_palette()

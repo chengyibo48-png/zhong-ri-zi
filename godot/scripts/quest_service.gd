@@ -1,5 +1,6 @@
 extends RefCounted
 ## Owns task progress and commands; gameplay domains remain authoritative.
+const MODEL=preload("res://scripts/quest_model.gd")
 const KNOWLEDGE=preload("res://scripts/knowledge_catalog.gd")
 const PROJECT_SITES={"bridge":{"x":1014,"y":2820,"name":"村口河埠施工点"},"canal":{"x":3040,"y":1950,"name":"小院旧水渠施工点"},"market":{"x":2816,"y":790,"name":"老街遮雨集市施工点"},"stage":{"x":3520,"y":930,"name":"老街戏台施工点"}}
 static var _guides: Array=[]
@@ -10,7 +11,8 @@ static func guides() -> Array:
 		var data: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/quests.json"));_guides=data.guides;_hours=data.serviceHours
 	return _guides
 static func defaults() -> Dictionary:
-	return {"version":1,"entries":{},"metrics":{},"pins":[],"collapsed":false,"sequence":0,"seen":[],"notices":{}}
+	return {"version":3,"entries":{},"metrics":{},"pins":[],"collapsed":false,"sequence":0,"seen":[],"notices":{},"journey":{"chapter":0,"stage":0},"receipts":{},"memorials":{}}
+
 static func initialize(s: Node) -> void:
 	if s.quests.is_empty():s.quests=defaults()
 static func event(s: Node, key: String, token: String="", amount: int=1) -> bool:
@@ -21,9 +23,25 @@ static func event(s: Node, key: String, token: String="", amount: int=1) -> bool
 		while s.quests.seen.size()>1024:s.quests.seen.pop_front()
 	s.quests.sequence=int(s.quests.sequence)+1
 	s.quests.metrics[key]=int(s.quests.metrics.get(key,0))+maxi(0,amount)
+	if s.get("quest_runtime")!=null:s.quest_runtime.mark("metric:"+key)
 	return true
 static func metric(s: Node, key: String) -> int:
 	var n: int=int(s.quests.metrics.get(key,0))
+	if key=="rodSpecies":
+		var total:int=0
+		for record:Dictionary in s.fishing.records.values():
+			if int(record.get("rod",0))>0:total+=1
+		return total
+	if key=="fertilizePlots":
+		var tended:int=0
+		for name:String in s.quests.metrics:
+			if name.begins_with("fieldCare:") and int(s.quests.metrics[name])>0:tended+=1
+		var total:int=0
+		for plot:Dictionary in s.plots:
+			if int(plot.get("fertilized",-1))>=0:total+=1
+		return maxi(n,maxi(total,tended))
+	if key=="nurseryRecord":return s.village_progress.get("growth",{}).size()
+
 	match key:
 		"rest":return maxi(n,s.day)
 		"harvest":return maxi(n,int(s.player_stats.get("harvested",0)))
@@ -64,6 +82,13 @@ static func metric(s: Node, key: String) -> int:
 		"research":return n
 		"donate":return s.collection.get("donated",{}).size()
 		"yearReview":return int(s.day>=112 and int(s.quests.metrics.get("visit:year",0))>0)
+	if key=="storyFinal":
+		var total:int=0
+		for id:String in s.content.arcs:
+			if int(s.npc_stories.get(id,{}).get("step",0))>=s.content.arcs[id].size():total+=1
+		return total
+	if key=="weeklyComplete":return s.economy.get("claimed",[]).size()
+	if key=="neighborWork":return n+int(s.quests.metrics.get("gathering",0))
 	if key.begins_with("inventory:"):
 		var bits:=key.split(":");return int(int(s.inventory.get(bits[1],0))>=int(bits[2]))
 	if key.begins_with("flag:"):return int(bool(s.flags.get(key.trim_prefix("flag:"),false)))
@@ -72,17 +97,18 @@ static func metric(s: Node, key: String) -> int:
 static func definitions(s: Node) -> Array:
 	var rows: Array=guides().duplicate(true)
 	for row: Dictionary in rows:row.kind="guide"
+	rows.append(MODEL.chapter_definition(s))
 	for order: Dictionary in s.content.get("orders",[]):
-		rows.append({"id":"wish:"+str(order.id),"kind":"wish","category":"人物","title":order.title,"text":order.text,"needs":order.needs,"reward":order.get("reward",{}),"money":order.get("money",0),"npc":order.npc,"source":"npc:"+str(order.npc),"ref":str(order.id),"page":"orders"})
+		rows.append({"id":"wish:"+str(order.id),"kind":"wish","category":"人物","title":order.title,"text":order.text,"needs":order.needs,"reward":order.get("reward",{}),"money":MODEL.commission_payout(s,order),"npc":order.npc,"source":"npc:"+str(order.npc),"ref":str(order.id),"page":"orders"})
 	for favor: Dictionary in s.content.get("favors",[]):
-		rows.append({"id":"favor:"+str(favor.id),"kind":"favor","category":"委托","title":favor.title,"text":favor.text,"needs":favor.needs,"reward":favor.get("reward",{}),"money":favor.get("money",0),"npc":favor.npc,"source":"npc:"+str(favor.npc),"ref":str(favor.id),"page":"orders"})
+		rows.append({"id":"favor:"+str(favor.id),"kind":"favor","category":"委托","title":favor.title,"text":favor.text,"needs":favor.needs,"reward":favor.get("reward",{}),"money":MODEL.commission_payout(s,favor),"npc":favor.npc,"source":"npc:"+str(favor.npc),"ref":str(favor.id),"page":"orders"})
 	for id: String in s.content.get("projects",{}):
 		var project: Dictionary=s.content.projects[id]
-		rows.append({"id":"project:"+id,"kind":"project","category":"主线","title":project.name,"text":str(project.people)+"\n"+str(project.change),"needs":project.needs,"source":"project:"+id,"ref":id,"seasonDay":int(project.season)*28,"page":"projects","unlock":str(project.get("recipe",""))})
+		rows.append({"id":"project:"+id,"kind":"project","category":"主线","title":project.name,"text":str(project.people)+"\n"+str(project.change),"needs":project.needs,"source":"project:"+id,"ref":id,"page":"projects","unlock":str(project.get("recipe",""))})
 	for order: Dictionary in s.economy_weekly_orders():
 		rows.append(weekly_definition(s,order))
 	for entry: Dictionary in s.quests.entries.values():
-		if entry.get("definition",{}).get("kind","") in ["weekly","story","chapter"]:
+		if entry.get("definition",{}).get("kind","") in ["weekly","story","chapter","journey"]:
 			for i: int in range(rows.size()-1,-1,-1):
 				if str(rows[i].id)==str(entry.definition.id):rows.remove_at(i)
 			rows.append(entry.definition.duplicate(true))
@@ -91,13 +117,13 @@ static func definitions(s: Node) -> Array:
 		if step>=arc.size():continue
 		if step==0 and int(s.relations.get(id,{}).get("talked",-1))<0 and not bool(s.neighbors.get("people",{}).get(id,{}).get("introduced",false)):continue
 		var story: Dictionary=arc[step]
-		rows.append({"id":"story:"+id+":"+str(step),"kind":"story","category":"人物","title":str(npc.name)+" · "+str(story.title),"text":"在关系与前置满足后，面对面倾听这一段故事。后续内容会逐步展开。","npc":id,"ref":id,"step":step,"points":int(story.get("points",0)),"needs":story.get("needs",{}) if story.get("needs") is Dictionary else {},"source":"npc:"+id,"page":"stories"})
-	for season: int in range(4):
+		rows.append({"id":"story:"+id+":"+str(step),"kind":"story","category":"人物","title":str(npc.name)+" · "+str(story.title),"text":str(story.get("text","")),"npc":id,"ref":id,"step":step,"story_count":arc.size(),"points":int(story.get("points",0)),"needs":story.get("needs",{}) if story.get("needs") is Dictionary else {},"source":"npc:"+id,"page":"stories"})
+	for season: int in range(0):
 		var chapter: Dictionary=s.content.seasonChapters[season]
 		rows.append({"id":"chapter:%d:%d" % [int(s.day/112)+1,season],"year":int(s.day/112)+1,"kind":"chapter","category":"主线","title":chapter.title,"text":chapter.goal,"ref":str(season),"seasonDay":season*28,"source":"home","page":"stories"})
 	return rows
 static func weekly_definition(s: Node, order: Dictionary) -> Dictionary:
-	return {"id":"weekly:"+str(order.key),"kind":"weekly","category":"委托","title":order.title,"text":"合作社本周供货单。接取后条件固定；到实际柜台交付。","ref":str(order.key),"order":order.duplicate(true),"needs":{str(order.id):int(order.qty)},"grade":int(order.grade),"source":"coop","deadline":(int(s.day/7)+1)*7,"page":"economy"}
+	return {"id":"weekly:"+str(order.key),"kind":"weekly","category":"委托","title":order.title,"text":"合作社今日供货单。最多接取两张，过期无惩罚。接取后条件固定；到实际柜台交付。","ref":str(order.key),"order":order.duplicate(true),"needs":{str(order.id):int(order.qty)},"grade":int(order.grade),"source":"coop","deadline":int(order.get("day",s.day))+2,"page":"economy"}
 static func definition(s: Node, id: String) -> Dictionary:
 	for row: Dictionary in definitions(s):
 		if str(row.id)==id:return row
@@ -124,9 +150,11 @@ static func food_segments(s: Node, item: String) -> Array:
 			if qty<=0:continue
 			var segment:=row.duplicate(true);segment.qty=qty;segment.grade=grade;result.append(segment);counts[grade]-=qty;left-=qty
 			if left<=0:break
+	for grade:int in range(4):
+		if int(counts[grade])>0:result.append({"qty":int(counts[grade]),"grade":grade,"age":0.0})
 	return result
 static func eligible_counts(s: Node, item: String) -> Array:
-	if s._is_food(item):s._reconcile_kitchen_lots()
+	
 	if s.economy.get("locked",[]).has(item):return [0,0,0,0]
 	var counts: Array=s._quality_counts(item)
 	if not s._is_food(item):return counts
@@ -160,11 +188,13 @@ static func snapshot(s: Node, d: Dictionary) -> Dictionary:
 	var r:=d.duplicate(true);var id:=str(d.id);var e: Dictionary=s.quests.entries.get(id,{})
 	r.status="available";r.reason="";r.current=0;r.required=int(d.get("target",1));r.deadline=int(e.get("deadline",d.get("deadline",-1)));r.accepted=not e.is_empty();r.pinned=s.quests.pins.has(id)
 	if done(s,d):r.status="completed";r.current=r.required;return r
+	if str(d.kind)=="journey":return MODEL.chapter_snapshot(s,r)
 	if str(e.get("status","")) in ["expired","abandoned"]:r.status=e.status;return r
 	if r.accepted and int(r.deadline)>=0 and s.day>=int(r.deadline):r.status="expired";r.reason="已过截止日，物品保留，不扣钱或关系。";return r
 	if d.has("previous") and str(d.previous)!="" and str(s.quests.entries.get(str(d.previous),{}).get("status",""))!="completed":r.status="locked";r.reason="先完成这条引导链的当前步骤。";return r
 	if s.day<int(d.get("seasonDay",0)):r.status="locked";r.reason="等待对应季节到来，之后可以慢慢补做。";return r
 	if str(d.kind)=="guide":
+		if not MODEL.guide_revealed(s,d):r.status="locked";r.reason="使用对应生活系统后出现，不必现在完成。";return r
 		if str(d.get("source","")).begins_with("project:"):
 			var site_status: Dictionary=s.community_project_status(str(d.source).trim_prefix("project:"));r.reason=str(site_status.get("reason","")) if not bool(site_status.get("done",false)) else ""
 		r.current=maxi(0,metric(s,str(d.metric))-(int(e.get("baseline",0)) if bool(d.get("afterAccept",false)) else 0))
@@ -175,9 +205,14 @@ static func snapshot(s: Node, d: Dictionary) -> Dictionary:
 		var have:=qualified(s,item,int(d.get("grade",0)));var need:=int(d.needs[item]);ready=ready and have>=need
 		lines.append(str(s.item_catalog.get(item,{}).get("name",item))+" %d / %d" % [mini(have,need),need]+(" · 已保护" if s.economy.get("locked",[]).has(item) else ""))
 	r.materials=lines;r.current=int(ready)
+	MODEL.material_progress(s,r)
 	if str(d.kind)=="project":
+		r.phase=load("res://scripts/village_growth.gd").phase(s,str(d.ref))
 		var status: Dictionary=s.community_project_status(str(d.ref));ready=bool(status.get("ready",false));r.reason=str(status.get("reason",""))
+		if MODEL.project_gate(s,str(d.ref))!="":r.status="locked";return r
 	if str(d.kind)=="story":
+		r.accepted=true
+		r.activity=MODEL.story_activity(s,str(d.npc))
 		var story_status: Dictionary=s.npc_story_readiness(str(d.npc))
 		ready=bool(story_status.get("ok",false)) and ready
 		if not ready:r.reason=str(story_status.get("message","关系或故事前置尚未满足。"))
@@ -188,7 +223,8 @@ static func snapshot(s: Node, d: Dictionary) -> Dictionary:
 static func rows(s: Node, filters: Dictionary={}) -> Array:
 	initialize(s);var result: Array=[]
 	for d: Dictionary in definitions(s):
-		var r:=snapshot(s,d)
+		var runtime:Node=s.get("quest_runtime")
+		var r:Dictionary=runtime.view(d) if runtime!=null else snapshot(s,d)
 		if str(r.status)=="locked" and str(r.kind)!="project":continue
 		if str(filters.get("category","全部"))!="全部" and str(r.category)!=str(filters.category):continue
 		var search:=str(filters.get("search","")).strip_edges()
@@ -196,48 +232,54 @@ static func rows(s: Node, filters: Dictionary={}) -> Array:
 		result.append(r)
 	return result
 static func sync(s: Node) -> void:
+	for id:String in s.quests.entries.keys():
+		var entry:Dictionary=s.quests.entries[id]
+		if str(entry.get("definition",{}).get("kind",""))=="weekly" and s.day>int(entry.get("deadline",s.day))+7:
+			s.quests.entries.erase(id);s.quests.pins.erase(id);s.quests.notices.erase(id)
 	if _syncing:return
 	_syncing=true;initialize(s)
-	for d: Dictionary in guides():
-		var key:=str(d.metric);s.quests.metrics[key]=maxi(int(s.quests.metrics.get(key,0)),metric(s,key)) if not key.begins_with("inventory:") and key!="seasonSeed" else int(s.quests.metrics.get(key,0))
-		if not s.quests.entries.has(str(d.id)) and (bool(d.auto) or str(d.previous)!="" and str(s.quests.entries.get(str(d.previous),{}).get("status",""))=="completed"):
+	for d:Dictionary in guides():
+		if s.quests.entries.has(str(d.id)) or not MODEL.guide_revealed(s,d):continue
+		if bool(d.auto) or str(d.previous)!="" and str(s.quests.entries.get(str(d.previous),{}).get("status",""))=="completed":
 			s.quests.entries[str(d.id)]={"status":"active","acceptedDay":s.day,"deadline":-1,"baseline":metric(s,str(d.metric)) if bool(d.get("afterAccept",false)) else 0}
-	for id: String in s.quests.entries:
-		var e: Dictionary=s.quests.entries[id]
+	for id:String in s.quests.entries:
+		var e:Dictionary=s.quests.entries[id]
 		if str(e.status) in ["completed","expired","abandoned"]:continue
-		if int(e.get("deadline",-1))>=0 and s.day>=int(e.deadline):e.status="expired"
-
-	var notes: Array[String]=[]
-	var notify_new: bool=s.quests.notices.has("initialized")
-	for d: Dictionary in definitions(s):
-		var state: String=str(snapshot(s,d).status)
-		if state not in ["available","active","ready","reward"]:continue
-		var notice_key: String="known:"+str(d.id)
-		if not s.quests.notices.has(notice_key):
-			if notify_new:notes.append(("下一步 · " if str(d.kind)=="guide" and state=="active" else "新心愿 · ")+str(d.title))
-			s.quests.notices[notice_key]="shown"
-	s.quests.notices.initialized="yes"
-	for d: Dictionary in definitions(s):
-		if not s.quests.entries.has(str(d.id)):continue
-		var r:=snapshot(s,d);var state:=str(r.status);var previous:=str(s.quests.notices.get(str(d.id),"active"))
-		if state!=previous and state in ["ready","reward"]:notes.append(str(d.title)+(" · 可以交付" if state=="ready" else " · 已达成"))
-		s.quests.notices[str(d.id)]=state
-		if r.accepted and int(r.deadline)-s.day==1 and state in ["active","ready"]:
-			var key: String="deadline:"+str(d.id)
-			if not s.quests.notices.has(key):notes.append(str(d.title)+" · 今天截止");s.quests.notices[key]="shown"
+		if int(e.get("deadline",-1))>=0 and s.day>=int(e.deadline):e.status="expired";s.quests.pins.erase(id)
+	var all:Array=definitions(s);var notices:Array[String]=[];var views:Array=[]
+	var runtime:Node=s.get("quest_runtime")
+	for d:Dictionary in all:
+		var r:Dictionary=runtime.view(d) if runtime!=null else snapshot(s,d)
+		views.append(r)
+		if str(r.status)=="reward" and (str(r.kind)=="guide" or str(r.kind)=="journey" and int(r.get("stage",0)) in [1,2]):
+			if runtime!=null:runtime.enqueue(str(r.id))
+		var status:String=str(r.status);var old:String=str(s.quests.notices.get(str(r.id),""))
+		if status!=old and status in ["ready","reward"] and str(r.kind)!="guide":notices.append(str(r.title)+(" · 可交付" if status=="ready" else " · 阶段达成"))
+		s.quests.notices[str(r.id)]=status
 	_syncing=false
-	s.quest_changed.emit()
-	if not notes.is_empty():s.message_requested.emit("手记更新："+"；".join(notes.slice(0,2))+(" 等 %d 项" % notes.size() if notes.size()>2 else ""))
+	var signature:int=hash([views,s.quests.pins,s.quests.collapsed,s.quests.memorials])
+	if signature!=int(s.get_meta("quest_visible_signature",-1)):
+		s.set_meta("quest_visible_signature",signature);s.quest_changed.emit()
+	if not notices.is_empty():s.message_requested.emit("手记更新："+"；".join(notices.slice(0,2)))
+
 static func accept(s: Node, id: String) -> bool:
 	initialize(s);var d:=definition(s,id)
 	if d.is_empty() or str(snapshot(s,d).status)!="available":return false
+	if str(d.kind)=="weekly":
+		var count:int=0
+		for e:Dictionary in s.quests.entries.values():
+			if str(e.get("definition",{}).get("kind",""))=="weekly" and str(e.get("status",""))=="active" and s.day<int(e.get("deadline",0)):count+=1
+		if count>=2:s.message="手上已有两张供货单，先完成或放下其中一张。";return false
 	s.quests.entries[id]={"status":"active","acceptedDay":s.day,"deadline":int(d.get("deadline",-1)),"baseline":metric(s,str(d.get("metric",""))) if bool(d.get("afterAccept",false)) else 0,"definition":d.duplicate(true)}
 	s.changed.emit();return true
 static func claim(s: Node, id: String) -> bool:
 	var d:=definition(s,id)
-	if d.is_empty() or str(d.kind)!="guide" or str(snapshot(s,d).status)!="reward":return false
+	if d.is_empty():return false
+	if str(d.kind)=="journey":return MODEL.advance_chapter(s,d)
+	if str(d.kind)!="guide" or str(snapshot(s,d).status)!="reward" or s.quests.receipts.has(id):return false
 	for item: String in d.get("reward",{}):
 		if int(s.inventory.get(item,0))+int(d.reward[item])>999999:s.message="背包暂时放不下，回礼会留在手记里。";s.changed.emit();return false
+	s.quests.receipts[id]=true
 	s.quests.entries[id].status="completed";s.quests.entries[id].claimed=true;s.quests.entries[id].completedDay=s.day
 	for item: String in d.get("reward",{}):s._grant_legacy_item(item,int(d.reward[item]))
 	s.message="记下了："+str(d.title)+(" · 回礼已收好。" if not d.get("reward",{}).is_empty() else "。")
@@ -283,13 +325,23 @@ static func reward_room(s: Node, d: Dictionary) -> bool:
 		if int(s.inventory.get(item,0))-int(d.get("needs",{}).get(item,0))+int(d.reward[item])>999999:return false
 	return true
 static func target(s: Node, d: Dictionary) -> Dictionary:
+	if str(d.get("kind",""))=="journey" and int(d.get("stage",0))==1:
+		for goal:Array in d.goals:
+			if metric(s,str(goal[0]))<int(goal[1]):
+				var resolved:Dictionary=target(s,MODEL.goal_definition(s,str(goal[0])))
+				if not resolved.is_empty():resolved.questId=str(d.id)
+				return resolved
 	var source:=str(d.get("source","home"));var at: Dictionary={}
-	if source.begins_with("npc:"):
+	if str(d.get("kind",""))=="guide" and str(d.get("metric","")) in ["harvest","fertilize"]:
+		at=MODEL.GUIDANCE.plot(s,str(d.metric))
+	if d.get("target_override") is Dictionary:at=d.target_override.duplicate(true)
+	if not at.is_empty():pass
+	elif source.begins_with("npc:"):
 		for person: Dictionary in s.npc_catalog:
 			if str(person.id)==source.trim_prefix("npc:"):return s.atlas_npc_target(person)
 		return {}
-	if source.begins_with("item:"):return KNOWLEDGE.source_target(s,source)
-	if source.begins_with("project:"):
+	elif source.begins_with("item:"):return KNOWLEDGE.source_target(s,source)
+	elif source.begins_with("project:"):
 		var id:=source.trim_prefix("project:")
 		at=PROJECT_SITES.get(id,{}).duplicate(true)
 	elif source=="water":

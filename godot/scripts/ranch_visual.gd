@@ -8,7 +8,7 @@ static func appearance(a: Dictionary, catalog: Dictionary, clock: float, pose: D
 	var action := str(pose.get("action",""))
 	return {"direction":str(p.get("direction","down")),"walking":bool(p.get("walking",false)),
 		"young":int(a.get("age",0))<int(catalog.get("species",{}).get(str(a.get("type","")),{}).get("adult",6)),
-		"sick":int(a.get("illness",0))>=20,"sleepy":bool(a.get("rest",false)),"hungry":int(a.get("hunger",100))<35,
+		"sick":int(a.get("illness",0))>=20,"sleepy":(bool(a.get("rest",false)) or GameState.minutes>=1200) and not bool(p.get("walking",false)),"hungry":int(a.get("hunger",100))<35,
 		"dirty":int(a.get("clean",100))<45,"eating":active and action=="feed","happy":active and action in ["pet","clean"],
 		"sheared":active and action=="collect" and str(a.get("type",""))=="sheep",
 		"tail":1.5 if str(a.get("trait",""))=="friendly" else 0.5 if str(a.get("trait",""))=="shy" else 1.0}
@@ -44,7 +44,7 @@ static func animal(c: CanvasItem,a: Dictionary,at: Vector2,catalog: Dictionary,c
 	var phase := posmod(floori(clock*9),8)
 	var lift := float(LIFT[phase]) if bool(v.walking) else 0.0
 	at = at.round()
-	_shadow(c,at,(31.0 if bird else 49.0)*size,8*size)
+	if not preload("res://scripts/animal_layers.gd").data().has(type_id):_shadow(c,at,(31.0 if bird else 49.0)*size,8*size)
 	if preload("res://scripts/animal_art.gd").draw(c,a,v,at,clock if str(GameState.visual_fx.get("motion","full"))=="full" else 0.0):
 		_animal_status(c,a,v,at,size)
 		return true
@@ -115,6 +115,7 @@ static func _animal_status(c:CanvasItem,a:Dictionary,v:Dictionary,at:Vector2,siz
 		c.draw_string(ThemeDB.fallback_font,at+Vector2(-9,-47*size),symbol,HORIZONTAL_ALIGNMENT_CENTER,18,12,Color("#fff2d2"))
 
 static func pet(c: CanvasItem,pet_data: Dictionary,companion: Dictionary,at: Vector2,clock: float,minutes: float) -> void:
+	if preload("res://scripts/animal_layers.gd").draw(c,{"id":"pet","type":str(companion.get("type","cat"))},{"direction":str(pet_data.get("position",{}).get("direction","down")),"young":false,"walking":bool(pet_data.get("position",{}).get("walking",false)),"sleepy":minutes>=1140},at,clock):return
 	if preload("res://scripts/pet_art.gd").draw(c,pet_data,companion,at,minutes,clock): return
 	var p: Dictionary = pet_data.get("position",{})
 	var cat := str(companion.get("type","cat"))=="cat"

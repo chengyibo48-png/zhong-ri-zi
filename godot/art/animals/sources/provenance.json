@@ -1,0 +1,65 @@
+[
+  {
+    "species": "hen",
+    "source": "res://art/animals/sources/hen-components.png",
+    "sha256": "ed55460124c99d4476666e13923bb07d5ef015d20700f5fad6039b09359a4b8b",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral hen component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "duck",
+    "source": "res://art/animals/sources/duck-components.png",
+    "sha256": "f3104d4e89a68c34ce8c27375799a0572da77f91e8423d90923672d2680eff37",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral duck component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "cow",
+    "source": "res://art/animals/sources/cow-components.png",
+    "sha256": "f2a170340f4b096e70ad421b6ad558bbc23ccb97d6e01e0ba0561072eb02e4fe",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral cow component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "sheep",
+    "source": "res://art/animals/sources/sheep-components.png",
+    "sha256": "20033e3aac3ac07dfa4e877dedb000ec75e87f67f4ac9e4abe70cf369d4cef84",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral sheep component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "pig",
+    "source": "res://art/animals/sources/pig-components.png",
+    "sha256": "5da8a7e312e7e105e7d9ec126492ed419e53539ffb7bd7b074720fb862e37699",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral pig component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "goat",
+    "source": "res://art/animals/sources/goat-components.png",
+    "sha256": "6840eeb9b8643d5a7a4a50113dd0ea92dd7231cb6b660563a256bcfa1d547c26",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral goat component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "rabbit",
+    "source": "res://art/animals/sources/rabbit-components.png",
+    "sha256": "b15c7c0c859ed380380ef4cef5550b083c3ca969866698e1818584ed07245e39",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral rabbit component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "cat",
+    "source": "res://art/animals/sources/cat-components.png",
+    "sha256": "4885ea7e8c701f63b789e7e7081e0a790c1e4ee912fa547fe63a13a0c5060ff5",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral cat component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  },
+  {
+    "species": "dog",
+    "source": "res://art/animals/sources/dog-components.png",
+    "sha256": "44b6b6c9cdc168828b4dc39f5dc3dbf5f5ec8ca1995875abd7853e7e08ee3705",
+    "method": "built-in imagegen; transparent component atlas, no source pixel edits",
+    "prompt": "Painted Chinese pastoral dog component atlas, 6 columns: torso, head, front leg or wing, hind leg or foot, tail, closed-eye head; four explicit views; independent adult and juvenile rows for livestock, adult-only cat/dog. Transparent background, realistic gouache volume, stable scale and separate padded components."
+  }
+]

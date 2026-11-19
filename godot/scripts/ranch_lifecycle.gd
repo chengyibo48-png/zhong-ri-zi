@@ -35,7 +35,7 @@ static func advance(s: Node, previous_day: int, weather: String, _previous_minut
 		for animal in residents:
 			var spec: Dictionary = species_catalog[str(animal.type)]
 			var breed: Dictionary = breeds[str(animal.breed)]
-			if int(animal.get("postpartumUntil",-1)) == previous_day: animal.rest = false
+			if int(animal.get("postpartumUntil",-1))>=0 and previous_day>=int(animal.postpartumUntil): animal.rest=false;animal.postpartumUntil=-1
 			animal.age = mini(100000, int(animal.age) + 1)
 			animal.hunger = clampf(float(animal.hunger) - (16.0 + float(spec.feed) * 2.0) * (1.15 if str(animal.trait) == "hungry" else 1.0), 0.0, 100.0)
 			animal.clean = clampf(float(animal.clean) - (8 if str(barn_id) == "pigpen" else 4) - (3 if wet else 0) + (2 if int(barn.protection) > 0 else 0), 0.0, 100.0)
@@ -68,7 +68,7 @@ static func advance(s: Node, previous_day: int, weather: String, _previous_minut
 				animal.mood = clampf(float(animal.mood) - 8.0, 0.0, 100.0)
 				animal.stress = clampf(float(animal.stress) + 8.0, 0.0, 100.0)
 				s._ranch_notice(str(animal.name) + "听见野外动静有些受惊，可安抚或增建围护。")
-			var can_produce := mature and not bool(animal.retired) and not bool(animal.lost) and float(animal.health) >= 30 and float(animal.hunger) >= 25 and (not bool(spec.get("femaleOnly",true)) or str(animal.sex) == "female")
+			var can_produce := preload("res://scripts/animal_species.gd").produces(s,str(animal.type)) and mature and int(animal.get("postpartumUntil",-1))<0 and not bool(animal.retired) and not bool(animal.lost) and float(animal.health) >= 30 and float(animal.hunger) >= 25 and (not bool(spec.get("femaleOnly",true)) or str(animal.sex) == "female")
 			if can_produce and int(animal.ready) < 28:
 				var rate := float(breed.rate) * (1.08 if str(animal.trait) == "busy" else 1.0) * (0.55 if float(animal.health) < 60 else 1.0) * (0.65 if int(animal.age) >= int(spec.elder) else 1.0) * (0.6 if float(animal.illness) > 30 else 1.0)
 				animal.progress = float(animal.progress) + rate
@@ -78,7 +78,7 @@ static func advance(s: Node, previous_day: int, weather: String, _previous_minut
 					var grade: int = s._animal_quality(animal, barn)
 					PRODUCTS.produce(s,animal,str(animal.product),1,grade,previous_day)
 					stock[grade] = int(stock[grade]) + 1
-					if str(animal.type) in ["hen", "duck"] and previous_day % 5 == 0: PRODUCTS.produce(s,animal,"feather",1,grade,previous_day)
+					if preload("res://scripts/animal_species.gd").bird(s,str(animal.type)) and previous_day % 5 == 0: PRODUCTS.produce(s,animal,"feather",1,grade,previous_day)
 					
 			if not can_produce and not mature: animal.progress = 0
 			animal.feedQuality = maxf(0.0, float(animal.feedQuality) - 1.0)
@@ -89,26 +89,7 @@ static func advance(s: Node, previous_day: int, weather: String, _previous_minut
 		barn.cleanStatus = "运行 · 料仓垫草" if bool(barn.autoClean) and int(stores.bedding)>0 else "停机 · 料仓缺垫草" if bool(barn.autoClean) else "手动换草"
 
 	for zone in range(2): grass[zone] = clampf(float(grass[zone]) + (10 if int(s.ranch.zone) != zone else 4) + (5 if wet else 0), 0.0, 100.0)
-	for birth in s.ranch.births.duplicate():
-		var home := str(species_catalog[str(birth.type)].home)
-		var barn: Dictionary = barns[home]
-		var mother: Dictionary = {}
-		for animal in s.animals:
-			if birth.mother != null and str(animal.id) == str(birth.mother): mother = animal; break
-		if float(barn.clean) < 40 or not mother.is_empty() and (float(mother.health) < 50 or float(mother.hunger) < 30) or extreme and int(barn.comfort) < 1: continue
-		birth.remaining = maxi(0, int(birth.remaining) - 1)
-		if int(birth.remaining) == 0:
-			var parent_ids: Array = []
-			if birth.mother != null and str(birth.mother) != "": parent_ids.append(str(birth.mother))
-			if birth.father != null and str(birth.father) != "": parent_ids.append(str(birth.father))
-			var baby: Dictionary = s._ranch_new_animal(str(birth.type), "female" if int(s.ranch.nextId) % 2 == 1 else "male", str(birth.breed), 0, parent_ids)
-			if not mother.is_empty():
-				if int(s.ranch.nextId) % 2 == 0: baby.trait = mother.trait; baby.personality = catalog.traits[str(baby.trait)]
-				mother.care.breed = s.day
-				mother.rest = true
-				mother.postpartumUntil = s.day+2
-			s.ranch.births.erase(birth)
-			s._ranch_notice("新伙伴 " + str(baby.name) + " 出生了！已安置在" + str(catalog.barns[home].name) + "。")
+	preload("res://scripts/ranch_nurture.gd").advance_births(s,previous_day,extreme)
 	pet.hunger = clampf(float(pet.hunger) - 12.0, 0.0, 100.0)
 	pet.energy = clampf(float(pet.energy) + (30 if str(pet.mode) == "home" else 10), 0.0, 100.0)
 	if previous_day % 13 == 0 and not cat_help and int(stores.grainFeed) > 0:

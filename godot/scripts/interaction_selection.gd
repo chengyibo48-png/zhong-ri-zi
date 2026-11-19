@@ -31,8 +31,11 @@ func choose(at: Vector2, facing: Vector2, points: Array, hover: Dictionary = {},
 		var point: Dictionary = candidate.duplicate(true)
 		var offset := Vector2(float(point.get("x",0)),float(point.get("y",0))) - at
 		var distance := offset.length()
-		if distance >= 53.0: continue
+		# Rod casts accept the full bank radius; other interactions retain their range.
+		if distance > 75.0 if str(point.get("kind","")) == "fish" else distance >= 53.0: continue
 		var fit := 8.0 if str(point.get("kind","")) == "plot" and tool in ["hoe","seed","water","sickle"] else 0.0
+		# With a rod selected, nearby livestock must not hide the bank action.
+		if str(point.get("kind",""))=="fish" and tool=="rod":fit=120.0
 		var is_ready := bool(readiness.call(point,tool)) if readiness.is_valid() else bool(point.get("ready",true))
 		point.ready = is_ready
 		var available := 3.0 if is_ready else 0.0

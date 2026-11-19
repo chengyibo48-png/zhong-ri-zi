@@ -1,0 +1,740 @@
+{
+  "hen": {
+    "height": 25,
+    "stride": 25,
+    "radius": 7,
+    "gait": [
+      0,
+      0.5
+    ],
+    "leg": 0.2,
+    "body": 0.52,
+    "neck": 0.05,
+    "head": 0.26,
+    "width": 0.68,
+    "family": "bird",
+    "waterfowl": false,
+    "idle": "peck",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "duck": {
+    "height": 27,
+    "stride": 28,
+    "radius": 9,
+    "gait": [
+      0,
+      0.5
+    ],
+    "leg": 0.18,
+    "body": 0.5,
+    "neck": 0.09,
+    "head": 0.27,
+    "width": 0.84,
+    "family": "bird",
+    "waterfowl": true,
+    "idle": "preen",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "cow": {
+    "height": 49,
+    "stride": 58,
+    "radius": 16,
+    "gait": [
+      0,
+      0.5,
+      0.25,
+      0.75
+    ],
+    "leg": 0.29,
+    "body": 0.4,
+    "neck": 0.06,
+    "head": 0.32,
+    "width": 1.0,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "ruminate",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 3.2,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "sheep": {
+    "height": 39,
+    "stride": 42,
+    "radius": 13,
+    "gait": [
+      0,
+      0.5,
+      0.28,
+      0.78
+    ],
+    "leg": 0.27,
+    "body": 0.45,
+    "neck": 0.05,
+    "head": 0.31,
+    "width": 0.92,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "ruminate",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 3.2,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "pig": {
+    "height": 32,
+    "stride": 35,
+    "radius": 14,
+    "gait": [
+      0,
+      0.48,
+      0.23,
+      0.72
+    ],
+    "leg": 0.26,
+    "body": 0.5,
+    "neck": 0.01,
+    "head": 0.34,
+    "width": 1.04,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "root",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "goat": {
+    "height": 39,
+    "stride": 42,
+    "radius": 12,
+    "gait": [
+      0,
+      0.5,
+      0.24,
+      0.74
+    ],
+    "leg": 0.3,
+    "body": 0.39,
+    "neck": 0.1,
+    "head": 0.3,
+    "width": 0.9,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "browse",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 3.2,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "rabbit": {
+    "height": 24,
+    "stride": 30,
+    "radius": 8,
+    "gait": [
+      0.05,
+      0.05,
+      0.55,
+      0.55
+    ],
+    "leg": 0.22,
+    "body": 0.52,
+    "neck": 0,
+    "head": 0.36,
+    "width": 0.82,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "wash",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "cat": {
+    "height": 26,
+    "stride": 34,
+    "radius": 9,
+    "gait": [
+      0,
+      0.5,
+      0.25,
+      0.75
+    ],
+    "leg": 0.3,
+    "body": 0.38,
+    "neck": 0.05,
+    "head": 0.32,
+    "width": 0.95,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "stretch",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "dog": {
+    "height": 32,
+    "stride": 42,
+    "radius": 11,
+    "gait": [
+      0,
+      0.5,
+      0.25,
+      0.75
+    ],
+    "leg": 0.31,
+    "body": 0.4,
+    "neck": 0.05,
+    "head": 0.31,
+    "width": 0.92,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "sniff",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "horse": {
+    "height": 56,
+    "stride": 72,
+    "radius": 19,
+    "gait": [
+      0,
+      0.5,
+      0.25,
+      0.75
+    ],
+    "leg": 0.39,
+    "body": 0.31,
+    "neck": 0.17,
+    "head": 0.28,
+    "width": 1.02,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "graze",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 1.05,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "alpaca": {
+    "height": 48,
+    "stride": 55,
+    "radius": 15,
+    "gait": [
+      0,
+      0.5,
+      0,
+      0.5
+    ],
+    "leg": 0.3,
+    "body": 0.35,
+    "neck": 0.22,
+    "head": 0.18,
+    "width": 0.82,
+    "family": "mammal",
+    "waterfowl": false,
+    "idle": "observe",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 3.2,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  },
+  "goose": {
+    "height": 32,
+    "stride": 32,
+    "radius": 10,
+    "gait": [
+      0,
+      0.5
+    ],
+    "leg": 0.17,
+    "body": 0.42,
+    "neck": 0.34,
+    "head": 0.2,
+    "width": 0.87,
+    "family": "bird",
+    "waterfowl": true,
+    "idle": "preen",
+    "eyes": {
+      "down": [
+        [
+          0.34,
+          0.4
+        ],
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "left": [
+        [
+          0.34,
+          0.4
+        ]
+      ],
+      "right": [
+        [
+          0.66,
+          0.4
+        ]
+      ],
+      "up": []
+    },
+    "idleDuration": 2.4,
+    "youngHeight": 0.62,
+    "youngLeg": 0.8,
+    "youngHead": 1.22,
+    "coatShapes": {
+      "local": [
+        1.0,
+        1.0
+      ],
+      "hardy": [
+        1.07,
+        1.1
+      ],
+      "productive": [
+        0.97,
+        0.96
+      ]
+    }
+  }
+}

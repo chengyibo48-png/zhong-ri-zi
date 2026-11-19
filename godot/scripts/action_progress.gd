@@ -3,10 +3,12 @@ extends Control
 var title: Label
 var phase: Label
 var progress: ProgressBar
+var skip_button:Button
 var cancel_button: Button
 var card: PanelContainer
 var activity_icon: TextureRect
 var _icon_phase := 0.0
+var saving:bool=false
 
 func _ready() -> void:
  set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -45,6 +47,11 @@ func _ready() -> void:
  cancel_button.text = "取消 · Esc / B"
  cancel_button.pressed.connect(GameState.cancel_player_action)
  heading.add_child(cancel_button)
+ skip_button=Button.new();skip_button.text="收好演出";skip_button.set_meta("ui_role","quiet")
+ skip_button.pressed.connect(func():
+  if GameState.action_snapshot().has("houseContact") and not GameState.action_sequence.active.is_empty():
+   GameState.action_sequence.active.elapsed=float(GameState.action_sequence.active.spec.duration);GameState._process_action(0.0))
+ heading.add_child(skip_button)
  phase = Label.new()
  phase.add_theme_font_size_override("font_size",14)
  phase.clip_text = true
@@ -64,7 +71,9 @@ func refresh(snapshot: Dictionary) -> void:
  var opening := not visible and not snapshot.is_empty()
  visible = not snapshot.is_empty()
  if not visible:return
+ if saving:get_viewport().set_input_as_handled();return
  cancel_button.text="停下 · "+GameState.cancel_input_label()
+ skip_button.visible=snapshot.has("houseContact")
  _layout_card()
  card.visible=str(snapshot.get("kind",""))!="fish"
  if opening and card.visible:cancel_button.grab_focus()
@@ -76,10 +85,14 @@ func refresh(snapshot: Dictionary) -> void:
 
 func _input(event: InputEvent) -> void:
  if not visible:return
+ if saving:get_viewport().set_input_as_handled();return
+ if GameState.fishing_active() and GameState.ui_open:return
  # Capture before focused underlying buttons receive keyboard or controller input.
  if event is InputEventKey:
   if event.pressed and event.keycode==KEY_ESCAPE:GameState.cancel_player_action()
-  elif event.pressed and not event.echo and event.keycode==KEY_SPACE and GameState.fishing_active():GameState.toggle_fishing_reel()
+  elif event.keycode in [KEY_SPACE,GameState.bound_key("interact",KEY_E)] and GameState.fishing_active():
+   if event.pressed:GameState.set_source_input_mode("keyboard")
+   if not event.echo:GameState.fishing_input("press" if event.pressed else "release","keyboard")
   get_viewport().set_input_as_handled()
  elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
   # Button edges and cancellation are owned by the source frame sampler.
@@ -96,6 +109,10 @@ func _layout_card() -> void:
  card.offset_top=bottom-maxf(100,card.get_combined_minimum_size().y)
 
 func _process(delta: float) -> void:
+ if GameState.transactions!=null and GameState.transactions.busy():
+  saving=true;show();card.show();title.text="正在记下这次安排";phase.text="保存确认中 · 钱物和进度尚未结算";progress.value=0;cancel_button.disabled=true;skip_button.hide()
+ elif saving:
+  saving=false;cancel_button.disabled=false;refresh(GameState.action_snapshot())
  if not visible or not is_instance_valid(activity_icon): return
  _icon_phase += delta if str(GameState.visual_fx.get("motion", "full")) == "full" and not GameState.simulation_hidden() else 0.0
  activity_icon.pivot_offset=activity_icon.size*0.5

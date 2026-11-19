@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "guides": [
     {
       "id": "guide:home:bag",
@@ -15,7 +15,8 @@
       "previous": "",
       "reward": {},
       "auto": true,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:home:tools",
@@ -31,7 +32,8 @@
       "previous": "guide:home:bag",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:home:map",
@@ -47,7 +49,8 @@
       "previous": "guide:home:tools",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:home:rest",
@@ -63,7 +66,8 @@
       "previous": "guide:home:map",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:home:plans",
@@ -79,7 +83,8 @@
       "previous": "guide:home:rest",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:home:help",
@@ -93,11 +98,10 @@
       "source": "home",
       "page": "help",
       "previous": "guide:home:plans",
-      "reward": {
-        "cabbageSeed": 2
-      },
+      "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:farm:seed",
@@ -111,9 +115,12 @@
       "source": "seed",
       "page": "farmcare",
       "previous": "",
-      "reward": {},
+      "reward": {
+        "cabbageSeed": 1
+      },
       "auto": true,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:farm:sow",
@@ -129,7 +136,8 @@
       "previous": "guide:farm:seed",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:farm:water",
@@ -145,7 +153,8 @@
       "previous": "guide:farm:sow",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:farm:harvest",
@@ -161,7 +170,8 @@
       "previous": "guide:farm:water",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:farm:soil",
@@ -177,7 +187,8 @@
       "previous": "guide:farm:harvest",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:farm:process",
@@ -191,11 +202,10 @@
       "source": "kitchen",
       "page": "processing",
       "previous": "guide:farm:soil",
-      "reward": {
-        "beanSeed": 2
-      },
+      "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": ""
     },
     {
       "id": "guide:ranch:home",
@@ -211,7 +221,8 @@
       "previous": "",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:ranch"
     },
     {
       "id": "guide:ranch:movein",
@@ -227,7 +238,8 @@
       "previous": "guide:ranch:home",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:ranch"
     },
     {
       "id": "guide:ranch:care",
@@ -243,7 +255,8 @@
       "previous": "guide:ranch:movein",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:ranch"
     },
     {
       "id": "guide:ranch:collect",
@@ -259,7 +272,8 @@
       "previous": "guide:ranch:care",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:ranch"
     },
     {
       "id": "guide:ranch:graze",
@@ -273,11 +287,10 @@
       "source": "ranch",
       "page": "animals",
       "previous": "guide:ranch:collect",
-      "reward": {
-        "hay": 4
-      },
+      "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:ranch"
     },
     {
       "id": "guide:fish:prepare",
@@ -293,7 +306,8 @@
       "previous": "",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:fishing"
     },
     {
       "id": "guide:fish:catch",
@@ -309,7 +323,8 @@
       "previous": "guide:fish:prepare",
       "reward": {},
       "auto": false,
-      "afterAccept": true
+      "afterAccept": true,
+      "revealMetric": "visit:fishing"
     },
     {
       "id": "guide:fish:result",
@@ -325,7 +340,8 @@
       "previous": "guide:fish:catch",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:fishing"
     },
     {
       "id": "guide:fish:trap",
@@ -341,25 +357,25 @@
       "previous": "guide:fish:result",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:fishing"
     },
     {
       "id": "guide:fish:collect",
       "chain": "fish",
       "chainTitle": "水畔手记",
       "category": "经营",
-      "title": "次日沿岸收笼",
-      "text": "投饵后的下一天，走到笼边领取一次产物；未领取时会保留。",
+      "title": "沿岸查看成熟捕笼",
+      "text": "捕笼投饵满两天后，走到实际笼位收取；以笼位记录的可收时间为准。",
       "metric": "trapCatch",
       "target": 1,
       "source": "water",
       "page": "fishing",
       "previous": "guide:fish:trap",
-      "reward": {
-        "grainBait": 4
-      },
+      "reward": {},
       "auto": false,
-      "afterAccept": true
+      "afterAccept": true,
+      "revealMetric": "visit:fishing"
     },
     {
       "id": "guide:cook:ingredients",
@@ -373,9 +389,12 @@
       "source": "item:cabbage",
       "page": "bag",
       "previous": "",
-      "reward": {},
+      "reward": {
+        "cabbage": 1
+      },
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:kitchen"
     },
     {
       "id": "guide:cook:meal",
@@ -391,7 +410,8 @@
       "previous": "guide:cook:ingredients",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:kitchen"
     },
     {
       "id": "guide:cook:fresh",
@@ -407,7 +427,8 @@
       "previous": "guide:cook:meal",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:kitchen"
     },
     {
       "id": "guide:cook:share",
@@ -423,7 +444,8 @@
       "previous": "guide:cook:fresh",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:kitchen"
     },
     {
       "id": "guide:cook:process",
@@ -437,11 +459,10 @@
       "source": "kitchen",
       "page": "processing",
       "previous": "guide:cook:share",
-      "reward": {
-        "rice": 2
-      },
+      "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:kitchen"
     },
     {
       "id": "guide:neighbor:hello",
@@ -457,7 +478,8 @@
       "previous": "",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "talk"
     },
     {
       "id": "guide:neighbor:gift",
@@ -473,7 +495,8 @@
       "previous": "guide:neighbor:hello",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "talk"
     },
     {
       "id": "guide:neighbor:wish",
@@ -489,7 +512,8 @@
       "previous": "guide:neighbor:gift",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "talk"
     },
     {
       "id": "guide:neighbor:story",
@@ -505,7 +529,8 @@
       "previous": "guide:neighbor:wish",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "talk"
     },
     {
       "id": "guide:neighbor:together",
@@ -521,7 +546,8 @@
       "previous": "guide:neighbor:story",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "talk"
     },
     {
       "id": "guide:village:bridge",
@@ -537,7 +563,8 @@
       "previous": "",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "project:bridge"
     },
     {
       "id": "guide:village:canal",
@@ -553,7 +580,8 @@
       "previous": "guide:village:bridge",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "project:bridge"
     },
     {
       "id": "guide:village:market",
@@ -569,7 +597,8 @@
       "previous": "guide:village:canal",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "project:bridge"
     },
     {
       "id": "guide:village:stage",
@@ -583,11 +612,10 @@
       "source": "project:stage",
       "page": "projects",
       "previous": "guide:village:market",
-      "reward": {
-        "wood": 4
-      },
+      "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "project:bridge"
     },
     {
       "id": "guide:memory:season",
@@ -603,7 +631,8 @@
       "previous": "",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:calendar"
     },
     {
       "id": "guide:memory:research",
@@ -619,7 +648,8 @@
       "previous": "guide:memory:season",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:calendar"
     },
     {
       "id": "guide:memory:donate",
@@ -635,7 +665,8 @@
       "previous": "guide:memory:research",
       "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:calendar"
     },
     {
       "id": "guide:memory:year",
@@ -649,11 +680,10 @@
       "source": "home",
       "page": "year",
       "previous": "guide:memory:donate",
-      "reward": {
-        "rice": 2
-      },
+      "reward": {},
       "auto": false,
-      "afterAccept": false
+      "afterAccept": false,
+      "revealMetric": "visit:calendar"
     }
   ],
   "serviceHours": {

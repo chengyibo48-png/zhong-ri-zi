@@ -9,7 +9,10 @@ var quote:Label
 var reveal:=0.0
 var reveal_pause:=0.0
 var buttons:Dictionary={}
+var action_parent:Control
+var expanded_extras:Dictionary={}
 func _ready()->void:
+ set_meta("ui_managed_layout",true)
  set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
  mouse_filter=Control.MOUSE_FILTER_STOP
  var backdrop:=ColorRect.new()
@@ -25,24 +28,29 @@ func _ready()->void:
  panel.add_child(margin)
  var layout:=VBoxContainer.new();margin.add_child(layout)
  close_button=Button.new();close_button.text="关闭 Esc";close_button.pressed.connect(close);layout.add_child(close_button)
- scroll=ScrollContainer.new();scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;layout.add_child(scroll)
+ close_button.set_meta("ui_role","quiet");close_button.size_flags_horizontal=Control.SIZE_SHRINK_END
+ scroll=ScrollContainer.new();scroll.follow_focus=true;scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;layout.add_child(scroll)
  column=VBoxContainer.new();column.size_flags_horizontal=Control.SIZE_EXPAND_FILL;column.add_theme_constant_override("separation",12);scroll.add_child(column)
+ column.minimum_size_changed.connect(func():
+  if visible and bool(get_meta("ui_shell",false)):get_parent().ui_stack.request_fit(self))
  _fit_panel();hide()
 func _notification(what:int)->void:
  if what==NOTIFICATION_RESIZED and is_instance_valid(panel):_fit_panel()
 func _fit_panel()->void:
+ if bool(get_meta("ui_shell",false)):return
  var half:=Vector2(minf(360,maxf(1,(get_viewport_rect().size.x-24)/2)),minf(300,maxf(1,(get_viewport_rect().size.y-24)/2)))
  panel.offset_left=-half.x;panel.offset_right=half.x;panel.offset_top=-half.y;panel.offset_bottom=half.y
 func _text(value:String,parent:Node=column)->Label:
  var label:=Label.new();label.text=value;label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;label.size_flags_horizontal=Control.SIZE_EXPAND_FILL;parent.add_child(label);return label
 func _button(key:String,text:String,callback:Callable)->void:
- var button:=Button.new();button.text=text;button.pressed.connect(callback);column.add_child(button);buttons[key]=button
+ var button:=Button.new();button.text=text;button.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.pressed.connect(callback);(action_parent if is_instance_valid(action_parent) else column).add_child(button);buttons[key]=button
 func open_panel(id:String)->void:
  if GameState.action_busy():return
- npc_id=id;show();GameState.ui_open=true;refresh();close_button.grab_focus()
+ npc_id=id;show();GameState.ui_open=true;refresh();close_button.grab_focus.call_deferred()
 func close()->void:hide();GameState.ui_open=false
 func is_open()->bool:return visible
 func refresh()->void:
+ action_parent=null
  buttons.clear()
  for child in column.get_children():column.remove_child(child);child.queue_free()
  var person:Dictionary={}
@@ -53,7 +61,7 @@ func refresh()->void:
  var resident:Dictionary=GameState.neighbors.get("people",{}).get(npc_id,{})
  var last:Dictionary=resident.get("last",{})
  var emotion:=str(last.get("emotion","calm"))
- _text(str(person.name)+" · 坐下慢慢聊")
+ _text(str(person.name)+" · 坐下慢慢聊").set_meta("ui_role","title")
  _text(str(person.get("role",""))+" · "+GameState._relationship_stage(int(GameState.relations.get(npc_id,{}).get("points",0)))+" · "+str(profile.get("trait","")))
  var row:=HBoxContainer.new();column.add_child(row)
  var portrait:=PORTRAIT.new();portrait.custom_minimum_size=Vector2(128,160);portrait.configure(npc_id,person,emotion);row.add_child(portrait)
@@ -64,13 +72,16 @@ func refresh()->void:
  reveal=0;reveal_pause=0
  var where:Dictionary=GameState.npc_location(npc_id)
  _text(str(where.get("place",""))+" · "+str(where.get("activity","")),words)
- _text("任务交付 · 与普通赠礼分开")
+ column.add_child(HSeparator.new())
+ _text("邻里的事").set_meta("ui_role","heading")
  for task: Dictionary in GameState.quest_snapshot():
   if str(task.get("npc",""))!=npc_id or str(task.kind) not in ["wish","favor"] or str(task.status) in ["completed","expired","abandoned"]:continue
   var text: String=str(task.title)+" · "+("材料齐了" if str(task.status)=="ready" else "查看所需物品")
   _button("quest:"+str(task.id),text,_quest.bind(str(task.id)))
+ var topics:=GridContainer.new();topics.columns=2;topics.add_theme_constant_override("h_separation",10);topics.add_theme_constant_override("v_separation",8);column.add_child(topics);action_parent=topics
  for topic in [["auto","聊聊此刻"],["daily","说点家常"],["advice","请教生活窍门"],["memory","说起一起经历的事"]]:
   _button(str(topic[0]),str(topic[1]),_talk.bind(str(topic[0])))
+ action_parent=null
  var event:Dictionary=resident.get("event",{})
  if not event.is_empty():
   var status:=str(event.get("status","offered"))
@@ -87,8 +98,18 @@ func refresh()->void:
    else:
     _button("accept","我愿意搭把手",_event.bind("accept",int(event.get("day",-1))))
     _button("later","先说好，改天再来",_event.bind("later",int(event.get("day",-1))))
+ column.add_child(HSeparator.new())
  _text("对方惦记着\n"+str(profile.get("goal",""))+"\n"+str(GameState.npc_story_readiness(npc_id).get("message","")))
+ if GameState.quests.get("memorials",{}).has(npc_id):_text("后来再见时\n"+str(GameState.quests.memorials[npc_id]))
+ var house_memory:Dictionary=GameState.interior_state.get("household",{}).get("receipts",{}).get("home-"+npc_id+":theme",{})
+ if not house_memory.is_empty():
+  var house_profile:Dictionary=preload("res://scripts/house_geometry.gd").profile("home-"+npc_id)
+  _text("屋里的新记忆").set_meta("ui_role","heading")
+  _text("你上次一起做的"+str(house_profile.memorial)+"还在。我把它"+str(house_profile.steps[2].options[int(house_memory.choices[2])])+"了；有空也可以再换一种试试。")
  _button("story","聊聊个人故事",_journal.bind(true))
+ var extras:=VBoxContainer.new();extras.visible=bool(expanded_extras.get(npc_id,false))
+ _button("more","更多来往 · 赠礼、吃饭与记录",func():extras.visible=not extras.visible;expanded_extras[npc_id]=extras.visible)
+ buttons.more.set_meta("ui_role","disclosure");column.add_child(extras);action_parent=extras
  _button("gift","送一道菜",_gift)
  _button("home","邀请来吃饭",_home)
  _button("person","查看行踪与约定",_journal.bind(false))
@@ -97,6 +118,7 @@ func refresh()->void:
   var spouse:=str(GameState.marriage.get("spouse",""))==npc_id
   var dating:=str(GameState.partners.get(npc_id,""))=="dating"
   _button("relationship","我们的共同生活" if spouse else "商量婚礼" if dating else "认真表达心意",_relationship.bind(spouse,dating))
+ action_parent=null
 func _process(delta:float)->void:
  if visible and is_instance_valid(quote) and quote.visible_characters>=0:
   if quote.visible_characters==0 and reveal==0.0:reveal_pause=0.0

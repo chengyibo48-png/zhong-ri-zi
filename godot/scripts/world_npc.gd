@@ -3,6 +3,8 @@ extends Node2D
 const CHARACTER_SCENE := preload("res://scenes/character_visual.tscn")
 
 var npc_id := ""
+var _last_sample_clock:=-1.0
+var _last_sample_position:=Vector2.ZERO
 var _last_presentation: Array = []
 var npc_data: Dictionary = {}
 var npc_index := 0
@@ -80,10 +82,17 @@ func present_resident(state: Node, room: String = "") -> void:
 	var at: Dictionary = p if room == "" else runtime.get("inside", {})
 	if at.is_empty(): at = {"x":565.0,"y":430.0,"direction":"left"}
 	global_position = Vector2(float(at.x), float(at.y))
+	if is_instance_valid(character_visual):
+		var elapsed:float=state.source_frame_time-_last_sample_clock
+		if _last_sample_clock>=0 and elapsed>0 and elapsed<.25:character_visual.set_locomotion_sample(global_position-_last_sample_position,elapsed)
+		else:character_visual.set_locomotion_sample(Vector2.ZERO,.016)
+	_last_sample_clock=state.source_frame_time;_last_sample_position=global_position
 	var on_screen := preload("res://scripts/life_presentation.gd").visible_rect(self,96.0).has_point(global_position)
 	if is_instance_valid(character_visual): character_visual.visible = on_screen
 	if not on_screen: return
-	var signature := [global_position,at.get("direction"),runtime.get("walking",false),runtime.get("activity"),runtime.get("plan",{}),state.ui_open]
+	character_visual.resident_context=runtime.get("plan",{}).duplicate(true)
+	character_visual.work_contact=preload("res://scripts/resident_work_pose.gd").describe(state,npc_id,global_position,actual_room,runtime)
+	var signature := [global_position,at.get("direction"),runtime.get("walking",false),runtime.get("activity"),runtime.get("listening",false),runtime.get("plan",{}),state.ui_open]
 	if signature == _last_presentation: return
 	_last_presentation = signature.duplicate(true)
 	var plan: Dictionary = runtime.get("plan", {})
@@ -95,7 +104,7 @@ func present_resident(state: Node, room: String = "") -> void:
 	facing = {"left":Vector2.LEFT,"right":Vector2.RIGHT,"up":Vector2.UP,"down":Vector2.DOWN}.get(str(at.get("direction","down")),Vector2.DOWN)
 	if is_instance_valid(character_visual):
 		character_visual.call("set_pose", facing, bool(runtime.get("walking", false)) and not state.ui_open)
-		character_visual.call("set_working", not bool(runtime.get("walking", false)) and str(plan.get("key", "")) == "work" and not state.ui_open)
+		character_visual.call("set_working", not bool(runtime.get("listening",false)) and not bool(runtime.get("walking", false)) and (str(plan.get("key", "")) == "work" or not character_visual.work_contact.is_empty()) and not state.ui_open)
 	queue_redraw()
 
 func sync_action_visual(snapshot: Dictionary) -> void:

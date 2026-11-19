@@ -102,10 +102,5 @@ func _draw() -> void:
 			draw_circle(Vector2(12, -10), 7, Color("28392e"))
 			draw_string(ThemeDB.fallback_font, Vector2(8, -7), glyph, HORIZONTAL_ALIGNMENT_LEFT, 12, 9, tint)
 	if index == FarmWorld.hovered_plot:
-		var corners := [Vector2(-21,-10),Vector2(21,-10),Vector2(-21,16),Vector2(21,16)]
-		for corner: Vector2 in corners:
-			var inward := Vector2(1 if corner.x < 0 else -1,1 if corner.y < 0 else -1)
-			draw_line(corner,corner+Vector2(inward.x*5,0),Color("f5e7a5"),1.3,true)
-			draw_line(corner,corner+Vector2(0,inward.y*4),Color("f5e7a5"),1.3,true)
 		if data.tilled:
 			draw_string(ThemeDB.fallback_font, Vector2(-20, 25), "肥%d 湿%d" % [fertility, int(data.get("moisture", 45))], HORIZONTAL_ALIGNMENT_LEFT, 64, 9, Color("f7edcf"))

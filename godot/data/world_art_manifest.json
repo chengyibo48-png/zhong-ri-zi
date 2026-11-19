@@ -38,7 +38,41 @@
       "sourceSha256": "ee77ef36a1cf153b14886144495e7f59ffe3005f6acbf468f0b15c260a23784a",
       "status": "partial",
       "verifiedChecks": [],
-      "worldHeight": 49
+      "worldHeight": 49,
+      "poseAtlas": {
+        "path": "res://art/world/animals/poses-v2/cow.png",
+        "frameSize": [
+          256,
+          128
+        ],
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "states": {
+          "eat": 0,
+          "sleep": 1
+        },
+        "anchor": [
+          128,
+          116
+        ]
+      },
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "actual_feeding_pose",
+          "tucked_sleep_pose",
+          "direction",
+          "consistent_foot_anchor"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
     },
     "animals/duck": {
       "anchor": [
@@ -78,7 +112,41 @@
       "sourceSha256": "0065c039beddc36a2635e0c3bde03e4501fc748212f380aa7dd304935fd9a1e9",
       "status": "partial",
       "verifiedChecks": [],
-      "worldHeight": 27
+      "worldHeight": 27,
+      "poseAtlas": {
+        "path": "res://art/world/animals/poses-v2/duck.png",
+        "frameSize": [
+          256,
+          128
+        ],
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "states": {
+          "eat": 0,
+          "sleep": 1
+        },
+        "anchor": [
+          128,
+          116
+        ]
+      },
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "actual_feeding_pose",
+          "tucked_sleep_pose",
+          "direction",
+          "consistent_foot_anchor"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
     },
     "animals/hen": {
       "anchor": [
@@ -118,7 +186,41 @@
       "sourceSha256": "1c1d157f4f7648d5afb151be88ed0da78d4284ee0855fbb6b2761d020bf84714",
       "status": "partial",
       "verifiedChecks": [],
-      "worldHeight": 25
+      "worldHeight": 25,
+      "poseAtlas": {
+        "path": "res://art/world/animals/poses-v2/hen.png",
+        "frameSize": [
+          256,
+          128
+        ],
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "states": {
+          "eat": 0,
+          "sleep": 1
+        },
+        "anchor": [
+          128,
+          116
+        ]
+      },
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "actual_feeding_pose",
+          "tucked_sleep_pose",
+          "direction",
+          "consistent_foot_anchor"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
     },
     "animals/pig": {
       "anchor": [
@@ -158,7 +260,41 @@
       "sourceSha256": "f59c31023c8c2f606cdb8964f6964a391e24bceb2089b3648d8a6d54873cd928",
       "status": "partial",
       "verifiedChecks": [],
-      "worldHeight": 32
+      "worldHeight": 32,
+      "poseAtlas": {
+        "path": "res://art/world/animals/poses-v2/pig.png",
+        "frameSize": [
+          256,
+          128
+        ],
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "states": {
+          "eat": 0,
+          "sleep": 1
+        },
+        "anchor": [
+          128,
+          116
+        ]
+      },
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "actual_feeding_pose",
+          "tucked_sleep_pose",
+          "direction",
+          "consistent_foot_anchor"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
     },
     "animals/sheep": {
       "anchor": [
@@ -198,7 +334,41 @@
       "sourceSha256": "63e46a4c24327df264fa74b3568c6bedbf93e6902e6368f02b84a3bf6ee23043",
       "status": "partial",
       "verifiedChecks": [],
-      "worldHeight": 39
+      "worldHeight": 39,
+      "poseAtlas": {
+        "path": "res://art/world/animals/poses-v2/sheep.png",
+        "frameSize": [
+          256,
+          128
+        ],
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "states": {
+          "eat": 0,
+          "sleep": 1
+        },
+        "anchor": [
+          128,
+          116
+        ]
+      },
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "actual_feeding_pose",
+          "tucked_sleep_pose",
+          "direction",
+          "consistent_foot_anchor"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
     },
     "buildings/building-bamboo-11": {
       "artBatch": "independent-fine-art-20261011",
@@ -23303,7 +23473,41 @@
       "sourceSha256": "1ca6dd89e5f4dc3105b0d0173dc57259a015c5df98a827453df2bc9a333b4b56",
       "status": "partial",
       "verifiedChecks": [],
-      "worldHeight": 39
+      "worldHeight": 39,
+      "poseAtlas": {
+        "path": "res://art/world/animals/poses-v2/goat.png",
+        "frameSize": [
+          256,
+          128
+        ],
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "states": {
+          "eat": 0,
+          "sleep": 1
+        },
+        "anchor": [
+          128,
+          116
+        ]
+      },
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "actual_feeding_pose",
+          "tucked_sleep_pose",
+          "direction",
+          "consistent_foot_anchor"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
     },
     "animals/rabbit": {
       "anchor": [
@@ -23338,20 +23542,54 @@
       "sourceSha256": "9efdb7395399afe64ae4a1165b4848914b3ba0c8ba2ad66a534e573f9a67cdf4",
       "status": "partial",
       "verifiedChecks": [],
-      "worldHeight": 24
+      "worldHeight": 24,
+      "poseAtlas": {
+        "path": "res://art/world/animals/poses-v2/rabbit.png",
+        "frameSize": [
+          256,
+          128
+        ],
+        "directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ],
+        "states": {
+          "eat": 0,
+          "sleep": 1
+        },
+        "anchor": [
+          128,
+          116
+        ]
+      },
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "actual_feeding_pose",
+          "tucked_sleep_pose",
+          "direction",
+          "consistent_foot_anchor"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
     },
     "buildings/ranch-rabbitry": {
       "artBatch": "independent-fine-art-20261011",
       "artReview": "Static source comparison completed; in-game review pending",
       "baseReady": true,
       "door": {
-        "x": 2771.2,
-        "y": 2532.0
+        "x": 2590.0,
+        "y": 2520.0
       },
       "name": "草编兔舍",
       "nightSeason": 0.0,
       "owner": null,
-      "path": "res://art/world/buildings/ranch-poultry.png",
+      "path": "res://art/world/buildings/rabbitry-v2/spring.png",
       "pendingPaintedStates": [],
       "plannedPaintedStatesImported": true,
       "rapidSeasonMaterial": false,
@@ -23402,10 +23640,10 @@
       ],
       "seasonalRender": "Independently authored seasonal images; gameplay alignment review pending",
       "seasons": [
-        "res://art/world/buildings/ranch-poultry.png",
-        "res://art/world/buildings/fine/ranch-poultry-summer.png",
-        "res://art/world/buildings/fine/ranch-poultry-autumn.png",
-        "res://art/world/buildings/fine/ranch-poultry-winter.png"
+        "res://art/world/buildings/rabbitry-v2/spring.png",
+        "res://art/world/buildings/rabbitry-v2/summer.png",
+        "res://art/world/buildings/rabbitry-v2/autumn.png",
+        "res://art/world/buildings/rabbitry-v2/winter.png"
       ],
       "sourcePosition": [
         2530,
@@ -23417,22 +23655,67 @@
         1622.0,
         894.0
       ],
-      "states": {
-        "autumn": "res://art/world/buildings/fine/ranch-poultry-autumn.png",
-        "night": "res://art/world/buildings/fine/ranch-poultry-night.png",
-        "summer": "res://art/world/buildings/fine/ranch-poultry-summer.png",
-        "winter": "res://art/world/buildings/fine/ranch-poultry-winter.png"
-      },
+      "states": {},
       "status": "partial",
       "theme": "wood",
       "verification": "Runtime paths bound and Godot editor import succeeded; gameplay not tested",
       "visualTier": "independent_painted_seasons",
       "worldRect": [
-        -60,
-        -120,
-        120,
-        120
-      ]
+        -75,
+        -87.890625,
+        150,
+        87.890625
+      ],
+      "fitLayout": true,
+      "reviewStages": {
+        "integrated": true,
+        "technical": "passed",
+        "visual": "reviewed_20261026",
+        "batch": "2026-10-26",
+        "checks": [
+          "unique_rabbit_identity",
+          "preserved_aspect",
+          "four_season_baseline",
+          "door_approach"
+        ],
+        "evidence": "artifacts/visual-20261026"
+      }
+    },
+    "interior_props/domestic-sideboard": {
+      "name": "生活家具 sideboard",
+      "baseReady": true,
+      "path": "res://art/world/domestic/sideboard.png",
+      "artBatch": "household-rich-20261029",
+      "source": "built-in imagegen, original source retained in artifacts/household-rich-20261029/sources",
+      "anchor": "floor-bottom-center",
+      "status": "runtime-visual-check-required"
+    },
+    "interior_props/domestic-shoe-bench": {
+      "name": "生活家具 shoe-bench",
+      "baseReady": true,
+      "path": "res://art/world/domestic/shoe-bench.png",
+      "artBatch": "household-rich-20261029",
+      "source": "built-in imagegen, original source retained in artifacts/household-rich-20261029/sources",
+      "anchor": "floor-bottom-center",
+      "status": "runtime-visual-check-required"
+    },
+    "interior_props/domestic-bedside": {
+      "name": "生活家具 bedside",
+      "baseReady": true,
+      "path": "res://art/world/domestic/bedside.png",
+      "artBatch": "household-rich-20261029",
+      "source": "built-in imagegen, original source retained in artifacts/household-rich-20261029/sources",
+      "anchor": "floor-bottom-center",
+      "status": "runtime-visual-check-required"
+    },
+    "interior_props/domestic-wardrobe": {
+      "name": "生活家具 wardrobe",
+      "baseReady": true,
+      "path": "res://art/world/domestic/wardrobe.png",
+      "artBatch": "household-rich-20261029",
+      "source": "built-in imagegen, original source retained in artifacts/household-rich-20261029/sources",
+      "anchor": "floor-bottom-center",
+      "status": "runtime-visual-check-required"
     }
   },
   "groundAtlas": {

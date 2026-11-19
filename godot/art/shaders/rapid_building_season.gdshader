@@ -1,4 +1,5 @@
 shader_type canvas_item;
+uniform float occlusion_alpha=1.0;
 uniform int season = 0;
 uniform float evening : hint_range(0.0, 1.0) = 0.0;
 uniform float roof_bottom : hint_range(0.2, 0.8) = 0.57;
@@ -11,6 +12,10 @@ void vertex() {
 void fragment() {
 	vec4 source = texture(TEXTURE, UV);
 	vec3 color = source.rgb;
+	float top_edge=clamp(source.a-texture(TEXTURE,UV-vec2(0.0,TEXTURE_PIXEL_SIZE.y*1.5)).a,0.0,1.0);
+	color+=vec3(0.038,0.029,0.016)*top_edge;
+	float eave=smoothstep(roof_bottom-0.012,roof_bottom,UV.y)*(1.0-smoothstep(roof_bottom,roof_bottom+0.038,UV.y));
+	color*=1.0-0.06*eave;
 	float roof = 1.0 - smoothstep(roof_bottom - 0.03, roof_bottom, UV.y);
 	if (season == 1) {
 		color *= vec3(1.035, 1.015, 0.965);
@@ -27,4 +32,5 @@ void fragment() {
 	float glazing = step(roof_bottom + 0.07, UV.y) * step(source.r * 1.06, source.b) * smoothstep(0.30, 0.65, source.b);
 	color = mix(color, vec3(0.95, 0.75, 0.41), glazing * evening * 0.68);
 	COLOR = vec4(color, source.a) * vertex_modulate;
+	if(TEXTURE_PIXEL_SIZE.x<0.1){COLOR.a*=mix(1.0,occlusion_alpha,1.0-smoothstep(0.66,0.86,UV.y));}
 }

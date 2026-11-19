@@ -35,6 +35,8 @@ static var hovered_fish := ""
 static var hovered_wildlife := ""
 static var hovered_pet := false
 static var hovered_building_piece := 0
+var built_furniture_revision := -1
+var built_furniture_nodes: Array[Node2D] = []
 var player: CharacterBody2D
 var hud: CanvasLayer
 var world_effects: Node2D
@@ -65,6 +67,13 @@ func _init() -> void:
 	y_sort_enabled = true
 
 func _ready() -> void:
+	if GameState.meadow_visit_pending:GameState.meadow_visit_pending=false;preload("res://scripts/ranch_meadow.gd").visit.call_deferred(GameState)
+	var prefetch:Array[String]=[]
+	for key:String in ["props/tree","props/willow","props/plants","props/stones"]:
+		var row:Dictionary=preload("res://scripts/world_art.gd").entries().get(key,{})
+		var path:=str(row.get("path",""))
+		if not path.is_empty():prefetch.append(path)
+	preload("res://scripts/texture_cache.gd").prefetch(prefetch)
 	get_viewport().mouse_exited.connect(_pointer_leave)
 	var ranch_fixtures := Node2D.new()
 	ranch_fixtures.name = "RanchFixtures"
@@ -76,11 +85,20 @@ func _ready() -> void:
 	world_data = _read_world_data()
 	queue_redraw()
 	_create_ground_layer()
+	preload("res://scripts/scenery_profile.gd").configure(world_data.get("village",{}).get("houses",[]))
+	var water_garden:=preload("res://scripts/water_garden.gd").new()
+	add_child(water_garden);water_garden.configure(ground_layer,world_data)
+	var shoreline:=preload("res://scripts/shoreline.gd").new()
+	shoreline.name="PaintedShoreline";add_child(shoreline);shoreline.configure(ground_layer)
+	var landscape := preload("res://scripts/landscape_dressing.gd").new()
+	add_child(landscape);landscape.configure(ground_layer)
+	var village_lights := preload("res://scripts/village_lighting.gd").new()
+	add_child(village_lights)
 	world_effects = Node2D.new()
 	world_effects.name = "WorldEffects"
 	world_effects.set_script(WORLD_EFFECTS_SCRIPT)
 	add_child(world_effects)
-	world_effects.call("configure", preload("res://scripts/world_layout.gd").ambience_world(world_data))
+	world_effects.call("configure", preload("res://scripts/world_layout.gd").ambience_world(world_data),ground_layer)
 	building_collision_root = Node2D.new()
 	building_collision_root.name = "BuildingLayoutCollisions"
 	add_child(building_collision_root)
@@ -127,16 +145,18 @@ func _ready() -> void:
 	var fishing_panel: Node = hud.get("fishing_panel")
 	if fishing_panel != null and fishing_panel.has_signal("world_fishing_changed"):
 		fishing_panel.connect("world_fishing_changed", _on_fishing_visual_changed)
+	var meadow_gate:Node2D=load("res://scripts/meadow_gate_visual.gd").new();meadow_gate.position=Vector2(2670,2556);add_child(meadow_gate)
 	_prepare_quest_sites()
 	_create_ambient_actors()
 	GameState.ranch_positions_changed.connect(_sync_ranch_visuals)
-	GameState.world_changed.connect(_refresh)
+	GameState.domain_changed.connect(_refresh_domain)
 	GameState.clock_changed.connect(_refresh_clock)
 	GameState.input_mode_changed.connect(func(_mode:String):queue_redraw())
 	GameState.action_sequence_changed.connect(func(_snapshot:Dictionary):queue_redraw())
 	_refresh()
 
 func _resume_saved_interior() -> void:
+	if GameState.current_interior=="ranch-meadow":get_tree().change_scene_to_file("res://scenes/meadow.tscn");return
 	if not GameState.interior_house().is_empty():
 		get_tree().change_scene_to_file("res://scenes/interior.tscn")
 	else:
@@ -144,6 +164,7 @@ func _resume_saved_interior() -> void:
 		get_tree().change_scene_to_file("res://scenes/main.tscn")
 	_refresh_npc_schedules()
 	_sync_building_collisions()
+	_sync_built_furniture_visuals()
 
 func _read_world_data() -> Dictionary:
 	var file := FileAccess.open(WORLD_DATA_PATH, FileAccess.READ)
@@ -342,7 +363,7 @@ func _spawn_gather(node_id: String, item_id: String, title: String, at: Vector2,
 func _create_ground_layer() -> void:
 	var ground := TileMapLayer.new()
 	ground.name = "Ground"
-	ground.z_index = -1
+	ground.z_index = -10
 	var season := GameState.season_index()
 	ground.tile_set = GROUND_TILE_SET
 	for row in range(120):
@@ -415,7 +436,6 @@ func _draw() -> void:
 	_draw_quest_sites()
 	_draw_economy_handover()
 	_draw_building_layout()
-	_draw_selected_target()
 
 func _draw_economy_handover() -> void:
 	var handovers: Array = GameState.system_catalog.get("economy", {}).get("handover", [])
@@ -444,8 +464,6 @@ func _draw_economy_handover() -> void:
 					draw_rect(Rect2(at.x - 16 + item_index * 14, at.y - 41, 3, 4), Color("546d4d"), true)
 		if ready:
 			draw_circle(at + Vector2(31, -8), 4, Color("f6d78c"))
-		if player != null and player.global_position.distance_to(at) < 84.0:
-			draw_arc(at + Vector2(0, -4), 44.0, 0.0, TAU, 24, Color("f2dfaa", 0.75), 2.0)
 		draw_string(ThemeDB.fallback_font, at + Vector2(0, 28), GameState.interaction_input_label()+(" · 合作社货单" if cooperative else " · 摆摊与经营"), HORIZONTAL_ALIGNMENT_CENTER, 170, 11, Color("fff0ce"))
 
 func _draw_building_layout() -> void:
@@ -456,7 +474,7 @@ func _draw_building_layout() -> void:
 	for zone_id in ["court", "orchard"]:
 		var zone: Dictionary = zones.get(zone_id, {})
 		var open := bool(GameState.upgrades.get("yard", false)) if zone_id == "court" else bool(GameState.building.get("land", {}).get("orchard", false))
-		if zone.is_empty() or not open: continue
+		if zone.is_empty() or not open or GameState.selected_tool != "build": continue
 		var area := Rect2(float(zone.x), float(zone.y), int(zone.cols) * float(zone.size), int(zone.rows) * float(zone.size))
 		draw_rect(area, Color("d7cfa2", 0.18), false, 2.0)
 		for col in range(int(zone.cols) + 1):
@@ -467,6 +485,7 @@ func _draw_building_layout() -> void:
 			draw_line(Vector2(float(zone.x), y), Vector2(area.end.x, y), Color("eee1b6", 0.2), 1.0)
 		draw_string(ThemeDB.fallback_font, Vector2(area.position.x, area.position.y - 8), str(zone.get("name", zone_id)), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("f7e9c7"))
 	for piece in GameState.building.get("layout", []):
+		if str(piece.get("zone", "")) == "home" or preload("res://scripts/built_furniture_art.gd").supports(str(piece.get("type", ""))): continue
 		var zone: Dictionary = zones.get(str(piece.get("zone", "")), {})
 		var definition: Dictionary = definitions.get(str(piece.get("type", "")), {})
 		if zone.is_empty() or definition.is_empty(): continue
@@ -482,10 +501,11 @@ func _draw_building_layout() -> void:
 		var tint := Color(str(data.get("color", definition.get("color", "#a9895d"))))
 		draw_rect(box, tint, true)
 		draw_rect(box, tint.lightened(0.28), false, 2.0)
-		if int(piece.get("key", 0)) == hovered_building_piece: draw_rect(box.grow(4.0), Color("f7e6a5"), false, 2.0)
 		draw_string(ThemeDB.fallback_font, box.position + Vector2(5, minf(box.size.y - 4.0, 19.0)), str(data.get("name", piece.get("type", "摆设"))), HORIZONTAL_ALIGNMENT_LEFT, maxf(20.0, box.size.x - 8.0), 12, Color("fff5df"))
 
+var layout_refresh_count:=0
 func _sync_building_collisions() -> void:
+	layout_refresh_count+=1
 	var revision := int(GameState.building.get("revision", 0))
 	if revision == building_collision_revision or not is_instance_valid(building_collision_root): return
 	building_collision_revision = revision
@@ -577,6 +597,7 @@ func _world_target_candidates() -> Array:
 	if frame == _candidate_frame: return _candidate_cache
 	_candidate_frame = frame
 	var points: Array = []
+	points.append({"id":"ranch-meadow","house":"ranch-meadow","kind":"enter","name":"东坡大牧野 · 十片放牧区","x":2670.0,"y":2556.0})
 	for id: String in quest_site_points:
 		var site: Dictionary=quest_site_points[id]
 		points.append(_target_point("quest-project",id,Vector2(float(site.x),float(site.y)),str(GameState.content.projects[id].name)))
@@ -656,7 +677,7 @@ func _refresh_world_target() -> Dictionary:
 	if previous != interaction_selection.key or previous_point != Vector2(float(selected_world_target.get("x",0)),float(selected_world_target.get("y",0))):
 		interaction_presentation_changed.emit()
 		queue_redraw()
-		for node in plot_nodes + animal_nodes + npc_nodes + gather_nodes + fish_nodes: node.queue_redraw()
+		# Interaction rings are disabled; target changes need no global actor/crop redraw.
 	return selected_world_target
 
 func _cycle_world_target(direction: int = 1) -> void:
@@ -670,10 +691,6 @@ func _cycle_world_target(direction: int = 1) -> void:
 		GameState.changed.emit()
 	queue_redraw()
 
-func _draw_selected_target() -> void:
-	if selected_world_target.is_empty() or GameState.ui_open or GameState.action_busy(): return
-	var at := Vector2(float(selected_world_target.x),float(selected_world_target.y))
-	draw_arc(at,19,0,TAU,24,Color("ffe39c"),2)
 
 
 func _sync_ranch_visuals() -> void:
@@ -683,7 +700,7 @@ func _sync_ranch_visuals() -> void:
 		animal_nodes[index].position = Vector2(float(p.get("x",0)),float(p.get("y",0)))
 		animal_nodes[index].visible = p.get("room") == null
 		if animal_nodes[index].visible and preload("res://scripts/life_presentation.gd").visible_rect(self).has_point(animal_nodes[index].global_position):
-			animal_nodes[index].queue_redraw()
+			animal_nodes[index].request_visual_update()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -1029,12 +1046,16 @@ func _refresh_legacy_gather() -> void:
 				break
 		node.queue_redraw()
 
+var _last_geometry_scope:=""
+var _last_world_day:=-1
 func _refresh() -> void:
+	_last_geometry_scope=preload("res://scripts/navigation_revision.gd").sample(GameState).scope;_last_world_day=GameState.day
 	_candidate_frame = -1
 	preload("res://scripts/ground_style.gd").update_weather(ground_layer, float(GameState.ground_conditions().get("snow", 0.0)))
 	_sync_legacy_furniture()
 	_refresh_legacy_gather()
 	_sync_building_collisions()
+	_sync_built_furniture_visuals()
 	queue_redraw()
 	var visual_season := GameState.season_index()
 	if visual_season != last_visual_season:
@@ -1043,22 +1064,7 @@ func _refresh() -> void:
 		get_tree().call_group("seasonal_world_props", "refresh_season")
 	for plot_node in plot_nodes:
 		plot_node.queue_redraw()
-	while animal_nodes.size() > GameState.animals.size():
-		var removed: Node2D = animal_nodes.pop_back()
-		removed.queue_free()
-	while animal_nodes.size() < GameState.animals.size():
-		var created := Node2D.new()
-		created.set_script(ANIMAL_SCRIPT)
-		add_child(created)
-		animal_nodes.append(created)
-	for i in range(animal_nodes.size()):
-		var animal_node := animal_nodes[i]
-		var animal_data: Dictionary = GameState.animals[i]
-		var saved_position: Dictionary = animal_data.get("position", {})
-		animal_node.set("animal_index", i)
-		animal_node.position = Vector2(float(saved_position.get("x", animal_node.position.x)), float(saved_position.get("y", animal_node.position.y)))
-		animal_node.visible = saved_position.get("room", null) == null
-		animal_node.queue_redraw()
+	_refresh_animals_only()
 	for npc in npc_nodes:
 		npc.queue_redraw()
 	for node in gather_nodes:
@@ -1168,15 +1174,85 @@ func _refresh_clock() -> void:
 	queue_redraw()
 
 func _draw_quest_sites() -> void:
-	var sites: Dictionary=quest_site_points
-	for id: String in sites:
-		var at:=Vector2(float(sites[id].x),float(sites[id].y))
-		draw_line(at+Vector2(-18,-3),at+Vector2(-18,-32),Color("80684b"),4)
-		draw_style_box(preload("res://scripts/detail_art.gd").panel("ui/tooltip"),Rect2(at+Vector2(-70,-68),Vector2(140,36)))
-		var text: String=str(GameState.content.projects[id].name)+(" · 成" if bool(GameState.community_projects.get(id,false)) else "")
-		draw_string(preload("res://art/fonts/NotoSansCJKsc-Regular.otf"),at+Vector2(-62,-45),text,HORIZONTAL_ALIGNMENT_LEFT,130,13,Color("354537"))
+	for id: String in quest_site_points:
+		var at:=Vector2(float(quest_site_points[id].x),float(quest_site_points[id].y))
+		preload("res://scripts/world_art.gd").draw_prop(self,{"kind":"board","x":at.x,"y":at.y,"_visual_rect":[-16,-37,32,37]},GameState.season_index(),GameState.minutes)
+		var project:Dictionary=preload("res://scripts/village_growth.gd").project(GameState,id)
+		if bool(project.surveyed) and not bool(project.collaborated):
+			var slot:int=0
+			for item:String in ["wood","bamboo"]:
+				if int(project.supplied.get(item,0))<=0:continue
+				var material:Texture2D=preload("res://scripts/item_art.gd").texture_for(item)
+				if material!=null:draw_texture_rect(material,Rect2(at+Vector2(23+slot*26,-19),Vector2(28,28)),false)
+				slot+=1
+			if preload("res://scripts/village_growth.gd").phase(GameState,id)=="collaborate":
+				for x:float in [-28,50]:draw_line(at+Vector2(x,-7),at+Vector2(x,-46),Color("84603f"),3,true)
+				draw_line(at+Vector2(-28,-46),at+Vector2(50,-46),Color("a68150"),4,true)
+		if player==null or player.global_position.distance_to(at)>100:continue
+		var text:=str(GameState.content.projects[id].name)+( " · 已完成" if bool(GameState.community_projects.get(id,false)) else "")
+		draw_style_box(preload("res://scripts/detail_art.gd").panel("ui/tooltip"),Rect2(at+Vector2(-65,-62),Vector2(130,27)))
+		draw_string(preload("res://art/fonts/NotoSansCJKsc-Regular.otf"),at+Vector2(-59,-44),text,HORIZONTAL_ALIGNMENT_LEFT,118,11,Color("354537"))
 
 func _prepare_quest_sites() -> void:
 	for id: String in preload("res://scripts/quest_service.gd").PROJECT_SITES:
 		var target: Dictionary=preload("res://scripts/quest_service.gd").target(GameState,{"id":"project:"+id,"source":"project:"+id})
 		if not target.is_empty():quest_site_points[id]=target
+
+func _sync_built_furniture_visuals() -> void:
+	var revision := hash([GameState.building.get("revision", 0), GameState.building.get("layout", [])])
+	if revision == built_furniture_revision: return
+	built_furniture_revision = revision
+	for visual in built_furniture_nodes:
+		if is_instance_valid(visual):
+			remove_child(visual)
+			visual.queue_free()
+	built_furniture_nodes.clear()
+	for piece in GameState.building.get("layout", []):
+		if str(piece.get("zone", "")) == "home": continue
+		if not preload("res://scripts/built_furniture_art.gd").supports(str(piece.get("type", ""))): continue
+		var bounds: Dictionary = GameState.BUILDING_GEOMETRY.rect(GameState, piece)
+		var area := Rect2(float(bounds.x), float(bounds.y), float(bounds.w), float(bounds.h))
+		var visual := preload("res://scripts/built_furniture_visual.gd").new()
+		visual.configure(self, piece, area)
+		add_child(visual)
+		built_furniture_nodes.append(visual)
+
+func _refresh_animals_only()->void:
+	while animal_nodes.size() > GameState.animals.size():
+		var removed: Node2D = animal_nodes.pop_back()
+		removed.queue_free()
+	while animal_nodes.size() < GameState.animals.size():
+		var created := Node2D.new()
+		created.set_script(ANIMAL_SCRIPT)
+		add_child(created)
+		animal_nodes.append(created)
+	for i in range(animal_nodes.size()):
+		var animal_node := animal_nodes[i]
+		var animal_data: Dictionary = GameState.animals[i]
+		var saved_position: Dictionary = animal_data.get("position", {})
+		animal_node.set("animal_index", i)
+		animal_node.set("animal_id", str(animal_data.id))
+		animal_node.position = Vector2(float(saved_position.get("x", animal_node.position.x)), float(saved_position.get("y", animal_node.position.y)))
+		animal_node.visible = saved_position.get("room", null) == null
+		animal_node.queue_redraw()
+
+func _refresh_domain(domain:String)->void:
+	_candidate_frame=-1
+	if domain=="world":
+		var scope:String=preload("res://scripts/navigation_revision.gd").sample(GameState).scope
+		if scope!=_last_geometry_scope or _last_world_day!=GameState.day:_refresh()
+		else:queue_redraw()
+		return
+	if domain=="farm":
+		for index:Variant in GameState.get_meta("farm_dirty_indices",[]):
+			if int(index)>=0 and int(index)<plot_nodes.size():plot_nodes[int(index)].queue_redraw()
+	elif domain=="ranch":_refresh_animals_only()
+	elif domain=="decor":_sync_legacy_furniture()
+	elif domain=="forage":
+		_refresh_legacy_gather()
+		for node in gather_nodes:node.queue_redraw()
+	elif domain=="fishing":
+		for node in fish_nodes:node.queue_redraw()
+	elif domain=="relations":
+		for npc in npc_nodes:npc.queue_redraw()
+	if domain in ["inventory","economy","farm","ranch","settings","village"]:queue_redraw()

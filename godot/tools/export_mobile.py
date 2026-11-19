@@ -4,7 +4,7 @@ from pathlib import Path
 from release_config import VERSION, VERSION_CODE, RELEASE_DATE
 from project_temporary import temporary_directory
 project=Path(__file__).resolve().parents[1]
-parser=argparse.ArgumentParser();parser.add_argument('target',choices=['Web','Android']);parser.add_argument('--variant',action='store_true');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('target',choices=['Web','Android']);parser.add_argument('--variant',action='store_true');parser.add_argument('--output',type=Path);args=parser.parse_args()
 source=project/'.build'/('web-project' if args.target=='Web' else 'mobile-project') if args.variant else project
 if args.variant:
     for folder in ['scripts','scenes','data']:shutil.copytree(project/folder,source/folder,dirs_exist_ok=True)
@@ -18,6 +18,8 @@ if args.target=='Android':
     env['GODOT_ANDROID_KEYSTORE_RELEASE_USER']=private['alias']
     env['GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD']=private['password']
 output=project/'build'/('web/index.html' if args.target=='Web' else f'android/ZhongRiZi-{VERSION}.apk')
+if args.output:output=args.output.resolve()
+output.parent.mkdir(parents=True,exist_ok=True)
 log=project/'artifacts'/os.environ.get('ZRZ_EXPORT_LOG','quality-export-'+args.target.lower()+'-20261014.log')
 with temporary_directory(prefix='zrz-export-') as temporary, log.open('wb') as stream:
     env.update(TEMP=temporary,TMP=temporary,APPDATA=str(Path(temporary)/'appdata'),LOCALAPPDATA=str(Path(temporary)/'localappdata'))

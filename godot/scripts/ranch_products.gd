@@ -14,7 +14,7 @@ static func initialize(s: Node) -> void:
 	sync(s)
 
 static func produce(s: Node, a: Dictionary, item: String, qty: int, grade: int, produced_day: int, ground: bool = false) -> void:
-	if qty <= 0: return
+	if qty <= 0 or not s.item_catalog.has(item): return
 	var spec: Dictionary = s.system_catalog.ranch.species[str(a.type)]
 	var p: Dictionary = a.position
 	var home := str(spec.home)
@@ -94,6 +94,9 @@ static func take(s: Node, kind: String, identity: String) -> int:
 	sync(s)
 	if count > 0:
 		s.quest_event("ranchCollect")
+		var identities:Array=[]
+		for row:Dictionary in selected:identities.append(str(row.id))
+		s.quest_event("animalProduce","products:"+",".join(identities),count)
 		s._museum_sync()
 	return count
 
@@ -105,6 +108,12 @@ static func points(s: Node, room: String) -> Array:
 	for home: String in s.system_catalog.ranch.barns:
 		var spec: Dictionary = s.system_catalog.ranch.barns[home]
 		if room != str(spec.house) or not bool(s.ranch.barns[home].built): continue
+		if str(spec.get("residence","barn"))=="shelter":
+			var resident:Dictionary=preload("res://scripts/animal_species.gd").home(s,"horse" if home=="horseStable" else "alpaca")
+			var box:Vector2=resident.bed+Vector2(100,35)
+			result.append({"kind":"ranch-box","id":home,"x":box.x,"y":box.y,"name":"棚区收集箱 · %d份"%box_count(s,home),"ready":box_count(s,home)>0})
+			result.append({"kind":"ranch-trough","id":home,"x":resident.feed.x,"y":resident.feed.y,"name":"添满本棚料槽","ready":true})
+			continue
 		result.append({"kind":"ranch-box","id":home,"x":730,"y":492,"name":"本舍收集箱 · %d 份" % box_count(s,home),"ready":box_count(s,home)>0})
 		result.append({"kind":"ranch-trough","id":home,"x":250,"y":492,"name":"添满料槽","ready":true})
 	for row: Dictionary in s.ranch.get("products",[]):

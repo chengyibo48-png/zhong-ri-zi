@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bedside-off",
+    "source": "data\\village_media\\sources\\bedside-off.png",
+    "runtime": "bedside-off.png",
+    "method": "Built-in ImageGen edit, original project furniture reference; alpha retained; runtime downsample only",
+    "author": "OpenAI ImageGen / Codex",
+    "date": "2026-10-30",
+    "use": "Real lamp-off / shelf interior with textured native hinged panels"
+  },
+  {
+    "id": "sideboard-interior",
+    "source": "data\\village_media\\sources\\sideboard-interior.png",
+    "runtime": "sideboard-interior.png",
+    "method": "Built-in ImageGen edit, original project furniture reference; alpha retained; runtime downsample only",
+    "author": "OpenAI ImageGen / Codex",
+    "date": "2026-10-30",
+    "use": "Real lamp-off / shelf interior with textured native hinged panels"
+  }
+]

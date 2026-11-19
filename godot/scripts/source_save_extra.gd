@@ -33,6 +33,7 @@ static func village_error(source:Dictionary,world:Dictionary)->String:
  var interior:Variant=source.village.get("interior")
  if interior==null:return ""
  if not TEXT.is_string(interior):return "房屋存档数据无效。"
+ if interior=="ranch-meadow" and int(source.get("version",0))>=35:return ""
  for house in world.get("houses",[]):
   if TEXT.equal(house.id,interior):return ""
  return "房屋存档数据无效。"
@@ -40,7 +41,7 @@ static func animal_valid(a:Variant,ids:Array,day:float,defs:Dictionary,world:Dic
  if not a is Dictionary:return false
  var species:Dictionary=defs.get("species",{})
  if not a.get("id") is String or not BASE.pattern(a.id,"^(hen|duck|cow|livestock-\\d+)$") or ids.has(a.id) or not id_in(species,a.get("type")) or not id_in(defs.get("breeds",{}),a.get("breed")) or not id_in(defs.get("traits",{}),a.get("trait")) or a.get("sex") not in ["female","male"] or not text(a.get("name"),12):return false
- if not TEXT.equal(a.get("species"),species[a.type].name) or not TEXT.equal(a.get("product"),species[a.type].product) or not BASE.integer(a.get("age"),0,100000) or not BASE.integer(a.get("generation"),0,100000):return false
+ if not TEXT.equal(a.get("species"),species[a.type].name) or a.get("product")!=species[a.type].product or not BASE.integer(a.get("age"),0,100000) or not BASE.integer(a.get("generation"),0,100000):return false
  for key in ["bond","hunger","health","mood","clean","stress","illness","warning","feedQuality"]:
   if not BASE.number(a.get(key),0,100):return false
  if not BASE.number(a.get("progress"),0,10) or not a.get("qualityStock") is Array or a.qualityStock.size()!=4 or not BASE.integer(a.get("feathers"),0,20):return false
@@ -57,8 +58,10 @@ static func animal_valid(a:Variant,ids:Array,day:float,defs:Dictionary,world:Dic
  for parent in a.parents:
   if not text(parent,40):return false
  var pos:Variant=a.get("position")
- if not pos is Dictionary or not BASE.number(pos.get("x"),24,float(world.get("WIDTH",3840))-24) or not BASE.number(pos.get("y"),38,float(world.get("HEIGHT",3840))-24) or not pos.has("room") or pos.room!=null and not TEXT.equal(pos.room,defs.barns[species[a.type].home].house) or not pos.get("inside") is Dictionary:return false
- if not BASE.number(pos.inside.get("x"),113,847) or not BASE.number(pos.inside.get("y"),205,602):return false
+ if not pos is Dictionary or not BASE.number(pos.get("x"),24,float(world.get("WIDTH",3840))-24) or not BASE.number(pos.get("y"),38,float(world.get("HEIGHT",3840))-24) or not pos.has("room") or pos.room!=null and not TEXT.equal(pos.room,defs.barns[species[a.type].home].house) and pos.room!="ranch-meadow" or not pos.get("inside") is Dictionary:return false
+ if pos.room=="ranch-meadow":
+  if not BASE.number(pos.inside.get("x"),24,3752) or not BASE.number(pos.inside.get("y"),38,2024):return false
+ elif not BASE.number(pos.inside.get("x"),113,847) or not BASE.number(pos.inside.get("y"),205,602):return false
  ids.append(a.id);return true
 static func ranch_error(source:Dictionary,items:Dictionary,systems:Dictionary,world:Dictionary)->String:
  var r:Variant=source.get("ranch")
@@ -221,7 +224,8 @@ static func normalize_ranch(source:Dictionary,initial:Dictionary,systems:Diction
    var position:Dictionary=animal.position
    if position.room==null:position.merge(navigation.safe(context,"",position),true)
    var house:String=str(systems.ranch.barns[systems.ranch.species[animal.type].home].house)
-   position.inside.merge(navigation.safe(context,house,position.inside),true)
+   navigation.traversal_profile="waterfowl" if bool(preload("res://scripts/animal_species.gd").profile(str(animal.type)).get("waterfowl",false)) else "ground"
+   position.inside.merge(navigation.safe(context,"ranch-meadow" if position.room=="ranch-meadow" else house,position.inside),true)
    next=maxf(next,number_or_zero(str(animal.id).split("-")[-1])+1)
   for row in r.births:next=maxf(next,number_or_zero(str(row.id).split("-")[-1])+1)
   r.nextId=next

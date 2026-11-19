@@ -1,0 +1,29 @@
+[
+  {
+    "species": "horse",
+    "source": "res://art/animals/sources/v2/horse-components.png",
+    "sha256": "c1d379fe2a5ea4e6ae51afc9f389d955a99a06da65e10a65fcad3ae5f4aa01e6",
+    "original": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-d9c9ba45-f839-487b-a95e-ccd1908fa19b.png",
+    "mode": "built-in imagegen",
+    "alpha": "unchanged",
+    "directions": "source side rows are right then left; explicitly mapped without mirroring"
+  },
+  {
+    "species": "alpaca",
+    "source": "res://art/animals/sources/v2/alpaca-components.png",
+    "sha256": "71e67c77e13930551cd06c933442d0b80d233dab4c015fa001c61eaf553944b8",
+    "original": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-699e418c-9f05-4e3d-9147-ee41ec5f605a.png",
+    "mode": "built-in imagegen",
+    "alpha": "unchanged",
+    "directions": "source side rows are right then left; explicitly mapped without mirroring"
+  },
+  {
+    "species": "goose",
+    "source": "res://art/animals/sources/v2/goose-components.png",
+    "sha256": "072f0816e65cf654f28ea271896e2e74d8d98eb3b2efadf7e4ccc01a837ff711",
+    "original": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-1796ad10-e34a-4c6f-84ce-b023e14a0783.png",
+    "mode": "built-in imagegen",
+    "alpha": "unchanged",
+    "directions": "source side rows are right then left; explicitly mapped without mirroring"
+  }
+]

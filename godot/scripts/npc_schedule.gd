@@ -60,6 +60,8 @@ static func _offset(value: Variant, x: float, y: float) -> Dictionary:
 	return {"x": float(point.x) + x, "y": float(point.y) + y}
 
 static func from_state(state: Node, person: Dictionary) -> Dictionary:
+	var invitation:Dictionary=load("res://scripts/village_growth.gd").npc_plan(state,str(person.id))
+	if not invitation.is_empty():return invitation
 	var npc_id := str(person.get("id", ""))
 	var index: int = state.npc_catalog.find(person)
 	var homes: Dictionary = {}

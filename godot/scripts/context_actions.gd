@@ -37,6 +37,15 @@ func refresh_world()->void:
   for i in range(player.walk_index,player.walk_path.size()):path.append({"x":player.walk_path[i].x,"y":player.walk_path[i].y})
  var info:Dictionary=DESCRIBE.describe(GameState,near,GameState.selected_tool) if not near.is_empty() else {}
  var model:Dictionary=RULES.describe(near,str(info.get("verb","")),home_of(str(near.get("id",""))),GameState.current_interior,GameState.riding,not path.is_empty(),world.interaction_selection.options.size(),"touch" if preload("res://scripts/input_hints.gd").touch() else GameState.source_input_mode,GameState.ui_open,GameState.action_busy())
+ # Fishing uses authored bank points. Make the route discoverable even when
+ # the selected rod is beside another stretch of water, outside a bank radius.
+ if outdoor and GameState.selected_tool=="rod" and str(near.get("kind",""))!="fish" and not model.hidden:
+  var nearest:Dictionary={}
+  var distance:=INF
+  for spot:Dictionary in GameState.system_catalog.fishing.spots:
+   var candidate:float=player.global_position.distance_squared_to(Vector2(float(spot.x),float(spot.y)))
+   if candidate<distance:distance=candidate;nearest=spot
+  if not nearest.is_empty():model.buttons.push_front({"label":"前往最近钓点","action":"fishing-bank","id":str(nearest.id),"op":""})
  visible=not model.hidden
  if not visible:return
  if last_buttons!=model.buttons:
@@ -79,6 +88,11 @@ func activate(row:Dictionary,target:Dictionary)->void:
    hud.ranch_panel.selected_animal_id=str(row.id)
    hud.show_ranch()
   "r-task":GameState.queue_ranch_tasks([{"animalId":str(row.id),"action":str(row.op),"arg":str(GameState.ranch.get("feed","feed"))}])
+  "fishing-bank":
+   for spot:Dictionary in GameState.system_catalog.fishing.spots:
+    if str(spot.id)==str(row.id):
+     world.player.walk_to(spot.duplicate(true))
+     return
   "fishing":hud.show_fishing()
   "forage":hud.show_forage()
   "v-npc-talk":GameState.queue_npc_task(str(row.id),"talk",{"topic":"auto"})

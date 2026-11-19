@@ -22,7 +22,7 @@ func run() -> void:
  check(button.theme==service.shared_theme and panel.theme==service.shared_theme,"控件构建完成前就获得共享主题")
  await settle()
  check(button.theme==service.shared_theme and panel.theme==service.shared_theme,"新节点在完成构建后获得主题")
- check(root.get_node("UIArtService").style_background(panel.get_theme_stylebox("panel")).is_equal_approx(Color("f2e8d2")),"延迟主题更新保留陈设样式的尺寸并应用纸色")
+ check(root.get_node("UIArtService").style_background(panel.get_theme_stylebox("panel")).is_equal_approx(Color("f7f4ea")),"延迟主题更新保留陈设样式的尺寸并应用纸色")
  var style: StyleBox=button.get_theme_stylebox("normal")
  var theme: Theme=service.shared_theme
  var revision: int=service.theme_revision
@@ -44,7 +44,7 @@ func run() -> void:
  var discarded := Button.new();container.add_child(discarded);discarded.free();await settle()
  check(true,"延迟主题更新忽略已销毁控件")
  state.ui_art.theme="paper";state.changed.emit()
- check(root.get_node("UIArtService").style_background(button.get_theme_stylebox("normal")).is_equal_approx(Color("e6dcc3")),"切回纸色恢复所有已有控件")
+ check(root.get_node("UIArtService").style_background(button.get_theme_stylebox("normal")).is_equal_approx(Color("eeeee3")),"切回纸色恢复所有已有控件")
  var notifications := [0]
  label.theme_changed.connect(func():notifications[0]+=1)
  label.add_theme_color_override("font_color",Color.RED)

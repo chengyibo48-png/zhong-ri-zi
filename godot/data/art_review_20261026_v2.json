@@ -1,0 +1,102 @@
+{
+  "visual_revision": "2026-10-26-v2",
+  "assets": [
+    {
+      "path": "art/world/interior_details/v2/herbs.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 237778,
+      "sha256": "bb8c9f27ec21ec9a8730823cbb88d663f1dfe70137293f9c03618b2bc10dbac5",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/interior_details/v2/lantern.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 249479,
+      "sha256": "3422119eb2ab105e2e8fb1706aa3be3c0c73901d73288af51b1c85d576e7061c",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/interior_details/v2/shelf.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 163855,
+      "sha256": "1f4a2feba4508d0006d41986b80feaca37734c4b9f2b58861de12a7f8acffc97",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/interior_details/v2/tea.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 244865,
+      "sha256": "439fcc2485e451873bb91c61cb53a49b2d6393605294bf53cdb6797ac90d4ff4",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/terrain/bamboo-mat-v2.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 367947,
+      "sha256": "41ca0ae21c9e08498f566ff09d1a1fc1bf7b811a9b6c1d24962282186ce5421e",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/terrain/blue-brick-v2.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 417674,
+      "sha256": "896812b0b78bd7969b9e948cea1c899928efca4d62958ed4540b348da6afc4bf",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/terrain/oak-planks-v2.png",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 1293792,
+      "sha256": "122e3770051b66d169be17f41bc0ffe963dcf35c4ab39c77ffd704ced0b3e2ff",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/terrain/riverbank-v2.png",
+      "width": 1024,
+      "height": 165,
+      "bytes": 381085,
+      "sha256": "ef217007bf75295bf18bfd292d880732905c3b1c7a702af70fcfb002131a38d7",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    },
+    {
+      "path": "art/world/terrain/terrazzo-v2.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 503359,
+      "sha256": "c8fe0f7c1743df58dfe9c2c636ce1c0eeb47370aa0d70e66eb7167ae83654478",
+      "integration": "native Godot scene/material",
+      "technical": "passed",
+      "visual": "reviewed"
+    }
+  ],
+  "runtimeReviews": {
+    "shoreline": "reviewed spring/winter and bridge exclusion",
+    "interiors": "reviewed day/night and wood/brick/bamboo/terrazzo",
+    "residents": "continuous mesh checked in four directions; fixed idle master retained",
+    "characterMotion": "procedural, partial; not a complete redrawn animation set"
+  },
+  "worldManifestScope": "existing 340-entry completion status remains unchanged"
+}

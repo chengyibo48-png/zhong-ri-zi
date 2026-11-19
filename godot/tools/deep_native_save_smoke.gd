@@ -57,7 +57,7 @@ func run() -> void:
 		check(FileAccess.get_file_as_string("user://deep-valid.json") == before_disk,"Preserve disk: "+str(path))
 	var partial := {"version":1,"plots":baseline.plots.slice(0,24),"inventory":{}}
 	check(state.load_game_data(partial),"Sparse old native save retains defaults")
-	check(state.plots.size() == 72,"Old 24 plot native save expands")
+	check(state.plots.size() == preload("res://scripts/farm_layout.gd").TOTAL,"Old 24 plot native save expands")
 	check(state.load_game_data(baseline),"Restore canonical state")
 	var detached: Node = load("res://scripts/game_state.gd").new()
 	detached._load_content();detached._load_initial_state()

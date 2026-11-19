@@ -6,7 +6,6 @@ func _draw() -> void:
 	var row: Dictionary=GameState.fishing.traps.get(str(slot.id),{})
 	var at:=Vector2(float(slot.waterX),float(slot.waterY))-global_position
 	if row.is_empty():
-		if FarmWorld.hovered_fish==str(slot.id):draw_arc(at,9,0,TAU,24,Color("c7d8b0"),1)
 		return
 	var texture: Texture2D=preload("res://scripts/item_art.gd").texture_for("fishTrap","items")
 	draw_line(Vector2.ZERO,at,Color("b3a17a"),1.0)

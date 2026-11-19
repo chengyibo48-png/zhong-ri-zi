@@ -27,6 +27,8 @@ var result_panel: PanelContainer
 var result_label: Label
 var result_icon: TextureRect
 var last_world_state: String="idle"
+var _visual_stamp:String=""
+var _visual_at:int=0
 var active: bool:
 	get:return GameState.fishing_active()
 
@@ -48,14 +50,14 @@ func _ready() -> void:
 	style_button=_button("",choices,func():GameState.set_fishing_option("inputStyle","toggle" if str(GameState.fishing.get("inputStyle","hold"))=="hold" else "hold"))
 	depth_button=_button("",choices,func():GameState.set_fishing_option("depth",(int(GameState.fishing.get("depth",1))+1)%3))
 	options_label=_label(prepare,"")
-	cast_button=_button("在这处水岸抛竿",prepare,start_cast)
-	_label(prepare,"先选近、中、远落点；按住再松开可蓄力调整。轻松辅助自动提竿，仍由你追踪鱼影。")
+	cast_button=_button("在这处水岸抛竿",prepare,start_cast);cast_button.set_meta("ui_role","primary")
+	_label(prepare,"先选近、中、远落点；按住再松开可蓄力调整。轻松辅助自动提竿，仍由你观察鱼势、收放线。")
 	gear_rows=VBoxContainer.new();prepare.add_child(gear_rows)
 	var traps:=_page("岸边捕笼")
 	var bulk:=HFlowContainer.new();traps.add_child(bulk)
 	_button("沿路收取待领产物",bulk,_bulk.bind("take"))
 	_button("沿路给空笼补饵",bulk,_bulk.bind("bait"))
-	_label(traps,"捕笼需一份制成的鱼饵，次日查看；最多同时部署 8 个。未收取时停止继续生产。")
+	_label(traps,"捕笼需一份制成的鱼饵，投饵满两天后查看；最多同时部署 8 个。未收取时停止继续生产。")
 	trap_rows=VBoxContainer.new();traps.add_child(trap_rows)
 	var book:=_page("水产手记")
 	records_label=_label(book,"")
@@ -66,9 +68,10 @@ func _ready() -> void:
 	phase_label=_label(live,"")
 	meter=Control.new();meter.set_script(preload("res://scripts/fishing_meter.gd"));live.add_child(meter)
 	status_label=_label(live,"");status_label.custom_minimum_size.x=190
-	reel_button=_button("按住 / 松开",live,func():pass)
-	reel_button.button_down.connect(func():GameState.fishing_input("press"))
-	reel_button.button_up.connect(func():GameState.fishing_input("release"))
+	reel_button=_button("按住收线 · 松开卸力",live,func():pass)
+	reel_button.custom_minimum_size.y=56
+	reel_button.button_down.connect(func():GameState.fishing_input("press","touch" if preload("res://scripts/input_hints.gd").touch() else "mouse"))
+	reel_button.button_up.connect(func():GameState.fishing_input("release","touch" if preload("res://scripts/input_hints.gd").touch() else "mouse"))
 	var secondary:=HBoxContainer.new();live.add_child(secondary)
 	_button("暂停／设置",secondary,_pause_settings)
 	fishing_cancel_button=_button("收竿取消",secondary,GameState.cancel_player_action)
@@ -76,7 +79,7 @@ func _ready() -> void:
 	result_panel=PanelContainer.new();result_panel.add_theme_stylebox_override("panel",_paper());result_panel.name="FishingResult";get_parent().add_child.call_deferred(result_panel)
 	result_panel.anchor_left=0.5;result_panel.anchor_right=0.5;result_panel.anchor_top=0.5;result_panel.anchor_bottom=0.5;result_panel.offset_left=-225;result_panel.offset_right=225;result_panel.offset_top=-145;result_panel.offset_bottom=145
 	var result_column:=VBoxContainer.new();result_panel.add_child(result_column)
-	result_icon=TextureRect.new();result_icon.custom_minimum_size=Vector2(120,96);result_icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;result_icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;result_column.add_child(result_icon)
+	result_icon=TextureRect.new();result_icon.custom_minimum_size=Vector2(160,116);result_icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;result_icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;result_column.add_child(result_icon)
 	result_label=_label(result_column,"")
 	var decisions:=HBoxContainer.new();result_column.add_child(decisions)
 	_button("留在鱼篓",decisions,_resolve.bind(false));_button("轻轻放流并记录",decisions,_resolve.bind(true))
@@ -122,10 +125,11 @@ func refresh() -> void:
 	water_label.text=str(f.waters.get(water_id,{}).get("name","水岸"))+" · "+str(f.waters.get(water_id,{}).get("tip",""))
 	var bait: Dictionary=f.baits[str(GameState.fishing.bait)]
 	bait_button.text="鱼饵："+str(bait.name)+(" · 免费" if str(GameState.fishing.bait)=="plain" else " ×"+str(GameState.inventory.get(str(bait.get("item","")),0)))
-	mode_button.text="轻松辅助" if str(GameState.fishing.mode)=="relaxed" else "手动追踪 · 可获珍品"
+	mode_button.text="轻松辅助" if str(GameState.fishing.mode)=="relaxed" else "手动控线 · 可获珍品"
 	style_button.text="操作：按住／松开" if str(GameState.fishing.get("inputStyle","hold"))=="hold" else "操作：按一次切换"
 	depth_button.text="落点："+["近岸","中段","远水"][int(GameState.fishing.get("depth",1))]
 	options_label.text=str(bait.tip)+"\n当前钓具槽 %d / %d · 熟练 %d · %s" % [GameState.fishing.get("tackles",[]).size(),int(GameState.tool_data("rod").get("level",0)),int(GameState.fishing.get("xp",0)),"鱼饵可用" if GameState.fishing_has_bait(str(GameState.fishing.bait)) else "饵料不足，可制作或改用素饵"]
+	options_label.text+="\n品质看搏鱼时的安全控线比例、落点和鱼竿；准备与等待不计入，轻松模式最高上品。"
 	cast_button.disabled=spot_id=="" or active or not pending.is_empty()
 	for container: Node in [gear_rows,trap_rows]:
 		for child in container.get_children():container.remove_child(child);child.queue_free()
@@ -174,18 +178,37 @@ func _bulk(op: String) -> void:
 func _resolve(released: bool) -> void:
 	if GameState.fishing_resolve(released):
 		result_panel.hide();GameState.ui_open=visible
-		last_world_state="idle";world_fishing_changed.emit(water_id,spot_id,"idle",0.0)
+		last_world_state="released" if released else "idle";world_fishing_changed.emit(water_id,spot_id,last_world_state,0.0)
+		if released:GameState.sound_requested.emit("water")
 func _on_session_changed(game: Dictionary) -> void:
 	live_panel.visible=not game.is_empty() and not GameState.ui_open
 	if game.is_empty():
-		if last_world_state!="caught":world_fishing_changed.emit(water_id,spot_id,"idle",0.0)
+		if last_world_state not in ["caught","miss","released"]:world_fishing_changed.emit(water_id,spot_id,"idle",0.0)
 		refresh();return
+	var stamp:String=str([game.stage,game.get("fishPhase",""),game.get("holding",false),game.get("previewDepth",1),game.get("danger",false)])
+	var now:int=Time.get_ticks_msec()
+	if stamp==_visual_stamp and now-_visual_at<41:return
+	_visual_stamp=stamp;_visual_at=now
 	var p: Dictionary=game.plan;water_id=str(p.water);spot_id=str(game.p.id)
+	status_label.custom_minimum_size.y=status_label.get_theme_font_size("font_size")*3.8
+	status_label.max_lines_visible=3
 	phase_label.text=str(GameState.fishing_phase())+("" if preload("res://scripts/input_hints.gd").touch() else " · A" if GameState.source_input_mode=="pad" else " · 空格 / "+GameState.interaction_input_label())
 	meter.update_session(game)
 	var stage:=str(game.stage)
-	status_label.text={"charge":"按住蓄力，松开抛竿；也可使用预选落点。","cast":"浮漂轻轻落水。","wait":"留意浮漂和咬钩声。","bite":"咬钩了！按下提竿。","fight":"按住上升，松开下降。保持鱼影在绿色范围内。","caught":"托住鱼身，准备抄起。","miss":str(game.get("reason","鱼游走了"))}.get(stage,"")
-	if bool(game.get("warn",false)):status_label.text="鱼正在蓄力，留意下一次突进。"
-	reel_button.text="提竿" if stage=="bite" else "按一次切换" if str(p.get("inputStyle","hold"))=="toggle" else "按住上升 · 松开下降"
-	var visual:=str({"charge":"cast","cast":"cast","wait":"waiting","bite":"bite","fight":"fight","caught":"caught","miss":"miss"}.get(stage,"idle"))
+	status_label.text={"charge":"短按使用预选落点；按住蓄力，松开才抛出。","cast":"浮漂轻轻落水。","wait":"留意浮漂和咬钩声。","bite":"咬钩了！按下提竿。","fight":"按住收线、松开卸力。张力稳妥时拉近。","caught":"托住鱼身，准备抄起。","miss":str(game.get("reason","鱼游走了"))}.get(stage,"")
+	var toggle_style:bool=str(p.get("inputStyle","hold"))=="toggle"
+	if toggle_style and stage=="charge":status_label.text="按一下开始蓄力，再按一下抛出。"
+	elif toggle_style and stage=="fight":status_label.text="按一下收线，再按一下卸力。张力稳妥时拉近。"
+	if stage=="fight":
+		if float(game.get("tension",35))>=85:status_label.text="张力危险！再按一下卸力。" if toggle_style else "张力危险！先松开卸力。"
+		elif float(game.get("tension",35))<20:status_label.text="鱼线偏松，短暂收线保持牵引。"
+		elif bool(game.get("warn",false)):status_label.text="鱼在蓄力或突进，准备切换卸力。" if toggle_style else "鱼在蓄力或突进，准备松开卸力。"
+	reel_button.text="提竿" if stage=="bite" else "按一次切换" if str(p.get("inputStyle","hold"))=="toggle" else "按住蓄力 · 松开抛竿" if stage=="charge" else "按住收线 · 松开卸力"
+	var visual:=str({"charge":"aim","cast":"cast","wait":"waiting","bite":"bite","fight":"fight","caught":"caught","miss":"miss"}.get(stage,"idle"))
 	last_world_state=visual;world_fishing_changed.emit(water_id,spot_id,visual,float(game.get("tension",0))/100.0)
+
+func _unhandled_input(event:InputEvent)->void:
+	if not GameState.fishing_active() or GameState.ui_open:return
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
+		GameState.fishing_input("press" if event.pressed else "release","mouse")
+		get_viewport().set_input_as_handled()

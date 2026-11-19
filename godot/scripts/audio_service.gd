@@ -10,15 +10,21 @@ var music_players: Array[AudioStreamPlayer] = []
 var ambient_players: Array[AudioStreamPlayer] = []
 var stream_cache: Dictionary = {}
 var music_cache: Dictionary = {}
+var ambient_cache:Dictionary={}
+var generation_metrics:Dictionary={"calls":0,"max_ms":0.0}
+var prewarm_queue:Array[String]=["hoe","water","seed","harvest","chop","dig","gather","door"]
+var prewarm_at:=0.0
 var current_music: AudioStreamPlayer
 var music_tween: Tween
 var shutting_down := false
 var quit_requested := false
 var context_active := false
 var melody_at := 0.0
+var synthesis:Node
 
 func _ready() -> void:
  get_tree().auto_accept_quit = false
+ synthesis=preload("res://scripts/audio_render_queue.gd").new();add_child(synthesis)
  rng.randomize()
  for spec in [["SFX",sfx_players,6],["Music",music_players,2],["Ambience",ambient_players,2]]:
   for index in range(int(spec[2])):
@@ -54,17 +60,24 @@ func _notification(what: int) -> void:
  if what == NOTIFICATION_WM_CLOSE_REQUEST:
   request_quit()
 
-func request_quit(exit_code: int = 0) -> void:
- if quit_requested: return
- quit_requested = true
- if is_instance_valid(GameState) and not GameState.save_game(GameState.SAVE_PATH,true):
-  quit_requested = false
-  return
+func request_quit(exit_code:int=0)->void:
+ if quit_requested:return
+ quit_requested=true
+ if is_instance_valid(GameState) and not GameState.incompatible_save:
+  var was_open:bool=GameState.ui_open;GameState.ui_open=true
+  await GameState.wait_for_saves()
+  var result:Array=[false,false]
+  if not GameState.save_async(GameState.SAVE_PATH,func(ok:bool):result[0]=true;result[1]=ok):
+   quit_requested=false;GameState.ui_open=was_open;return
+  while not bool(result[0]):await get_tree().process_frame
+  if not bool(result[1]):
+   quit_requested=false;GameState.ui_open=was_open;GameState.message="退出前保存失败，游戏仍保持打开，原有存档保留。";GameState.message_requested.emit(GameState.message);return
  await prepare_exit()
  get_tree().quit(exit_code)
 
 func prepare_exit() -> void:
  shutdown()
+ while is_instance_valid(synthesis) and synthesis.busy():await get_tree().process_frame
  # stop() queues playback cleanup on the audio thread. Keep the tree alive
  # briefly so the audio driver and main-thread disposal queue can run.
  var deadline := Time.get_ticks_msec() + 150
@@ -76,6 +89,7 @@ func prepare_exit() -> void:
 func shutdown() -> void:
  if shutting_down: return
  shutting_down = true
+ if is_instance_valid(synthesis):synthesis.cancel()
  set_process(false)
  if music_tween != null and music_tween.is_valid(): music_tween.kill()
  music_tween = null
@@ -93,6 +107,7 @@ func shutdown() -> void:
  current_music = null
  stream_cache.clear()
  music_cache.clear()
+ ambient_cache.clear()
 
 func _exit_tree() -> void:
  shutdown()
@@ -104,14 +119,9 @@ func play_sfx(kind: String) -> void:
  if bool(recipe.activate):context_active = true
  if recipe.voices.is_empty():return
  var key := JSON.stringify(recipe)
- if not stream_cache.has(key):
-  if stream_cache.size()>=64:stream_cache.clear()
-  stream_cache[key] = _make_stream(recipe.voices)
- var player := _free_player(sfx_players)
- player.stream = stream_cache[key]
- player.pitch_scale = 1.0
- player.play()
- sound_played.emit(kind)
+ _request_stream("sfx",key,recipe.voices,func(stream:AudioStreamWAV):
+  if shutting_down or not bool(GameState.player_settings.get("sound",true)):return
+  var player:AudioStreamPlayer=_free_player(sfx_players);player.stream=stream;player.pitch_scale=1.0;player.play();sound_played.emit(kind))
 
 func _free_player(players: Array[AudioStreamPlayer]) -> AudioStreamPlayer:
  for player in players:
@@ -120,7 +130,12 @@ func _free_player(players: Array[AudioStreamPlayer]) -> AudioStreamPlayer:
 
 func _process(_delta: float) -> void:
  if shutting_down:return
- ambient_at(float(Time.get_ticks_msec())/1000.0)
+ var now:=float(Time.get_ticks_msec())/1000.0
+ if not prewarm_queue.is_empty() and now>=prewarm_at and not GameState.action_busy():
+  prewarm_at=now+.25
+  var kind:String=prewarm_queue.pop_front();var recipe:=RULES.sound(kind,GameState.player_settings);var key:=JSON.stringify(recipe)
+  if not recipe.voices.is_empty() and not stream_cache.has(key):_request_stream("sfx",key,recipe.voices,Callable())
+ ambient_at(now)
 
 func ambient_at(seconds: float) -> Dictionary:
  if shutting_down:return {"next":melody_at,"music":[],"ambient":[]}
@@ -130,17 +145,15 @@ func ambient_at(seconds: float) -> Dictionary:
  if float(plan.next)==melody_at:return plan
  melody_at = float(plan.next)
  if not plan.music.is_empty():
-  var key := JSON.stringify(plan.music)
-  if not music_cache.has(key):
-   if music_cache.size()>=64:music_cache.clear()
-   music_cache[key] = _make_stream(plan.music)
-  current_music = _free_player(music_players)
-  current_music.stream = music_cache[key]
-  current_music.play()
+  var key:String=JSON.stringify(plan.music)
+  _request_stream("music",key,plan.music,func(stream:AudioStreamWAV):
+   if shutting_down or GameState.ui_open or GameState.simulation_hidden():return
+   current_music=_free_player(music_players);current_music.stream=stream;current_music.play())
  if not plan.ambient.is_empty():
-  var player := _free_player(ambient_players)
-  player.stream = _make_stream(plan.ambient)
-  player.play()
+  var key:String=JSON.stringify(plan.ambient)
+  _request_stream("ambient",key,plan.ambient,func(stream:AudioStreamWAV):
+   if shutting_down or GameState.ui_open or GameState.simulation_hidden():return
+   var player:AudioStreamPlayer=_free_player(ambient_players);player.stream=stream;player.play())
  ambient_scheduled.emit(plan)
  return plan
 
@@ -148,6 +161,7 @@ func _make_sfx_stream(kind: String) -> AudioStreamWAV:
  return _make_stream(RULES.sound(kind,GameState.player_settings).voices)
 
 func _make_stream(voices: Array) -> AudioStreamWAV:
+ var generation_started:=Time.get_ticks_usec()
  var duration := 0.0
  for voice in voices:duration=maxf(duration,float(voice.end))
  var frame_count := int(round(duration*SAMPLE_RATE))
@@ -194,9 +208,23 @@ func _make_stream(voices: Array) -> AudioStreamWAV:
  stream.mix_rate=SAMPLE_RATE
  stream.stereo=false
  stream.data=bytes
+ generation_metrics.calls+=1
+ generation_metrics.max_ms=maxf(generation_metrics.max_ms,(Time.get_ticks_usec()-generation_started)/1000.0)
  return stream
 
 func _write_sample(bytes: PackedByteArray, frame: int, value: float) -> void:
  var pcm := clampi(roundi(clampf(value,-1.0,1.0)*32767.0),-32767,32767)
  bytes[frame*2]=pcm&255
  bytes[frame*2+1]=(pcm>>8)&255
+
+func _request_stream(kind:String,key:String,voices:Array,done:Callable)->void:
+ var cache:Dictionary=stream_cache if kind=="sfx" else music_cache if kind=="music" else ambient_cache
+ if cache.has(key):
+  if done.is_valid():done.call(cache[key])
+  return
+ var settings_stamp:int=hash(GameState.player_settings)
+ synthesis.request(kind+":"+key,voices,func(stream:AudioStreamWAV):
+  if shutting_down:return
+  if cache.size()>=64:cache.erase(cache.keys()[0])
+  cache[key]=stream
+  if done.is_valid() and hash(GameState.player_settings)==settings_stamp:done.call(stream),"sfx" if kind=="sfx" else "ambient")

@@ -1,0 +1,212 @@
+{
+  "date": "2026-10-26",
+  "tool": "built-in image_gen",
+  "purpose": "Visual optimization production atlas sources; originals are retained.",
+  "sources": [
+    {
+      "kind": "rabbit-building",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-be2c0240-3d82-46c3-ba71-c608ca3918cb.png",
+      "prompt": "Four seasons of one rabbit hutch; same camera and geometry; rabbit sign; 2 x 2 transparent atlas.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "87b68997f7e1559ca6080ad03f4bf899091f9802bf0ec8de2028a5fac74db60a",
+      "projectSource": "art/source/visual-20261026/rabbit-building-master.png"
+    },
+    {
+      "kind": "cow",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-3218a3bf-9346-414f-8639-8561f291a20f.png",
+      "prompt": "Exact chestnut and cream cow identity from source; feeding and lying asleep; four facing directions; 4 x 2 transparent atlas.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "9b765f34142bcf4b8f3cd4844b161ef55d2f905ec8090ab65a8f8afbebf60654",
+      "projectSource": "art/source/visual-20261026/cow-master.png"
+    },
+    {
+      "kind": "fence",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-8004fe1b-8b61-46f8-8e8e-04659f84fe55.png",
+      "prompt": "Matching hand-painted modular horizontal, vertical, corner and gate fence; 2 x 2 transparent atlas.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "18047422384a360f01ed6e781ca196586f9abae3be81e63f89ce0a46deb4a4cb",
+      "projectSource": "art/source/visual-20261026/fence-master.png"
+    },
+    {
+      "kind": "hen",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-91d4b827-8da0-4c17-8a7f-3d48d92a7d55.png",
+      "prompt": "Production hand-painted 2D countryside farming-game animal pose atlas for a warm buff golden-brown hen with red comb. The supplied sprite sheet is the identity/style reference: preserve the SAME animal's coat colors, anatomy, facial features and soft painted edges. ONE genuinely transparent PNG, EXACTLY 4 equal columns and 2 equal rows, eight isolated sprites. Column order: facing camera/down, left profile, right profile, facing away/up. TOP ROW: genuinely feeding with neck/head lowered to peck/graze on the ground (no food, bowls or ground). BOTTOM ROW: naturally asleep, body resting on belly and feet tucked underneath, eyes closed where visible; bird's bill tucked gently toward back/wing where appropriate. Actual resting pose, never a squashed standing sprite. Elevated orthographic game view matching source. Identical body scale for all eight poses, each centered horizontally with its lowest body/foot at 85% of its cell's height, generous transparent margins. Soft top-left diffuse light. No rectangle backgrounds, no floor, no labels, no gridlines, no other animals or props. Preserve species identity and readable small-game silhouette.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "f7978cf5937c4800a603d125779dae4413a2540823ea953670f009426a55273e",
+      "projectSource": "art/source/visual-20261026/hen-master.png"
+    },
+    {
+      "kind": "duck",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-fb7cf422-3079-4649-9291-cac82275b8f3.png",
+      "prompt": "Production hand-painted 2D countryside farming-game animal pose atlas for a cream-white and olive-brown duck with orange bill and orange webbed feet. The supplied sprite sheet is the identity/style reference: preserve the SAME animal's coat colors, anatomy, facial features and soft painted edges. ONE genuinely transparent PNG, EXACTLY 4 equal columns and 2 equal rows, eight isolated sprites. Column order: facing camera/down, left profile, right profile, facing away/up. TOP ROW: genuinely feeding with neck/head lowered to peck/graze on the ground (no food, bowls or ground). BOTTOM ROW: naturally asleep, body resting on belly and feet tucked underneath, eyes closed where visible; bird's bill tucked gently toward back/wing where appropriate. Actual resting pose, never a squashed standing sprite. Elevated orthographic game view matching source. Identical body scale for all eight poses, each centered horizontally with its lowest body/foot at 85% of its cell's height, generous transparent margins. Soft top-left diffuse light. No rectangle backgrounds, no floor, no labels, no gridlines, no other animals or props. Preserve species identity and readable small-game silhouette.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "086f14566ea5769cb22a94eec3a8d4e5e9201db64c077bb956bf35835b526e53",
+      "projectSource": "art/source/visual-20261026/duck-master.png"
+    },
+    {
+      "kind": "sheep",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-12018f57-21a9-4e17-a01d-8a3f000caeaa.png",
+      "prompt": "Production hand-painted 2D countryside farming-game animal pose atlas for a cream woolly sheep with gray-brown face and legs. The supplied sprite sheet is the identity/style reference: preserve the SAME animal's coat colors, anatomy, facial features and soft painted edges. ONE genuinely transparent PNG, EXACTLY 4 equal columns and 2 equal rows, eight isolated sprites. Column order: facing camera/down, left profile, right profile, facing away/up. TOP ROW: genuinely feeding with neck/head lowered to peck/graze on the ground (no food, bowls or ground). BOTTOM ROW: naturally asleep, body resting on belly and feet tucked underneath, eyes closed where visible; bird's bill tucked gently toward back/wing where appropriate. Actual resting pose, never a squashed standing sprite. Elevated orthographic game view matching source. Identical body scale for all eight poses, each centered horizontally with its lowest body/foot at 85% of its cell's height, generous transparent margins. Soft top-left diffuse light. No rectangle backgrounds, no floor, no labels, no gridlines, no other animals or props. Preserve species identity and readable small-game silhouette.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "900fa2e86b16473294a3d67c884aab76f3730576a8d762e5561a19b195fe09c2",
+      "projectSource": "art/source/visual-20261026/sheep-master.png"
+    },
+    {
+      "kind": "goat",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-ffd9dc80-ed3f-48ba-8409-33aae3858d14.png",
+      "prompt": "Production hand-painted 2D countryside farming-game pose atlas for a cream shaggy goat with brown curved horns, small beard and cream/tan coat. Use supplied sheet as exact identity/style reference. Preserve the SAME animal's markings, anatomy, facial features and soft painted edges. Deliver ONE genuinely transparent PNG in EXACTLY 4 equal columns and 2 equal rows, eight isolated sprites. Column order: facing camera/down, left profile, right profile, facing away/up. TOP ROW: genuinely eating with head/neck lowered toward ground; no food, bowls or ground. BOTTOM ROW: naturally asleep resting on belly with legs tucked, head relaxed and eyes closed; rabbit ears relaxed along back, goat legs genuinely tucked, pig on belly. Real sleeping anatomy, never compressed standing pose. Elevated orthographic farming-game camera matching reference, upper-left diffuse light, fixed body scale. Center each animal horizontally in its equal cell, lowest foot/body at 85% of cell height, transparent safety margins. No background rectangles, floor, cast shadow outside silhouette, labels, gridlines or props. No extra animals. Eight well separated clear silhouettes.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "852bdbe2530079c85523e0bbf5d58b6600ec69fbf7b091dd7da0cf58004134bd",
+      "projectSource": "art/source/visual-20261026/goat-master.png"
+    },
+    {
+      "kind": "pig",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-f589fb2b-7b4f-4055-85a6-1021b09c6fc9.png",
+      "prompt": "Production hand-painted 2D countryside farming-game pose atlas for a friendly pink pig with floppy ears, rounded belly and curled tail. Use supplied sheet as exact identity/style reference. Preserve the SAME animal's markings, anatomy, facial features and soft painted edges. Deliver ONE genuinely transparent PNG in EXACTLY 4 equal columns and 2 equal rows, eight isolated sprites. Column order: facing camera/down, left profile, right profile, facing away/up. TOP ROW: genuinely eating with head/neck lowered toward ground; no food, bowls or ground. BOTTOM ROW: naturally asleep resting on belly with legs tucked, head relaxed and eyes closed; rabbit ears relaxed along back, goat legs genuinely tucked, pig on belly. Real sleeping anatomy, never compressed standing pose. Elevated orthographic farming-game camera matching reference, upper-left diffuse light, fixed body scale. Center each animal horizontally in its equal cell, lowest foot/body at 85% of cell height, transparent safety margins. No background rectangles, floor, cast shadow outside silhouette, labels, gridlines or props. No extra animals. Eight well separated clear silhouettes.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "dc3ff5501cefa1940c2761306623b31ee15f7ea255d4da331127da5136d11688",
+      "projectSource": "art/source/visual-20261026/pig-master.png"
+    },
+    {
+      "kind": "rabbit",
+      "input": "C:/Users/智者不入爱河/.codex/generated_images/01a173ba-d7a5-7ce2-b0cf-22ccd06669e8/exec-3037fa56-0744-4cc6-8aae-6d46dd34bc70.png",
+      "prompt": "Production hand-painted 2D countryside farming-game pose atlas for a cream-and-gray mottled rabbit with long pink-lined ears and a white cottontail. Use supplied sheet as exact identity/style reference. Preserve the SAME animal's markings, anatomy, facial features and soft painted edges. Deliver ONE genuinely transparent PNG in EXACTLY 4 equal columns and 2 equal rows, eight isolated sprites. Column order: facing camera/down, left profile, right profile, facing away/up. TOP ROW: genuinely eating with head/neck lowered toward ground; no food, bowls or ground. BOTTOM ROW: naturally asleep resting on belly with legs tucked, head relaxed and eyes closed; rabbit ears relaxed along back, goat legs genuinely tucked, pig on belly. Real sleeping anatomy, never compressed standing pose. Elevated orthographic farming-game camera matching reference, upper-left diffuse light, fixed body scale. Center each animal horizontally in its equal cell, lowest foot/body at 85% of cell height, transparent safety margins. No background rectangles, floor, cast shadow outside silhouette, labels, gridlines or props. No extra animals. Eight well separated clear silhouettes.",
+      "mode": "reference-guided generation",
+      "originalRetained": true,
+      "sha256": "808608624f843b74e6d39abd5e02c38ff498f9bd6c879c43b3b86e53a34a2591",
+      "projectSource": "art/source/visual-20261026/rabbit-master.png"
+    },
+    {
+      "kind": "rug",
+      "input": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-03e4843e-cf33-4c7a-b40c-a9d4d5c2725f.png",
+      "prompt": "Single top-down handwoven jute and faded indigo bedside rug, warm rural painted game style, isolated transparent background, no floor or props.",
+      "mode": "generation",
+      "originalRetained": true,
+      "sha256": "a3abea93eff8b97f71664caf2e82296073085095302760f88b61287cdfa2aa4d",
+      "projectSource": "art/source/visual-20261026/rug-master.png"
+    }
+  ],
+  "importer": "Godot Image native atlas crop + uniform resize + alpha-boundary normalization; no semantic image repaint",
+  "importReceipt": [
+    {
+      "height": 300,
+      "path": "art/world/buildings/rabbitry-v2/spring.png",
+      "sha256": "92dea35b85ab73bb3d05b8fa5b8b05babe317a7b03632e9a7f659a156e64c74d",
+      "used": "[P: (16, 26), S: (480, 270)]",
+      "width": 512
+    },
+    {
+      "height": 300,
+      "path": "art/world/buildings/rabbitry-v2/summer.png",
+      "sha256": "f399b03b0f4dd4b33fffa3780fc45e3641d2569224225980674220306c8da709",
+      "used": "[P: (16, 25), S: (480, 271)]",
+      "width": 512
+    },
+    {
+      "height": 300,
+      "path": "art/world/buildings/rabbitry-v2/autumn.png",
+      "sha256": "8e520e48bb078ec12a492ccdf3e5db61321ec5fb13a2bb9f7eb0aa957c25d6fb",
+      "used": "[P: (16, 28), S: (480, 268)]",
+      "width": 512
+    },
+    {
+      "height": 300,
+      "path": "art/world/buildings/rabbitry-v2/winter.png",
+      "sha256": "de4f88d61f1fef394a219ae562d5070fae77e089a34c953fdf8bc4d1b1b05ca8",
+      "used": "[P: (16, 24), S: (480, 272)]",
+      "width": 512
+    },
+    {
+      "height": 256,
+      "path": "art/world/animals/poses-v2/cow.png",
+      "sha256": "2eb9be31272d2f66cd96b17fc1c644393e17a15e48ff89b18352f305f9c26f8e",
+      "used": "[P: (92, 8), S: (832, 236)]",
+      "width": 1024
+    },
+    {
+      "height": 256,
+      "path": "art/world/ranch/fence-v2/horizontal.png",
+      "sha256": "45d6928f9291875ef05b873acf4579709a096c6102f250fd4ebf755afc584fc2",
+      "used": "[P: (8, 129), S: (240, 119)]",
+      "width": 256
+    },
+    {
+      "height": 256,
+      "path": "art/world/ranch/fence-v2/vertical.png",
+      "sha256": "2f3b9409e88c9d4b3de53ddcc946ad250d123511a76fcc9ca63012e195ff06c3",
+      "used": "[P: (97, 8), S: (62, 240)]",
+      "width": 256
+    },
+    {
+      "height": 256,
+      "path": "art/world/ranch/fence-v2/corner.png",
+      "sha256": "a84f0faa023af7b48673793416ed04402a128a120ac92b2b0051777faf242883",
+      "used": "[P: (8, 12), S: (240, 236)]",
+      "width": 256
+    },
+    {
+      "height": 256,
+      "path": "art/world/ranch/fence-v2/gate.png",
+      "sha256": "7b9ea0c557a7f2b7d50d82b4e52bdf79d7c435f532c1e8d4c9a7aea89a907781",
+      "used": "[P: (8, 91), S: (240, 157)]",
+      "width": 256
+    },
+    {
+      "height": 256,
+      "path": "art/world/animals/poses-v2/hen.png",
+      "sha256": "078372d54d6ae26b19276ed77a2b40eafe93983514af01c5ead45837288a2dfa",
+      "used": "[P: (93, 18), S: (837, 226)]",
+      "width": 1024
+    },
+    {
+      "height": 256,
+      "path": "art/world/animals/poses-v2/duck.png",
+      "sha256": "74626bfbe90bb7552ba9de4af3161be8da7321ebcf0fc6a04fe27373d6064684",
+      "used": "[P: (94, 23), S: (833, 221)]",
+      "width": 1024
+    },
+    {
+      "height": 256,
+      "path": "art/world/animals/poses-v2/sheep.png",
+      "sha256": "b07128d86b17f1f265a876e96c32609ebe6f29fa822a8f640d7d9d7af4db7a1c",
+      "used": "[P: (89, 8), S: (841, 236)]",
+      "width": 1024
+    },
+    {
+      "height": 256,
+      "path": "art/world/animals/poses-v2/goat.png",
+      "sha256": "4c00dca9faa6fa948142bf46061966ca5c06c7f3b6492b268cc2b0a45a7dfcaa",
+      "used": "[P: (89, 8), S: (844, 236)]",
+      "width": 1024
+    },
+    {
+      "height": 256,
+      "path": "art/world/animals/poses-v2/pig.png",
+      "sha256": "c2cb01ade60b9ddbbfe69beb87145cdf52ed387aec3325edcb429157f17edb9b",
+      "used": "[P: (89, 8), S: (841, 236)]",
+      "width": 1024
+    },
+    {
+      "height": 256,
+      "path": "art/world/animals/poses-v2/rabbit.png",
+      "sha256": "a7aee4740333587935ca7442506e5b39acd019c034bd16f67093e4b6fc316d37",
+      "used": "[P: (89, 8), S: (847, 236)]",
+      "width": 1024
+    },
+    {
+      "height": 200,
+      "path": "art/world/interior_surfaces/bedside-rug-v2.png",
+      "sha256": "eaf0dcedfea8f302c3765161e9a16833a76e00caf944d471b87c454a84cd5469",
+      "used": "[P: (16, 28), S: (480, 168)]",
+      "width": 512
+    }
+  ]
+}

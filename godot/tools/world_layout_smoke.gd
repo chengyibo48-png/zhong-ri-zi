@@ -57,18 +57,25 @@ func _initialize()->void:
    for x in range(floori(before.position.x/32),floori((before.end.x-.01)/32)+1):before_cells.append(Vector2i(x,y))
   for y in range(floori(after.position.y/32),floori((after.end.y-.01)/32)+1):
    for x in range(floori(after.position.x/32),floori((after.end.x-.01)/32)+1):after_cells.append(Vector2i(x,y))
-  check(before_cells==after_cells,"wall correction retains authored conservative navigation cells")
+  if not str(override.get("reason","")).begins_with("v8 environmental tree"):
+   check(before_cells==after_cells,"wall correction retains authored conservative navigation cells")
+  else:check(before.size==after.size,"environmental trunk keeps original footprint")
  check(not rect(plan.collisionOverrides[0].rect).intersects(rect(plan.collisionOverrides[1].rect)),"corrected grain-store and compost walls have a physical gap")
  check(LAYOUT.ground_column(Vector2i(86,55),7)==4,"crop rows draw grass instead of a crossing stone road")
  check(LAYOUT.ground_column(Vector2i(82,56),4)==6,"farm west lane draws an earth walking route")
  var stove_box:=rect(plan.fixtures.kitchen_stove)
- for i in 72:
-  var position:=Vector2(2710+(i%6)*42,1731+floori(float(i)/6)*36) if i<24 else Vector2(2020+((i-24)%12)*43,3152+floori(float(i-24)/12)*39)
+ for i in preload("res://scripts/farm_layout.gd").TOTAL:
+  var position:Vector2=preload("res://scripts/farm_layout.gd").position(i)
   check(not stove_box.intersects(Rect2(position-Vector2(16,29),Vector2(32,31))),"stove clears every crop and grown foliage envelope")
  for identity in plan.get("fixedSceneryPositions",{}):
   var parts:Array=identity.split(":");var rows:Array=world.village.allProps if parts[0]=="village" else world.tiles.objects
   var data:Dictionary=rows[int(parts[1])];var update:Dictionary=plan.fixedSceneryPositions[identity]
   var actual:Dictionary=LAYOUT.prop(data,int(parts[1]),str(parts[0]))
+  if str(update.get("reason","")).begins_with("v8 "):
+   check(data.kind in ["tree","willow","shrub","flowers","stone"],"v8 changes environmental scenery only")
+   check(actual.x==update.x and actual.y==update.y,"v8 display uses centralized positions")
+   check(data.x==update.source[0] and data.y==update.source[1],"v8 source identity and array index retained")
+   continue
   check(data.kind in ["tree","blossom","orchard"] and not world.tiles.assets.get(str(data.kind),{}).get("box"),"relocation limited to non-collidable garden tree")
   check(actual.x==update.x and actual.y==update.y,"garden tree consumes planned position")
   check(data.x==update.source[0] and data.y==update.source[1],"authored garden identity retained")

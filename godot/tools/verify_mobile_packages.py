@@ -1,10 +1,11 @@
 """Check exact browser ZIP bytes, Android signatures, alignment and package metadata."""
-import hashlib,json,os,subprocess,zipfile
+import argparse,hashlib,json,os,subprocess,zipfile
 from pathlib import Path
 from release_config import VERSION, VERSION_CODE, RELEASE_DATE
 project=Path(__file__).resolve().parents[1]
-release=project/f'build/releases/{RELEASE_DATE}-{VERSION}'
-web=project/'build/web';archive=release/f'种日子-Web-{VERSION}.zip'
+parser=argparse.ArgumentParser();parser.add_argument('--web-dir',type=Path);parser.add_argument('--release-dir',type=Path);parser.add_argument('--apk',type=Path);args=parser.parse_args()
+release=args.release_dir or project/f'build/releases/{RELEASE_DATE}-{VERSION}'
+web=args.web_dir or project/'build/web';archive=release/f'种日子-Web-{VERSION}.zip'
 manifest=json.loads((web/'manifest.json').read_text(encoding='utf8'))
 with zipfile.ZipFile(archive) as z:
     assert set(z.namelist())=={'manifest.json',*(row['name'] for row in manifest['files'])}
@@ -14,7 +15,7 @@ with zipfile.ZipFile(archive) as z:
         assert data==(web/row['name']).read_bytes()
     assert 'variant/thread_support' not in z.read('index.html').decode() # HTML config is authoritative below.
     assert 'const GODOT_THREADS_ENABLED = false;' in z.read('index.html').decode()
-apk=project/f'build/android/ZhongRiZi-{VERSION}.apk'
+apk=args.apk or project/f'build/android/ZhongRiZi-{VERSION}.apk'
 sdk=project/'.build/android-sdk/build-tools/35.0.1'
 env=os.environ.copy();env['JAVA_HOME']=str(project/'.build/jdk17');env['PATH']=str(project/'.build/jdk17/bin')+os.pathsep+env['PATH']
 def command(args):

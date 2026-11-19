@@ -1249,6 +1249,59 @@
       },
       "generation": 0,
       "parents": []
+    },
+    {
+      "id": "starter-cow-v1",
+      "name": "麦麦",
+      "species": "牛",
+      "personality": "慢悠悠",
+      "product": "milk",
+      "bond": 0,
+      "fed": true,
+      "ready": 0,
+      "type": "cow",
+      "sex": "female",
+      "breed": "local",
+      "trait": "strong",
+      "age": 26,
+      "hunger": 65,
+      "health": 100,
+      "mood": 80,
+      "clean": 90,
+      "stress": 0,
+      "illness": 0,
+      "warning": 0,
+      "progress": 0,
+      "qualityStock": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "feedQuality": 0,
+      "feathers": 0,
+      "retired": false,
+      "rest": false,
+      "lost": false,
+      "care": {
+        "feed": -1,
+        "pet": -1,
+        "clean": -1,
+        "treat": -1,
+        "breed": -20
+      },
+      "position": {
+        "x": 3184,
+        "y": 2605,
+        "direction": "down",
+        "room": null,
+        "inside": {
+          "x": 545,
+          "y": 490
+        }
+      },
+      "generation": 0,
+      "parents": []
     }
   ],
   "relations": {
@@ -1397,7 +1450,9 @@
       "returnGift": false
     }
   },
-  "flags": {},
+  "flags": {
+    "starter_livestock_v1": true
+  },
   "upgrades": {},
   "collected": {},
   "processing": [],
@@ -4254,6 +4309,44 @@
         "collectStatus": "手工收取",
         "cleanStatus": "手动换草",
         "beddingDay": -1
+      },
+      "horseStable": {
+        "built": false,
+        "space": 0,
+        "comfort": 0,
+        "protection": 0,
+        "efficiency": 0,
+        "autoFeed": false,
+        "autoClean": false,
+        "autoCollect": false,
+        "durability": 100,
+        "clean": 90,
+        "waste": 0,
+        "lastClean": -1,
+        "trough": {},
+        "feedStatus": "手动添料 · 背包 → 料槽",
+        "collectStatus": "手工收取",
+        "cleanStatus": "手动换草",
+        "beddingDay": -1
+      },
+      "alpacaShelter": {
+        "built": false,
+        "space": 0,
+        "comfort": 0,
+        "protection": 0,
+        "efficiency": 0,
+        "autoFeed": false,
+        "autoClean": false,
+        "autoCollect": false,
+        "durability": 100,
+        "clean": 90,
+        "waste": 0,
+        "lastClean": -1,
+        "trough": {},
+        "feedStatus": "手动添料 · 背包 → 料槽",
+        "collectStatus": "手工收取",
+        "cleanStatus": "手动换草",
+        "beddingDay": -1
       }
     },
     "stores": {
@@ -4734,13 +4827,19 @@
     "tracked": null
   },
   "quests": {
-    "version": 1,
+    "version": 2,
     "entries": {},
     "metrics": {},
     "pins": [],
     "collapsed": false,
     "sequence": 0,
     "seen": [],
-    "notices": {}
+    "notices": {},
+    "journey": {
+      "chapter": 0,
+      "stage": 0
+    },
+    "receipts": {},
+    "memorials": {}
   }
 }

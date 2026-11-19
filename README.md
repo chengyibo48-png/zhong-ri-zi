@@ -1,20 +1,22 @@
-# 种日子 · Godot 0.29.0
+> 2026-11-19 已同步旧版稳定性、钓鱼入口与两头初始奶牛更新。详见[更新说明](godot/STABILITY_UPDATE_20261119.md)。使用 Godot 4.7.2 打开 `godot/project.godot` 运行。本次为源码更新，未发布新安装包。
+
+# 种日子 · Godot 0.30.0
 
 中式乡村生活游戏：单人单机、无战斗，围绕种植、牧场、垂钓、加工经营、邻里与村史展陈展开。
 
-**[下载 Windows 试玩](https://github.com/chengyibo48-png/zhong-ri-zi/releases/tag/v0.29.0)** · [源码运行与构建](docs/GITHUB使用说明.md) · [0.29.0 验收记录](godot/RELEASE_20261017.md)
+**[下载 Windows 试玩](https://github.com/chengyibo48-png/zhong-ri-zi/releases/tag/v0.30.0)** · [源码运行与构建](docs/GITHUB使用说明.md) · [0.30.0 验收记录](godot/RELEASE_20261017.md)
 
-![0.29.0 实际游戏画面](docs/screenshots/gameplay-0.29.0.png)
+![0.30.0 实际游戏画面](docs/screenshots/gameplay-0.30.0.png)
 
 当前主版本位于 `godot/`，使用 Godot **4.7.2** 打开 `godot/project.godot` 后按 F5 运行主场景。仓库包含源码、数据、原始资源及测试工具；引擎、SDK、导入缓存、私人存档与签名密钥不纳入版本控制。Windows 试玩无需安装编辑器。
 
-根目录 HTML/JavaScript 是保留的 **v0.22 浏览器原型**，不等同于当前 Godot 主版本。0.29.0 已验收的发行平台为 Windows；触控验收属于 Windows GPU 模拟，未宣称手机实机通过。
+根目录 HTML/JavaScript 是保留的 **v0.22 浏览器原型**，不等同于当前 Godot 主版本。0.30.0 已验收的发行平台为 Windows；触控验收属于 Windows GPU 模拟，未宣称手机实机通过。
 
 以下为开发过程与历史说明。
 
 ---
 
-> **当前发布：Windows 0.29.0 · 2026-10-17。** 最新 UI、任务、7×7 主田、七种动物、16 种水产和266条图鉴已测试并导出；试玩与作品集见[本轮交付记录](godot/RELEASE_20261017.md)。以下较早版本信息作为开发历史保留。
+> **当前发布：Windows 0.30.0 · 2026-10-17。** 最新 UI、任务、7×7 主田、七种动物、16 种水产和266条图鉴已测试并导出；试玩与作品集见[本轮交付记录](godot/RELEASE_20261017.md)。以下较早版本信息作为开发历史保留。
 
 > 主田已扩大为 **7×7（49 格）**，东坡保留 48 格；本次专项 1701 项通过、0 失败，不做旧档迁移、不导出游戏包。见 [7×7 调整记录](godot/FARM_GRID_7X7_20261016.md)。
 

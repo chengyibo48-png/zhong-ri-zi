@@ -39,6 +39,7 @@ var float_rows: Array[Dictionary] = []
 var ambient_props: Array[Dictionary] = []
 var visible_ambient_props: Array[Dictionary] = []
 var water_rects: Array[Dictionary] = []
+var water_columns: Dictionary = {}
 var houses: Array[Dictionary] = []
 var visible_houses: Array[Dictionary] = []
 var festival_market := Vector2.ZERO
@@ -59,7 +60,8 @@ func _ready() -> void:
 	GameState.player_moved.connect(_on_player_moved)
 	set_process(true)
 
-func configure(data: Dictionary) -> void:
+func configure(data: Dictionary, ground: TileMapLayer=null) -> void:
+	water_columns=ground.get_meta("visual_columns",{}) if ground!=null else {}
 	world_data = data
 	interior_stations.clear()
 	ambient_props.clear()
@@ -413,6 +415,8 @@ func _draw_ambient() -> void:
 		elif season == 1 and int(weather.get("rain", 0)) == 0 and GameState.minutes >= 1050:
 			var glint := point + Vector2(sin(clock * 0.7 + float(seed)) * 18.0, -17.0 + sin(clock * 0.4 + float(seed)) * 8.0)
 			draw_rect(Rect2(glint, Vector2(2, 2)), Color("#dece82", 0.35 + 0.3 * pow(sin(clock + float(seed)), 2.0)))
+	# Source scenes use the masked water shader; retain lines for legacy callers.
+	if not water_columns.is_empty():return
 	var drawn := 0
 	var view := _visible_world_rect()
 	for water in water_rects:

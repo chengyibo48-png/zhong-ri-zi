@@ -330,13 +330,15 @@ static func _social(data: Dictionary) -> String:
 	if not bad.is_empty(): return bad
 	bad = _fields(data.get("pet",{}),{"bond":NUMBER,"patted":NUMBER},"pet")
 	if not bad.is_empty(): return bad
-	bad = _fields(data.get("interior_state",{}),{"memories":TYPE_DICTIONARY,"chores":TYPE_DICTIONARY},"interior_state")
+	bad = _fields(data.get("interior_state",{}),{"memories":TYPE_DICTIONARY,"chores":TYPE_DICTIONARY,"household":TYPE_DICTIONARY},"interior_state")
 	if not bad.is_empty(): return bad
 	return ""
 
 static func fishing_error(data: Dictionary) -> String:
-	var f: Dictionary=data.get("fishing",{})
-	if int(f.get("version",1))!=2:return "fishing.version"
+	var raw:Variant=data.get("fishing",{})
+	if not raw is Dictionary:return "fishing"
+	var f:Dictionary=raw
+	if not BASE.integer(f.get("version",1),2,2):return "fishing.version"
 	if not BASE.integer(f.get("rng"),1,2147483646) or not BASE.integer(f.get("nextId"),1,1000000000) or not BASE.integer(f.get("settled"),0,int(f.nextId)-1):return "fishing.random"
 	if f.get("mode") not in ["relaxed","standard"] or f.get("inputStyle") not in ["hold","toggle"]:return "fishing.options"
 	if not f.get("pending",{}) is Dictionary or not f.get("traps",{}) is Dictionary or f.traps.size()>8:return "fishing.containers"
@@ -346,6 +348,8 @@ static func fishing_error(data: Dictionary) -> String:
 	for id: Variant in f.get("tackles",[]):
 		if not catalog.tackles.has(id) or seen_tackles.has(id):return "fishing.tackles"
 		seen_tackles.append(id)
+	if not f.get("records",{}) is Dictionary:return "fishing.records"
+	if not f.get("waters",{}) is Dictionary:return "fishing.waters"
 	for id: String in f.get("records",{}):
 		var row: Dictionary=f.records[id]
 		if not catalog.species.has(id) or not BASE.integer(row.get("count"),0,1000000) or not BASE.number(row.get("best"),0,200) or not BASE.integer(row.get("grade"),0,3) or not row.get("waters") is Array:return "fishing.records"

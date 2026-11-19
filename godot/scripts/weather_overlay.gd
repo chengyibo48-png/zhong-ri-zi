@@ -23,7 +23,7 @@ func _draw() -> void:
 	var light: Dictionary = EnvironmentRules.daylight(GameState.day, GameState.minutes, events)
 	var viewport_size := get_viewport_rect().size
 	var bounds := Rect2(Vector2.ZERO, viewport_size)
-	if GameState.current_interior != "":
+	if GameState.current_interior != "" and GameState.current_interior!="ranch-meadow":
 		# Night paintings already contain their room lighting.
 		if float(light.night) > 0.01:
 			draw_rect(bounds,Color(0.10,0.12,0.18,minf(0.06,float(light.night)*0.12)),true)
@@ -42,7 +42,7 @@ func _draw() -> void:
 	if float(light.warm) > 0.01:
 		draw_rect(bounds, Color(0.83, 0.50, 0.29, float(light.warm) * 0.18), true)
 	if float(light.night) > 0.01:
-		draw_rect(bounds, Color(0.05, 0.10, 0.19, minf(0.28,float(light.night))), true)
+		draw_rect(bounds, Color(0.05, 0.10, 0.19, minf(0.45,float(light.night)*0.78)), true)
 	if int(profile.rain) > 0:
 		var rain_count := 48 if gentle_weather and str(profile.kind) == "台风" else 30 if gentle_weather else 90 if str(profile.kind) == "台风" else 55
 		for i in range(rain_count):

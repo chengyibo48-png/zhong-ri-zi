@@ -1,7 +1,7 @@
 {
   "version": 1,
   "purpose": "original village layout, functional reservations and collision-consistent painted scenery",
-  "source_world_sha256": "b965109a3b652caaee3efdd2f0ed21ade0b9fbffad36dc8eee946c6b2538701b",
+  "source_world_sha256": "6e8806a1b0620d031ec3d9fe4f0684025414512c1768c3738187dcae9e3c3df5",
   "houseRects": {
     "building-pasture-18": [
       -77.5,
@@ -46,6 +46,166 @@
         60
       ],
       "reason": "compost-room wall respects shared gap"
+    },
+    {
+      "source": [
+        3272,
+        469,
+        14,
+        12
+      ],
+      "rect": [
+        3290,
+        457,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 123; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        2080,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        2068,
+        2298,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 481; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        2197,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        2207,
+        2316,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 483; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        2314,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        2307,
+        2293,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 485; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        2431,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        2447,
+        2307,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 486; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        2548,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        2559,
+        2321,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 487; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        2782,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        2773,
+        2304,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 489; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        2899,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        2913,
+        2315,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 491; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        3133,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        3141,
+        2310,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 495; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
+    },
+    {
+      "source": [
+        3250,
+        2286,
+        14,
+        12
+      ],
+      "rect": [
+        3236,
+        2320,
+        14,
+        12
+      ],
+      "reason": "v8 environmental tree 497; same trunk footprint, matching display and navigation",
+      "requiresSafeLanding": true
     }
   ],
   "props": {
@@ -1394,8 +1554,8 @@
       "region": "farm"
     },
     "village:428": {
-      "x": 2664,
-      "y": 1993,
+      "x": 2694,
+      "y": 2044,
       "rect": [
         -39.6,
         -16.69560184478763,
@@ -2306,8 +2466,8 @@
       "region": "mountain"
     },
     "village:128": {
-      "x": 2440,
-      "y": 568,
+      "x": 2428,
+      "y": 561,
       "rect": [
         -16.680685424804718,
         -25.6,
@@ -2322,8 +2482,8 @@
       "region": "town"
     },
     "village:130": {
-      "x": 2385,
-      "y": 880,
+      "x": 2377,
+      "y": 888,
       "rect": [
         -16.680685424804718,
         -25.6,
@@ -2354,7 +2514,7 @@
       "region": "town"
     },
     "village:225": {
-      "x": 1091,
+      "x": 1103,
       "y": 2741,
       "rect": [
         -16.680685424804718,
@@ -2722,8 +2882,8 @@
       "region": "mountain"
     },
     "village:129": {
-      "x": 3296,
-      "y": 574,
+      "x": 3310,
+      "y": 562,
       "rect": [
         -13.600000000000001,
         -23.42729339599608,
@@ -2738,7 +2898,7 @@
       "region": "town"
     },
     "village:131": {
-      "x": 3320,
+      "x": 3332,
       "y": 882,
       "rect": [
         -13.600000000000001,
@@ -2754,8 +2914,8 @@
       "region": "town"
     },
     "village:226": {
-      "x": 1272,
-      "y": 2679,
+      "x": 1252,
+      "y": 2691,
       "rect": [
         -13.600000000000001,
         -23.42729339599608,
@@ -3090,8 +3250,8 @@
       "region": "pasture"
     },
     "village:589": {
-      "x": 2625,
-      "y": 2514,
+      "x": 2638,
+      "y": 2527,
       "rect": [
         -13.600000000000001,
         -23.42729339599608,
@@ -5759,6 +5919,82 @@
       ],
       "atlasColumn": 6,
       "reason": "Connect both service entrances to the existing east pasture road"
+    },
+    {
+      "rect": [
+        3328,
+        1920,
+        96,
+        288
+      ],
+      "atlasColumn": 2,
+      "ellipse": true,
+      "sourceColumns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reason": "v8 soft planting transition; roads, bridges and water excluded"
+    },
+    {
+      "rect": [
+        2380,
+        520,
+        100,
+        72
+      ],
+      "atlasColumn": 4,
+      "ellipse": true,
+      "sourceColumns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reason": "v8 soft planting transition; roads, bridges and water excluded"
+    },
+    {
+      "rect": [
+        3250,
+        520,
+        120,
+        64
+      ],
+      "atlasColumn": 4,
+      "ellipse": true,
+      "sourceColumns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reason": "v8 soft planting transition; roads, bridges and water excluded"
+    },
+    {
+      "rect": [
+        1180,
+        2670,
+        160,
+        110
+      ],
+      "atlasColumn": 4,
+      "ellipse": true,
+      "sourceColumns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reason": "v8 soft planting transition; roads, bridges and water excluded"
     }
   ],
   "reservations": [
@@ -7845,6 +8081,657 @@
       ],
       "kind": "orchard",
       "reason": "non-collidable tree clears nearby fixed service facilities and all reserved activity space"
+    },
+    "village:123": {
+      "x": 3297,
+      "y": 464,
+      "source": [
+        3279,
+        476
+      ],
+      "kind": "tree",
+      "reason": "v8 town composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:128": {
+      "x": 2428,
+      "y": 561,
+      "source": [
+        2440,
+        568
+      ],
+      "kind": "shrub",
+      "reason": "v8 town composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:129": {
+      "x": 3310,
+      "y": 562,
+      "source": [
+        3264,
+        574
+      ],
+      "kind": "flowers",
+      "reason": "v8 town composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:130": {
+      "x": 2377,
+      "y": 888,
+      "source": [
+        2385,
+        912
+      ],
+      "kind": "shrub",
+      "reason": "v8 town composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:131": {
+      "x": 3332,
+      "y": 882,
+      "source": [
+        3320,
+        930
+      ],
+      "kind": "flowers",
+      "reason": "v8 town composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:225": {
+      "x": 1103,
+      "y": 2741,
+      "source": [
+        1091,
+        2773
+      ],
+      "kind": "shrub",
+      "reason": "v8 river composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:226": {
+      "x": 1252,
+      "y": 2691,
+      "source": [
+        1368,
+        2791
+      ],
+      "kind": "flowers",
+      "reason": "v8 river composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:481": {
+      "x": 2075,
+      "y": 2305,
+      "source": [
+        2087,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:483": {
+      "x": 2214,
+      "y": 2323,
+      "source": [
+        2204,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:485": {
+      "x": 2314,
+      "y": 2300,
+      "source": [
+        2321,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:486": {
+      "x": 2454,
+      "y": 2314,
+      "source": [
+        2438,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:487": {
+      "x": 2566,
+      "y": 2328,
+      "source": [
+        2555,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:489": {
+      "x": 2780,
+      "y": 2311,
+      "source": [
+        2789,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:491": {
+      "x": 2920,
+      "y": 2322,
+      "source": [
+        2906,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:495": {
+      "x": 3148,
+      "y": 2317,
+      "source": [
+        3140,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:497": {
+      "x": 3243,
+      "y": 2327,
+      "source": [
+        3257,
+        2293
+      ],
+      "kind": "tree",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:464": {
+      "x": 3352,
+      "y": 1954,
+      "source": [
+        3369,
+        1960
+      ],
+      "kind": "stone",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:465": {
+      "x": 3361,
+      "y": 2004,
+      "source": [
+        3378,
+        1991
+      ],
+      "kind": "stone",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:466": {
+      "x": 3374,
+      "y": 2042,
+      "source": [
+        3385,
+        2024
+      ],
+      "kind": "stone",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:467": {
+      "x": 3362,
+      "y": 2107,
+      "source": [
+        3387,
+        2095
+      ],
+      "kind": "stone",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:468": {
+      "x": 3380,
+      "y": 2152,
+      "source": [
+        3384,
+        2137
+      ],
+      "kind": "stone",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
+    },
+    "village:469": {
+      "x": 3441,
+      "y": 2208,
+      "source": [
+        3426,
+        2191
+      ],
+      "kind": "stone",
+      "reason": "v8 farm composition: varied spacing and planted clusters; environmental scenery only"
     }
+  },
+  "compositionV8": {
+    "changes": [
+      {
+        "key": "village:123",
+        "kind": "tree",
+        "region": "town",
+        "before": [
+          3279,
+          476
+        ],
+        "after": [
+          3297,
+          464
+        ],
+        "source": [
+          3279,
+          476
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:128",
+        "kind": "shrub",
+        "region": "town",
+        "before": [
+          2440,
+          568
+        ],
+        "after": [
+          2428,
+          561
+        ],
+        "source": [
+          2440,
+          568
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:129",
+        "kind": "flowers",
+        "region": "town",
+        "before": [
+          3296,
+          574
+        ],
+        "after": [
+          3310,
+          562
+        ],
+        "source": [
+          3264,
+          574
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:130",
+        "kind": "shrub",
+        "region": "town",
+        "before": [
+          2385,
+          880
+        ],
+        "after": [
+          2377,
+          888
+        ],
+        "source": [
+          2385,
+          912
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:131",
+        "kind": "flowers",
+        "region": "town",
+        "before": [
+          3320,
+          882
+        ],
+        "after": [
+          3332,
+          882
+        ],
+        "source": [
+          3320,
+          930
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:225",
+        "kind": "shrub",
+        "region": "river",
+        "before": [
+          1091,
+          2741
+        ],
+        "after": [
+          1103,
+          2741
+        ],
+        "source": [
+          1091,
+          2773
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:226",
+        "kind": "flowers",
+        "region": "river",
+        "before": [
+          1272,
+          2679
+        ],
+        "after": [
+          1252,
+          2691
+        ],
+        "source": [
+          1368,
+          2791
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:481",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          2087,
+          2293
+        ],
+        "after": [
+          2075,
+          2305
+        ],
+        "source": [
+          2087,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:483",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          2204,
+          2293
+        ],
+        "after": [
+          2214,
+          2323
+        ],
+        "source": [
+          2204,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:485",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          2321,
+          2293
+        ],
+        "after": [
+          2314,
+          2300
+        ],
+        "source": [
+          2321,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:486",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          2438,
+          2293
+        ],
+        "after": [
+          2454,
+          2314
+        ],
+        "source": [
+          2438,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:487",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          2555,
+          2293
+        ],
+        "after": [
+          2566,
+          2328
+        ],
+        "source": [
+          2555,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:489",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          2789,
+          2293
+        ],
+        "after": [
+          2780,
+          2311
+        ],
+        "source": [
+          2789,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:491",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          2906,
+          2293
+        ],
+        "after": [
+          2920,
+          2322
+        ],
+        "source": [
+          2906,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:495",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          3140,
+          2293
+        ],
+        "after": [
+          3148,
+          2317
+        ],
+        "source": [
+          3140,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:497",
+        "kind": "tree",
+        "region": "farm",
+        "before": [
+          3257,
+          2293
+        ],
+        "after": [
+          3243,
+          2327
+        ],
+        "source": [
+          3257,
+          2293
+        ],
+        "solid": true
+      },
+      {
+        "key": "village:464",
+        "kind": "stone",
+        "region": "farm",
+        "before": [
+          3369,
+          1960
+        ],
+        "after": [
+          3352,
+          1954
+        ],
+        "source": [
+          3369,
+          1960
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:465",
+        "kind": "stone",
+        "region": "farm",
+        "before": [
+          3378,
+          1991
+        ],
+        "after": [
+          3361,
+          2004
+        ],
+        "source": [
+          3378,
+          1991
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:466",
+        "kind": "stone",
+        "region": "farm",
+        "before": [
+          3385,
+          2024
+        ],
+        "after": [
+          3374,
+          2042
+        ],
+        "source": [
+          3385,
+          2024
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:467",
+        "kind": "stone",
+        "region": "farm",
+        "before": [
+          3387,
+          2095
+        ],
+        "after": [
+          3362,
+          2107
+        ],
+        "source": [
+          3387,
+          2095
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:468",
+        "kind": "stone",
+        "region": "farm",
+        "before": [
+          3384,
+          2137
+        ],
+        "after": [
+          3380,
+          2152
+        ],
+        "source": [
+          3384,
+          2137
+        ],
+        "solid": false
+      },
+      {
+        "key": "village:469",
+        "kind": "stone",
+        "region": "farm",
+        "before": [
+          3426,
+          2191
+        ],
+        "after": [
+          3441,
+          2208
+        ],
+        "source": [
+          3426,
+          2191
+        ],
+        "solid": false
+      }
+    ],
+    "protected": "Buildings, doors, roads, bridges, crop/task/gather identities and player furniture unchanged; no additional interactive nodes."
+  },
+  "refinementsV9": {
+    "originalPlanSourceHash": "b965109a3b652caaee3efdd2f0ed21ade0b9fbffad36dc8eee946c6b2538701b",
+    "note": "Source map retained byte-for-byte; plan provenance refreshed after prior content expansion.",
+    "changes": [
+      {
+        "key": "village:589",
+        "kind": "flowers",
+        "before": [
+          2625,
+          2514
+        ],
+        "after": [
+          2638,
+          2527
+        ],
+        "reason": "Environmental flowers clear rabbitry collision, door and preserved neighboring props."
+      }
+    ]
+  },
+  "refinementsV11": {
+    "fence428_before": [
+      2664,
+      1993
+    ],
+    "fence428_after": [
+      2694,
+      2044
+    ],
+    "safe_landing": "explicit requiresSafeLanding flag; save fields unchanged"
   }
 }

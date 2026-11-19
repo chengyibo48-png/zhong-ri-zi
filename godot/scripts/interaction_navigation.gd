@@ -5,6 +5,7 @@ static func approach(navigation: RefCounted,state: Node,room: String,position: D
  var y:=float(target.y)
  var fallback:={"x":x,"y":y+5.0}
  var kind:=str(target.get("kind",""))
+ if kind=="house-fixture":return {"x":x,"y":y-8.0}
  if kind in ["animal","ranch-task"]:fallback.y=y
  if kind in ["walk","enter","exit"]:return fallback
  var angle:=preload("res://scripts/js_navigation_math.gd").angle(float(position.y)-y,float(position.x)-x)

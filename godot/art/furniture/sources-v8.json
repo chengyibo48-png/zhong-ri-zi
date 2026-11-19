@@ -1,0 +1,110 @@
+[
+  {
+    "key": "pot",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-b24868ee-ea00-4bb4-b248-09d49bd3ff7f.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A small terracotta flowerpot with a gently flared rim, restrained cream daisies and sage foliage, a tiny indigo ceramic repair motif on front. Square1x1 footprint. Four distinct real views, same plant rotating.",
+    "source": "source/pot-v8-master.png",
+    "sha256": "ee69ef406ad561e54a29ea130da93ce3e742981743513f289feae627082c365d",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "fence",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-960095f7-f9c2-4b74-8e4d-4257d8c7108a.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A LOW bamboo garden fence panel, TWO sturdy end posts, TWO horizontal rails, slender diagonal crossed inner bamboo bracing, tied lashings. Long width twice shallow depth. Front/back broad horizontal, true side views narrow receding; no archway or opening, no gate, no additional objects.",
+    "source": "source/fence-v8-master.png",
+    "sha256": "92832137df578c108e30da58860252d7031e7014bc36cebd63faf9b5e83bc8eb",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "orchard",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-b85434e3-d965-498f-951a-6449b4f05b63.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A compact small pear tree, softly sculpted sage-green canopy with a few pale yellow pears, visible branching trunk; ONE small low honeywood resting stool under its shade beside trunk. Square2x2 footprint. Tree and stool rotate together as one object; consistent branch structure, restrained leaves, absolutely no terrain or grass patch.",
+    "source": "source/orchard-v8-master.png",
+    "sha256": "30149f2e33a4d155062ddd616e08c2053439754871b1ebff056a1faf293db9e0",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "photo",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-f499bf4d-f1f9-4e17-b0e7-b33db2891a2c.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A small tabletop wooden photograph FRAME propped by a short rear easel support, warm worn oak, inside an indistinct tiny sepia countryside group portrait with no legible individual faces. Front shows photograph, back shows wooden backing and easel leg; sides show shallow frame depth. No table underneath, no lettering.",
+    "source": "source/photo-v8-master.png",
+    "sha256": "704d774a06f0b9e6ed3d3db4fa3f04c7387678efb65e04962717b4122f540b70",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "waterbed",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-9e439eff-7b9c-4cb0-ba81-da6f65b5b994.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A LOW long rectangular raised vegetable bed, bamboo-edged sides, sage cabbage seedlings and a few slender leaves, a NARROW blue-green irrigation gutter along one long edge and one small visible water surface. Width twice depth, short supports, no grass or surrounding soil patch outside object. Same growing arrangement rotates with bed.",
+    "source": "source/waterbed-v8-master.png",
+    "sha256": "7f374859f5fe70521eba715c67233da39de96dde394e16e55bbc7d800dbaeb03",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "scarecrow",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-e907266b-31a6-48ba-abda-19282957ec30.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A friendly rustic scarecrow: short wood support pole on a small discreet crossed wooden foot, faded sage shirt, cream patches, straw head and woven straw hat, short straw hands. No eyes glowing, no scary face, no ground. Square1x1 footprint. Back reveals support crossbar, side shallow but complete.",
+    "source": "source/scarecrow-v8-master.png",
+    "sha256": "7e6bee8de44cd33dbac70de7fb445605da179e9b880db14dc01f5f507bd5793d",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "greenhouse",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-5bcba3e5-e729-4eec-93f4-8947a38c9bb0.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A small square2x2 garden greenhouse with a honey bamboo frame and softly translucent pale sage glass panes, simple pitched roof, ONE narrow door on front, low seedling trays visible through panes. Sides and back have proper frame bracing and transparent glass; no ground slab or outdoor scenery. Restrained glass reflections without painted background.",
+    "source": "source/greenhouse-v8-master.png",
+    "sha256": "91936ea2fea022009fee676129c190030d3d753f89b66911f1aa1ba68a9fdc14",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "lantern",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-8c4f2de8-adf8-411a-bb68-117a3ed50b4d.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A SMALL low portable bamboo lantern sitting on a tiny wooden base, oval cream-paper chamber with honey bamboo ribs and one curved carrying handle. Subtle unlit warm cream inner paper, no emitted glow halo. Square1x1 decoration, light and portable, no tall pole or stand. Different front/back woven fastening detail, true side views.",
+    "source": "source/lantern-v8-master.png",
+    "sha256": "236709d8d183d4c0eadcdc285b23ada98d1fa4a20a3b95f91d26a51a880a7dad",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "sign",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-8b734d86-1242-4854-907e-f2408e425550.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A small rustic wooden garden name board on ONE short post with tiny unobtrusive foot. On front an engraved SIMPLE LEAF symbol, no text, letters or words. Back plain wood with rear brace, sides shallow. Small1x1 footprint, restrained honey wood.",
+    "source": "source/sign-v8-master.png",
+    "sha256": "f1b9a6eb21c336fe25491cf7fb82505db71ea65c6d6c56321bb14daaa50d2fe2",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "seedrack",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-0799cf31-81d5-4574-9757-6ec9e9d7ddd8.png",
+    "prompt": "Production sprite atlas for a 2D Chinese countryside handpainted farming game. FOUR complete views of the SAME rigid object in a 2x2 arrangement: TL FRONT 0, TR RIGHT90, BL BACK180, BR LEFT270. Fixed elevated orthographic camera about40 degrees. Identical proportions, accessories and construction across all views. Warm honey bamboo/wood, muted sage and cream, tactile gouache shading with clear volume, readable at50-120 world pixels. Generous genuinely TRANSPARENT gutters and margins between views. All structural holes transparent. Absolutely no background, no vignette, no ground patch, no cast shadow, no diagram labels, no letters, no grid or numerals. A WIDE two-tier freestanding bamboo nursery rack, visible crossed rear braces, shallow woven trays of dark soil with small sage seedlings; small clay watering cup on lower tray. Width twice depth, medium height. Front shows seedlings, back shows rear bracing, sides narrow and receding. No loose objects beside rack.",
+    "source": "source/seedrack-v8-master.png",
+    "sha256": "05e8b100ba17a959a1b5f3c097bbdc9a8efe754d2e747417f8743cbe8e03cbd6",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "front/right/back/left atlas, alpha-preserving native crop"
+  },
+  {
+    "key": "path",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-b6c71922-3fb5-4d54-acb8-525985b439b6.png",
+    "prompt": "A single seamless TOP-DOWN square bluestone paving texture for a hand-painted countryside2D farming game. Grey-green worn flagstones of irregular but walkable sizes, thin muted brown soil joints, tiny restrained moss at joints. Orthographic directly overhead, no perspective, no bevel frame, no cast shadow, no vignette, no decorative border, no text. Full image is usable repeatable tile texture; matched opposite edges. Soft gouache, clear material grain, avoid bright highlights.",
+    "source": "source/path-v8-master.png",
+    "sha256": "952df40e51193b90bf9bfbf6e6c1a01645ea37d0a50abeb9ed22682706a9612b",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "ground texture, four native rotations"
+  },
+  {
+    "key": "rug",
+    "path": "C:\\Users\\智者不入爱河\\.codex\\generated_images\\01a173ba-d7a5-7ce2-b0cf-22ccd06669e8\\exec-5d9a2cae-2c3d-42d9-9aa7-cad7e0d1d10d.png",
+    "prompt": "Production 2D game floor sprite. ONE SQUARE indigo handwoven rug viewed STRICTLY TOP-DOWN, cream thread geometric small border and restrained woven diamond center, short cream fringes on two opposing sides. Warm muted indigo not neon, tactile handpainted fiber shading. Entire complete rug centered with transparent margins, no floor, shadow, background, perspective, words or vignette.",
+    "source": "source/rug-v8-master.png",
+    "sha256": "698e0d70d00c4dec010a1453d82e70a76be10b5222be7bb3c945b2745a139d7b",
+    "provider": "OpenAI image generation; original retained",
+    "usage": "ground texture, four native rotations"
+  }
+]

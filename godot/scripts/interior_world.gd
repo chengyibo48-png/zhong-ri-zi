@@ -19,6 +19,8 @@ signal interaction_presentation_changed
 const INTERACTION_DESCRIPTION=preload("res://scripts/interaction_description.gd")
 var room_animal_nodes: Dictionary = {}
 var painted_floor_active:=false
+var furniture_visuals: Array[Node2D] = []
+var furniture_visual_signature := ""
 var home_furniture_stamp := ""
 var home_furniture_cache: Array = []
 
@@ -54,6 +56,7 @@ func _ready() -> void:
 	player = CharacterBody2D.new()
 	player.name = "Player"
 	player.set_script(PLAYER_SCRIPT)
+	preload("res://scripts/house_geometry.gd").recover(GameState)
 	player.position = GameState.interior_position
 	add_child(player)
 	collision_root = Node2D.new()
@@ -62,10 +65,20 @@ func _ready() -> void:
 	hud = CanvasLayer.new()
 	hud.set_script(HUD_SCRIPT)
 	add_child(hud)
+	var floor_dressing:=preload("res://scripts/interior_ground.gd").new()
+	floor_dressing.world=self;add_child(floor_dressing)
+	if not preload("res://scripts/resident_life.gd").profile(str(room.get("owner",""))).is_empty():
+		var resident_decor:=preload("res://scripts/resident_home_decor.gd").new()
+		resident_decor.world=self;add_child(resident_decor)
+	var living:=preload("res://scripts/house_life_visual.gd").new();living.world=self;add_child(living)
+	var grouping:=preload("res://scripts/house_dressing.gd").new();grouping.world=self;add_child(grouping)
+	var kept:=preload("res://scripts/house_memorial.gd").new();add_child(kept)
+	var atmosphere:=preload("res://scripts/interior_atmosphere.gd").new()
+	atmosphere.world=self;add_child(atmosphere)
 	_add_wall_blockers()
 	GameState.ranch_positions_changed.connect(queue_redraw)
 	GameState.ranch_positions_changed.connect(_sync_room_animals)
-	GameState.world_changed.connect(_refresh)
+	GameState.domain_changed.connect(_refresh_domain)
 	GameState.clock_changed.connect(queue_redraw)
 	GameState.input_mode_changed.connect(func(_mode:String):queue_redraw())
 	GameState.action_sequence_changed.connect(func(_snapshot:Dictionary):queue_redraw())
@@ -82,16 +95,14 @@ func _ready() -> void:
 		if str(room.get("name", "")) in ["禾溪小灶", "许婶杂货", "禾溪村史馆"]: _add_blocker(Rect2(590, 392, 154, 102))
 	else:
 		_add_layout_blockers(layout)
+	_sync_life_furniture()
+	_sync_furniture_visuals()
 	_sync_room_owner(0.0)
 	_publish_npc_positions()
 	queue_redraw()
 
 func _add_wall_blockers() -> void:
-	_add_blocker(Rect2(70, 70, 820, 34))
-	_add_blocker(Rect2(70, 70, 34, 500))
-	_add_blocker(Rect2(856, 70, 34, 500))
-	_add_blocker(Rect2(70, 576, 375, 34))
-	_add_blocker(Rect2(515, 576, 375, 34))
+	for wall:Rect2 in preload("res://scripts/house_geometry.gd").walls(GameState.current_interior):_add_blocker(wall)
 
 func _process(delta: float) -> void:
 	if preload("res://scripts/life_presentation.gd").animate():
@@ -273,14 +284,10 @@ func _draw() -> void:
 		room_title = "%s · %s" % [str(owner_profile[1]), room_title]
 	draw_string(ThemeDB.fallback_font, Vector2(140, 95), room_title, HORIZONTAL_ALIGNMENT_CENTER, 680, 19, Color("f2e5c7"))
 	if not layout.is_empty():
-		draw_string(ThemeDB.fallback_font, Vector2(130, 189), str(layout.get("description", "")), HORIZONTAL_ALIGNMENT_CENTER, 700, 11, Color("efe0bf"))
-		_draw_room_layout(layout, palette)
+		pass # Descriptive prose remains in the room data and interaction views.
+		pass # Furnishings are independent Y-sorted nodes.
 	else:
-		_draw_base_furnishings(room, home_room, palette)
-		if home_room: _draw_home_layout()
-	if not selected_room_target.is_empty() and not GameState.ui_open and not GameState.action_busy():
-		var point := Vector2(float(selected_room_target.x),float(selected_room_target.y))
-		draw_arc(point,19.0,0.0,TAU,24,Color("f4e7ad"),2.0)
+		pass # Base and player furniture share the same sorted visual path.
 
 func _draw_base_furnishings(room: Dictionary, home_room: bool, palette: Array) -> void:
 	if painted_floor_active:
@@ -335,6 +342,7 @@ func _draw_painted_base_furnishings(room: Dictionary, home_room: bool, palette: 
 	else:
 		var kind := "table" if str(room.get("name","")) == "禾溪小灶" else "shelf"
 		rows.append({"kind":kind,"x":667,"y":478,"w":154,"h":88})
+	rows.append_array(preload("res://scripts/house_life.gd").rows(GameState,GameState.current_interior))
 	for row: Dictionary in rows:
 		_draw_room_furniture(row,palette,0)
 
@@ -348,7 +356,7 @@ func _room_points() -> Array:
 	var layout := _room_layout()
 	if not layout.is_empty():
 		var authored: Variant = layout.get("points",[])
-		return authored if authored is Array else []
+		return (authored.duplicate(true) if authored is Array else [])+preload("res://scripts/house_geometry.gd").points(current_interior_house_id())
 	if current_interior_house_id() != _grandfather_house_id(): return []
 	var points: Array = [
 		{"id":"room-exit","kind":"exit","name":"推门回到小院","x":480,"y":590},
@@ -360,7 +368,7 @@ func _room_points() -> Array:
 	if stage >= 3:
 		var use := str(GameState.building.get("roomUse","display"))
 		points.append({"id":"home-function","kind":{"display":"catalog","workshop":"tools","nursery":"farmcare","storage":"storage"}.get(use,"catalog"),"name":"功能间 · " + str({"display":"收成展示","workshop":"工具手作","nursery":"农事育苗","storage":"食材储藏"}.get(use,"收成展示")),"x":650,"y":550})
-	return points
+	return points+preload("res://scripts/house_geometry.gd").points(current_interior_house_id())
 
 func _home_furniture_points() -> Array:
 	var points: Array = []
@@ -426,6 +434,7 @@ func _draw_room_floor(layout: Dictionary) -> void:
 func _add_layout_blockers(layout: Dictionary) -> void:
 	for row in layout.get("rows", []):
 		if not row is Dictionary: continue
+		if not bool(row.get("solid",true)):continue
 		var width := float(row.get("w", 80))
 		var height := float(row.get("h", 32))
 		var y := float(row.get("y", 300))
@@ -676,8 +685,9 @@ func _sync_room_animals() -> void:
 			node = Node2D.new();node.set_script(load("res://scripts/ranch_animal.gd"));node.inside_room=GameState.current_interior
 			room_animal_nodes[id]=node;add_child(node)
 		node.animal_index=index
+		node.animal_id=id
 		var at: Dictionary=position_data.get("inside",{})
-		node.position=Vector2(float(at.get("x",480)),float(at.get("y",490)));node.queue_redraw()
+		node.position=Vector2(float(at.get("x",480)),float(at.get("y",490)));node.request_visual_update()
 	for id: String in room_animal_nodes.keys():
 		if not living.has(id):room_animal_nodes[id].queue_free();room_animal_nodes.erase(id)
 
@@ -737,7 +747,23 @@ func _draw_furniture(piece: Dictionary, rect: Rect2, color: Color, name: String)
 		draw_string(ThemeDB.fallback_font, Vector2(rect.get_center().x, rect.position.y + 13), display_name.substr(0, 8), HORIZONTAL_ALIGNMENT_CENTER, rect.size.x - 8, 10, Color("fff0bd"))
 	draw_string(ThemeDB.fallback_font, Vector2(rect.get_center().x, rect.end.y - 5), name.substr(0, 5), HORIZONTAL_ALIGNMENT_CENTER, rect.size.x - 6, 10, Color("fff2d3"))
 
+var life_collision_root:Node2D
+var life_signature:String=""
+func _sync_life_furniture()->void:
+	var rows:Array=preload("res://scripts/house_life.gd").rows(GameState,GameState.current_interior)
+	var next:String=str(hash(rows))
+	if next==life_signature:return
+	life_signature=next
+	if is_instance_valid(life_collision_root):remove_child(life_collision_root);life_collision_root.queue_free()
+	life_collision_root=Node2D.new();life_collision_root.name="HouseLifeCollisions";add_child(life_collision_root)
+	for row:Dictionary in rows:
+		if not bool(row.get("solid",true)):continue
+		var rect:Rect2=preload("res://scripts/house_life.gd").footprint(row)
+		var body:=StaticBody2D.new();body.position=rect.get_center();var collision:=CollisionShape2D.new();var shape:=RectangleShape2D.new();shape.size=rect.size;collision.shape=shape;body.add_child(collision);life_collision_root.add_child(body)
+	_sync_furniture_visuals()
+var layout_refresh_count:=0
 func _sync_furniture_collisions() -> void:
+	layout_refresh_count+=1
 	var revision := int(GameState.building.get("revision", 0))
 	if revision == collision_revision or not is_instance_valid(collision_root): return
 	collision_revision = revision
@@ -772,6 +798,8 @@ func current_interior_house_id() -> String:
 	return GameState.current_interior
 
 func _refresh() -> void:
+	_sync_life_furniture()
+	_sync_furniture_visuals()
 	_sync_room_animals()
 	_sync_furniture_collisions()
 	queue_redraw()
@@ -881,6 +909,13 @@ func _interact() -> void:
 
 func _interact_target(target: Dictionary,performed: bool=false) -> void:
 	if GameState.ui_open or GameState.action_busy() or target.is_empty():return
+	if str(target.get("kind",""))=="house-fixture":
+		if player.global_position.distance_to(Vector2(float(target.x),float(target.y)-8))>12:
+			var approach:Dictionary=target.duplicate(true);approach.world_click=true;approach.click_room=GameState.current_interior;approach.auto_interact=true;player.walk_to(approach);return
+		if str(target.type)=="preset":hud.house_activity_panel.open_home_preview()
+		else:GameState.house_activity.toggle_fixture(GameState,target)
+		return
+	if str(target.get("kind",""))=="house-activity":hud.house_activity_panel.open_panel(target);return
 	if not performed and GameState.begin_point_action(target,_interact_target.bind(target.duplicate(true),true)):return
 	if str(target.get("kind","")) in ["ranch-box","ranch-product","ranch-trough"]:
 		GameState.confirm_operation(GameState.ranch_fixture_action(str(target.kind),str(target.id)))
@@ -1068,3 +1103,61 @@ func _painted_wood_floor(layout:Dictionary,style_id:String)->bool:
 	texture_repeat=CanvasItem.TEXTURE_REPEAT_ENABLED
 	draw_texture_rect(texture,Rect2(112,198,736,394),true,Color(0.82,0.85,0.78))
 	return true
+
+func _sync_furniture_visuals() -> void:
+	var room: Dictionary=GameState.interior_house()
+	if room.is_empty():return
+	var layout:=_room_layout()
+	var home:=current_interior_house_id()==_grandfather_house_id()
+	var signature:=str(hash([current_interior_house_id(),layout,preload("res://scripts/house_life.gd").rows(GameState,GameState.current_interior),GameState.building.get("house",0),GameState.building.get("layout",[]),GameState.building.get("style","wood")]))
+	if signature==furniture_visual_signature:
+		for node: Node2D in furniture_visuals:node.queue_redraw()
+		return
+	furniture_visual_signature=signature
+	for node: Node2D in furniture_visuals:
+		remove_child(node);node.queue_free()
+	furniture_visuals.clear()
+	var colors: Array=GameState.system_catalog.get("building",{}).get("styles",{}).get(str(GameState.building.get("style","wood")),["#896a43","#c7b080","#e1d5b4","#896a43"])
+	var rows: Array=layout.get("rows",[]).duplicate(true)
+	if rows.is_empty():
+		rows=[{"kind":"bed","x":246,"y":279,"w":122,"h":57}]
+		if home:
+			var level:=int(GameState.building.get("house",0))
+			if level>=1:rows.append({"kind":"table","x":666,"y":312,"w":126,"h":44})
+			if level>=2:rows.append({"kind":"shelf","x":245,"y":484,"w":132,"h":71})
+			if level>=3:rows.append({"kind":"shelf","x":664,"y":489,"w":178,"h":76})
+		else:rows.append({"kind":"table" if str(room.get("name",""))=="禾溪小灶" else "shelf","x":667,"y":478,"w":154,"h":88})
+	rows.append_array(preload("res://scripts/house_life.gd").rows(GameState,GameState.current_interior))
+	for row: Dictionary in rows:
+		if str(row.get("kind","")) in ["草编巢床","ranch-fixture"]:continue
+		var node:=preload("res://scripts/interior_furniture_visual.gd").new()
+		node.configure(self,row,colors,int(layout.get("key",0)))
+		add_child(node);furniture_visuals.append(node)
+	if not home:return
+	var zone: Dictionary=GameState.system_catalog.get("building",{}).get("zones",{}).get("home",{})
+	var defs: Dictionary=GameState.system_catalog.get("building",{}).get("defs",{})
+	var size:=float(zone.get("size",44));var cols:=int(zone.get("cols",14))
+	for piece: Dictionary in GameState.building.get("layout",[]):
+		if str(piece.get("zone",""))!="home":continue
+		var definition: Dictionary=defs.get(str(piece.get("type","")),{})
+		var rotated:=posmod(int(piece.get("rotation",0)),2)!=0
+		var w:=int(definition.get("h" if rotated else "w",1))*size
+		var h:=int(definition.get("w" if rotated else "h",1))*size
+		var cell:=int(piece.cell)
+		var at:=Vector2(float(zone.x)+cell%cols*size+w*.5,float(zone.y)+int(cell/cols)*size+h)
+		var node:=preload("res://scripts/interior_furniture_visual.gd").new()
+		node.configure(self,{"x":at.x,"y":at.y-9},colors,0)
+		node.custom_piece=piece.duplicate(true);node.custom_rect=Rect2(-w*.5,-h,w,h)
+		if preload("res://scripts/built_furniture_art.gd").ground_surface(str(piece.get("type",""))):
+			node.custom_rect.position+=node.position;node.position=Vector2.ZERO;node.set_meta("ground_surface",true)
+		node.custom_name=str(GameState.content.get("furniture",{}).get(str(piece.type),{}).get("name",piece.type))
+		add_child(node);furniture_visuals.append(node)
+
+func _refresh_domain(domain:String)->void:
+	if domain=="household":
+		_sync_life_furniture()
+		for visual:Node2D in furniture_visuals:visual.queue_redraw()
+		return
+	if domain=="world":_refresh();return
+	if domain=="ranch":_sync_room_animals()
+	if domain in ["inventory","economy","farm","ranch","settings"]:queue_redraw()

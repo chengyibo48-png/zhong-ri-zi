@@ -46,12 +46,16 @@ static func settle(s: Node, a: Dictionary, barn: Dictionary, meal_day: int) -> v
 	barn.feedStatus = "运行 · 牧场料仓 → 本舍料槽" if needed(s,a,meal_day) == 0 else "停机 · 料仓缺少适用饲料"
 
 static func graze(s: Node, a: Dictionary, delta: float) -> void:
-	if a.position.get("room") != null or bool(a.position.get("walking",false)): return
+	var meadow:bool=a.position.get("room")=="ranch-meadow"
+	if (a.position.get("room") != null and not meadow) or bool((a.position.inside if meadow else a.position).get("walking",false)): return
 	var spec: Dictionary = s.system_catalog.ranch.species[str(a.type)]
 	if int(a.age) < int(spec.adult) or needed(s,a,s.day) == 0: return
 	var zone := int(spec.get("grazingZone",s.ranch.zone))
 	var pen: Dictionary = s.system_catalog.forage.pens[zone]
-	if not Rect2(float(pen.x),float(pen.y),float(pen.w),float(pen.h)).has_point(Vector2(a.position.x,a.position.y)): return
+	if meadow:
+		var field:Script=load("res://scripts/ranch_meadow.gd");var assigned:Dictionary=field.assignment(s,a)
+		if not field.pen(int(assigned.pen)).has_point(Vector2(float(a.position.inside.x),float(a.position.inside.y))):return
+	elif not Rect2(float(pen.x),float(pen.y),float(pen.w),float(pen.h)).has_point(Vector2(a.position.x,a.position.y)): return
 	a.grazeElapsed = float(a.get("grazeElapsed",0))+delta
 	if float(a.grazeElapsed) < 2.0 or float(s.ranch.grass[zone]) < 2: return
 	a.grazeElapsed = 0

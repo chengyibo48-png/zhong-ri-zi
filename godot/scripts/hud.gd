@@ -1,4 +1,5 @@
 extends CanvasLayer
+var house_activity_panel:Control
 var ui_stack=preload("res://scripts/ui_shell.gd").new()
 var layout_manager=preload("res://scripts/hud_layout.gd").new()
 var quest_tracker: PanelContainer
@@ -121,6 +122,7 @@ func _ready() -> void:
 	date_card.add_child(date_box)
 	date_button = _hud_button("",show_calendar)
 	date_button.clip_text = true
+	date_button.set_meta("ui_role","quiet")
 	date_box.add_child(date_button)
 	info_label = Label.new()
 	info_label.add_theme_font_size_override("font_size",13)
@@ -154,6 +156,7 @@ func _ready() -> void:
 	ambient_hud.add_child(quick_row)
 	for entry in [["map","地图",show_map],["save","存档",show_saves],["fullscreen","全屏",toggle_fullscreen],["menu","菜单",show_life_menu]]:
 		var button := _hud_button(str(entry[1]),entry[2])
+		button.set_meta("ui_role","quiet")
 		quick_row.add_child(button)
 		quick_buttons[str(entry[0])] = button
 	var tool_row := HBoxContainer.new()
@@ -185,8 +188,8 @@ func _ready() -> void:
 	kitchen_heat_panel = Control.new()
 	kitchen_heat_panel.set_script(load("res://scripts/kitchen_heat_panel.gd"))
 	add_child(kitchen_heat_panel)
-	GameState.changed.connect(refresh)
-	GameState.clock_changed.connect(refresh)
+	GameState.domain_changed.connect(_refresh_domain)
+	GameState.clock_changed.connect(_refresh_clock_labels)
 	GameState.input_mode_changed.connect(func(_mode: String): refresh())
 	onboarding_panel = Control.new()
 	onboarding_panel.set_script(ONBOARDING_PANEL_SCRIPT)
@@ -359,9 +362,10 @@ func _ready() -> void:
 	add_child(context_actions)
 	gift_panel=GIFT_PANEL_SCRIPT.new()
 	add_child(gift_panel)
-	for modal_panel in [separation_panel,wedding_panel,npc_story_panel,npc_history_panel,npc_dialogue,gift_panel,life_plan_panel,life_menu,kitchen_heat_panel,seed_picker,map_panel,community_panel,skills_panel,help_panel,feedback_panel,sleep_panel,mail_panel,item_catalog_panel,settings_panel,save_panel,market_panel,weather_panel,forage_panel,fishing_panel,kitchen_panel,tool_panel,farm_facility_panel,farm_planner_panel,home_panel,relations_panel,neighbor_journal,museum_panel,festival_panel,building_panel,ranch_panel]:
+	house_activity_panel=preload("res://scripts/house_activity_panel.gd").new();add_child(house_activity_panel)
+	for modal_panel in [house_activity_panel,separation_panel,wedding_panel,npc_story_panel,npc_history_panel,npc_dialogue,gift_panel,life_plan_panel,life_menu,kitchen_heat_panel,seed_picker,map_panel,community_panel,skills_panel,help_panel,feedback_panel,sleep_panel,mail_panel,item_catalog_panel,settings_panel,save_panel,market_panel,weather_panel,forage_panel,fishing_panel,kitchen_panel,tool_panel,farm_facility_panel,farm_planner_panel,home_panel,relations_panel,neighbor_journal,museum_panel,festival_panel,building_panel,ranch_panel]:
 		modal_panel.z_index=maxi(20,modal_panel.z_index)
-	ui_stack.setup(self,[separation_panel,wedding_panel,npc_story_panel,npc_history_panel,npc_dialogue,gift_panel,life_plan_panel,life_menu,kitchen_heat_panel,seed_picker,map_panel,community_panel,skills_panel,help_panel,feedback_panel,sleep_panel,mail_panel,item_catalog_panel,settings_panel,save_panel,market_panel,weather_panel,forage_panel,fishing_panel,kitchen_panel,tool_panel,farm_facility_panel,farm_planner_panel,home_panel,relations_panel,neighbor_journal,museum_panel,festival_panel,building_panel,ranch_panel])
+	ui_stack.setup(self,[house_activity_panel,separation_panel,wedding_panel,npc_story_panel,npc_history_panel,npc_dialogue,gift_panel,life_plan_panel,life_menu,kitchen_heat_panel,seed_picker,map_panel,community_panel,skills_panel,help_panel,feedback_panel,sleep_panel,mail_panel,item_catalog_panel,settings_panel,save_panel,market_panel,weather_panel,forage_panel,fishing_panel,kitchen_panel,tool_panel,farm_facility_panel,farm_planner_panel,home_panel,relations_panel,neighbor_journal,museum_panel,festival_panel,building_panel,ranch_panel])
 	quest_tracker=preload("res://scripts/quest_hud.gd").new()
 	ambient_hud.add_child(quest_tracker)
 	layout_manager.setup(self)
@@ -401,6 +405,11 @@ func _ready() -> void:
 		touch_controls.name = "MobileControls"
 		add_child(touch_controls)
 	refresh()
+	if GameState.incompatible_save:call_deferred("show_saves")
+	else:call_deferred("_grant_starter_livestock")
+
+func _grant_starter_livestock() -> void:
+	preload("res://scripts/starter_livestock.gd").grant(GameState)
 
 func _refresh_scene_fade(alpha: float) -> void:
 	if not is_instance_valid(scene_fade):return
@@ -505,7 +514,7 @@ func show_build_layout() -> void:
 
 func handle_source_key(event: InputEventKey) -> bool:
 	if event.keycode in [KEY_SPACE,GameState.bound_key("interact",KEY_E)] and GameState.fishing_active() and not GameState.ui_open:
-		if not event.echo:GameState.fishing_input("press" if event.pressed else "release")
+		if not event.echo:GameState.fishing_input("press" if event.pressed else "release","keyboard")
 		get_viewport().set_input_as_handled();return true
 	if not event.pressed:return false
 	if settings_capture_active():
@@ -568,8 +577,9 @@ func gamepad_focus_kind() -> String:
 	return "none"
 
 func _gamepad_panel() -> Control:
-	for panel in [separation_panel,wedding_panel,npc_story_panel,npc_history_panel,npc_dialogue,gift_panel,life_plan_panel,life_menu,kitchen_heat_panel,seed_picker,map_panel,community_panel,skills_panel,help_panel,feedback_panel,sleep_panel,mail_panel,item_catalog_panel,settings_panel,save_panel,market_panel,weather_panel,forage_panel,fishing_panel,kitchen_panel,tool_panel,farm_facility_panel,farm_planner_panel,home_panel,relations_panel,neighbor_journal,museum_panel,festival_panel,building_panel,ranch_panel]:
+	for panel in [house_activity_panel,separation_panel,wedding_panel,npc_story_panel,npc_history_panel,npc_dialogue,gift_panel,life_plan_panel,life_menu,kitchen_heat_panel,seed_picker,map_panel,community_panel,skills_panel,help_panel,feedback_panel,sleep_panel,mail_panel,item_catalog_panel,settings_panel,save_panel,market_panel,weather_panel,forage_panel,fishing_panel,kitchen_panel,tool_panel,farm_facility_panel,farm_planner_panel,home_panel,relations_panel,neighbor_journal,museum_panel,festival_panel,building_panel,ranch_panel]:
 		if is_instance_valid(panel) and panel.visible:return panel
+	if GameState.action_busy() and GameState.action_snapshot().has("houseContact") and is_instance_valid(action_progress):return action_progress
 	return null
 
 func _gamepad_entries(node:Node,result:Array) -> void:
@@ -614,12 +624,13 @@ func _gamepad_move_focus(direction:int) -> void:
 		ancestor=ancestor.get_parent()
 
 func apply_source_gamepad(command:Dictionary) -> void:
+	if is_instance_valid(ranch_panel) and ranch_panel.confirmation_gamepad(command):return
 	var world:=get_parent()
 	match str(command.kind):
 		"tab":
 			var panel: Control=ui_stack.active()
 			if panel==life_plan_panel:
-				var ids: Array=["active","available","done","today"];life_plan_panel._tab(str(ids[posmod(ids.find(life_plan_panel.active_tab)+int(command.value),ids.size())]))
+				var ids: Array=life_plan_panel.tabs.keys();life_plan_panel._tab(str(ids[posmod(ids.find(life_plan_panel.active_tab)+int(command.value),ids.size())]))
 			elif panel==life_menu:
 				var groups: Array=life_menu.GROUPS.keys();life_menu._group(str(groups[posmod(groups.find(life_menu.active_group)+int(command.value),groups.size())]))
 			elif panel!=null:
@@ -685,7 +696,8 @@ func _select_life_menu(entry: String) -> void:
 		"catalog":show_museum("catalog")
 		"archive":community_panel.open_panel("archives")
 		"gatherings":community_panel.open_panel("gatherings")
-		"appearance":show_settings()
+		"appearance":
+			show_settings();settings_panel._settings_group("形象",true)
 		"economy":show_market("business",false,"coop")
 		"item-icons":show_item_catalog()
 		"bag": show_market("inventory", false)
@@ -710,6 +722,7 @@ func handle_bound_shortcut(event: InputEventKey) -> bool:
 	return handle_source_key(event)
 
 func show_map() -> void:
+	if GameState.current_interior=="ranch-meadow" and get_parent().has_method("show_meadow_map"):get_parent().show_meadow_map();return
 	map_panel.call("open_panel")
 
 func close_map() -> void:
@@ -1058,3 +1071,12 @@ func begin_relationship_action(action_id: String,npc_id: String,origin: Control,
 
 func show_separation() -> void:
 	separation_panel.open_panel()
+
+func _refresh_domain(domain:String)->void:
+	if domain in ["world","settings","inventory","economy","player"]:refresh()
+func _refresh_clock_labels()->void:
+	if not is_instance_valid(date_button):return
+	var today:Dictionary=GameState.weather_profile()
+	date_button.text=GameState.date_text()
+	info_label.text="%s · %s %d°C"%[GameState.time_text(),str(today.label),int(today.temperature)]
+	forecast_button.text="明日 · "+GameState.weather_for(GameState.day+1)

@@ -15,26 +15,43 @@ func run()->void:
  check(not FileAccess.file_exists("res://tools/market_ui_smoke.gd"),"test source excluded")
  check(FileAccess.file_exists("res://data/initial_state.json"),"initial state packaged")
  check(FileAccess.file_exists("res://data/systems.json"),"system data packaged")
- check(state.item_catalog.size()==214 and state.crop_catalog.size()==28 and state.npc_catalog.size()==24,"full catalogs in package")
- check(state.system_catalog.ranch.species.size()==7,"seven ranch species in package")
+ check(state.item_catalog.size()==217 and state.crop_catalog.size()==28 and state.npc_catalog.size()==24,"full catalogs in package")
+ check(state.system_catalog.ranch.species.size()==10,"ten ranch species in package")
  check(state.system_catalog.fishing.species.size()==16,"sixteen aquatic species in package")
  check(state.museum_entries.size()==266,"266 encyclopedia entries in package")
  check(load("res://scripts/quest_service.gd").guides().size()==40,"40 actual guide definitions packaged")
  check(FileAccess.file_exists("res://data/quests.json"),"quest configuration packaged")
  check(ResourceLoader.exists("res://scripts/ui_shell.gd") and ResourceLoader.exists("res://scripts/quest_save_rules.gd"),"new UI and pure save rules packaged")
+ var snap:Dictionary=state._make_save_data()
+ check(int(snap.version)==38 and int(snap.quests.version)==3,"v38 and task v3 packaged")
+ check(load("res://data/village_media/bedside-off.png") is Texture2D,"real extinguished lamp packaged")
+ var baked:=DirAccess.get_files_at("res://data/animal_meshes")
+ var meshes:=0
+ for file in baked:
+  if str(file).ends_with(".res") or str(file).ends_with(".res.remap"):
+   var path="res://data/animal_meshes/"+str(file).trim_suffix(".remap")
+   check(load(path) is ArrayMesh,"baked animal mesh "+path);meshes+=1
+ check(meshes==528,"all 528 precomputed animal meshes packaged")
+ state.flags.introDone=true
  change_scene_to_file("res://scenes/main.tscn")
  await process_frame;await process_frame
  var world=current_scene;world.set_process(false);world.player.set_physics_process(false)
  check(world.get_node_or_null("WorldEffects")!=null,"world effects instantiated")
  check(world.hud!=null and world.player!=null,"world and native UI instantiated")
+ state.quest_runtime.set_process(false)
+ await state.wait_for_saves()
+ state.cancel_player_action()
  var hud=world.hud
  if hud.onboarding_open():hud.toggle_onboarding()
  for method in ["show_feedback","show_weather","show_kitchen","show_museum","show_help","show_settings","show_neighbor_book"]:
   check(hud.has_method(method),"page route "+method)
   if hud.has_method(method):
+   await state.wait_for_saves()
    hud.call(method)
+   await process_frame
    check(state.ui_open,"native page opens "+method)
    hud.close_top_panel()
+   await process_frame
    check(not state.ui_open,"native page closes "+method)
  state.stamina=37.875
  var wanted_day:int=state.day
@@ -75,7 +92,7 @@ func run()->void:
    if str(path).contains("/fine/"):fine_paths[str(path)]=true
   if str(key).begins_with("buildings/"):
    check(art.get("seasons",[]).size()==4,"Four building seasons packaged "+str(key))
-   check(load(str(art.get("states",{}).get("night",""))) is Texture2D,"Building night packaged "+str(key))
+   check(load(str(art.get("states",{}).get("night",art.get("path","")))) is Texture2D,"Building night packaged "+str(key))
  for path in fine_paths:
   check(load(str(path)) is Texture2D,"Fine painting in independent package "+str(path))
  check(fine_paths.size()==674,"All 674 accepted fine paintings packaged")

@@ -1,11 +1,12 @@
 extends Node
 
 const PALETTES := {
-	"paper": {"panel": "f2e8d2", "border": "a98b63", "backdrop": "29362cc7", "button": "e6dcc3", "hover": "d4dfbe", "pressed": "c3d1ae", "ink": "354537", "muted": "6c6957"},
+	"paper": {"panel": "f7f4ea", "border": "d5dace", "backdrop": "172c256e", "button": "eeeee3", "hover": "e1e9dc", "pressed": "ccdcc6", "ink": "293f35", "muted": "617268"},
 	"porcelain": {"panel": "293b40", "border": "97c0c3", "backdrop": "071115e0", "button": "30474d", "hover": "42636a", "pressed": "20343a", "ink": "e3f1ee", "muted": "b5d1cf"},
 	"timber": {"panel": "44392c", "border": "c5a06e", "backdrop": "120d08e0", "button": "55452f", "hover": "705a3b", "pressed": "3b2e20", "ink": "f4e3c6", "muted": "dcc39b"}
 }
 
+var style_cache: Dictionary = {}
 var paper_samples:Dictionary={}
 var paper_textures:Dictionary={}
 var shared_theme: Theme
@@ -63,6 +64,7 @@ func _apply_pending_control(reference: WeakRef) -> void:
 
 func _rebuild_theme() -> void:
 	theme_revision += 1
+	style_cache.clear()
 	active_text_scale=clampf(float(GameState.player_settings.get("textScale",1.0)),0.85,1.5)
 	active_theme = str(GameState.ui_art.get("theme", "paper"))
 	if active_theme not in PALETTES: active_theme = "paper"
@@ -104,7 +106,7 @@ func _rebuild_theme() -> void:
 		shared_theme.set_color("font_disabled_color", type_name, Color(str(palette.muted)))
 		shared_theme.set_color("font_accelerator_color", type_name, Color(str(palette.muted)))
 	var tooltip_style: StyleBox = _button_style(str(palette.panel), str(palette.border))
-	if active_theme == "paper" and not active_high_contrast:
+	if false: # Raster tooltip borders are retained as source assets only.
 		var painted_tooltip := preload("res://scripts/detail_art.gd").panel("ui/tooltip")
 		if painted_tooltip != null: tooltip_style = painted_tooltip
 	shared_theme.set_stylebox("panel", "TooltipPanel", tooltip_style)
@@ -145,29 +147,46 @@ func _apply_control(control: Control, theme_key: String) -> void:
 		if not bool(control.get_meta("preserve_ui_color",false)): control.color = Color(str(palette.backdrop))
 	elif control is PanelContainer:
 		var existing: StyleBox = control.get_theme_stylebox("panel")
-		if existing is StyleBoxFlat: control.set_meta("painted_panel_baseline",existing.duplicate())
-		var baseline: Variant=control.get_meta("painted_panel_baseline") if control.has_meta("painted_panel_baseline") else null
-		if baseline is StyleBoxFlat:
-			var style: StyleBoxFlat=baseline.duplicate()
-			style.bg_color=Color(str(palette.panel),style.bg_color.a)
-			style.border_color=Color(str(palette.border),style.border_color.a)
-			var painted:=_paper_skin("panel",style.bg_color)
-			if painted!=null:
-				for side in [SIDE_LEFT,SIDE_TOP,SIDE_RIGHT,SIDE_BOTTOM]:painted.set_content_margin(side,style.get_content_margin(side))
-				control.add_theme_stylebox_override("panel",painted)
-			else:control.add_theme_stylebox_override("panel",style)
+		if not control.has_meta("ui_panel_margins"):
+			var margins: Array = []
+			for side: int in [SIDE_LEFT,SIDE_TOP,SIDE_RIGHT,SIDE_BOTTOM]:margins.append(maxf(8,existing.get_content_margin(side)))
+			control.set_meta("ui_panel_margins",margins)
+		var margins: Array=control.get_meta("ui_panel_margins")
+		var key: String="panel:"+str(margins)+str(control.get_meta("ui_window",false))
+		if not style_cache.has(key):
+			var surface:=_flat_style(str(palette.panel),str(palette.border)).duplicate() as StyleBoxFlat
+			for side: int in [SIDE_LEFT,SIDE_TOP,SIDE_RIGHT,SIDE_BOTTOM]:surface.set_content_margin(side,margins[side])
+			if bool(control.get_meta("ui_window",false)):
+				surface.shadow_color=Color("11251c24");surface.shadow_size=12;surface.shadow_offset=Vector2(0,4)
+			style_cache[key]=surface
+		control.add_theme_stylebox_override("panel",style_cache[key])
+	elif control is TabContainer or control is TabBar:
+		if control is TabContainer:control.clip_tabs=true
+		control.add_theme_stylebox_override("panel",_flat_style(str(palette.panel),str(palette.border)))
+		for state:String in ["tab_unselected","tab_selected","tab_hovered","tab_disabled"]:
+			control.add_theme_stylebox_override(state,_button_style(str(palette.hover) if state=="tab_selected" else "00000000","00000000"))
+		for state:String in ["font_selected_color","font_unselected_color","font_hovered_color","font_disabled_color"]:control.add_theme_color_override(state,Color(str(palette.ink)))
 	elif control is Button:
-		control.add_theme_color_override("font_color", Color(str(palette.ink)))
-		control.add_theme_color_override("font_hover_color", Color(str(palette.ink)))
-		control.add_theme_color_override("font_pressed_color", Color(str(palette.ink)))
+		var role: String=str(control.get_meta("ui_role","secondary"))
+		var primary: bool=role=="primary"
+		var selected: bool=role=="selected"
+		var quiet: bool=role in ["quiet","tab","disclosure"]
+		var ink:=Color("fffdf5") if primary else Color(str(palette.ink))
+		for state: String in ["font_color","font_hover_color","font_pressed_color","font_focus_color"]:control.add_theme_color_override(state,ink)
 		control.add_theme_color_override("font_disabled_color", Color(str(palette.muted)))
-		control.add_theme_color_override("font_focus_color", Color(str(palette.ink)))
-		control.add_theme_stylebox_override("normal", _button_style(str(palette.button), str(palette.border)))
-		control.add_theme_stylebox_override("hover", _button_style(str(palette.hover), str(palette.border)))
-		control.add_theme_stylebox_override("pressed", _button_style(str(palette.pressed), str(palette.border)))
-		control.add_theme_stylebox_override("focus", _focus_style(str(palette.button), str(palette.ink)))
+		var fill: String="365b47" if primary else str(palette.hover) if selected else "00000000" if quiet else str(palette.button)
+		var hover: String="436d55" if primary else str(palette.hover)
+		var pressed: String="294835" if primary else str(palette.pressed)
+		var edge: String="365b47" if primary else str(palette.border) if selected else "00000000"
+		control.add_theme_stylebox_override("normal",_button_style(fill,edge))
+		control.add_theme_stylebox_override("hover",_button_style(hover,"00000000"))
+		control.add_theme_stylebox_override("pressed",_button_style(pressed,edge))
+		control.add_theme_stylebox_override("disabled",_button_style(str(palette.button),"00000000"))
+		control.add_theme_stylebox_override("focus",_focus_style(fill,str(palette.ink)))
+		if bool(control.get_meta("ui_label_content",false)):
+			for state:String in ["font_color","font_hover_color","font_pressed_color","font_focus_color","font_disabled_color"]:control.add_theme_color_override(state,Color.TRANSPARENT)
 	elif control is Label:
-		control.add_theme_color_override("font_color", Color(str(palette.ink)))
+		control.add_theme_color_override("font_color", Color("9a503e") if str(control.get_meta("ui_role",""))=="warning" else Color(str(palette.muted)) if str(control.get_meta("ui_role",""))=="caption" else Color(str(palette.ink)))
 	elif control is RichTextLabel:
 		control.add_theme_color_override("default_color", Color(str(palette.ink)))
 	elif control is ItemList:
@@ -193,30 +212,27 @@ func _effective_palette(theme_key: String) -> Dictionary:
 	return palette
 
 func _button_style(background: String, border: String) -> StyleBox:
-	var painted:=_paper_skin("button",Color(background))
-	if painted!=null:
-		painted.set_content_margin_all(7)
-		return painted
 	return _flat_style(background,border)
 
 func _flat_style(background: String, border: String) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(background)
-	style.border_color = Color(border)
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(5)
-	style.set_content_margin_all(7)
+	var key: String="flat:"+background+":"+border
+	if style_cache.has(key):return style_cache[key]
+	var style:=StyleBoxFlat.new()
+	style.bg_color=Color(background);style.border_color=Color(border)
+	style.set_border_width_all(1);style.set_corner_radius_all(8)
+	style.content_margin_left=12;style.content_margin_right=12
+	style.content_margin_top=8;style.content_margin_bottom=8
+	style_cache[key]=style
 	return style
 
 func _focus_style(background: String, border: String) -> StyleBox:
-	if not active_high_contrast:
-		var painted := preload("res://scripts/detail_art.gd").panel("ui/focus", 7.0)
-		if painted != null:
-			painted.draw_center = false
-			return painted
-	var style := _flat_style(background, border)
-	style.bg_color.a = 0.0
-	style.set_border_width_all(2)
+	var key: String="focus:"+border
+	if style_cache.has(key):return style_cache[key]
+	var style:=StyleBoxFlat.new()
+	style.bg_color=Color.TRANSPARENT;style.border_color=Color(border)
+	style.set_border_width_all(2);style.set_corner_radius_all(8)
+	style.set_expand_margin_all(0)
+	style_cache[key]=style
 	return style
 
 func _paper_skin(kind:String,color:Color)->StyleBoxTexture:
@@ -275,11 +291,6 @@ func _apply_compact_hud(control: Control) -> void:
 			var edge := ink if state in ["focus", "pressed"] else border
 			if state == "focus": fill.a = 0.0
 			var style: StyleBox = _compact_surface(fill, edge)
-			if state == "focus" and not active_high_contrast:
-				var focus := preload("res://scripts/detail_art.gd").panel("ui/focus", 7.0)
-				if focus != null:
-					focus.draw_center = false
-					style = focus
 			control.add_theme_stylebox_override(state, style)
 		for role: String in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
 			control.add_theme_color_override(role, ink)
@@ -302,6 +313,10 @@ func _typography(control: Control) -> void:
 	if not control.has_meta("ui_base_font"):
 		var original:=control.get_theme_font_size("font_size")
 		control.set_meta("ui_base_font",maxi(14,mini(original,16)) if compact else maxi(16,original) if original<=16 else maxi(18,original))
+	var role: String=str(control.get_meta("ui_role",""))
+	if role=="title":control.set_meta("ui_base_font",26)
+	elif role=="heading":control.set_meta("ui_base_font",20)
+	elif role=="caption":control.set_meta("ui_base_font",14)
 	var font:=roundi(float(control.get_meta("ui_base_font"))*maxf(.85,active_text_scale))
 	control.add_theme_font_size_override("font_size",font)
 	if control is RichTextLabel:

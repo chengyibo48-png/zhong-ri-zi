@@ -70,7 +70,19 @@ func _run() -> void:
 	await _arrive(world)
 	_check(state.walking_target.is_empty() and state.plots[0].tilled,"真实移动抵达后开垦命中田")
 	_check(world.player.global_position.distance_to(point) < 53,"操作前进入原版互动范围")
+	# Find a genuinely empty reachable landing in the current authored world.
+	# The former fixed offset now overlaps scenery introduced by the art pass.
 	var ground: Vector2 = world.player.global_position + Vector2(0,160)
+	var found_ground := false
+	for radius in [80.0,120.0,160.0,200.0]:
+		for direction in range(12):
+			var candidate: Vector2 = world.player.global_position + Vector2.from_angle(direction * TAU / 12.0) * radius
+			if not world.interaction_selection.hit(candidate,world._world_target_candidates()).is_empty(): continue
+			var route: Dictionary = world.player.preview_walk({"kind":"walk","world_click":true,"click_room":"","auto_interact":false,"x":candidate.x,"y":candidate.y})
+			if not bool(route.get("reachable",false)): continue
+			ground = candidate; found_ground = true; break
+		if found_ground: break
+
 	_check(world.interaction_selection.hit(ground,world._world_target_candidates()).is_empty(),"空地验证使用无交互目标的落点")
 	var ground_plan: Dictionary = world.player.preview_walk({"kind":"walk","world_click":true,"click_room":"","auto_interact":false,"x":ground.x,"y":ground.y})
 	_check(ground_plan.get("reachable",false),"地面落点有碰撞检查路线")

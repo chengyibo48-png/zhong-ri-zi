@@ -1,4 +1,5 @@
 shader_type canvas_item;
+uniform float occlusion_alpha=1.0;
 uniform float clock = 0.0;
 uniform float phase = 0.0;
 uniform float wind = 0.0;
@@ -20,4 +21,5 @@ void fragment() {
 		if (uv.x < 0.0 || uv.x > 1.0) { pixel.a = 0.0; }
 		COLOR = vertex_tint * pixel;
 	} else { COLOR = vertex_tint; }
+	if(TEXTURE_PIXEL_SIZE.x<0.1){COLOR.a*=mix(1.0,occlusion_alpha,1.0-smoothstep(0.66,0.86,UV.y));}
 }

@@ -16,7 +16,7 @@ static func draw_room(target: CanvasItem, house_id: String, minutes: float) -> b
 	var image: Texture2D = TEXTURES.texture(str(row.get("path", "")))
 	if image == null: return false
 	target.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-	var rectangle := Rect2(102, 104, 756, 500)
+	var rectangle := preload("res://scripts/house_geometry.gd").bounds(house_id)
 	var states: Dictionary = row.get("states", {})
 	var night: Texture2D = TEXTURES.texture(str(states.get("night", "")))
 	if row.has("roomBase"):
@@ -40,12 +40,10 @@ static func draw_room(target: CanvasItem, house_id: String, minutes: float) -> b
 	return true
 
 static func draw_furniture(target: CanvasItem, row: Dictionary, minutes: float, selected: Dictionary) -> bool:
+	if preload("res://scripts/house_fixture_art.gd").draw(target,row,minutes):return true
 	var kind: String = str(row.get("kind", ""))
-	var art: Dictionary = WORLD_ART.entries().get("interior_props/" + kind, {})
+	var art: Dictionary = WORLD_ART.entries().get("interior_props/" + str(row.get("visualKind",kind)), {})
 	if not bool(art.get("baseReady", false)): return false
-	if kind == "搪瓷缸":
-		# Small keepsakes sit on a table rather than becoming floor-sized props.
-		draw_furniture(target,{"kind":"table","x":row.get("x",480),"y":row.get("y",350),"w":row.get("w",104),"h":35},minutes,{})
 	var point: Dictionary = row.get("point", {})
 	var focused: bool = not point.is_empty() and not selected.is_empty() and str(point.get("id", "")) == str(selected.get("id", ""))
 	var running: bool = false
@@ -66,6 +64,9 @@ static func draw_furniture(target: CanvasItem, row: Dictionary, minutes: float, 
 	if kind == "搪瓷缸": height = 16.0
 	elif kind in ["小铜镜", "稻草帽"]: height = 30.0
 	height = float(row.get("visualHeight", height))
+	if "/fine/" in str(art.get("path","")) and not bool(row.get("supportSurface",false)):
+		height=minf(height,12.0 if kind=="搪瓷缸" else 22.0)
+		width=minf(width,16.0 if kind=="搪瓷缸" else 40.0)
 	var path: String = str(states.get(state,art.get("path","")))
 	if not _furniture_regions.has(path):
 		var pixels := image.get_image()
@@ -76,7 +77,7 @@ static func draw_furniture(target: CanvasItem, row: Dictionary, minutes: float, 
 	var factor: float = minf(width / dimensions.x, height / dimensions.y)
 	var size: Vector2 = dimensions * factor
 	var bottom: Vector2 = Vector2(float(row.get("x", 480)), float(row.get("y", 350)) + 9.0)
-	if kind == "搪瓷缸": bottom += Vector2(width * 0.23, -26.0)
+	
 	var rectangle := Rect2(bottom - Vector2(size.x * 0.5, size.y), size)
 	preload("res://scripts/ground_style.gd").shadow(target, bottom, size.x * 0.82, minf(5.0, size.x * 0.055))
 	var tint: Color = Color.WHITE if state == "night" and states.has("night") else lighting(minutes)

@@ -1,0 +1,4275 @@
+{
+  "version": 1,
+  "date": "2026-10-26",
+  "meaning": "Integration, technical validation and art review are independent. Unreviewed assets are not promoted by test counts.",
+  "entries": {
+    "animals/cow": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "sleeping",
+        "product_action",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "animals/duck": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "sleeping",
+        "product_action",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "animals/hen": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "sleeping",
+        "product_action",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "animals/pig": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "sleeping",
+        "product_action",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "animals/sheep": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "sleeping",
+        "product_action",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-bamboo-11": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-farm-12": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-farm-13": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-farm-14": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-farm-15": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-farm-16": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-mountain-0": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-pasture-17": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-pasture-18": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-pasture-19": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-river-10": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-river-9": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-1": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-2": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-3": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-4": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-5": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-6": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-7": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/building-town-8": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-an": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-bao": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-chen": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-granny": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-he": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-jiang": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-lan": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-liang": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-lin": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-luSenior": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-luo": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-mei": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-ning": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-qi": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-qiao": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-song": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-tao": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-wu": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-xiaohe": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-xu": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-yan": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-yu": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-zhou": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/home-zhouSenior": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/ranch-pigpen": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/ranch-poultry": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "buildings/ranch-sheepfold": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    },
+    "crops/bean": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/bokchoy": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/broadbean": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/cabbage": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/carrot": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/corn": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/cucumber": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/eggplant": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/leek": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/lettuce": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/lotus": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/mustard": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/okra": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/pea": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/peanut": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/pepper": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/potato": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/pumpkin": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/radish": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/rice": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/sesame": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/spinach": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/sweetpotato": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/taro": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/tomato": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/watermelon": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/wheat": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "crops/wintermelon": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "seedling",
+        "growing",
+        "mature",
+        "wilted",
+        "pest_feedback",
+        "harvest_alignment"
+      ],
+      "priority": "normal"
+    },
+    "effects/building": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/chimney_smoke": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/fog": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/harvest": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/leaves": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/rain": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/snow": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/watering": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "effects/wind": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "fixtures/cooperative_desk": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "interaction_alignment",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "fixtures/general_counter": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "placement",
+        "interaction_alignment",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "fixtures/kitchen_stove": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "placement",
+        "interaction_alignment",
+        "cooking_states"
+      ],
+      "priority": "normal"
+    },
+    "fixtures/market_stall": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "interaction_alignment",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "forage/bamboo": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "regrowth_states",
+        "seasonal_variants",
+        "interaction_alignment"
+      ],
+      "priority": "normal"
+    },
+    "forage/berry": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "regrowth_states",
+        "seasonal_variants",
+        "interaction_alignment"
+      ],
+      "priority": "normal"
+    },
+    "forage/mushroom": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "regrowth_states",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "forage/shoot": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "regrowth_states",
+        "seasonal_variants",
+        "interaction_alignment"
+      ],
+      "priority": "normal"
+    },
+    "forage/tea": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "regrowth_states",
+        "seasonal_variants",
+        "interaction_alignment"
+      ],
+      "priority": "normal"
+    },
+    "forage/wildHerb": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "regrowth_states",
+        "seasonal_variants",
+        "interaction_alignment"
+      ],
+      "priority": "normal"
+    },
+    "forage/wood": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "regrowth_states",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/bed": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/chair": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/shelf": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/table": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/主人手记": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/乳品发酵架": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/乳桶与挤奶布": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/伙伴观察本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/便当盒": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/修网架": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/储物架": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/农事观察台": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/剪报": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/发条钟": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/叶子标本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/合作社 · 交货与账本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/听诊器": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/回忆抽屉": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/地球仪": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/坐诊椅 · 休息": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/大风车": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/孵化观察本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/宝物罐": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/小录音机": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/小竹鸟": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/小自行车模型": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/小铜蜜酱锅": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/小铜铃": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/山石": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/工作台 · 整理工具": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/急救包": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/戏服箱": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/扇子": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/手剪与羊毛": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/手艺册": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/扳手": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/排水观察牌": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/搪瓷缸": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/收发乡间来信": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/收音机": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/故事书": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/旧报纸": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/旧木尺": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/旧货签": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/明信片": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/木梁榨油机": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/木马": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/木齿轮": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/机械图": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/村庄沙盘": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/柴火灶": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/榫卯台": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/模型车": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/檐下烘干架": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/水渠图": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/水质记录": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/水轮模型": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/汤锅": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/灶台 · 做家常菜": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/灶边菜谱 · 做饭与试配": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/焙茶筛": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/照料伙伴": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/照片墙": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/牧场铜铃": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/玻璃花瓶": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/生长尺": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/留声机": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/登山杖": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/相机": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/种子信封": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/种子柜": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/积木桥": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/稻草玩具": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/窗边旧物": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/竹编台": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/竹蒸笼": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/竹靠椅": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/算盘": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/米糕模": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/米酿木桶": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/系绳桩": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/纸风铃": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/织布架": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/绣架": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/羊圈铜铃": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/翻开牧场名册": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/翻看屋里的旧物": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/老相册": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/老茶壶": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/育苗盘": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/胶片盒": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/茶席": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/茶谱": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/草帽": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/草床观察本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/草编巢箱": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/药草架": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/蒸笼": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/蜡笔画": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/讲述卡": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/诊疗本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/贝壳铃": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/货架 · 买卖": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/邮戳": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/邮袋": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/邻里账本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/采访本": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/院边堆肥篓": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/陶土腌菜缸": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/零件盒": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/零钱罐": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/青石磨": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/面团": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/食槽清单": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/食谱卡": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/饮水铜勺": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/黑板": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/黑板上的乡村故事": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "unique_material",
+        "placement",
+        "interaction_alignment",
+        "occlusion"
+      ],
+      "priority": "normal"
+    },
+    "interior_surfaces/wood": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "in_game_visual_review"
+      ],
+      "priority": "normal"
+    },
+    "interiors/building-bamboo-11": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-farm-13": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-farm-14": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-farm-15": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-farm-16": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-mountain-0": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-pasture-17": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-pasture-18": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-pasture-19": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-river-10": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-river-9": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-1": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-2": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-3": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-4": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-5": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-6": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-7": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/building-town-8": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-an": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-bao": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-chen": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-granny": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-he": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-jiang": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-lan": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-liang": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-lin": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-luSenior": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-luo": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-mei": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-ning": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-qi": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-qiao": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-song": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-tao": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-wu": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-xiaohe": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-xu": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-yan": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-yu": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-zhou": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/home-zhouSenior": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/player_home": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "all_upgrade_levels",
+        "custom_furniture",
+        "door_alignment",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/ranch-pigpen": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/ranch-poultry": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "interiors/ranch-sheepfold": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "floor_wall_detail",
+        "distinct_composition",
+        "door_alignment",
+        "furniture_occlusion",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "pets/cat": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "petting",
+        "sleeping",
+        "interaction_alignment"
+      ],
+      "priority": "normal"
+    },
+    "pets/dog": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "petting",
+        "sleeping",
+        "interaction_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/bamboo": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/basket": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/bench": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/bike": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/blossom": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/board": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/boat": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/cart": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "interaction_alignment",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "props/drying": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/fence": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/flowers": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/gate": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "interaction_alignment",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "props/haystack": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/house": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/jar": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/lamp": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "in_game_visual_review"
+      ],
+      "priority": "normal"
+    },
+    "props/laundry": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "interaction_alignment",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "props/mailbox": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/mill": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/orchard": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/pavilion": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "placement",
+        "interaction_alignment",
+        "seasonal_variants"
+      ],
+      "priority": "normal"
+    },
+    "props/pot": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/rack": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/scarecrow": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/shrub": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/stone": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/table": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/teaRack": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "in_game_visual_review"
+      ],
+      "priority": "normal"
+    },
+    "props/tree": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/well": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/willow": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "terrain/grass": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "terrain/sand": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "terrain/shore": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "terrain/snow": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "terrain/soil": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "terrain/stone_path": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "terrain/water": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "terrain/wet_soil": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/button": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/cursor": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/focus": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/loading": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/minimap_pin": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/notification": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/panel": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/quality_badge": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/reward_badge": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "ui/tooltip": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "in_game_visual_review",
+        "legibility",
+        "performance"
+      ],
+      "priority": "normal"
+    },
+    "wildlife/butterfly": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "idle",
+        "movement",
+        "season_weather_visibility",
+        "observation_alignment"
+      ],
+      "priority": "normal"
+    },
+    "wildlife/egret": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "idle",
+        "movement",
+        "season_weather_visibility",
+        "observation_alignment"
+      ],
+      "priority": "normal"
+    },
+    "wildlife/sparrow": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "idle",
+        "movement",
+        "season_weather_visibility",
+        "observation_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/bambooBundle": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/grainMat": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/haybale": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/hayrack": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/jars": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/loom": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/netCoil": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/plants": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/scale": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/seedTray": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/stones": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/teaCrate": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/washstone": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/weather": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/woodpile": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "props/wall": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [
+        "material_detail",
+        "seasonal_variants",
+        "placement",
+        "collision_alignment"
+      ],
+      "priority": "normal"
+    },
+    "interior_props/bench": {
+      "integration": "bound",
+      "technical": "not_assessed_this_batch",
+      "art_review": "not_reviewed_this_batch",
+      "remaining_checks": [],
+      "priority": "normal"
+    },
+    "animals/goat": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "sleeping",
+        "product_action",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "animals/rabbit": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "idle",
+        "walking",
+        "feeding",
+        "sleeping",
+        "product_action",
+        "interaction_alignment"
+      ],
+      "priority": "high"
+    },
+    "buildings/ranch-rabbitry": {
+      "integration": "bound",
+      "technical": "passed",
+      "art_review": "reviewed_20261026",
+      "remaining_checks": [
+        "unique_design",
+        "transparent_background",
+        "door_alignment",
+        "collision_alignment",
+        "occlusion",
+        "night_lighting"
+      ],
+      "priority": "high"
+    }
+  },
+  "boundaries": [
+    "NPC locomotion uses a stable directional master with a cutout mesh; original independent sprite clips are retained, not claimed as repainted.",
+    "New animal sheets add feeding and lying poses; breathing is procedural. Existing product action effects remain in use.",
+    "Scenery scale and shoreline appearance change presentation, not collision footprints or saved coordinates.",
+    "The starter house retains player furnishing space; bedside rug and finer floor do not introduce invisible collision.",
+    "Real low-end devices and every avatar customization combination were not certified in this batch."
+  ]
+}

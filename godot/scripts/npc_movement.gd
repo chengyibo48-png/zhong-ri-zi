@@ -22,6 +22,7 @@ func update_actor(state: Node, person: Dictionary, index: int, delta: float) -> 
 	var p: Dictionary = state.npc_residents[npc_id]
 	var a: Dictionary = actors.get(npc_id,{"wait":2.0+index*0.31,"path":[],"phase":"","walking":false})
 	actors[npc_id] = a
+	a.listening=false
 	var plan: Dictionary = state.npc_dialogue_activity(person)
 	var room: String = str(p.room) if p.get("room") != null else ""
 	var house: Dictionary = state.house_data(room if room != "" else str(plan.room) if plan.room != null else "")
@@ -52,20 +53,27 @@ func update_actor(state: Node, person: Dictionary, index: int, delta: float) -> 
 				p.room = null; p.merge(house.get("door",{}),true); a.path = []; a.target = null; a.inside = null
 			return
 		if state.current_interior == room and navigation.distance(a.inside,player) < 60.0:
-			a.walking = false; face(a.inside,player); return
+			a.walking = false;a.listening=true; face(a.inside,player); return
 		if float(q.wait)>0:
 			q.wait = float(q.wait)-delta; a.walking = false; return
 		if not q.get("target") is Dictionary:
+			var intentional:Dictionary=preload("res://scripts/resident_life.gd").station(state,npc_id,room,plan,clock)
+			q.station=intentional
 			var choices: Array = []
 			for object in state.system_catalog.get("interiors",{}).get("layouts",{}).get(room,{}).get("points",[]):
 				if str(object.get("kind","")) in ["egg","tea","bed-visit"]: choices.append(object)
 			var target: Dictionary = choices[posmod(floori(clock/18.0)+index,choices.size())] if not choices.is_empty() else {"x":480.0,"y":450.0}
-			q.target = navigation.safe(state,room,{"x":float(target.x),"y":float(target.y)+25.0})
+			q.target = navigation.safe(state,room,intentional if not intentional.is_empty() else {"x":float(target.x),"y":float(target.y)+25.0})
 		a.walking = navigation.step(state,a.inside,q.target,delta,34.0,q,room)
-		if q.path.is_empty(): q.target = null; q.wait = 5.0+index%5
+		if q.path.is_empty():
+			var station:Dictionary=q.get("station",{})
+			if navigation.distance(a.inside,q.target)<18 and not station.is_empty():
+				face(a.inside,{"x":station.look_x,"y":station.look_y})
+				a.activity=preload("res://scripts/resident_life.gd").profile(npc_id).get("restLabel",plan.label) if bool(station.get("rest",false)) else plan.label
+			q.target = null;q.wait=float(station.get("wait",5.0+index%5))
 		return
 	if state.current_interior == "" and navigation.distance(p,player) < 60.0:
-		a.walking = false; face(p,player); return
+		a.walking = false;a.listening=true; face(p,player); return
 	if bool(plan.indoors):
 		a.walking = navigation.step(state,p,house.door,delta,64.0 if int(person.get("age",0))>60 else 96.0,a)
 		if navigation.distance(p,house.door)<8.0:

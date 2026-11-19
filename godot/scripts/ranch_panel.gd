@@ -10,6 +10,10 @@ const BARN_ACTION_NAMES := {"build": "建造", "space": "扩容", "comfort": "�
 
 var action_buttons: Dictionary = {}
 var box_buttons: Dictionary = {}
+var content_split: BoxContainer
+var roster_column: VBoxContainer
+var rehomed_title: Label
+var recall_button: Button
 var pages: TabContainer
 var today_detail: Label
 var animal_numbers: Label
@@ -40,11 +44,19 @@ var recipe_option: OptionButton
 var recipe_amount: SpinBox
 var pet_detail: Label
 var birth_detail: Label
+var birth_history:Label
 var store_summary: Label
 var notice_summary: Label
 var feed_preference: OptionButton
 var policy_option: OptionButton
 var zone_option: OptionButton
+var welcome_dialog:ConfirmationDialog
+var welcome_task:Dictionary={}
+var welcome_name:LineEdit
+var welcome_body:Label
+var welcome_actor:Node2D
+var confirmation_choice:int=0
+var welcome_preview:Control
 var confirm_rehome: ConfirmationDialog
 var remember_schedule: Button
 var handbook_button: Button
@@ -56,6 +68,7 @@ var handbook_blocks: Array = []
 var schedule_dirty := false
 
 func _ready() -> void:
+	set_meta("ui_managed_layout",true)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var backdrop := ColorRect.new()
@@ -90,11 +103,13 @@ func _ready() -> void:
 	header.add_child(handbook_button)
 	var close_button := _button("关闭 Esc", close)
 	header.add_child(close_button)
-	var body := HBoxContainer.new()
+	content_split=BoxContainer.new()
+	var body := content_split
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation", 12)
 	column.add_child(body)
-	var left := VBoxContainer.new()
+	roster_column=VBoxContainer.new()
+	var left := roster_column
 	left.custom_minimum_size.x = 250
 	left.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_child(left)
@@ -111,13 +126,14 @@ func _ready() -> void:
 	animal_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	animal_list.item_selected.connect(_select_animal)
 	left.add_child(animal_list)
-	var rehomed_title := Label.new(); rehomed_title.text = "送养记录 · 可按原补贴接回"
+	rehomed_title = Label.new(); rehomed_title.text = "送养记录 · 可按原补贴接回"
 	left.add_child(rehomed_title)
 	rehomed_list = ItemList.new()
 	rehomed_list.custom_minimum_size = Vector2(245, 70)
 	rehomed_list.item_selected.connect(_select_rehomed)
 	left.add_child(rehomed_list)
-	var adopt_button := _button("接回选中的伙伴", _adopt_selected)
+	recall_button = _button("接回选中的伙伴", _adopt_selected)
+	var adopt_button := recall_button
 	left.add_child(adopt_button)
 	pages = TabContainer.new()
 	pages.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -127,6 +143,8 @@ func _ready() -> void:
 	var companions := _page("伙伴")
 	var barns := _page("畜舍与放牧")
 	var products := _page("产物与加工")
+	var nursery := _page("养育")
+	var pets := _page("猫狗")
 	var right: VBoxContainer = today
 	today_detail = _label(right,95)
 	right.add_child(_button("按今日需要安排照料",_smart_care))
@@ -139,6 +157,7 @@ func _ready() -> void:
 	right.add_child(batch_action)
 	batch_label = _label(right,55)
 	batch_button = _button("开始这批照料 · 逐只走近",_start_batch)
+	batch_button.set_meta("ui_role","primary")
 	right.add_child(batch_button)
 	right = companions
 	_add_section(right, "伙伴照料")
@@ -160,6 +179,7 @@ func _ready() -> void:
 	var management_row := HBoxContainer.new(); right.add_child(management_row)
 	management_row.add_child(_button("退休 / 恢复生产", _toggle_retirement))
 	management_row.add_child(_button("送养…", _request_rehome))
+	right=nursery
 	_add_section(right, "配种与孵化")
 	var pair_row := HBoxContainer.new(); right.add_child(pair_row)
 	mother_option = OptionButton.new(); mother_option.size_flags_horizontal = Control.SIZE_EXPAND_FILL; pair_row.add_child(mother_option)
@@ -169,6 +189,8 @@ func _ready() -> void:
 	incubation_species = OptionButton.new(); hatch_row.add_child(incubation_species)
 	hatch_row.add_child(_button("把受精蛋放入巢箱", _incubate_selected))
 	birth_detail = _label(right, 42)
+	birth_history=_label(right,72)
+	right.add_child(_button("查看最近出生的幼崽并命名",_view_newborn))
 	_add_section(right, "迎接新伙伴")
 	var buy_row := HBoxContainer.new(); right.add_child(buy_row)
 	buy_species = OptionButton.new(); buy_species.size_flags_horizontal = Control.SIZE_EXPAND_FILL; buy_row.add_child(buy_species)
@@ -177,6 +199,11 @@ func _ready() -> void:
 	buy_young = CheckBox.new(); buy_young.text = "幼崽价七折"; buy_young.button_pressed = true; buy_row.add_child(buy_young)
 	right.add_child(_button("购买并安置", _buy_animal))
 	right = barns
+	_add_section(right, "大牧野 · 八片宽敞场地")
+	var meadow_buttons:=HFlowContainer.new();right.add_child(meadow_buttons)
+	meadow_buttons.add_child(_button("前往大牧野",func():close();preload("res://scripts/ranch_meadow.gd").visit(GameState)))
+	meadow_buttons.add_child(_button("启用分区放牧",func():GameState.ranch.meadowEnabled=true;GameState.ranch_set_policy("safe")))
+	meadow_buttons.add_child(_button("召回畜舍",func():GameState.ranch_set_policy("inside")))
 	_add_section(right, "畜舍建造与照料")
 	barn_list = ItemList.new(); barn_list.custom_minimum_size.y = 86; barn_list.item_selected.connect(_select_barn); right.add_child(barn_list)
 	barn_detail = _label(right, 56)
@@ -185,7 +212,7 @@ func _ready() -> void:
 	for action in BARN_ACTIONS: barn_action.add_item(str(BARN_ACTION_NAMES[action])); barn_action.set_item_metadata(barn_action.item_count - 1, action)
 	barn_row.add_child(_button("执行畜舍操作", _run_barn_action))
 	_add_section(right, "散养、轮牧与饲料")
-	var policy_row := HBoxContainer.new(); right.add_child(policy_row)
+	var policy_row := HFlowContainer.new(); right.add_child(policy_row)
 	policy_row.add_child(_label_text("放牧策略"))
 	policy_option = OptionButton.new(); policy_option.add_item("晴好日放牧"); policy_option.set_item_metadata(0, "safe"); policy_option.add_item("白日放牧（雨天也出舍）"); policy_option.set_item_metadata(1, "day"); policy_option.add_item("留舍照料"); policy_option.set_item_metadata(2, "inside"); policy_option.item_selected.connect(_policy_changed); policy_row.add_child(policy_option)
 	policy_row.add_child(_label_text("轮牧草圈"))
@@ -219,7 +246,7 @@ func _ready() -> void:
 	var pet_grid := GridContainer.new(); pet_grid.columns = 4; right.add_child(pet_grid)
 	for action in ["feed", "train", "play", "home", "follow", "patrol", "switch_pet"]:
 		var key := str(action)
-		var names := {"feed": "喂食", "train": "训练", "play": "陪它玩一会", "home": "回家", "follow": "跟随", "patrol": "牧场巡看", "switch_pet": "切换猫 / 狗"}
+		var names := {"feed": "喂食", "train": "训练", "play": "陪它玩一会", "home": "回家", "follow": "跟随", "patrol": "牧场巡看", "switch_pet": "安置与接回猫狗…"}
 		pet_grid.add_child(_button(str(names[key]), func() -> void: _pet_action(key)))
 	notice_summary = _label(today, 58)
 	var hint := Label.new(); hint.text = "O 打开牧场名册 · E 靠近动物照料 · Shift+R 换手动饲料 · 繁育会预留畜舍床位。"
@@ -233,12 +260,24 @@ func _ready() -> void:
 	for focus_control in pages.find_children("*","Control",true,false):
 		if focus_control.focus_mode != Control.FOCUS_NONE:
 			focus_control.focus_entered.connect(_reveal_control.bind(focus_control))
+
+	welcome_dialog=ConfirmationDialog.new();welcome_dialog.title="迎接伙伴";welcome_dialog.min_size=Vector2i(560,480);add_child(welcome_dialog)
+	_style_confirmation(welcome_dialog);_style_confirmation(confirm_rehome)
+	var welcome_column:=VBoxContainer.new();welcome_column.add_theme_constant_override("separation",8);welcome_dialog.add_child(welcome_column)
+	var description_scroll:=ScrollContainer.new();description_scroll.custom_minimum_size=Vector2(480,145);description_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;welcome_column.add_child(description_scroll)
+	welcome_body=Label.new();welcome_body.custom_minimum_size.x=465;welcome_body.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;welcome_body.add_theme_font_size_override("font_size",18);welcome_body.add_theme_color_override("font_color",Color("354b36"));description_scroll.add_child(welcome_body)
+	welcome_preview=Control.new();welcome_preview.custom_minimum_size=Vector2(480,140);welcome_preview.mouse_filter=Control.MOUSE_FILTER_IGNORE;welcome_column.add_child(welcome_preview)
+	welcome_actor=preload("res://scripts/animal_preview.gd").new();welcome_actor.position=Vector2(240,125);welcome_actor.scale=Vector2.ONE*2.3;welcome_preview.add_child(welcome_actor)
+	welcome_preview.draw.connect(func():welcome_actor.animal=welcome_preview.get_meta("animal",{});welcome_actor.queue_redraw())
+	welcome_name=LineEdit.new();welcome_name.placeholder_text="可选：为新伙伴取名（最多12字）";welcome_name.max_length=12;welcome_column.add_child(welcome_name)
+	welcome_dialog.confirmed.connect(_confirm_welcome)
+	welcome_dialog.canceled.connect(func():welcome_task.clear())
 	_build_handbook()
 	GameState.changed.connect(refresh)
 	visible = false
 
 func _button(label: String, action: Callable) -> Button:
-	var result := Button.new(); result.custom_minimum_size.y=34; result.text = label; result.pressed.connect(action); return result
+	var result := Button.new(); result.custom_minimum_size.y=48 if preload("res://scripts/performance_policy.gd").touch_device() else 34; result.text = label; result.pressed.connect(action); return result
 
 func _label(parent: Node, height: float = 54.0) -> Label:
 	var result := Label.new(); result.custom_minimum_size.y = height; result.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; parent.add_child(result); return result
@@ -251,6 +290,9 @@ func _add_section(parent: VBoxContainer, text: String) -> void:
 
 func _spinbox(minimum: int, maximum: int, value: int) -> SpinBox:
 	var result := SpinBox.new(); result.min_value = minimum; result.max_value = maximum; result.value = value; result.step = 1; result.custom_minimum_size.x = 72; return result
+
+func _notification(what:int) -> void:
+	if what==NOTIFICATION_RESIZED and is_instance_valid(pages):_layout.call_deferred()
 
 func open_panel() -> void:
 	if GameState.action_busy():return
@@ -278,7 +320,41 @@ func _select_meta(option: OptionButton, id: String) -> void:
 	for i in range(option.item_count):
 		if str(option.get_item_metadata(i)) == id: option.select(i); return
 
+func _layout() -> void:
+	if not is_inside_tree() or not is_instance_valid(content_split):return
+	var width:float=get_viewport_rect().size.x
+	var narrow:bool=width<860 or float(GameState.player_settings.get("textScale",1))>1.25 and width<1100
+	content_split.vertical=narrow
+	roster_column.custom_minimum_size.x=0 if narrow else 250
+	roster_column.size_flags_vertical=Control.SIZE_FILL if narrow else Control.SIZE_EXPAND_FILL
+	for list:ItemList in [animal_list,rehomed_list]:
+		list.custom_minimum_size.x=0 if narrow else 245
+		list.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	animal_list.custom_minimum_size.y=140 if narrow else 190
+	animal_list.size_flags_vertical=Control.SIZE_FILL if narrow else Control.SIZE_EXPAND_FILL
+	var has_rehomed:bool=rehomed_list.item_count>0
+	rehomed_title.visible=has_rehomed;rehomed_list.visible=has_rehomed;recall_button.visible=has_rehomed
+	for grid:Node in pages.find_children("*","GridContainer",true,false):
+		if not grid.has_meta("ui_grid_maxcols"):grid.set_meta("ui_grid_maxcols",grid.columns)
+		grid.columns=mini(int(grid.get_meta("ui_grid_maxcols")),maxi(1,int((width-64 if narrow else width-340)/170)))
+
 func refresh() -> void:
+	if not is_inside_tree() or not visible:return
+	_layout()
+	var saved_scrolls:Dictionary={}
+	if is_instance_valid(pages):
+		for page:Node in pages.get_children():
+			if page is ScrollContainer:saved_scrolls[page]=page.scroll_vertical
+	var editing:bool=is_instance_valid(animal_name) and animal_name.has_focus()
+	var typed:String=animal_name.text if editing else ""
+	var selected:String=selected_animal_id
+	var focus:Control=get_viewport().gui_get_focus_owner() if is_inside_tree() else null
+	_refresh_content()
+	if editing and selected==selected_animal_id:animal_name.text=typed
+	for page:Node in saved_scrolls:
+		if is_instance_valid(page):page.set_deferred("scroll_vertical",saved_scrolls[page])
+	if is_instance_valid(focus) and focus.is_visible_in_tree() and not welcome_dialog.visible:focus.grab_focus.call_deferred()
+func _refresh_content() -> void:
 	if not visible or not is_instance_valid(animal_list): return
 	var previous_animal := selected_animal_id
 	animal_list.clear()
@@ -313,6 +389,17 @@ func refresh() -> void:
 	_fill_rehomed()
 	var births: Array = GameState.ranch.get("births", [])
 	birth_detail.text = "孕育中：" + ("、".join(births.map(func(birth: Dictionary) -> String: return "%s %d/%d 天" % [str(GameState.system_catalog.get("ranch", {}).get("species", {}).get(str(birth.get("type", "")), {}).get("name", "幼崽")), int(birth.get("total", 1)) - int(birth.get("remaining", 0)), int(birth.get("total", 1))])) if not births.is_empty() else "暂无孕育安排。")
+	for birth:Dictionary in births:
+		if str(birth.get("pauseReason",""))!="":birth_detail.text+="\n"+("保护性保育 · " if bool(birth.get("protected",false)) else "暂缓 · ")+str(birth.pauseReason)
+	var history:Array=GameState.ranch.get("birthHistory",[])
+	birth_history.text="出生记录：暂无；出生不会阻塞睡觉与保存。"
+	if not history.is_empty():
+		var rows:Array[String]=[]
+		for i:int in range(maxi(0,history.size()-8),history.size()):
+			var row:Dictionary=history[i];var index:int=GameState.ranch_animal_index(str(row.animalId))
+			var title:String=str(GameState.animals[index].name) if index>=0 else str(row.animalId)
+			rows.append("第%d天 · %s · %s"%[int(row.day)+1,title,"破壳" if str(row.kind)=="incubation" else "出生"])
+		birth_history.text="出生记录（最近八次）：\n"+"\n".join(rows)
 	var pieces: Array[String] = []
 	for item_id in FEED_IDS: pieces.append("%s %d" % [str(GameState.item_catalog.get(item_id, {}).get("name", item_id)), int(GameState.ranch.get("stores", {}).get(item_id, 0))])
 	store_summary.text = " · ".join(pieces)
@@ -395,7 +482,9 @@ func _start_batch() -> void:
 	GameState.queue_ranch_tasks(_batch_tasks())
 
 func _pet_action(action: String) -> void:
-	if action in ["home","follow","patrol","switch_pet"]: GameState.confirm_operation(GameState.ranch_pet_action(action))
+	if action=="switch_pet":
+		_request_welcome({"pet":true,"action":"adopt:"+("dog" if str(GameState.pet_state.type)=="cat" else "cat")});return
+	if action in ["home","follow","patrol"]: GameState.confirm_operation(GameState.ranch_pet_action(action))
 	else: GameState.queue_ranch_tasks([{"pet":true,"action":action}])
 
 func _animal_action(action: String) -> void:
@@ -435,7 +524,7 @@ func _breed_selected() -> void:
 	var mother := _metadata(mother_option)
 	var index := _animal_index(mother)
 	if index >= 0:
-		GameState.queue_ranch_tasks([{"barnId":GameState._ranch_home_for(str(GameState.animals[index].type)),"action":"breed","arg":[mother,_metadata(father_option)]}])
+		_request_welcome({"barnId":GameState._ranch_home_for(str(GameState.animals[index].type)),"action":"breed","arg":[mother,_metadata(father_option)]})
 
 func _fill_species_options() -> void:
 	var species: Dictionary = GameState.system_catalog.get("ranch", {}).get("species", {})
@@ -453,16 +542,16 @@ func _fill_species_options() -> void:
 		buy_breed.set_item_metadata(buy_breed.item_count - 1, str(breed_id))
 	_select_meta(buy_breed, selected_breed)
 	incubation_species.clear()
-	incubation_species.add_item("鸡蛋 · 4 天")
+	incubation_species.add_item("受精鸡蛋 · 4 天")
 	incubation_species.set_item_metadata(0, "hen")
-	incubation_species.add_item("鸭蛋 · 5 天")
+	incubation_species.add_item("受精鸭蛋 · 5 天")
 	incubation_species.set_item_metadata(1, "duck")
 
 func _buy_animal() -> void:
-	GameState.queue_ranch_tasks([{"barnId":GameState._ranch_home_for(_metadata(buy_species)),"action":"purchase","arg":[_metadata(buy_species),_metadata(buy_sex),_metadata(buy_breed),buy_young.button_pressed]}])
+	_request_welcome({"barnId":GameState._ranch_home_for(_metadata(buy_species)),"action":"purchase","arg":[_metadata(buy_species),_metadata(buy_sex),_metadata(buy_breed),buy_young.button_pressed]})
 
 func _incubate_selected() -> void:
-	GameState.queue_ranch_tasks([{"barnId":"poultry","action":"incubate","arg":_metadata(incubation_species)}])
+	_request_welcome({"barnId":"poultry","action":"incubate","arg":_metadata(incubation_species)})
 
 func _fill_barn_list() -> void:
 	barn_list.clear()
@@ -649,6 +738,7 @@ func _fill_pet() -> void:
 	pet_detail.text = "%s「%s」· 好感 %d · 饥饿 %d · 精力 %d · 训练 %d\n当前模式：%s · %s" % ["小狗" if str(companion.get("type", "cat")) == "dog" else "小猫", str(companion.get("name", "小团")), int(companion.get("bond", 0)), int(pet.get("hunger", 0)), int(pet.get("energy", 0)), int(pet.get("training", 0)), str({"home": "在家", "follow": "跟随", "patrol": "巡看"}.get(str(pet.get("mode", "home")), "在家")), "已达成牧场协助条件" if int(pet.get("training", 0)) >= 20 and int(pet.get("hunger", 0)) >= 35 else "训练到 20、保持饱足后可协助"]
 
 func _fill_rehomed() -> void:
+	_layout.call_deferred()
 	rehomed_list.clear()
 	for record in GameState.ranch.get("rehomed", []):
 		var animal: Dictionary = record.get("animal", {})
@@ -661,7 +751,9 @@ func _select_rehomed(_index: int) -> void:
 func _adopt_selected() -> void:
 	var index := rehomed_list.get_selected_items()
 	if index.is_empty(): return
-	GameState.confirm_operation(GameState.ranch_adopt(str(rehomed_list.get_item_metadata(index[0]))))
+	var id:String=str(rehomed_list.get_item_metadata(index[0]))
+	for record:Dictionary in GameState.ranch.rehomed:
+		if str(record.animal.id)==id:_request_welcome({"barnId":GameState._ranch_home_for(str(record.animal.type)),"action":"readopt","arg":id});break
 
 func _page(title: String) -> VBoxContainer:
 	var scroll := ScrollContainer.new(); scroll.name = title; scroll.follow_focus = true
@@ -707,3 +799,54 @@ func _trough_text(trough: Dictionary) -> String:
 	for item: String in trough:
 		if int(trough[item])>0:parts.append(str(GameState.item_catalog.get(item,{}).get("name",item))+" "+str(trough[item]))
 	return "、".join(parts) if not parts.is_empty() else "暂空"
+
+func _request_welcome(task:Dictionary)->void:
+	welcome_task=task.duplicate(true)
+	var quote:Dictionary=preload("res://scripts/ranch_intents.gd").quote(GameState,task)
+	welcome_dialog.title=str(quote.title)
+	welcome_dialog.dialog_text="";welcome_body.text=str(quote.details)+"\n本次：%d元 · %d体力 · %d分钟"%[int(quote.money),int(quote.energy),int(quote.minutes)]
+	for id:String in quote.materials:welcome_body.text+="\n材料："+str(GameState.item_catalog.get(id,{}).get("name",id))+" ×"+str(quote.materials[id])
+	if not bool(quote.ok):welcome_body.text+="\n\n暂不能办理：\n"+"\n".join(quote.reasons)
+	welcome_dialog.get_ok_button().disabled=not bool(quote.ok)
+	welcome_dialog.get_ok_button().text="确认安排";welcome_dialog.get_cancel_button().text="暂不办理";confirmation_choice=0
+	welcome_name.text="";welcome_name.visible=str(task.action)=="purchase"
+	var animal:Dictionary={}
+	if str(task.action)=="purchase":animal={"id":"purchase-preview","type":str(task.arg[0]),"age":0 if bool(task.arg[3]) else 100,"breed":str(task.arg[2]),"position":{"direction":"down"},"hunger":80,"health":100,"mood":80}
+	if str(task.action).begins_with("adopt:"):animal={"id":"adoption-preview","type":str(task.action).trim_prefix("adopt:"),"age":100,"position":{"direction":"down"},"hunger":80}
+	welcome_preview.set_meta("animal",animal);welcome_preview.queue_redraw();welcome_dialog.popup_centered()
+func _confirm_welcome()->void:
+	if welcome_task.is_empty():return
+	var task:Dictionary=welcome_task.duplicate(true);welcome_task.clear()
+	var quote:Dictionary=preload("res://scripts/ranch_intents.gd").quote(GameState,task)
+	if not bool(quote.ok):GameState.message="；".join(quote.reasons);GameState.changed.emit();return
+	task.receipt="ranch-%d-%d"%[Time.get_ticks_usec(),int(GameState.ranch.nextId)]
+	task.name=welcome_name.text.strip_edges().left(12)
+	GameState.queue_ranch_tasks([task])
+
+func _style_confirmation(dialog:ConfirmationDialog)->void:
+	var style:=StyleBoxFlat.new();style.bg_color=Color("eee4ce");style.border_color=Color("aa8e61");style.set_border_width_all(2);style.set_corner_radius_all(7);style.set_content_margin_all(14)
+	var palette:=Theme.new();palette.default_font=get_theme_default_font()
+	for type_name:String in ["Window","AcceptDialog","ConfirmationDialog","PopupPanel"]:palette.set_stylebox("panel",type_name,style)
+	palette.set_stylebox("embedded_border","Window",style);palette.set_color("title_color","Window",Color("354b36"));dialog.theme=palette
+	if preload("res://scripts/performance_policy.gd").touch_device():dialog.get_ok_button().custom_minimum_size.y=48;dialog.get_cancel_button().custom_minimum_size.y=48
+	dialog.get_label().add_theme_color_override("font_color",Color("354b36"))
+func confirmation_gamepad(command:Dictionary)->bool:
+	var dialog:ConfirmationDialog=welcome_dialog if welcome_dialog.visible else confirm_rehome if confirm_rehome.visible else null
+	if dialog==null:return false
+	match str(command.get("kind","")):
+		"close":dialog.canceled.emit();dialog.hide()
+		"focus","horizontal":
+			confirmation_choice=posmod(confirmation_choice+int(command.get("value",1)),2)
+			(dialog.get_ok_button() if confirmation_choice==0 else dialog.get_cancel_button()).grab_focus()
+		"activate":
+			if confirmation_choice==1:dialog.canceled.emit();dialog.hide()
+			elif not dialog.get_ok_button().disabled:dialog.confirmed.emit();dialog.hide()
+	return true
+
+func _view_newborn()->void:
+	var history:Array=GameState.ranch.get("birthHistory",[])
+	for i:int in range(history.size()-1,-1,-1):
+		var row:Dictionary=history[i]
+		if GameState.ranch_animal_index(str(row.animalId))>=0:
+			row.seen=true;selected_animal_id=str(row.animalId);pages.current_tab=1;refresh();animal_name.grab_focus();return
+	GameState.message="暂无仍在牧场的出生记录。";GameState.changed.emit()

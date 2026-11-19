@@ -9,6 +9,8 @@ signal changed
 signal quest_changed
 const QUESTS=preload("res://scripts/quest_service.gd")
 var quests: Dictionary={}
+var quest_runtime:Node
+var incompatible_save:=false
 var quest_action: Dictionary={}
 var quest_action_serial: int=0
 signal clock_changed
@@ -18,6 +20,7 @@ var state_changes := preload("res://scripts/state_changes.gd").new()
 var _periodic_autosave_elapsed := 0.0
 var _autosave_timer: Timer
 var _urgent_autosave := false
+var autosave_coordinator:Node
 signal ranch_positions_changed
 signal message_requested(text: String)
 signal player_moved(position: Vector2)
@@ -33,7 +36,11 @@ signal scene_fade_changed(alpha: float)
 signal sound_requested(kind: String)
 signal vibration_requested
 
-const SAVE_PATH := "user://zhenrizhi_godot_save.json"
+const SAVE_PATH := "user://saves/v38/zhenrizhi_godot_save.json"
+const LEGACY_SAVE_PATH := "user://zhenrizhi_godot_save.json"
+var transactions:RefCounted
+var commit_log:Dictionary={"next":1,"rows":[]}
+var village_progress:Dictionary={"version":1,"projects":{},"observations":{},"growth":{}}
 const INVENTORY_METADATA_PATH := "res://data/inventory_metadata.json"
 const CONTENT_PATH := "res://data/content.json"
 const INITIAL_STATE_PATH := "res://data/initial_state.json"
@@ -108,6 +115,8 @@ var ranch_holds: Dictionary = {}
 var ranch_actor_clock := 0.0
 var ranch_actor_focus: Dictionary = {}
 var ranch_actor_poses: Dictionary = {}
+var meadow_visit_pending:bool=false
+var animal_behavior:RefCounted=preload("res://scripts/animal_behavior.gd").new()
 var ranch_actor_action: Dictionary = {}
 var ranch_movement: RefCounted
 var farm_queue: Array = []
@@ -117,7 +126,8 @@ var farm_queue_generation := 0
 var farm_next_at := 0.0
 var source_frame_time := 0.0
 var year_review_pending := false
-var interior_state: Dictionary = {"memories": {}, "chores": {}}
+var house_activity=preload("res://scripts/house_activity.gd").new()
+var interior_state: Dictionary = {"memories": {}, "chores": {}, "household":preload("res://scripts/house_save.gd").defaults()}
 const TOOLBAR_IDS := ["hoe", "seed", "water", "hand", "rod", "axe", "sickle", "build"]
 const TOOLBAR_NAMES := {"hoe": "锄头", "seed": "种子", "water": "水壶", "hand": "双手", "rod": "鱼竿", "axe": "斧头", "sickle": "采集镰刀", "build": "布置工具"}
 var selected_tool := "hoe"
@@ -254,8 +264,19 @@ var action_commit_kind := ""
 
 
 func _ready() -> void:
+	autosave_coordinator=preload("res://scripts/autosave_coordinator.gd").new()
+	autosave_coordinator.state=self
+	add_child(autosave_coordinator)
+	transactions=preload("res://scripts/commit_coordinator.gd").new();transactions.state=self
+	quest_runtime=preload("res://scripts/quest_runtime.gd").new()
+	quest_runtime.state=self;add_child(quest_runtime)
 	changed.connect(_refresh_quests)
 	_load_content()
+	var legacy_backup_ok:bool=true
+	var legacy_found:bool=FileAccess.file_exists(LEGACY_SAVE_PATH) and not FileAccess.file_exists(SAVE_PATH)
+	if legacy_found:
+		var backup:String=_save_path_absolute(LEGACY_SAVE_PATH)+".pre-v38-"+FileAccess.get_sha256(LEGACY_SAVE_PATH).left(12)
+		if not FileAccess.file_exists(backup):legacy_backup_ok=DirAccess.copy_absolute(_save_path_absolute(LEGACY_SAVE_PATH),backup)==OK
 	if not load_game():
 		_load_initial_state()
 		inventory = _new_inventory()
@@ -265,6 +286,7 @@ func _ready() -> void:
 		_reset_plots()
 		_reset_animals()
 		_merge_legacy_animal_care()
+	if legacy_found:incompatible_save=true
 	if neighbors.is_empty():
 		_normalize_neighbors()
 	ensure_neighbor_events()
@@ -273,12 +295,13 @@ func _ready() -> void:
 	_movement_autosave_timer = Timer.new()
 	_movement_autosave_timer.one_shot = true
 	_movement_autosave_timer.wait_time = 1.0
-	_movement_autosave_timer.timeout.connect(func(): save_game(SAVE_PATH,true))
+	_movement_autosave_timer.timeout.connect(func(): request_autosave())
 	add_child(_movement_autosave_timer)
 	player_moved.connect(_schedule_position_autosave)
 	interior_moved.connect(_schedule_position_autosave)
 	museum_record_region(player_position)
 	_remember_weather()
+	preload("res://scripts/village_growth.gd").prepare_day(self)
 	_feedback_snapshot = _feedback_snapshot_state()
 	_autosave_timer = Timer.new()
 	_autosave_timer.one_shot = true
@@ -287,6 +310,7 @@ func _ready() -> void:
 	add_child(_autosave_timer)
 	changed.connect(func(): state_changes.publish(self))
 	changed.connect(_queue_autosave)
+	if incompatible_save:message=("v34–v37 原档已保留并备份。" if legacy_backup_ok else "旧版本原档保留；备份暂未写成，请先检查存储空间。")+"本轮采用新循环，请在存档簿明确开始新的生活。"
 	changed.emit()
 
 func _input(event: InputEvent) -> void:
@@ -322,6 +346,8 @@ func _notification(what: int) -> void:
 		source_keyboard.clear()
 
 func _process(delta: float) -> void:
+	if incompatible_save:return
+	if transactions!=null and transactions.busy():return
 	var players := get_tree().get_nodes_in_group("player")
 	advance_simulation_frame(delta, players[0] if not players.is_empty() else null)
 	_poll_feedback_frame(Time.get_ticks_usec()/1000000.0,simulation_hidden())
@@ -338,6 +364,10 @@ func _poll_feedback_frame(at:float,hidden:bool)->bool:
 # Keep the original app frame order: world, movement/time, then action commit.
 # An arrival may start an action or open UI; the admitted frame still earns time.
 func advance_simulation_frame(frame_delta: float, actor: Node=null, at: float=-1.0) -> void:
+	if incompatible_save:return
+	if transactions!=null and transactions.busy():
+		if is_instance_valid(actor):actor.call("pause_player_frame")
+		return
 	var wall_time:float=float(Time.get_ticks_usec())/1000000.0 if at < 0.0 else at
 	poll_source_gamepad(wall_time*1000.0,actor)
 	source_frame_time=wall_time
@@ -372,7 +402,9 @@ func poll_source_gamepad(now:float,actor:Node=null,sample:Dictionary={})->Array[
 		var buttons: Array=input_sample.get("buttons",[])
 		var down: bool=bool(input_sample.get("connected",false)) and not buttons.is_empty() and bool(buttons[0])
 		var previous: bool=bool(fishing_session.game.get("padDown",false))
-		if down!=previous:fishing_input("press" if down else "release")
+		if down!=previous:
+			if down:set_source_input_mode("pad")
+			fishing_input("press" if down else "release","pad")
 		fishing_session.game.padDown=down
 		if buttons.size()>1 and source_gamepad.edge(buttons,1):cancel_player_action()
 		elif buttons.size()>9 and source_gamepad.edge(buttons,9) and hud!=null:hud.show_settings()
@@ -429,6 +461,9 @@ func _load_content() -> void:
 		push_error("Godot 内容目录格式无效。")
 		return
 	content = parsed
+	for arc:Array in content.get("arcs",{}).values():
+		for event:Dictionary in arc:
+			if not event.get("needs",{}) is Dictionary:event.needs={}
 	crop_catalog = content.get("crops", {})
 	item_catalog = content.get("items", {})
 	var metadata: Variant = JSON.parse_string(FileAccess.get_file_as_string(INVENTORY_METADATA_PATH))
@@ -450,7 +485,7 @@ func _load_content() -> void:
 	if world_file != null:
 		var world_parsed: Variant = load("res://scripts/save_json.gd").decode(JSON.parse_string(world_file.get_as_text()))
 		if world_parsed is Dictionary:
-			world_village = world_parsed.get("world", world_parsed).get("village", {})
+			world_village = preload("res://scripts/world_layout.gd").navigation_village(world_parsed.get("world", world_parsed).get("village", {}))
 			world_village["navigation_collisions"] = world_parsed.get("world", world_parsed).get("tiles", {}).get("collisions", [])
 	var atlas_file := FileAccess.open("res://data/atlas_catalog.json", FileAccess.READ)
 	if atlas_file != null:
@@ -460,7 +495,8 @@ func _load_content() -> void:
 
 func _load_initial_state() -> void:
 	quest_action.clear();quest_action_serial+=1
-	quests = initial_state.get("quests",QUESTS.defaults()).duplicate(true)
+	quests = QUESTS.defaults()
+	commit_log={"next":1,"rows":[]};village_progress=preload("res://scripts/village_growth.gd").defaults()
 	player_name = str(initial_state.get("name", "小满"))
 	player_gender = str(initial_state.get("gender", "不设定"))
 	player_settings = initial_state.get("settings", {}).duplicate(true)
@@ -473,7 +509,7 @@ func _load_initial_state() -> void:
 	player_stats = initial_state.get("stats", {}).duplicate(true)
 	legacy_systems = _normalize_legacy_systems(initial_state)
 	player_journal.clear()
-	interior_state = {"memories": {}, "chores": {}}
+	interior_state = {"memories": {}, "chores": {}, "household":preload("res://scripts/house_save.gd").defaults()}
 	riding = false
 	letters.clear()
 	mail_read.clear()
@@ -746,8 +782,10 @@ func weather_warning() -> String:
 	var events: Array = system_catalog.get("environment", {}).get("events", [])
 	return ENVIRONMENT_RULES.warning(day, events)
 
+var contact_approach := preload("res://scripts/contact_approach.gd").new()
+
 func action_busy() -> bool:
-	return not action_sequence.active.is_empty()
+	return not action_sequence.active.is_empty() or transactions!=null and transactions.busy()
 
 func action_snapshot() -> Dictionary:
 	return action_sequence.snapshot()
@@ -768,11 +806,14 @@ func begin_point_action(target: Dictionary,commit: Callable) -> bool:
 
 func begin_action(spec: Dictionary,target: Dictionary,commit: Callable,cancel: Callable=Callable()) -> bool:
 	if action_busy():return false
+	var contact_status:int=contact_approach.prepare(self,spec,target,commit,cancel)
+	if contact_status!=0:return contact_status==1
 	var running := spec.duplicate(true)
 	running.duration = ACTION_RULES.duration(running,str(feedback.get("prefs",{}).get("pace","normal")))
 	running.x = float(target.get("x",player_position.x))
 	running.y = float(target.get("y",player_position.y))
 	running.targetKind = str(target.get("kind",""))
+	running.targetId = str(target.get("id",target.get("index","")))
 	if target.has("npcId"):running.npcId=target.npcId
 	if target.has("animalId"):
 		running.animalId=target.animalId
@@ -801,14 +842,19 @@ func begin_action(spec: Dictionary,target: Dictionary,commit: Callable,cancel: C
 	return true
 
 func _commit_action(commit: Callable,kind: String,door: bool=false,before: Dictionary={},point: Dictionary={},spec: Dictionary={},generation: int=-1,room: String="",cancel: Callable=Callable()) -> void:
+	if transactions!=null and not transactions.preparing and not door:
+		transactions.submit("action:"+str(action_commit_kind)+":"+str(point.get("id",kind)),_commit_action_mutate.bind(commit,kind,door,before,point,spec,generation,room,cancel));return
+	_commit_action_mutate(commit,kind,door,before,point,spec,generation,room,cancel)
+
+func _commit_action_mutate(commit: Callable,kind: String,door: bool=false,before: Dictionary={},point: Dictionary={},spec: Dictionary={},generation: int=-1,room: String="",cancel: Callable=Callable()) -> bool:
 	if generation != _feedback_state_generation or current_interior != room:
 		if cancel.is_valid():cancel.call()
-		return
+		return false
 	_sync_action_visual()
 	action_sequence_changed.emit({})
 	action_commit_in_progress = true
 	action_commit_kind = kind
-	if commit.is_valid():commit.call()
+	var committed:Variant=commit.call() if commit.is_valid() else false
 	action_commit_in_progress = false
 	action_commit_kind = ""
 	if generation == _feedback_state_generation and not before.is_empty():
@@ -823,10 +869,12 @@ func _commit_action(commit: Callable,kind: String,door: bool=false,before: Dicti
 	if door:
 		scene_fade_remaining=0.3
 		scene_fade_changed.emit(action_darkness())
+	return committed if committed is bool else true
 
 func cancel_action(invoke_callback: bool=true) -> bool:
 	quest_action.clear()
-	var cancelled:bool=action_sequence.cancel(invoke_callback)
+	var approaching:bool=contact_approach.cancel(invoke_callback)
+	var cancelled:bool=action_sequence.cancel(invoke_callback) or approaching
 	if cancelled:
 		source_keyboard.clear()
 		_clear_action_effects()
@@ -837,6 +885,7 @@ func cancel_action(invoke_callback: bool=true) -> bool:
 # The source cancelAction is a player command; internal load/queue cancellation
 # keeps using cancel_action so it does not create user feedback or autosaves.
 func cancel_player_action() -> bool:
+	if transactions!=null and transactions.busy():return false
 	var fishing_paid: bool=fishing_active() and bool(fishing_session.game.get("paid",false))
 	if not cancel_action():return false
 	_interrupt_navigation_for_ui()
@@ -874,21 +923,33 @@ func _sync_action_visual() -> void:
 	get_tree().call_group("resident_visual_actor", "sync_action_visual", snapshot)
 
 func _process_action(delta: float) -> void:
+	if transactions!=null and transactions.busy():return
+	contact_approach.advance(self)
 	if not action_busy():return
 	if current_interior!=action_room:
 		stop_walking()
 		return
 	var paused := simulation_hidden()
-	if not paused and not action_sound_fired and float(action_sequence.active.elapsed)+clampf(delta,0.0,0.1)>=float(action_sequence.active.spec.duration)*0.5:
+	if not paused and not fishing_active() and not action_sound_fired and float(action_sequence.active.elapsed)+clampf(delta,0.0,0.1)>=float(action_sequence.active.spec.duration)*0.5:
 		action_sound_fired=true
 		sound_requested.emit(str(action_sequence.active.spec.kind))
 	if fishing_active():
 		fishing_session.tick(delta,paused or ui_open or fishing_focus_paused)
 		var game: Dictionary=fishing_session.game
 		if bool(game.get("landed",false)) and not bool(game.get("paid",false)):
+			if transactions!=null and not transactions.preparing:
+				if not transactions.submit("cast:"+str(game.plan.id),_commit_fishing_landing,func(ok:bool):
+					if not ok:cancel_action()):cancel_action()
+				return
 			if not preload("res://scripts/fishing_service.gd").commit_cast(self,game):cancel_action();return
-		if str(game.get("stage",""))=="bite" and not bool(game.get("biteSound",false)):
-			game.biteSound=true;sound_requested.emit("fish")
+		if int(game.get("feedbackSerial",0))<int(game.get("eventSerial",0)):
+			for event:Dictionary in game.get("events",[]):
+				if int(event.serial)<=int(game.get("feedbackSerial",0)):continue
+				var sound:String=str({"cast":"soft","wait":"water","bite":"fish","caught":"harvest"}.get(str(event.kind),""))
+				if str(event.kind)=="danger" and float(game.time)-float(game.get("dangerSoundAt",-100))>=1.2:sound="soft";game.dangerSoundAt=game.time
+				if sound!="":sound_requested.emit(sound)
+				if str(event.kind)=="bite":vibration_requested.emit()
+			game.feedbackSerial=game.eventSerial
 		fishing_session_changed.emit(fishing_snapshot())
 		if bool(game.get("caught",false)) or bool(game.get("missed",false)):
 			action_sequence.active.elapsed=float(action_sequence.active.spec.duration)
@@ -1059,23 +1120,8 @@ func _record_community_log(text: String, track: bool = true) -> void:
 		if events.size() > 200: events.resize(200)
 		legacy_systems.eventLog = events
 
-func community_project_status(project_id: String) -> Dictionary:
-	var project: Dictionary = content.get("projects", {}).get(project_id, {})
-	if project.is_empty():
-		return {"known": false, "done": false, "ready": false, "reason": "没有这个公共项目。"}
-	var done := bool(community_projects.get(project_id, false)) or project_id == "bridge" and bool(flags.get("bridge", false))
-	if done:
-		return {"known": true, "done": true, "ready": false, "reason": "大家已经完成了这项修缮。"}
-	if day < int(project.get("season", 0)) * 28:
-		return {"known": true, "done": false, "ready": false, "reason": "%s季起大家准备动工，之后随时可以补做。" % str(content.get("seasons", ["春", "夏", "秋", "冬"])[int(project.get("season", 0))])}
-	if project_id == "bridge" and not bool(flags.get("firstDish", false)):
-		return {"known": true, "done": false, "ready": false, "reason": "先给林阿婆送一道家常菜。她会把你介绍给一起修河埠的乡亲。"}
-	for item_id in project.get("needs", {}):
-		var unavailable := int(inventory.get(str(item_id), 0)) < int(project.needs[item_id])
-		if project_id != "bridge" and economy.get("locked", []).has(str(item_id)) and int(project.needs[item_id]) > 0: unavailable = true
-		if unavailable:
-			return {"known": true, "done": false, "ready": false, "reason": "还需要木料 ×8、竹材 ×6。木生叔负责手艺，乡亲们负责其他材料。" if project_id == "bridge" else "材料还没齐。你只需备自己的这一份，其他材料和手艺由乡亲们负责。"}
-	return {"known": true, "done": false, "ready": true, "reason": "材料齐了，可以和乡亲们一起动工。"}
+func community_project_status(project_id:String)->Dictionary:
+	return preload("res://scripts/village_growth.gd").quote(self,project_id)
 
 func repair_community_bridge() -> bool:
 	for item_id in ["wood","bamboo"]:
@@ -1085,40 +1131,14 @@ func repair_community_bridge() -> bool:
 			return false
 	return complete_community_project("bridge")
 
-func complete_community_project(project_id: String) -> bool:
-	if not QUESTS.can_commit(self,"project",project_id):
-		changed.emit();return false
-	var status := community_project_status(project_id)
-	if not bool(status.get("ready", false)):
-		message = str(status.get("reason", "现在还不能动工。"))
-		changed.emit()
-		return false
-	var project: Dictionary = content.projects[project_id]
-	if project_id == "bridge": _reconcile_kitchen_lots()
-	for item_id in project.get("needs", {}):
-		QUESTS.consume(self,str(item_id),int(project.needs[item_id]))
-	_reconcile_kitchen_lots()
-	var npc_id := "chen" if project_id == "bridge" else str(project.get("npc", ""))
-	var relation: Dictionary = relations[npc_id]
-	relation.points = mini(100, int(relation.get("points", 0)) + 20)
-	relations[npc_id] = relation
-	if project_id == "bridge":
-		flags.bridge = true
-		_record_community_log("大家修好了河埠，岸边添了长椅和一张小茶桌。", false)
-	community_projects[project_id] = true
-	if project_id == "bridge" and not archives.has("photo"): archives.append("photo")
-	var recipe_id := str(project.get("recipe", ""))
-	if recipe_id != "" and not known_recipes.has(recipe_id) and not recipe_data(recipe_id).is_empty():
-		known_recipes.append(recipe_id)
-		_record_community_log("学会了 %s。" % str(item_catalog[recipe_id].get("name", recipe_id)))
-	_award_skill_xp("craft", 12)
-	if str(skills.get("craft", {}).get("choice", "")) == "cooperate": _grant_legacy_item("bamboo", 2)
-	_record_community_log("共同完成%s。%s" % [str(project.name), str(project.change)])
-	message = "%s完成。%s%s" % [str(project.name), str(project.people), str(project.change)]
-	changed.emit()
-	return true
+func complete_community_project(project_id:String)->bool:
+	return growth_action(project_id,"collaborate")
 
 func complete_neighbor_favor(favor_id: int) -> bool:
+	if transactions==null or transactions.preparing:return _complete_neighbor_favor_mutate(favor_id)
+	return transactions.submit("complete_neighbor_favor:"+str([favor_id]),_complete_neighbor_favor_mutate.bind(favor_id))
+
+func _complete_neighbor_favor_mutate(favor_id: int) -> bool:
 	if not QUESTS.can_commit(self,"favor",str(favor_id)):
 		changed.emit();return false
 	var favor: Dictionary = {}
@@ -1144,7 +1164,7 @@ func complete_neighbor_favor(favor_id: int) -> bool:
 	for item_id in favor.get("needs", {}): QUESTS.consume(self,str(item_id),int(favor.needs[item_id]))
 	_reconcile_kitchen_lots()
 	for item_id in favor.get("reward", {}): _grant_legacy_item(str(item_id), int(favor.reward[item_id]))
-	var payout := int(favor.get("money", 0))
+	var payout:int=preload("res://scripts/quest_model.gd").commission_payout(self,favor)
 	money += payout
 	player_stats.earned = int(player_stats.get("earned", 0)) + payout
 	season_events[event_key] = true
@@ -1305,6 +1325,10 @@ func _is_ranch_order(order_id: String) -> bool:
 	return order_id in ["ranchMilk", "ranchWool", "ranchYogurt"]
 
 func fulfill_legacy_order(order_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _fulfill_legacy_order_mutate(order_id)
+	return transactions.submit("fulfill_legacy_order:"+str([order_id]),_fulfill_legacy_order_mutate.bind(order_id))
+
+func _fulfill_legacy_order_mutate(order_id: String) -> bool:
 	if not QUESTS.can_commit(self,"wish",order_id):
 		changed.emit();return false
 	var order: Dictionary = {}
@@ -1334,7 +1358,7 @@ func fulfill_legacy_order(order_id: String) -> bool:
 	for item_id in order.get("needs", {}): QUESTS.consume(self,str(item_id),int(order.needs[item_id]))
 	_reconcile_kitchen_lots()
 	for item_id in order.get("reward", {}): _grant_legacy_item(str(item_id), int(order.reward[item_id]))
-	var payout := int(order.get("money", 0))
+	var payout:int=preload("res://scripts/quest_model.gd").commission_payout(self,order)
 	money += payout
 	player_stats.earned = int(player_stats.get("earned", 0)) + payout
 	flags[order_id] = true
@@ -2013,6 +2037,7 @@ func _consume_item(item_id: String, quantity: int) -> Array[int]:
 		remaining -= taken[grade]
 	if remaining > 0:
 		return []
+	preload("res://scripts/ranch_nurture.gd").egg_consumed(self,item_id,quantity)
 	inventory[item_id] = int(inventory[item_id]) - quantity
 	if quality.has(item_id): quality[item_id] = [counts[1] - taken[1], counts[2] - taken[2], counts[3] - taken[3]]
 	return taken
@@ -2022,6 +2047,7 @@ func _add_inventory_count(item_id: String, quantity: int) -> void:
 	# A new acquisition belongs at the end of the bag, including when the
 	# previous stack has been exhausted.
 	if previous == 0 and quantity > 0: inventory.erase(item_id)
+	preload("res://scripts/ranch_nurture.gd").egg_added(self,item_id,quantity)
 	inventory[item_id] = previous + quantity
 
 func _restore_item(item_id: String, grades: Array) -> void:
@@ -2040,6 +2066,10 @@ func _storage_quality_counts(item_id: String) -> Array[int]:
 	return [maxi(0, int(storage.get(item_id, 0)) - premium[0] - premium[1] - premium[2]), premium[0], premium[1], premium[2]]
 
 func transfer_storage(item_id: String, quantity: int, to_storage: bool) -> bool:
+	if transactions==null or transactions.preparing:return _transfer_storage_mutate(item_id,quantity,to_storage)
+	return transactions.submit("transfer_storage:"+str([item_id,quantity,to_storage]),_transfer_storage_mutate.bind(item_id,quantity,to_storage))
+
+func _transfer_storage_mutate(item_id: String, quantity: int, to_storage: bool) -> bool:
 	# economy.js supplies the final original C.storageMove implementation.
 	return economy_transfer(item_id, quantity, to_storage)
 
@@ -2684,12 +2714,16 @@ func is_near_building(house_name: String, radius: float = 96.0) -> bool:
 	return false
 
 func enter_interior(house_id: String) -> bool:
+	if house_id=="ranch-meadow":
+		if not preload("res://scripts/ranch_meadow.gd").activate(self):return false
+		sound_requested.emit("soft");get_tree().change_scene_to_file("res://scenes/meadow.tscn");return true
 	if not enter_room_state(house_id):return false
 	sound_requested.emit("soft")
 	get_tree().change_scene_to_file("res://scenes/interior.tscn")
 	return true
 
 func enter_room_state(house_id: String) -> bool:
+	if house_id=="ranch-meadow":return preload("res://scripts/ranch_meadow.gd").activate(self)
 	if current_interior != "": return false
 	for house in world_village.get("houses", []):
 		if str(house.get("id", "")) != house_id: continue
@@ -2700,7 +2734,8 @@ func enter_room_state(house_id: String) -> bool:
 		walking_target.clear()
 		riding = false
 		interior_npc_positions.clear()
-		interior_position = Vector2(480, 567)
+		house_activity.reset()
+		interior_position = preload("res://scripts/house_geometry.gd").spawn(house_id)
 		player_direction = "up"
 		return true
 	return false
@@ -2720,6 +2755,7 @@ func leave_interior(continue_walk: bool = false) -> void:
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func leave_room_state() -> bool:
+	house_activity.reset()
 	if current_interior=="":return false
 	if atlas_source_navigation==null:atlas_source_navigation=preload("res://scripts/npc_navigation.gd").new()
 	atlas_source_navigation.refresh(self)
@@ -2734,6 +2770,7 @@ func leave_room_state() -> bool:
 
 
 func interior_house() -> Dictionary:
+	if current_interior=="ranch-meadow":return preload("res://scripts/ranch_meadow.gd").HOUSE.duplicate(true)
 	for house in world_village.get("houses", []):
 		if str(house.get("id", "")) == current_interior: return house
 	return {}
@@ -2899,6 +2936,10 @@ func upgrade_yard(at_home: bool) -> bool:
 	return perform_legacy_upgrade("yard")
 
 func craft_furniture(item_id: String, quantity: int, at_workshop: bool) -> bool:
+	if transactions==null or transactions.preparing:return _craft_furniture_mutate(item_id,quantity,at_workshop)
+	return transactions.submit("craft_furniture:"+str([item_id,quantity,at_workshop]),_craft_furniture_mutate.bind(item_id,quantity,at_workshop))
+
+func _craft_furniture_mutate(item_id: String, quantity: int, at_workshop: bool) -> bool:
 	var definitions: Dictionary = system_catalog.get("building", {}).get("defs", {})
 	var catalog: Dictionary = content.get("furniture", {})
 	var definition: Dictionary = definitions.get(item_id, {})
@@ -3133,6 +3174,10 @@ func perform_economy_task(task: Dictionary) -> bool:
 	return false
 
 func sell_economy_batch(lines: Variant) -> bool:
+	if transactions==null or transactions.preparing:return _sell_economy_batch_mutate(lines)
+	return transactions.submit("sell_economy_batch:"+str([lines]),_sell_economy_batch_mutate.bind(lines))
+
+func _sell_economy_batch_mutate(lines: Variant) -> bool:
 	if not lines is Array or lines.is_empty() or lines.size()>12:
 		message = "售货篮可装 1—12 条货签。"
 		return false
@@ -3269,6 +3314,10 @@ func sale_quote(item_id: String, quantity: int, grade: int = -1) -> int:
 	return int(economy_quote(item_id, quantity, grade).get("money", 0))
 
 func send_economy_goods(item_id: String, quantity: int, grade: int, channel: String, theme: String = "breakfast") -> bool:
+	if transactions==null or transactions.preparing:return _send_economy_goods_mutate(item_id,quantity,grade,channel,theme)
+	return transactions.submit("send_economy_goods:"+str([item_id,quantity,grade,channel,theme]),_send_economy_goods_mutate.bind(item_id,quantity,grade,channel,theme))
+
+func _send_economy_goods_mutate(item_id: String, quantity: int, grade: int, channel: String, theme: String = "breakfast") -> bool:
 	var ok := false
 	_refresh_economy_day()
 	var theme_ids := ["breakfast", "orchard", "pantry"]
@@ -3343,32 +3392,14 @@ func collect_economy_job(job_key: int, cancel: bool = false) -> bool:
 	changed.emit()
 	return ok
 
-func economy_weekly_orders() -> Array[Dictionary]:
-	var week := int(day / 7)
-	var crops: Array[String] = []
-	for crop_id in crop_catalog:
-		var crop: Dictionary = crop_catalog[crop_id]
-		if crop_in_season(str(crop_id)): crops.append(str(crop_id))
-	if crops.is_empty():
-		for crop_id in crop_catalog: crops.append(str(crop_id))
-	var crop_id := crops[posmod(week, crops.size())] if not crops.is_empty() else "cabbage"
-	var staples: Array[String] = ["egg", "milk", "wool"]
-	var pantry_items: Array[String] = ["flour", "driedMushroom", "berryJam"]
-	var staple_id: String = staples[posmod(week, staples.size())]
-	var pantry_id: String = pantry_items[posmod(week, pantry_items.size())]
-	var result: Array[Dictionary] = []
-	var ids := [crop_id, staple_id, pantry_id]
-	var quantities := [8, 5, 3]
-	var grades := [0, 0, 1]
-	var titles := ["食堂的时令篮", "邻里早餐桌", "乡味礼盒"]
-	var bonuses := [25, 30, 40]
-	for index in range(3):
-		var id := str(ids[index])
-		if not item_catalog.has(id): continue
-		result.append({"key": "%d-%d" % [week, index], "id": id, "qty": quantities[index], "grade": grades[index], "title": titles[index], "bonus": bonuses[index]})
-	return result
+func economy_weekly_orders()->Array[Dictionary]:
+	return preload("res://scripts/village_growth.gd").daily_orders(self)
 
 func fulfill_economy_order(order_key: String) -> bool:
+	if transactions==null or transactions.preparing:return _fulfill_economy_order_mutate(order_key)
+	return transactions.submit("fulfill_economy_order:"+str([order_key]),_fulfill_economy_order_mutate.bind(order_key))
+
+func _fulfill_economy_order_mutate(order_key: String) -> bool:
 	if not QUESTS.can_commit(self,"weekly",order_key):
 		changed.emit();return false
 	var ok := false
@@ -3428,6 +3459,10 @@ func fulfill_economy_order(order_key: String) -> bool:
 	return ok
 
 func buy_item(item_id: String, quantity: int = 1, special_offer: bool = false) -> bool:
+	if transactions==null or transactions.preparing:return _buy_item_mutate(item_id,quantity,special_offer)
+	return transactions.submit("buy_item:"+str([item_id,quantity,special_offer]),_buy_item_mutate.bind(item_id,quantity,special_offer))
+
+func _buy_item_mutate(item_id: String, quantity: int = 1, special_offer: bool = false) -> bool:
 	var ok := false
 	_refresh_economy_day(true)
 	var unit_price := shop_price(item_id)
@@ -3464,6 +3499,10 @@ func buy_item(item_id: String, quantity: int = 1, special_offer: bool = false) -
 	return ok
 
 func sell_item(item_id: String, quantity: int = 1, grade: int = -1) -> bool:
+	if transactions==null or transactions.preparing:return _sell_item_mutate(item_id,quantity,grade)
+	return transactions.submit("sell_item:"+str([item_id,quantity,grade]),_sell_item_mutate.bind(item_id,quantity,grade))
+
+func _sell_item_mutate(item_id: String, quantity: int = 1, grade: int = -1) -> bool:
 	var ok := false
 	_refresh_economy_day()
 	if economy.get("locked", []).has(item_id):
@@ -3504,6 +3543,10 @@ func sell_item(item_id: String, quantity: int = 1, grade: int = -1) -> bool:
 	return ok
 
 func buyback_item(receipt_key: int) -> bool:
+	if transactions==null or transactions.preparing:return _buyback_item_mutate(receipt_key)
+	return transactions.submit("buyback_item:"+str([receipt_key]),_buyback_item_mutate.bind(receipt_key))
+
+func _buyback_item_mutate(receipt_key: int) -> bool:
 	var ok := false
 	_refresh_economy_day()
 	var receipts: Array = economy.get("receipts", [])
@@ -3574,6 +3617,10 @@ func economy_category(item_id: String) -> String:
 	return "鲜蔬谷果" if _is_food(item_id) else kind
 
 func economy_transfer(item_id: String, amount: int, to_storage: bool, grade: int = -1, notify: bool = true) -> bool:
+	if transactions==null or transactions.preparing:return _economy_transfer_mutate(item_id,amount,to_storage,grade,notify)
+	return transactions.submit("economy_transfer:"+str([item_id,amount,to_storage,grade,notify]),_economy_transfer_mutate.bind(item_id,amount,to_storage,grade,notify))
+
+func _economy_transfer_mutate(item_id: String, amount: int, to_storage: bool, grade: int = -1, notify: bool = true) -> bool:
 	_refresh_economy_day()
 	var source: Dictionary = inventory if to_storage else storage
 	var destination: Dictionary = storage if to_storage else inventory
@@ -3595,12 +3642,14 @@ func economy_transfer(item_id: String, amount: int, to_storage: bool, grade: int
 		if left > 0:
 			message = "所选品质或数量不足。"
 		else:
+			var egg_move:Dictionary=preload("res://scripts/ranch_nurture.gd").egg_transfer(self,item_id,amount,to_storage)
 			_reconcile_kitchen_lots()
 			_move_kitchen_lots(item_id, amount, "bag" if to_storage else "storage", "storage" if to_storage else "bag")
 			source[item_id] = int(source.get(item_id, 0)) - amount
 			if int(source[item_id]) == 0: source.erase(item_id)
 			if to_storage: destination[item_id] = int(destination.get(item_id, 0)) + amount
 			else: _add_inventory_count(item_id, amount)
+			if not egg_move.is_empty():ranch.eggLineage[item_id]=egg_move.bag;ranch.eggStorageLineage[item_id]=egg_move.storage
 			var from_quality: Dictionary = quality if to_storage else storage_quality
 			var to_quality: Dictionary = storage_quality if to_storage else quality
 			var target_counts := _storage_quality_counts(item_id) if to_storage else _quality_counts(item_id)
@@ -3983,6 +4032,10 @@ func _kitchen_record(item_id: String, quantity: int, grade: int, recipe_id: Stri
 	_reconcile_kitchen_lots()
 
 func cook_recipe(recipe_id: String, quantity: Variant = 1, heat: float = -1.0, allow_substitutes: bool = false) -> bool:
+	if transactions==null or transactions.preparing:return _cook_recipe_mutate(recipe_id,quantity,heat,allow_substitutes)
+	return transactions.submit("cook_recipe:"+str([recipe_id,quantity,heat,allow_substitutes]),_cook_recipe_mutate.bind(recipe_id,quantity,heat,allow_substitutes))
+
+func _cook_recipe_mutate(recipe_id: String, quantity: Variant = 1, heat: float = -1.0, allow_substitutes: bool = false) -> bool:
 	var recipe := recipe_data(recipe_id)
 	if recipe.is_empty():
 		message = "这道菜还没学会，先请教乡亲或试配。"
@@ -4074,6 +4127,10 @@ func _drying_ready(start: float, duration: int, level: int) -> int:
 	return ceili(at)
 
 func process_recipe(recipe_id: String, batch: Variant = 1) -> bool:
+	if transactions==null or transactions.preparing:return _process_recipe_mutate(recipe_id,batch)
+	return transactions.submit("process_recipe:"+str([recipe_id,batch]),_process_recipe_mutate.bind(recipe_id,batch))
+
+func _process_recipe_mutate(recipe_id: String, batch: Variant = 1) -> bool:
 	var recipe := _processing_recipe(recipe_id)
 	if recipe.is_empty():
 		message = "没有这份加工配方。"
@@ -4147,6 +4204,7 @@ func collect_kitchen_job(job_key: int) -> bool:
 		var item_id := str(job.get("id", ""))
 		_kitchen_record(item_id, int(job.get("qty", 0)), int(job.get("grade", 0)), item_id)
 		QUESTS.event(self,"process")
+		if _is_food(item_id) and (not bool(job.get("cooking",true)) or str(job.get("station","")) in ["dry","pickle"]):QUESTS.event(self,"preserve")
 		if bool(job.get("cooking", false)):
 			_kitchen_cook_completed(int(job.get("qty", 0)))
 		jobs.remove_at(index)
@@ -4250,6 +4308,10 @@ func begin_eating(item_id: String,label: String,restore: Callable) -> bool:
 	return begin_action(ACTION_RULES.spec("eat",label,item_id),target,commit,resume)
 
 func eat_item(item_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _eat_item_mutate(item_id)
+	return transactions.submit("eat_item:"+str([item_id]),_eat_item_mutate.bind(item_id))
+
+func _eat_item_mutate(item_id: String) -> bool:
 	if economy.get("locked", []).has(item_id):
 		message = "需要的物品已锁定，请先在背包解除保护。"
 		changed.emit()
@@ -4374,6 +4436,7 @@ func _advance_legacy_processing(previous_day: int) -> void:
 		if bool(job.get("cooking", true)):
 			player_stats.cooked = int(player_stats.get("cooked", 0)) + quantity
 		QUESTS.event(self,"process")
+		if _is_food(item_id) and (not bool(job.get("cooking",true)) or str(job.get("station","")) in ["dry","pickle","晾晒架","腌菜坛"]):QUESTS.event(self,"preserve")
 		_record_community_log("%s加工完成，已放入背包。" % str(item_catalog.get(item_id, {}).get("name", item_id)))
 	legacy_processing = remaining
 
@@ -4485,6 +4548,7 @@ func advance_ranch_movement(delta: float) -> void:
 	if ranch_movement == null: ranch_movement = RANCH_MOVEMENT_SCRIPT.new()
 	ranch_actor_clock += delta
 	ranch_movement.advance(self,delta)
+	animal_behavior.advance(self,delta)
 	ranch_positions_changed.emit()
 
 func gather_ranch_actors(at: Vector2) -> void:
@@ -4500,6 +4564,7 @@ func ranch_actor_held(id: String) -> bool:
 	return ranch_actor_clock < float(ranch_holds.get(id,0.0))
 
 func house_data(id: String) -> Dictionary:
+	if id=="ranch-meadow":return preload("res://scripts/ranch_meadow.gd").HOUSE.duplicate(true)
 	for building in world_village.get("houses",[]):
 		if str(building.get("id","")) == id: return building
 	return {}
@@ -4512,7 +4577,7 @@ func ranch_actor_destination(id: String) -> Dictionary:
 	var room: String="" if position.get("room")==null else str(position.room)
 	if room!="" and room!=current_interior:
 		var species: Dictionary=system_catalog.ranch.species[str(animal.type)]
-		var house: Dictionary=house_data(str(system_catalog.ranch.barns[str(species.home)].house))
+		var house: Dictionary=house_data(room)
 		var point: Dictionary=house.door.duplicate()
 		point.merge({"id":str(house.id),"house":str(house.id),"kind":"enter","name":str(house.name)},true)
 		return point
@@ -4560,7 +4625,12 @@ func ranch_task_destination(task: Dictionary) -> Dictionary:
 		var building := house_data(str(definition.get("house","")))
 		if building.is_empty(): return {}
 		label = str(definition.get("name",barn_id))
-		if str(task.get("action",""))=="craft" and str(task.get("arg",""))=="compost":
+		if str(definition.get("residence","barn"))=="shelter":
+			var at_home:Dictionary=preload("res://scripts/animal_species.gd").home(self,"horse" if barn_id=="horseStable" else "alpaca")
+			if current_interior=="ranch-meadow":
+				room="ranch-meadow";at=at_home.bed+Vector2(70,25) if str(task.get("action",""))=="claimBox" else at_home.feed
+			else:house="ranch-meadow";stage="enter";at=preload("res://scripts/ranch_meadow.gd").ENTRY
+		elif str(task.get("action",""))=="craft" and str(task.get("arg",""))=="compost":
 			var corner:Dictionary=system_catalog.ranch.compostCorner
 			at=Vector2(float(corner.x),float(corner.y));label="猪圈旁堆肥加工角"
 		elif current_interior == str(building.id):
@@ -4633,14 +4703,31 @@ func advance_ranch_task() -> bool:
 	return true
 
 func perform_ranch_task(task: Dictionary) -> bool:
-	var ok := _perform_ranch_task_operation(task)
+	var action:String=str(task.get("action",""));var receipt:String=str(task.get("receipt",""))
+	var transaction:bool=action in ["purchase","breed","incubate","readopt"] or action.begins_with("adopt:")
+	if not ranch.has("receipts"):ranch.receipts=[]
+	if receipt!="" and ranch.receipts.has(receipt):message="这次安排已经办理，不会重复扣费。";return false
+	if transaction:
+		var quote:Dictionary=preload("res://scripts/ranch_intents.gd").quote(self,task)
+		if not bool(quote.ok):message="；".join(quote.reasons);changed.emit();return false
+	var blocked_before:bool=is_blocking_signals();var previous_minutes:float=minutes
+	if transaction:set_block_signals(true)
+	if receipt!="":ranch.receipts.append(receipt)
+	var ok:bool=_perform_ranch_task_operation(task)
+	if not ok and receipt!="":ranch.receipts.erase(receipt)
+	if ranch.receipts.size()>128:ranch.receipts=ranch.receipts.slice(-128)
 	if ok:
-		var id := str(task.get("animalId","pet"))
-		ranch_holds[id] = ranch_actor_clock+2.2
+		var chosen_name:String=str(task.get("name","")).strip_edges().left(12)
+		if action=="purchase" and chosen_name!="" and not animals.is_empty():animals.back().name=chosen_name
+		var id:String=str(task.get("animalId","pet"));ranch_holds[id]=ranch_actor_clock+2.2
 		if task.has("animalId"):
-			ranch_actor_poses[id] = {"action":str(task.get("action","")),"until":ranch_actor_clock+2.2}
-			var index := ranch_animal_index(id)
-			if index >= 0: ranch_actor_action = {"id":id,"kind":str(task.get("action","")),"at":ranch_actor_clock,"room":animals[index].position.get("room")}
+			ranch_actor_poses[id]={"action":action,"until":ranch_actor_clock+2.2}
+			var index:int=ranch_animal_index(id)
+			if index>=0:ranch_actor_action={"id":id,"kind":action,"at":ranch_actor_clock,"room":animals[index].position.get("room")}
+	if transaction:
+		set_block_signals(blocked_before)
+		if minutes!=previous_minutes:clock_changed.emit()
+		changed.emit()
 	return ok
 
 func _perform_ranch_task_operation(task: Dictionary) -> bool:
@@ -4649,8 +4736,11 @@ func _perform_ranch_task_operation(task: Dictionary) -> bool:
 	if task.has("animalId"):
 		if action == "retire": return ranch_retire_animal(str(task.animalId))
 		return ranch_tend(ranch_animal_index(str(task.animalId)),action,str(arg))
-	if bool(task.get("pet",false)): return ranch_pet_action(action)
+	if bool(task.get("pet",false)):
+		if action.begins_with("adopt:"):return preload("res://scripts/ranch_nurture.gd").pet_exchange(self,action.trim_prefix("adopt:"))
+		return ranch_pet_action(action)
 	match action:
+		"readopt": return ranch_adopt(str(arg))
 		"claimBox": return ranch_fixture_action("ranch-box",str(task.get("barnId","")))
 		"craft": return ranch_craft(str(arg),task.get("quantity",1))
 		"purchase":
@@ -4993,7 +5083,9 @@ func _farm_plot_action_single(index: int, action_tool: String = "", seed_choices
 			success = change_plot_soil(index, str(farm.get("selectedSoil", "loam")))
 		_:
 			message = "这件工具不适合田地，可换锄头、水壶或镰刀。"
-	if success:QUESTS.event(self,{"seed":"sow","water":"water","fertilizer":"fertilize"}.get(tool_id,"farmAction"))
+	if success:
+		QUESTS.event(self,{"seed":"sow","water":"water","fertilizer":"fertilize"}.get(tool_id,"farmAction"))
+		if tool_id in ["water","care","fertilizer"]:QUESTS.event(self,"fieldCare:"+str(index),"field-care:"+str(index))
 	changed.emit()
 	return success
 
@@ -5417,7 +5509,7 @@ func _ranch_new_animal(type_id: String, sex: String, breed_id: String, age: int 
 		for parent in animals:
 			if str(parent.get("id", "")) == str(parent_id): generation = maxi(generation, int(parent.get("generation", 0)) + 1)
 	var animal := {
-		"id": id, "type": type_id, "species": str(spec.get("name", type_id)), "product": str(spec.get("product", "egg")),
+		"id": id, "type": type_id, "species": str(spec.get("name", type_id)), "product": spec.get("product"),
 		"name": "%s%d" % [names[int(ranch.nextId) % names.size()], int(ranch.nextId)], "personality": str(traits.get(trait_id, "")),
 		"sex": sex, "breed": breed_id, "trait": trait_id, "age": age, "generation": generation, "parents": parents.duplicate(),
 		"bond": 0, "hunger": 65, "health": 100, "mood": 80, "clean": 90, "stress": 0, "illness": 0, "warning": 0,
@@ -5427,15 +5519,26 @@ func _ranch_new_animal(type_id: String, sex: String, breed_id: String, age: int 
 		"position": position
 	}
 	if breed.is_empty(): animal.breed = "local"
+	if not ranch.has("families"):ranch.families={}
+	ranch.families[id]={"parents":parents.duplicate(),"generation":generation}
+	preload("res://scripts/animal_species.gd").ensure_animal(animal)
+	if preload("res://scripts/animal_species.gd").sheltered(self,type_id):
+		var residence:Dictionary=preload("res://scripts/animal_species.gd").home(self,type_id)
+		animal.position.x=2670.0;animal.position.y=2556.0;animal.position.room="ranch-meadow";animal.position.inside={"x":residence.bed.x,"y":residence.bed.y,"direction":"down"}
 	animals.append(animal)
+	if age<int(spec.get("adult",1)):village_progress.get_or_add("cohorts",{})[id]=day
 	return animal
 
 func ranch_buy_animal(type_id: String, sex: String, breed_id: String, young: bool) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_buy_animal_mutate(type_id,sex,breed_id,young)
+	return transactions.submit("ranch_buy_animal:"+str([type_id,sex,breed_id,young]),_ranch_buy_animal_mutate.bind(type_id,sex,breed_id,young))
+
+func _ranch_buy_animal_mutate(type_id: String, sex: String, breed_id: String, young: bool) -> bool:
 	var catalog: Dictionary = system_catalog.get("ranch", {})
 	var spec: Dictionary = catalog.get("species", {}).get(type_id, {})
 	var breed: Dictionary = catalog.get("breeds", {}).get(breed_id, {})
 	var home := str(spec.get("home", ""))
-	if spec.is_empty() or breed.is_empty() or sex not in ["female", "male"]:
+	if spec.is_empty() or breed.is_empty() or not preload("res://scripts/animal_species.gd").breeds(self,type_id).has(breed_id) or sex not in ["female", "male"]:
 		message = "请选择有效种类与品种。"
 	elif not bool(ranch.get("barns", {}).get(home, {}).get("built", false)):
 		message = "畜舍尚未修好或没有空位；孕育中的幼崽也预留床位。"
@@ -5445,6 +5548,11 @@ func ranch_buy_animal(type_id: String, sex: String, breed_id: String, young: boo
 		var price := roundi(float(spec.get("cost", 0)) * float(breed.get("cost", 1.0)) * (0.7 if young else 1.0))
 		if _ranch_charge(2, {}, price, 5):
 			var animal := _ranch_new_animal(type_id, sex, breed_id, 0 if young else int(spec.get("adult", 6)))
+			if ranch_movement==null:ranch_movement=RANCH_MOVEMENT_SCRIPT.new()
+			var home_target:Dictionary=animal.position.inside.duplicate(true)
+			var arrival:Dictionary={"x":home_target.x,"y":float(home_target.y)+55} if preload("res://scripts/animal_species.gd").sheltered(self,type_id) else {"x":480,"y":560}
+			animal.position.inside=ranch_movement.navigation.safe(self,str(animal.position.room),arrival,true)
+			ranch_movement.actors[str(animal.id)]={"arrival_target":home_target}
 			message = "迎来%s“%s”，已安置在%s。" % [str(spec.get("name", type_id)), str(animal.get("name", "新伙伴")), str(catalog.get("barns", {}).get(home, {}).get("name", "畜舍"))]
 			changed.emit()
 			return true
@@ -5452,6 +5560,10 @@ func ranch_buy_animal(type_id: String, sex: String, breed_id: String, young: boo
 	return false
 
 func ranch_breed(mother_id: String, father_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_breed_mutate(mother_id,father_id)
+	return transactions.submit("ranch_breed:"+str([mother_id,father_id]),_ranch_breed_mutate.bind(mother_id,father_id))
+
+func _ranch_breed_mutate(mother_id: String, father_id: String) -> bool:
 	var mother: Dictionary = {}
 	var father: Dictionary = {}
 	for animal in animals:
@@ -5460,9 +5572,9 @@ func ranch_breed(mother_id: String, father_id: String) -> bool:
 	var spec: Dictionary = system_catalog.ranch.species.get(str(mother.get("type", "")), {})
 	if mother.is_empty() or father.is_empty() or mother_id == father_id or str(mother.type) != str(father.type) or str(mother.sex) != "female" or str(father.sex) != "male":
 		message = "需要同种成年母畜与公畜配对。"
-	elif mother_id in father.get("parents",[]) or father_id in mother.get("parents",[]) or mother.get("parents",[]).any(func(id):return id in father.get("parents",[])):
+	elif preload("res://scripts/ranch_nurture.gd").related(self,mother_id,father_id):
 		message = "这两位伙伴有近亲关系，请安排不同家系。"
-	elif [mother, father].any(func(animal: Dictionary) -> bool: return int(animal.age) < int(spec.adult) or bool(animal.retired) or float(animal.health) < 70 or float(animal.hunger) < 55 or float(animal.mood) < 50 or float(animal.illness) > 10 or bool(animal.lost)):
+	elif [mother, father].any(func(animal: Dictionary) -> bool: return int(animal.age) < int(spec.adult) or bool(animal.retired) or bool(animal.rest) or float(animal.health) < 70 or float(animal.hunger) < 55 or float(animal.mood) < 50 or float(animal.illness) > 10 or bool(animal.lost)):
 		message = "先让双方成年、吃饱、恢复健康与心情，再安排繁殖。"
 	elif ranch.births.any(func(birth: Dictionary) -> bool: return birth.mother != null and str(birth.mother) == mother_id) or day - int(mother.care.breed) < 12:
 		message = "刚生产的母畜需要休养，或已有孕育安排。"
@@ -5471,6 +5583,10 @@ func ranch_breed(mother_id: String, father_id: String) -> bool:
 	elif float(ranch.barns[str(spec.home)].clean) < 50:
 		message = "先清理畜舍，再迎接新生命。"
 	elif _ranch_charge(3, {"grainFeed": 2}, 20):
+		if preload("res://scripts/animal_species.gd").bird(self,str(mother.type)):
+			var egg_id:String=preload("res://scripts/animal_species.gd").egg(self,str(mother.type))
+			_add_inventory_count(egg_id,1);preload("res://scripts/ranch_nurture.gd").mark_paired_egg(self,egg_id,mother,father);mother.care.breed=day
+			message="已配对并留下一枚受精蛋；请使用舒适巢箱安排孵化。";changed.emit();return true
 		var birth_id := "birth-%d" % int(ranch.nextId)
 		ranch.nextId = int(ranch.nextId) + 1
 		var breed_id := str(mother.breed) if str(mother.breed) == str(father.breed) or int(ranch.nextId) % 2 == 1 else str(father.breed)
@@ -5484,18 +5600,23 @@ func ranch_breed(mother_id: String, father_id: String) -> bool:
 	return false
 
 func ranch_incubate(type_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_incubate_mutate(type_id)
+	return transactions.submit("ranch_incubate:"+str([type_id]),_ranch_incubate_mutate.bind(type_id))
+
+func _ranch_incubate_mutate(type_id: String) -> bool:
 	var barn: Dictionary = ranch.get("barns", {}).get("poultry", {})
-	var egg_id := "fertileHenEgg" if type_id == "hen" else "fertileDuckEgg"
+	var egg_id:String=preload("res://scripts/animal_species.gd").egg(self,type_id)
+	var egg_family:Dictionary=preload("res://scripts/ranch_nurture.gd").egg_preview(self,egg_id)
 	var spec: Dictionary = system_catalog.get("ranch", {}).get("species", {}).get(type_id, {})
-	if type_id not in ["hen", "duck"]:
-		message = "孵化区只接收受精鸡鸭蛋。"
+	if not preload("res://scripts/animal_species.gd").bird(self,type_id):
+		message = "请选择支持巢箱孵化的禽类受精蛋。"
 	elif int(barn.get("comfort", 0)) < 1:
 		message = "先给鸡鸭舍添置舒适巢箱。"
 	elif not _ranch_space_for(type_id):
 		message = "孵化也需要预留床位。"
 	elif _ranch_charge(2, {egg_id: 1}, 0, 5):
 		var gestation := int(spec.get("gestation", 4))
-		ranch.births.append({"id": "birth-%d" % int(ranch.nextId), "type": type_id, "mother": null, "father": null, "breed": "local", "remaining": gestation, "total": gestation})
+		ranch.births.append({"id": "birth-%d" % int(ranch.nextId), "type": type_id, "mother": egg_family.parents[0] if egg_family.parents.size()>0 else null, "father": egg_family.parents[1] if egg_family.parents.size()>1 else null, "breed": str(egg_family.breed), "remaining": gestation, "total": gestation, "kind":"incubation"})
 		ranch.nextId = int(ranch.nextId) + 1
 		message = "把受精蛋放进温暖巢箱，普通食用蛋不会误拿去孵化。"
 		changed.emit()
@@ -5504,6 +5625,10 @@ func ranch_incubate(type_id: String) -> bool:
 	return false
 
 func ranch_barn_action(barn_id: String, action: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_barn_action_mutate(barn_id,action)
+	return transactions.submit("ranch_barn_action:"+str([barn_id,action]),_ranch_barn_action_mutate.bind(barn_id,action))
+
+func _ranch_barn_action_mutate(barn_id: String, action: String) -> bool:
 	var catalog: Dictionary = system_catalog.get("ranch", {})
 	var definition: Dictionary = catalog.get("barns", {}).get(barn_id, {})
 	var barn: Dictionary = ranch.get("barns", {}).get(barn_id, {})
@@ -5595,6 +5720,10 @@ func _ranch_home_for(type_id: String) -> String:
 	return str(system_catalog.get("ranch", {}).get("species", {}).get(type_id, {}).get("home", ""))
 
 func ranch_store(item_id: String, amount: Variant, withdraw: bool) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_store_mutate(item_id,amount,withdraw)
+	return transactions.submit("ranch_store:"+str([item_id,amount,withdraw]),_ranch_store_mutate.bind(item_id,amount,withdraw))
+
+func _ranch_store_mutate(item_id: String, amount: Variant, withdraw: bool) -> bool:
 	if not (amount is int or amount is float) or not is_finite(float(amount)) or float(amount) != floor(float(amount)) or float(amount) < 1 or float(amount) > 100 or not ranch.stores.has(item_id):
 		message = "请选择有效物品与数量。"
 		changed.emit()
@@ -5621,6 +5750,10 @@ func ranch_store(item_id: String, amount: Variant, withdraw: bool) -> bool:
 	return false
 
 func ranch_craft(recipe_id: String, quantity: Variant) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_craft_mutate(recipe_id,quantity)
+	return transactions.submit("ranch_craft:"+str([recipe_id,quantity]),_ranch_craft_mutate.bind(recipe_id,quantity))
+
+func _ranch_craft_mutate(recipe_id: String, quantity: Variant) -> bool:
 	if recipe_id in ["cream", "yogurt"]: return process_recipe(recipe_id, quantity)
 	var recipe: Dictionary = system_catalog.get("ranch", {}).get("recipes", {}).get(recipe_id, {})
 	if recipe.is_empty() or not (quantity is int or quantity is float) or not is_finite(float(quantity)) or float(quantity) != floor(float(quantity)) or float(quantity) < 1 or float(quantity) > 20:
@@ -5652,6 +5785,10 @@ func ranch_craft(recipe_id: String, quantity: Variant) -> bool:
 	return true
 
 func ranch_rehome(animal_id: String, confirm: bool = false) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_rehome_mutate(animal_id,confirm)
+	return transactions.submit("ranch_rehome:"+str([animal_id,confirm]),_ranch_rehome_mutate.bind(animal_id,confirm))
+
+func _ranch_rehome_mutate(animal_id: String, confirm: bool = false) -> bool:
 	var animal_index := ranch_animal_index(animal_id)
 	if animal_index < 0:
 		message = "没有这位伙伴。"
@@ -5681,6 +5818,10 @@ func ranch_rehome(animal_id: String, confirm: bool = false) -> bool:
 	return false
 
 func ranch_adopt(animal_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_adopt_mutate(animal_id)
+	return transactions.submit("ranch_adopt:"+str([animal_id]),_ranch_adopt_mutate.bind(animal_id))
+
+func _ranch_adopt_mutate(animal_id: String) -> bool:
 	for i in range(ranch.rehomed.size()):
 		var record: Dictionary = ranch.rehomed[i]
 		var animal: Dictionary = record.get("animal", {})
@@ -5697,7 +5838,12 @@ func ranch_adopt(animal_id: String) -> bool:
 			animal.position.room = str(system_catalog.ranch.barns[home].house)
 			animal.position.inside = {"x": 480, "y": 500}
 			animals.append(animal)
+			if ranch_movement==null:ranch_movement=RANCH_MOVEMENT_SCRIPT.new()
+			var residence:Dictionary=preload("res://scripts/animal_species.gd").home(self,str(animal.type))
+			animal.position.inside={"x":residence.bed.x,"y":residence.bed.y+50,"direction":"up"}
+			ranch_movement.actors[str(animal.id)]={"arrival_target":{"x":residence.bed.x,"y":residence.bed.y}}
 			ranch.rehomed.remove_at(i)
+			if ranch.has("meadowAssignments"):ranch.meadowAssignments.erase(str(animal.id))
 			message = "把%s接回来了，名字、亲近与品种都还在。" % str(animal.get("name", "伙伴"))
 			changed.emit()
 			return true
@@ -5708,6 +5854,10 @@ func ranch_adopt(animal_id: String) -> bool:
 	return false
 
 func ranch_pet_action(action: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_pet_action_mutate(action)
+	return transactions.submit("ranch_pet_action:"+str([action]),_ranch_pet_action_mutate.bind(action))
+
+func _ranch_pet_action_mutate(action: String) -> bool:
 	var pet: Dictionary = ranch.get("pet", {})
 	var type_id := str(pet_state.get("type", "cat"))
 	if action == "feed":
@@ -5744,13 +5894,7 @@ func ranch_pet_action(action: String) -> bool:
 		changed.emit()
 		return true
 	if action == "switch_pet":
-		pet_visual_action.clear()
-		pet_state.type = "dog" if type_id == "cat" else "cat"
-		pet_state.name = "阿福" if str(pet_state.type) == "dog" else "小团"
-		pet.mode = "home"
-		message = "牧场伙伴现在是%s「%s」。" % ["小狗" if str(pet_state.type) == "dog" else "小猫", str(pet_state.name)]
-		changed.emit()
-		return true
+		message="请在猫狗名册中确认安置与正式接回，伙伴身份不会再被直接切换。";changed.emit();return false
 	var already_patted := int(pet_state.get("patted", -1)) == day
 	pat_companion()
 	return not already_patted
@@ -5770,6 +5914,10 @@ func ranch_default_action(index: int) -> String:
 	return "feed" if preload("res://scripts/ranch_care.gd").needed(self,a,day)>0 and float(a.hunger)<70 else "pet"
 
 func ranch_tend(index: int, action: String, food: String = "") -> bool:
+	if transactions==null or transactions.preparing:return _ranch_tend_mutate(index,action,food)
+	return transactions.submit("ranch_tend:"+str([index,action,food]),_ranch_tend_mutate.bind(index,action,food))
+
+func _ranch_tend_mutate(index: int, action: String, food: String = "") -> bool:
 	if index < 0 or index >= animals.size():
 		message = "这位伙伴不在牧场里。"
 		changed.emit()
@@ -5795,6 +5943,10 @@ func ranch_rename_animal(animal_id: String, new_name: Variant) -> bool:
 	return false
 
 func ranch_retire_animal(animal_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_retire_animal_mutate(animal_id)
+	return transactions.submit("ranch_retire_animal:"+str([animal_id]),_ranch_retire_animal_mutate.bind(animal_id))
+
+func _ranch_retire_animal_mutate(animal_id: String) -> bool:
 	var index := ranch_animal_index(animal_id)
 	if index < 0:
 		message = "这位伙伴不在牧场里。"
@@ -5851,6 +6003,7 @@ func cycle_animal_feed() -> void:
 	changed.emit()
 
 func rename_companion(companion_name: String, type_id: String) -> bool:
+	if type_id!=str(pet_state.type):message="更换伙伴请到牧场名册确认正式接回，原伙伴身份会保留。";changed.emit();return false
 	if type_id not in ["cat","dog"]:
 		message = "请选择猫或狗。"
 		changed.emit()
@@ -6156,102 +6309,59 @@ func _npc_story_scene(person: Dictionary) -> String:
 	return npc_scene_region(str(person.get("id", "")))
 
 func npc_story_readiness(npc_id: String) -> Dictionary:
-	var arc: Array = content.get("arcs", {}).get(npc_id, [])
-	var state: Dictionary = npc_stories.get(npc_id, {})
-	if arc.is_empty() or state.is_empty(): return {"ok":false,"message":"暂无故事。"}
-	var step := int(state.get("step",0))
-	if step >= arc.size(): return {"ok":false,"message":"这段故事已经留下了完整记录。"}
-	var event: Dictionary = arc[step]
-	if str(event.get("kind","")) == "married" and str(marriage.get("spouse","")) != npc_id: return {"ok":false,"message":"这一章是共同生活故事，结婚后再来聊。"}
-	if int(state.get("lastDay",-1)) == day: return {"ok":false,"message":"今天聊到这里，明天再来继续。"}
-	var needed_points := int(event.get("points",0))
-	if int(relations.get(npc_id,{}).get("points",0)) < needed_points: return {"ok":false,"message":"关系达到 %d 后继续；聊聊天、一起做饭或完成委托都可以。"%needed_points}
-	var needs: Dictionary = event.get("needs",{}) if event.get("needs",{}) is Dictionary else {}
-	if not _building_has(needs):
-		var descriptions: Array[String] = []
-		for item_id in needs: descriptions.append("%s ×%d"%[str(item_catalog.get(str(item_id),{}).get("name",item_id)),int(needs[item_id])])
-		return {"ok":false,"message":"这次合作需要 %s，随时备好再来。"%("、".join(descriptions))}
-	var person: Dictionary = {}
-	for candidate in npc_catalog:
-		if str(candidate.id) == npc_id: person = candidate;break
-	var scene_id := _npc_story_scene(person)
-	return {"ok":true,"message":"此刻在%s，可以继续聊“%s”。"%[str(content.get("scenes",{}).get(scene_id,{}).get("name","")),str(event.get("title","近况"))],"event":event,"step":step}
+	var arc:Array=content.get("arcs",{}).get(npc_id,[])
+	var record:Dictionary=npc_stories.get(npc_id,{})
+	var step:int=int(record.get("step",0))
+	if arc.is_empty() or step>=arc.size():return {"ok":false,"message":"故事已完整记下，可以回看我们的选择。"}
+	var event:Dictionary=arc[step]
+	if int(relations.get(npc_id,{}).get("points",0))<int(event.points):return {"ok":false,"message":"关系达到 %d 后继续；日常聊天与邻里协作都能增进了解。"%int(event.points)}
+	var activity:Dictionary=preload("res://scripts/quest_model.gd").story_activity(self,npc_id)
+	if not activity.is_empty() and not bool(activity.done):return {"ok":false,"message":"下一步："+str(activity.label)+"。找到对方后可以一起完成。","activity":activity}
+	for item:String in event.get("needs",{}):
+		if QUESTS.qualified(self,item)<int(event.needs[item]):return {"ok":false,"message":"需要新鲜、未保护的%s ×%d。"%[str(item_catalog[item].name),int(event.needs[item])]}
+	var compensation:int=preload("res://scripts/quest_model.gd").story_compensation(self,event)
+	if money+compensation>1000000000:return {"ok":false,"message":"材料补偿暂时放不下，请先整理零钱。"}
+	return {"ok":true,"message":"可以面对面继续聊“%s”；关系 +5，材料补偿 %d 元。"%[str(event.title),compensation],"event":event,"step":step}
 
 func choose_npc_story(npc_id: String, choice: int) -> bool:
-	if not npc_is_near(npc_id):
-		message = "面对面聊完这一段故事吧，先沿路找到对方。"
-		changed.emit()
-		return false
-	var readiness := npc_story_readiness(npc_id)
-	if not bool(readiness.get("ok", false)):
-		message = str(readiness.get("message", "暂时无法继续这段故事。"))
-		changed.emit()
-		return false
-	if choice not in [0, 1]:
-		message = "请选择一个回应。"
-		changed.emit()
-		return false
-	var state: Dictionary = npc_stories[npc_id]
-	var quest_definition: Dictionary=QUESTS.definition(self,"story:"+npc_id+":"+str(int(state.step)))
-	var event: Dictionary = readiness.event
-	var choices: Array = event.get("choices", [])
-	if choice >= choices.size():
-		message = "这段故事没有可选的回应。"
-		changed.emit()
-		return false
-	var needs_value: Variant = event.get("needs", {})
-	var needs: Dictionary = needs_value if needs_value is Dictionary else {}
-	_reconcile_kitchen_lots()
-	for item_id in needs:
-		_consume_item(str(item_id), int(needs[item_id]))
-	_reconcile_kitchen_lots()
-	var selected: Dictionary = choices[choice]
-	var person: Dictionary = {}
-	for candidate in npc_catalog:
-		if str(candidate.get("id", "")) == npc_id:
-			person = candidate
-			break
-	if str(event.get("kind", "")) == "confirmation":
-		if str(person.get("tier", "")) != "romance" or int(person.get("age", 0)) < 18:
-			message = "只有成年候选人才有关系确认。"
-			changed.emit()
-			return false
-		partners[npc_id] = "dating" if choice == 0 else "friend"
-	var arc: Array = content.get("arcs", {}).get(npc_id, [])
-	state.choices.append(choice)
-	state.step = int(state.get("step", 0)) + 1
-	state.lastDay = day
-	npc_stories[npc_id] = state
-	if int(state.step) == 2:
-		for link in content.get("links", []):
-			if link is Array and link.size() >= 2 and str(link[0]) == npc_id and relations.has(str(link[1])):
-				var friend_relation: Dictionary = relations[str(link[1])]
-				friend_relation.points = mini(100, int(friend_relation.get("points", 0)) + 2)
-				relations[str(link[1])] = friend_relation
-	var relation: Dictionary = relations.get(npc_id, {"points": 0})
-	relation.points = mini(100, int(relation.get("points", 0)) + 10)
-	_award_skill_xp("social", 5)
-	relations[npc_id] = relation
-	for recipe in content.get("recipes", []):
-		if str(recipe.get("source", "")) == npc_id and not known_recipes.has(str(recipe.get("id", ""))):
-			known_recipes.append(str(recipe.get("id", "")))
-			_record_community_log("学会了 %s。" % str(item_catalog.get(str(recipe.get("id","")),{}).get("name","")))
-	var reply := str(selected.get("reply", ""))
-	var narrative := str(event.get("text", "")) + "\n" + reply
-	_record_community_log("%s · %s：%s" % [npc_name(npc_id),str(event.get("title","")),reply])
-	_remember_npc_dialogue(npc_id, "story-choice-%d" % int(state.step), narrative, "故事", "happy", str(selected.get("label", "")))
-	message = reply
-	if int(state.step) == arc.size():
-		var archive_by_npc := {"granny": "recipe", "chen": "ruler", "zhouSenior": "teaBook", "he": "album"}
-		var archive_id := str(archive_by_npc.get(npc_id, ""))
-		if archive_id != "" and not archives.has(archive_id):
-			archives.append(archive_id)
-		_grant_legacy_item("rice", 2)
-	if quest_definition.is_empty():quest_definition={"id":"story:"+npc_id+":"+str(int(state.step)-1),"kind":"story","category":"人物","title":npc_name(npc_id)+" · "+str(event.title),"text":"已听完这段个人故事，可在人物簿回看。","npc":npc_id,"ref":npc_id,"step":int(state.step)-1,"source":"npc:"+npc_id,"page":"stories"}
-	QUESTS.complete_record(self,quest_definition)
-	_museum_sync()
-	changed.emit()
-	return true
+	if transactions==null or transactions.preparing:return _choose_npc_story_mutate(npc_id,choice)
+	return transactions.submit("choose_npc_story:"+str([npc_id,choice]),_choose_npc_story_mutate.bind(npc_id,choice))
+
+func _choose_npc_story_mutate(npc_id: String, choice: int) -> bool:
+	if not npc_is_near(npc_id):message="先沿路找到对方，面对面聊完这一段。";return false
+	var readiness:Dictionary=npc_story_readiness(npc_id)
+	if not bool(readiness.get("ok",false)):message=str(readiness.message);return false
+	var record:Dictionary=npc_stories[npc_id];var step:int=int(record.step)
+	var event:Dictionary=readiness.event;var choices:Array=event.choices
+	if choice<0 or choice>=choices.size():return false
+	var receipt:String="story:"+npc_id+":"+str(step)
+	if quests.receipts.has(receipt):return false
+	# All validation is complete before any deduction or reward.
+	var definition:Dictionary=QUESTS.definition(self,receipt)
+	var compensation:int=preload("res://scripts/quest_model.gd").story_compensation(self,event)
+	for item:String in event.get("needs",{}):
+		if QUESTS.qualified(self,item)<int(event.needs[item]):return false
+	quests.receipts[receipt]=true
+	for item:String in event.get("needs",{}):QUESTS.consume(self,item,int(event.needs[item]))
+	money+=compensation;player_stats.earned=int(player_stats.get("earned",0))+compensation
+	record.choices.append(choice);record.step=step+1;record.lastDay=day;npc_stories[npc_id]=record
+	var selected:Dictionary=choices[choice]
+	var relation:Dictionary=relations[npc_id];relation.points=mini(100,int(relation.points)+5);relations[npc_id]=relation
+	_award_skill_xp("social",5)
+	if str(event.get("kind",""))=="confirmation":partners[npc_id]="dating" if choice==0 else "friend"
+	for recipe:Dictionary in content.get("recipes",[]):
+		if str(recipe.get("source",""))==npc_id and not known_recipes.has(str(recipe.id)):known_recipes.append(str(recipe.id))
+	var reply:String=str(selected.reply)
+	_record_community_log("%s · %s：%s"%[npc_name(npc_id),str(event.title),reply])
+	_remember_npc_dialogue(npc_id,"story-choice-%d"%(step+1),str(event.text)+"\n"+reply,"故事","happy",str(selected.label))
+	if int(record.step)==content.arcs[npc_id].size():
+		quests.memorials[npc_id]=str(selected.get("memorial",reply))
+		_record_community_log("%s留下的纪念：%s"%[npc_name(npc_id),str(quests.memorials[npc_id])])
+		var archive_id:String=str({"granny":"recipe","chen":"ruler","zhouSenior":"teaBook","he":"album"}.get(npc_id,""))
+		if archive_id!="" and not archives.has(archive_id):archives.append(archive_id)
+	QUESTS.complete_record(self,definition)
+	message=reply+(" · 材料补偿 %d 元"%compensation if compensation>0 else "")
+	_museum_sync();changed.emit();return true
 
 func upgrade_home_room() -> bool:
 	return perform_legacy_upgrade("room")
@@ -6886,6 +6996,7 @@ func queue_npc_task(npc_id: String,operation: String,data: Dictionary={}) -> boo
 	npc_task_serial+=1
 	npc_task={"kind":"npc-task","id":npc_id,"npcId":npc_id,"op":operation,"x":point.x,"y":point.y,"token":npc_task_serial}
 	npc_task.merge(data,true)
+	if operation=="story":npc_task.expected_step=int(npc_stories[npc_id].step)
 	return begin_action(spec,npc_task,finish_npc_task.bind(npc_task.duplicate(true)))
 
 func finish_npc_task(target: Dictionary) -> void:
@@ -6898,7 +7009,8 @@ func finish_npc_task(target: Dictionary) -> void:
 		return
 	match str(target.op):
 		"talk":confirm_operation(talk_to_npc(npc_id,str(target.get("topic","auto"))))
-		"story":confirm_operation(choose_npc_story(npc_id,int(target.get("choice",-1))))
+		"story":
+			if int(npc_stories[npc_id].step)==int(target.get("expected_step",-1)):confirm_operation(choose_npc_story(npc_id,int(target.get("choice",-1))))
 		_:confirm_operation(resolve_npc_event(npc_id,str(target.op),int(target.get("day",-1))))
 	var players:=get_tree().get_nodes_in_group("player")
 	if not players.is_empty():
@@ -7004,6 +7116,10 @@ func museum_donation_reason(key: String, mode: String, grade: int = 0) -> String
 	return ""
 
 func museum_donate(key: String, mode: String, grade: int = 0) -> bool:
+	if transactions==null or transactions.preparing:return _museum_donate_mutate(key,mode,grade)
+	return transactions.submit("museum_donate:"+str([key,mode,grade]),_museum_donate_mutate.bind(key,mode,grade))
+
+func _museum_donate_mutate(key: String, mode: String, grade: int = 0) -> bool:
 	_museum_sync()
 	if not museum_near():
 		message = "请到村史馆登记桌前再提交。"
@@ -7177,6 +7293,10 @@ func host_meal_location_allowed() -> bool:
 	return region in ["farm", "pasture"]
 
 func host_meal(npc_id: String, dish_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _host_meal_mutate(npc_id,dish_id)
+	return transactions.submit("host_meal:"+str([npc_id,dish_id]),_host_meal_mutate.bind(npc_id,dish_id))
+
+func _host_meal_mutate(npc_id: String, dish_id: String) -> bool:
 	if not bool(upgrades.get("room", false)):
 		message = "先整理厢房，摆好共餐桌。"
 	elif not host_meal_location_allowed():
@@ -7207,6 +7327,7 @@ func host_meal(npc_id: String, dish_id: String) -> bool:
 					_record_community_log("学会了 %s。" % str(item_catalog.get(str(recipe.get("id", "")), {}).get("name", "")))
 			var event_text := "请%s来小院吃%s，聊了聊%s的日常。" % [str(person.get("name", npc_id)), str(item_catalog.get(dish_id, {}).get("name", dish_id)), str(person.get("role", "生活"))]
 			_record_community_log(event_text)
+			QUESTS.event(self,"sharedMeal")
 			message = "对方说起近来的工作，也认真听你讲菜地里的新变化。下周再约。"
 			changed.emit()
 			return true
@@ -7354,6 +7475,10 @@ func resolve_npc_event(npc_id: String, operation: String, event_day: int) -> boo
 	return true
 
 func gift_npc(npc_id: String, item_id: String) -> bool:
+	if transactions==null or transactions.preparing:return _gift_npc_mutate(npc_id,item_id)
+	return transactions.submit("gift_npc:"+str([npc_id,item_id]),_gift_npc_mutate.bind(npc_id,item_id))
+
+func _gift_npc_mutate(npc_id: String, item_id: String) -> bool:
 	ensure_neighbor_events()
 	if not npc_is_near(npc_id):
 		message="先走近对方，再把心意交到手中。"
@@ -7468,6 +7593,10 @@ func toggle_forage_mode() -> void:
 	changed.emit()
 
 func care_forage(node_id: String, item_id: String, event: String = "") -> bool:
+	if transactions==null or transactions.preparing:return _care_forage_mutate(node_id,item_id,event)
+	return transactions.submit("care_forage:"+str([node_id,item_id,event]),_care_forage_mutate.bind(node_id,item_id,event))
+
+func _care_forage_mutate(node_id: String, item_id: String, event: String = "") -> bool:
 	var success := false
 	var patches: Dictionary = forage.get("patches", {})
 	var patch: Dictionary = patches.get(node_id, {})
@@ -7491,6 +7620,10 @@ func care_forage(node_id: String, item_id: String, event: String = "") -> bool:
 	return success
 
 func gather_node(node_id: String, item_id: String, event: String = "") -> bool:
+	if transactions==null or transactions.preparing:return _gather_node_mutate(node_id,item_id,event)
+	return transactions.submit("gather_node:"+str([node_id,item_id,event]),_gather_node_mutate.bind(node_id,item_id,event))
+
+func _gather_node_mutate(node_id: String, item_id: String, event: String = "") -> bool:
 	if not inventory.has(item_id):
 		message = "这个采集物不在物品目录里。"
 		changed.emit()
@@ -7565,12 +7698,29 @@ func set_fishing_option(key: String, value: Variant) -> void:
 func fishing_active() -> bool:return not fishing_session.game.is_empty()
 func fishing_snapshot() -> Dictionary:return fishing_session.snapshot()
 func fishing_phase() -> String:return fishing_session.phase()
-func fishing_input(command: String) -> void:
+func fishing_input(command: String, source: String="") -> void:
+	if fishing_active() and source!="":
+		var owner:String=str(fishing_session.game.get("inputOwner",""))
+		if command=="release" and owner!="" and owner!=source:return
+		if command in ["press","toggle"]:
+			if owner!="" and owner!=source:fishing_session.command("clear")
+			fishing_session.game.inputOwner=source
+	if command=="clear" and fishing_active():fishing_session.game.inputOwner=""
 	fishing_session.command(command)
 	fishing_session_changed.emit(fishing_snapshot())
 func toggle_fishing_reel() -> void:fishing_input("toggle")
-func fishing_resolve(released: bool) -> bool:return preload("res://scripts/fishing_service.gd").resolve(self,released)
-func fishing_craft(id: String) -> bool:return preload("res://scripts/fishing_service.gd").craft(self,id)
+func fishing_resolve(released: bool) -> bool:
+	if transactions==null or transactions.preparing:return _fishing_resolve_mutate(released)
+	return transactions.submit("fishing_resolve:"+str([released]),_fishing_resolve_mutate.bind(released))
+
+func _fishing_resolve_mutate(released: bool) -> bool:
+	return preload("res://scripts/fishing_service.gd").resolve(self,released)
+func fishing_craft(id: String) -> bool:
+	if transactions==null or transactions.preparing:return _fishing_craft_mutate(id)
+	return transactions.submit("fishing_craft:"+str([id]),_fishing_craft_mutate.bind(id))
+
+func _fishing_craft_mutate(id: String) -> bool:
+	return preload("res://scripts/fishing_service.gd").craft(self,id)
 func fishing_equip(id: String) -> bool:return preload("res://scripts/fishing_service.gd").equip(self,id)
 func queue_fishing_tasks(tasks: Array) -> bool:return preload("res://scripts/fishing_service.gd").queue(self,tasks)
 func finish_fishing_task(target: Dictionary) -> void:preload("res://scripts/fishing_service.gd").finish_task(self,target)
@@ -7588,7 +7738,7 @@ func begin_fishing(spot_id: String) -> bool:
 	if not fishing_has_bait(str(plan.bait)) or stamina<fishing_energy_cost():message="鱼饵或体力不足，可先换免费素饵或休息。";changed.emit();return false
 	if preload("res://scripts/fishing_rules.gd").hotspot(system_catalog.fishing,day)==spot_id:plan.wait=float(plan.wait)*0.65
 	fishing_session.start(plan,point)
-	var spec: Dictionary={"kind":"fish","label":"蓄力 · 等漂 · 追踪鱼影","duration":45.0,"waterX":point.waterX,"waterY":point.waterY,"item":plan.fish}
+	var spec: Dictionary={"kind":"fish","label":"蓄力 · 观漂 · 收放线","duration":45.0,"waterX":point.waterX,"waterY":point.waterY,"item":plan.fish}
 	if not begin_action(spec,point,_finish_fishing_session,_cancel_fishing_session):_cancel_fishing_session();return false
 	set_player_direction_from_vector(Vector2(float(point.waterX),float(point.waterY))-player_position)
 	fishing_session_changed.emit(fishing_snapshot());return true
@@ -7601,6 +7751,8 @@ func _cancel_fishing_session() -> void:
 func _finish_fishing_session() -> void:
 	var game:=fishing_snapshot()
 	preload("res://scripts/fishing_service.gd").finish(self,game)
+	if bool(game.get("missed",false)) and str(game.get("hint",""))!="":
+		message+="\n下一次："+str(game.hint);message_requested.emit(message)
 	_cancel_fishing_session()
 
 func finish_fishing(plan: Dictionary, caught: bool, safe_time: float, total_time: float, reason: String="") -> bool:
@@ -7686,6 +7838,7 @@ func advance_day() -> void:
 			_feedback_note({"key": "building/" + str(job.get("id", "")) + "/" + str(job.get("level", 0)), "title": "修缮工程竣工", "text": "%s第 %d 阶已完成。" % [str(project.get("name", "工程")), int(job.get("level", 0))], "priority": 1, "link": "build"})
 	message = "早安，%s。今天%s。%s" % [player_name, str(weather_profile().kind), str(weather_profile().tip)]
 	_feedback_snapshot = _feedback_snapshot_state()
+	preload("res://scripts/village_growth.gd").prepare_day(self)
 	changed.emit()
 	save_game(SAVE_PATH,true)
 	if year_review_pending:year_review_requested.emit()
@@ -7806,6 +7959,7 @@ func _advance_farm(previous_day: int) -> void:
 
 func _advance_ranch(previous_day: int, weather: String, previous_minutes: float = 1050.0) -> void:
 	preload("res://scripts/ranch_lifecycle.gd").advance(self,previous_day,weather,previous_minutes)
+	preload("res://scripts/village_growth.gd").record_growth(self)
 
 func _ranch_notice(text: String) -> void:
 	var notices: Array = ranch.get("notices", [])
@@ -7829,17 +7983,23 @@ func _new_game_snapshot() -> Dictionary:
 	fresh._museum_sync()
 	fresh.museum_record_region(fresh.player_position)
 	fresh._remember_weather()
+	preload("res://scripts/village_growth.gd").prepare_day(fresh)
 	var snapshot: Dictionary = fresh._make_save_data().duplicate(true)
 	fresh.free()
 	return snapshot
 
 func start_new_game() -> bool:
-	return _start_new_game_to_paths(SAVE_PATH, "user://zhenrizhi_godot_backup.json")
+	return _start_new_game_to_paths(SAVE_PATH, "user://saves/v38/zhenrizhi_godot_backup.json")
 
 func _start_new_game_to_paths(save_path: String, backup_path: String) -> bool:
+	if autosave_coordinator!=null:autosave_coordinator.barrier(true)
 	var previous := _make_save_data().duplicate(true)
 	var fresh := _new_game_snapshot()
-	if not _write_json_atomically(backup_path, previous):
+	var protected_previous:Dictionary=previous
+	if incompatible_save:
+		var original:Variant=_read_save_json(_save_path_absolute(save_path))
+		if original is Dictionary:protected_previous=original
+	if not _write_json_atomically(backup_path, protected_previous):
 		message = "当前进度的备份没有写好，新生活尚未开始。"
 		changed.emit()
 		return false
@@ -7863,6 +8023,13 @@ func _start_new_game_to_paths(save_path: String, backup_path: String) -> bool:
 	return true
 
 func save_game(path: String = SAVE_PATH, silent: bool = false) -> bool:
+	if transactions!=null and transactions.preparing:return true
+	if silent and path==SAVE_PATH and not incompatible_save:
+		request_autosave();return true
+	if incompatible_save and path==SAVE_PATH:
+		message="旧任务存档已保护；请先在存档页面明确开始新生活。";return false
+	if _writing_save: return false
+	if autosave_coordinator!=null:autosave_coordinator.barrier(true)
 	if _writing_save:
 		return false
 	_writing_save = true
@@ -7885,12 +8052,15 @@ func _save_path_absolute(path: String) -> String:
 	return preload("res://scripts/save_repository.gd").absolute(path)
 
 func _write_json_atomically(path: String, data: Dictionary) -> bool:
+	if autosave_coordinator!=null:autosave_coordinator.barrier()
 	var restored := _save_path_absolute(path) == _recovered_save_path
 	var ok: bool = preload("res://scripts/save_repository.gd").write(path,data,restored)
 	if ok and restored: _recovered_save_path = ""
 	return ok
 
 func _queue_autosave() -> void:
+	if transactions!=null and (transactions.preparing or transactions.busy() or transactions.publishing):return
+	if incompatible_save:return
 	if _writing_save: return
 	if _urgent_autosave:
 		_urgent_autosave = false
@@ -7906,9 +8076,16 @@ func _schedule_position_autosave(_position: Vector2) -> void:
 	if is_instance_valid(_movement_autosave_timer):
 		_movement_autosave_timer.start()
 
+func request_autosave()->void:
+	if incompatible_save:return
+	if _writing_save:return
+	if transactions!=null and (transactions.preparing or transactions.busy() or transactions.publishing):return
+	if autosave_coordinator!=null:autosave_coordinator.request()
+	else:save_game(SAVE_PATH,true)
+
 func _flush_autosave() -> void:
 	_autosave_queued = false
-	save_game(SAVE_PATH,true)
+	request_autosave()
 
 func _make_save_data() -> Dictionary:
 	return preload("res://scripts/native_save_snapshot.gd").capture(self)
@@ -7917,17 +8094,31 @@ func weather_for(target_day: int) -> String:
 	return str(weather_profile(target_day).kind)
 
 func load_game(path: String = SAVE_PATH) -> bool:
+	if autosave_coordinator!=null:autosave_coordinator.barrier(true)
 	var absolute_path := _save_path_absolute(path)
 	var primary_data: Variant = _read_save_json(absolute_path)
+	if primary_data is Dictionary and int(primary_data.get("version",0)) in [34,35,36] and _task_save_compatible(primary_data):
+		var migration_copy:String=absolute_path+".v%d-original"%int(primary_data.version)
+		if not FileAccess.file_exists(migration_copy) and DirAccess.copy_absolute(absolute_path,migration_copy)!=OK:
+			message="无法保留迁入前原存档，迁入已取消，当前进度未改变。";return false
 	if primary_data is Dictionary and load_game_data(primary_data):
 		_recovered_save_path = ""
 		return true
+	if primary_data is Dictionary and not _task_save_compatible(primary_data):
+		if path==SAVE_PATH:incompatible_save=true
+		message="检测到旧任务版本存档，原文件已保留。请在存档页面开始新生活。";return false
 	var backup_path := absolute_path + ".bak"
 	var backup_data: Variant = _read_save_json(backup_path)
+	if backup_data is Dictionary and int(backup_data.get("version",0)) in [34,35,36] and _task_save_compatible(backup_data):
+		var migration_copy:String=backup_path+".v%d-original"%int(backup_data.version)
+		if not FileAccess.file_exists(migration_copy) and DirAccess.copy_absolute(backup_path,migration_copy)!=OK:
+			message="无法保留迁入前备份原档，迁入已取消，当前进度未改变。";return false
 	if backup_data is Dictionary and load_game_data(backup_data):
 		_recovered_save_path = absolute_path
 		message = "主存档无法读取，已从最近一次有效存档恢复。"
 		return true
+	if backup_data is Dictionary and not _task_save_compatible(backup_data) and path==SAVE_PATH:
+		incompatible_save=true;message="旧任务备份已保留，请开始新生活。"
 	return false
 
 func _read_save_json(path: String) -> Variant:
@@ -7939,18 +8130,27 @@ func load_game_data(parsed: Variant) -> bool:
 		parsed = parsed.duplicate(true)
 		if parsed.has("_float64_roundtrip"):
 			parsed = load("res://scripts/save_json.gd").decode(parsed)
+	if parsed is Dictionary and not _task_save_compatible(parsed):
+		message="这份存档属于 v34–v37 或其他循环版本，原文件保留，本轮请开始 v38 新生活。";return false
+	if parsed is Dictionary:parsed=preload("res://scripts/native_save_rules.gd").prepare_legacy(parsed)
 	var original_ranch_input:Dictionary={"day":parsed.get("day",0),"ranch":parsed.get("ranch"),"animals":parsed.get("animals")} if parsed is Dictionary else {}
 	original_ranch_input=original_ranch_input.duplicate(true)
 	var validation_error := preload("res://scripts/native_save_rules.gd").error(parsed,initial_state,world_village.get("offsets",{}))
 	if not validation_error.is_empty():
 		message = validation_error
 		return false
+	if autosave_coordinator!=null:autosave_coordinator.barrier(true)
+	house_activity.reset()
 	var saved_ranch: Variant = parsed.get("ranch", {})
 	var saved_delivered: Variant = saved_ranch.get("delivered", []) if saved_ranch is Dictionary else []
 	if not preload("res://scripts/atlas_rules.gd").truthy(saved_delivered): saved_delivered = []
 	year_review_pending = false
 	quest_action.clear();quest_action_serial+=1
+	incompatible_save=false
 	quests = parsed.get("quests",QUESTS.defaults()).duplicate(true)
+	commit_log=parsed.get("commit_log",{"next":1,"rows":[]}).duplicate(true)
+	village_progress=parsed.get("village_progress",{"version":1,"projects":{},"observations":{},"growth":{}}).duplicate(true)
+	if quest_runtime!=null:quest_runtime.reset()
 	day = maxi(0, int(parsed.get("day", 0)))
 	legacy_systems = _normalize_legacy_systems(parsed)
 	player_name = str(parsed.get("player_name", parsed.get("name", "小满"))).strip_edges().left(12)
@@ -8011,6 +8211,7 @@ func load_game_data(parsed: Variant) -> bool:
 	pet_visual_action.clear()
 	ranch_actor_focus.clear()
 	ranch_actor_poses.clear()
+	animal_behavior.clear()
 	ranch_actor_action.clear()
 	ranch_movement = null
 	kitchen_task.clear()
@@ -8026,14 +8227,15 @@ func load_game_data(parsed: Variant) -> bool:
 	if saved_interior_state is Dictionary:
 		interior_state = {
 			"memories": saved_interior_state.get("memories", {}).duplicate(true) if saved_interior_state.get("memories", {}) is Dictionary else {},
-			"chores": saved_interior_state.get("chores", {}).duplicate(true) if saved_interior_state.get("chores", {}) is Dictionary else {}
+			"chores": saved_interior_state.get("chores", {}).duplicate(true) if saved_interior_state.get("chores", {}) is Dictionary else {},
+			"household":saved_interior_state.get("household",preload("res://scripts/house_save.gd").defaults()).duplicate(true)
 		}
 	else:
-		interior_state = {"memories": {}, "chores": {}}
+		interior_state = {"memories": {}, "chores": {}, "household":preload("res://scripts/house_save.gd").defaults()}
 	var saved_interior_position: Variant = parsed.get("interior_position", {})
 	if saved_interior_position is Dictionary:
 		var candidate_interior := Vector2(float(saved_interior_position.get("x", 480)), float(saved_interior_position.get("y", 567)))
-		if candidate_interior.x >= 113 and candidate_interior.x <= 847 and candidate_interior.y >= 205 and candidate_interior.y <= 602:
+		if (current_interior=="ranch-meadow" and candidate_interior.x>=24 and candidate_interior.x<=3752 and candidate_interior.y>=38 and candidate_interior.y<=2024) or (candidate_interior.x >= 113 and candidate_interior.x <= 847 and candidate_interior.y >= 205 and candidate_interior.y <= 602):
 			interior_source_position={"x":float(saved_interior_position.get("x",480)),"y":float(saved_interior_position.get("y",567))}
 	interior_return_source=null
 	var saved_return_position: Variant=parsed.get("interior_return_position")
@@ -8107,8 +8309,9 @@ func load_game_data(parsed: Variant) -> bool:
 	for candidate in saved_plots:
 		if candidate is Dictionary:
 			plots.append(candidate)
-	if plots.size() != FARM_LAYOUT.TOTAL:
-		_reset_plots()
+	# Validation has admitted a complete current or known historical layout.
+	# Preserve saved indexes, crops and soil instead of replacing them with defaults.
+	while plots.size()<FARM_LAYOUT.TOTAL:plots.append(_new_plot())
 	_normalize_plots()
 	_normalize_farm()
 	animals.clear()
@@ -8213,6 +8416,7 @@ func load_game_data(parsed: Variant) -> bool:
 			ranch=raw_ranch.ranch.duplicate(true)
 			animals.assign(raw_ranch.animals.duplicate(true))
 	preload("res://scripts/ranch_products.gd").initialize(self)
+	preload("res://scripts/ranch_nurture.gd").ensure(self)
 	_remember_weather()
 	if atlas.get("tracking") is Dictionary and atlas_resolve(atlas.tracking).is_empty(): atlas.tracking=null
 	atlas_visit()
@@ -8220,9 +8424,10 @@ func load_game_data(parsed: Variant) -> bool:
 	return true
 
 func convert_external_save(source: Dictionary) -> Dictionary:
+	if not _task_save_compatible(source):return {}
 	if not preload("res://scripts/native_save_schema.gd").safe_tree(source): return {}
 	# Native JSON also reaches this entry; reject containers before int(version).
-	if not preload("res://scripts/source_save_validation.gd").integer(source.get("version"),1,33): return {}
+	if not preload("res://scripts/source_save_validation.gd").integer(source.get("version"),38,38): return {}
 	if source.has("bag") and not source.has("inventory"):
 		if int(source.get("version", 0)) not in [1, 2, 3] or not source.get("bag") is Dictionary or not source.get("plots") is Array:
 			return {}
@@ -8374,7 +8579,7 @@ func convert_external_save(source: Dictionary) -> Dictionary:
 			if source_extra.ranch_error(migrated,item_catalog,system_catalog,world_village)=="":
 				converted["_source_ranch_bundle"]=source_extra.normalize_ranch(migrated,initial_state,system_catalog,world_village)
 		return converted
-	if int(source.get("version", 0)) in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33] and source.has("inventory"):
+	if int(source.get("version", 0)) in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38] and source.has("inventory"):
 		var native: Variant = load("res://scripts/save_json.gd").decode(source.duplicate(true))
 		return native if native is Dictionary and preload("res://scripts/native_save_rules.gd").error(native,initial_state,world_village.get("offsets",{})).is_empty() else {}
 	return {}
@@ -8429,7 +8634,7 @@ func _convert_legacy_player(source: Dictionary) -> Dictionary:
 	return {"x": x, "y": y, "direction": direction}
 
 func import_external_save(source: Dictionary) -> bool:
-	return _import_external_save_to_paths(source, SAVE_PATH, "user://zhenrizhi_godot_recovery.json", "user://zhenrizhi_godot_backup.json")
+	return _import_external_save_to_paths(source, SAVE_PATH, "user://saves/v38/zhenrizhi_godot_recovery.json", "user://saves/v38/zhenrizhi_godot_backup.json")
 
 func _import_external_save_to_paths(source: Dictionary, save_path: String, recovery_path: String, backup_path: String) -> bool:
 	var old_alias_save:=false
@@ -8467,10 +8672,10 @@ func _import_external_save_to_paths(source: Dictionary, save_path: String, recov
 	return true
 
 func save_game_to_recovery() -> bool:
-	return _write_snapshot("user://zhenrizhi_godot_recovery.json")
+	return _write_snapshot("user://saves/v38/zhenrizhi_godot_recovery.json")
 
 func save_game_to_backup() -> bool:
-	return _write_snapshot("user://zhenrizhi_godot_backup.json")
+	return _write_snapshot("user://saves/v38/zhenrizhi_godot_backup.json")
 
 func _write_snapshot(path: String) -> bool:
 	return _write_json_atomically(path, _make_save_data())
@@ -8516,6 +8721,7 @@ func advance_npc_movement(delta: float) -> void:
 
 func confirm_operation(success: bool, kind: String="good", vibrate: bool=true) -> bool:
 	if success:
+		if transactions!=null and (transactions.busy() or transactions.preparing):return true
 		sound_requested.emit(kind)
 		if vibrate and bool(player_settings.get("vibration",false)):
 			vibration_requested.emit()
@@ -8530,6 +8736,10 @@ func inspect_point_with_sound(point: Dictionary) -> bool:
 	return confirm_operation(inspect_interior_point(point),"music" if musical else "good",false)
 
 func ranch_fixture_action(kind: String, identity: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_fixture_action_mutate(kind,identity)
+	return transactions.submit("ranch_fixture_action:"+str([kind,identity]),_ranch_fixture_action_mutate.bind(kind,identity))
+
+func _ranch_fixture_action_mutate(kind: String, identity: String) -> bool:
 	if kind == "ranch-trough": return ranch_fill_trough(identity)
 	var count: int = preload("res://scripts/ranch_products.gd").take(self,"box" if kind == "ranch-box" else "product",identity)
 	message = "收下产物 ×%d，品质与生产日期已保留。" % count if count>0 else "这里暂时没有待领产物。"
@@ -8537,6 +8747,10 @@ func ranch_fixture_action(kind: String, identity: String) -> bool:
 	return count>0
 
 func ranch_fill_trough(home: String) -> bool:
+	if transactions==null or transactions.preparing:return _ranch_fill_trough_mutate(home)
+	return transactions.submit("ranch_fill_trough:"+str([home]),_ranch_fill_trough_mutate.bind(home))
+
+func _ranch_fill_trough_mutate(home: String) -> bool:
 	if not ranch.barns.has(home) or not bool(ranch.barns[home].built): return false
 	var food := str(ranch.feed)
 	var amount := 0
@@ -8552,13 +8766,15 @@ func ranch_fill_trough(home: String) -> bool:
 
 
 func _refresh_quests() -> void:
-	QUESTS.sync(self)
+	if quest_runtime!=null:quest_runtime.commands_changed()
 func quest_event(key: String, token: String="", amount: int=1) -> bool:
 	return QUESTS.event(self,key,token,amount)
 func quest_snapshot(filters: Dictionary={}) -> Array:
 	return QUESTS.rows(self,filters)
-func quest_accept(id: String) -> bool:return QUESTS.accept(self,id)
-func quest_claim(id: String) -> bool:return QUESTS.claim(self,id)
+func quest_accept(id:String)->bool:
+	return transactions.submit("accept:"+id,QUESTS.accept.bind(self,id)) if transactions!=null and not transactions.preparing else QUESTS.accept(self,id)
+func quest_claim(id:String)->bool:
+	return transactions.submit("claim:"+id,QUESTS.claim.bind(self,id)) if transactions!=null and not transactions.preparing else QUESTS.claim(self,id)
 func quest_pin(id: String) -> bool:return QUESTS.pin(self,id)
 func quest_abandon(id: String) -> bool:return QUESTS.abandon(self,id)
 func quest_track(id: String) -> Dictionary:return QUESTS.track(self,id)
@@ -8581,4 +8797,61 @@ func _finish_quest_submission(record: Dictionary) -> void:
 	if quest_action.is_empty() or int(quest_action.get("serial",-1))!=int(record.get("serial",-2)):return
 	quest_action.clear()
 	if day!=int(record.day) or current_interior!=str(record.room):return
-	QUESTS.submit(self,str(record.id))
+	if transactions!=null:transactions.submit("submit:"+str(record.id),QUESTS.submit.bind(self,str(record.id)))
+	else:QUESTS.submit(self,str(record.id))
+
+func start_npc_story_activity(npc_id:String)->bool:
+	if action_busy() or not npc_is_near(npc_id):message="先找到对方，再一起做这件事。";return false
+	var activity:Dictionary=preload("res://scripts/quest_model.gd").story_activity(self,npc_id)
+	if activity.is_empty() or bool(activity.done):return false
+	var step:int=int(npc_stories[npc_id].step);var room:String=current_interior
+	var destination:Dictionary=npc_destination(npc_id)
+	var spec:Dictionary=ACTION_RULES.spec(str(activity.kind),str(activity.label));spec.duration=2.0
+	return begin_action(spec,destination,func():
+		if current_interior!=room or not npc_is_near(npc_id) or int(npc_stories[npc_id].step)!=step:return
+		QUESTS.event(self,"storyActivity:"+npc_id+":"+str(step),"storyActivity:"+npc_id+":"+str(step))
+		QUESTS.event(self,"neighborWork")
+		message=str(activity.result);_record_community_log(npc_name(npc_id)+"："+message)
+		changed.emit())
+
+func _task_save_compatible(value:Dictionary)->bool:
+	return preload("res://scripts/source_save_validation.gd").integer(value.get("version"),38,38) and value.get("quests") is Dictionary and preload("res://scripts/source_save_validation.gd").integer(value.quests.get("version"),3,3)
+
+func _save_farm_projection() -> Dictionary:
+	var beds: Array = []
+	for plot in plots:
+		beds.append({"type": plot.get("soil_type", "loam"), "fertility": plot.get("fertility", 100), "moisture": plot.get("moisture", 45), "health": plot.get("health", 100), "pests": plot.get("pests", 0), "disease": plot.get("disease", 0), "weeds": plot.get("weeds", 0), "slow": plot.get("slow", 0), "fertilized": plot.get("fertilized", -1), "treated": plot.get("treated", -1), "stress": plot.get("stress", 0), "ripeDays": plot.get("ripe_days", 0), "kind": plot.get("seed_kind", "normal"), "density": plot.get("density", "balanced"), "compacted": plot.get("compacted", 0), "fallow": plot.get("fallow", false), "removed": plot.get("removed", false), "condition": plot.get("condition", 75.0), "ticks": plot.get("ticks", 0), "penalty": plot.get("penalty", 0.0), "companion": plot.get("companion", {}).duplicate(true) if plot.get("companion", {}) is Dictionary and not plot.get("companion", {}).is_empty() else null, "irrigated": plot.get("irrigated", -1)})
+		if int(plot.get("regrow_days",0)) > 0:
+			beds[-1].regrowDays = int(plot.regrow_days)
+			beds[-1].harvestCount = int(plot.get("harvest_count",0))
+	var result:Dictionary=farm.duplicate(true)
+	result.beds=beds
+	return result
+
+
+func save_async(path:String=SAVE_PATH,done:Callable=Callable())->bool:
+	if incompatible_save:return false
+	if transactions!=null and transactions.busy():return false
+	autosave_coordinator.commit(_make_save_data().duplicate(true),done,path);return true
+func wait_for_saves()->void:
+	while autosave_coordinator.busy():await get_tree().process_frame
+
+func growth_action(id:String,op:String,quantities:Dictionary={})->bool:
+	var operation:Callable=preload("res://scripts/village_growth.gd").perform.bind(self,id,op,quantities)
+	return transactions.submit("growth:"+id+":"+op,operation) if transactions!=null and not transactions.preparing else operation.call()
+
+func village_activity(kind:String,npc:String="")->bool:
+	var work:Callable=preload("res://scripts/village_growth.gd").activity.bind(self,kind,npc)
+	return transactions.submit("village-activity:"+kind+":"+npc,work) if transactions!=null and not transactions.preparing else work.call()
+
+func start_growth_action(id:String,op:String,quantities:Dictionary={})->bool:
+	if action_busy():return false
+	var quote:Dictionary=preload("res://scripts/village_growth.gd").quote(self,id,op)
+	if not quote.ready:message=str(quote.reason);return false
+	var spec:Dictionary=ACTION_RULES.spec("build" if op=="collaborate" else "read",{"survey":"勘察现场","contribute":"放下建材","procure":"确认筹料","collaborate":"一起修缮","use":"体验新设施"}.get(op,"公共筹备"))
+	spec.duration=2.4 if op=="collaborate" else .8
+	var at:Vector2=preload("res://scripts/village_growth.gd").SITES[id]
+	return begin_action(spec,{"kind":"village-work","id":id,"x":at.x,"y":at.y},growth_action.bind(id,op,quantities))
+
+func _commit_fishing_landing()->bool:
+	return preload("res://scripts/fishing_service.gd").commit_cast(self,fishing_session.game)

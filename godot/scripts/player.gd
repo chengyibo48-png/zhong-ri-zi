@@ -5,6 +5,7 @@ var walk_source_path: Array=[]
 const CHARACTER_SCENE := preload("res://scenes/character_visual.tscn")
 var facing := Vector2.DOWN
 var camera: Camera2D
+var fishing_camera:Node
 var character_visual: Node2D
 var walk_path: Array[Vector2] = []
 var walk_index := 0
@@ -14,6 +15,7 @@ var walk_chase_at := 0.0
 
 func _ready() -> void:
 	add_to_group("player")
+	preload("res://scripts/world_layout.gd").restore_safe_actor(GameState,self)
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	facing = GameState.player_direction_vector()
 	character_visual = CHARACTER_SCENE.instantiate()
@@ -32,10 +34,11 @@ func _ready() -> void:
 	var indoors := GameState.current_interior != ""
 	camera.limit_left = 0
 	camera.limit_top = 0
-	camera.limit_right = 960 if indoors else 3840
-	camera.limit_bottom = 600 if indoors else 3840
+	camera.limit_right = int(preload("res://scripts/house_geometry.gd").profile(GameState.current_interior).get("canvas",[960,640])[0]) if indoors else 3840
+	camera.limit_bottom = int(preload("res://scripts/house_geometry.gd").profile(GameState.current_interior).get("canvas",[960,640])[1]) if indoors else 3840
 	add_child(camera)
 	camera.make_current()
+	fishing_camera=preload("res://scripts/fishing_camera.gd").new();add_child(fishing_camera)
 	GameState.changed.connect(_apply_camera_settings)
 	GameState.changed.connect(_sync_riding_visual)
 	_apply_camera_settings()
@@ -57,7 +60,9 @@ func _physics_process(frame_delta: float) -> void:
 
 func pause_player_frame() -> void:
 	velocity = Vector2.ZERO
-	if is_instance_valid(character_visual):character_visual.call("set_pose", facing, false)
+	if is_instance_valid(character_visual):
+		character_visual.call("set_locomotion_sample",Vector2.ZERO,1.0/60.0)
+		character_visual.call("set_pose", facing, false)
 
 func advance_player_frame(frame_delta: float) -> void:
 	var _delta := clampf(frame_delta, 0.0, 0.05)
@@ -68,6 +73,10 @@ func advance_player_frame(frame_delta: float) -> void:
 	var keyboard:Vector2=GameState.source_keyboard.direction(GameState.player_settings.get("bindings",{}))
 	keyboard += GameState.touch_direction
 	var direction:Dictionary={"x":float(keyboard.x)+float(GameState.source_gamepad.motion.x),"y":float(keyboard.y)+float(GameState.source_gamepad.motion.y)}
+	if (float(direction.x)!=0 or float(direction.y)!=0) and not GameState.contact_approach.pending.is_empty():
+		var held_keys:Dictionary=GameState.source_keyboard.keys.duplicate()
+		GameState.stop_walking()
+		GameState.source_keyboard.keys=held_keys
 	var automatic:=false
 	GameState.advance_navigation_queues(self)
 	_recheck_source_target(GameState.source_frame_time)
@@ -82,6 +91,7 @@ func advance_player_frame(frame_delta: float) -> void:
 	if not is_inside_tree():return
 
 	if is_instance_valid(character_visual):
+		character_visual.call("set_locomotion_sample",global_position-previous_position,_delta)
 		character_visual.call("set_pose", facing, walking)
 	if global_position != previous_position:
 		if GameState.current_interior != "":
@@ -265,5 +275,6 @@ func _apply_camera_settings() -> void:
 	var zoom := float(GameState.player_settings.get("zoom", 1.0))
 	# Keep the saved distance preference; the authored scene now has a closer baseline.
 	var baseline := 1.12 if GameState.current_interior != "" else 1.35
-	camera.zoom = Vector2.ONE * zoom * baseline
+	if is_instance_valid(fishing_camera) and fishing_camera.engaged:fishing_camera.base_zoom=Vector2.ONE*zoom*baseline
+	else:camera.zoom = Vector2.ONE * zoom * baseline
 

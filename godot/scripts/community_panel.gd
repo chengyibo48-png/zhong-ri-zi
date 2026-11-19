@@ -8,8 +8,9 @@ var tab_buttons: Dictionary = {}
 var achievement_buttons: Dictionary = {}
 var transaction_buttons: Dictionary = {}
 var tabs := ["projects", "orders", "favors", "gatherings", "records", "journal", "archives", "year"]
-var tab_labels := {"projects": "公共项目", "orders": "邻里委托", "favors": "顺路帮忙", "gatherings": "每周小聚", "records": "四季记事", "journal": "生活日志", "archives": "旧物柜", "year": "年度回顾"}
+var tab_labels := {"projects": "公共项目", "orders": "邻里委托", "favors": "顺路帮忙", "gatherings": "随时共作", "records": "四季记事", "journal": "生活日志", "archives": "旧物柜", "year": "年度回顾"}
 var active_tab := "projects"
+var growth_quantities:Dictionary={}
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -164,9 +165,11 @@ func _add_card(title: String, description: String, action_label: String = "", di
 
 func refresh() -> void:
 	if not visible or not is_instance_valid(card_list): return
-	achievement_buttons.clear()
-	transaction_buttons.clear()
 	var focus_owner := get_viewport().gui_get_focus_owner()
+	var focus_key:String="";var scroll_value:int=content_scroll.scroll_vertical
+	for key:String in transaction_buttons:
+		if transaction_buttons[key]==focus_owner:focus_key=key;break
+	achievement_buttons.clear();transaction_buttons.clear()
 	var restore_focus := focus_owner != null and card_list.is_ancestor_of(focus_owner)
 	for tab_id in tab_buttons: tab_buttons[tab_id].set_pressed_no_signal(tab_id == active_tab)
 	for child in card_list.get_children():
@@ -181,21 +184,34 @@ func refresh() -> void:
 		"journal": _show_journal()
 		"archives": _show_archives()
 		"year": _show_year()
-	if restore_focus and tab_buttons.has(active_tab): tab_buttons[active_tab].grab_focus()
+	if restore_focus and focus_key!="":_restore_transaction_focus.call_deferred(focus_key,scroll_value,GameState.day,GameState.current_interior)
+	elif restore_focus and tab_buttons.has(active_tab):tab_buttons[active_tab].grab_focus()
+	content_scroll.set_deferred("scroll_vertical",scroll_value)
 
-func _show_projects() -> void:
-	var projects: Dictionary = GameState.content.get("projects", {})
-	var ids: Array = projects.keys()
-	ids.sort_custom(func(a, b): return int(projects[a].get("season", 0)) < int(projects[b].get("season", 0)))
-	for project_id_value in ids:
-		var project_id := str(project_id_value)
-		var project: Dictionary = projects[project_id_value]
-		var status := GameState.community_project_status(project_id)
-		var description := "%s\n%s\n%s" % [str(project.get("people", "乡亲们一起出力。")), str(project.get("change", "")), _items_text(project.get("needs", {}))]
-		if bool(status.get("done", false)): description += "\n已完成。"
-		elif not bool(status.get("ready", false)): description += "\n" + str(status.get("reason", ""))
-		transaction_buttons["e-project:" + project_id] = _add_card(str(project.get("name", project_id)), description, "乡亲们一起动工", bool(status.done) or GameState.day < int(project.season) * 28, _begin_transaction.bind("e-project", project_id))
-	if projects.is_empty(): _add_card("暂无公共项目", "可参与的村庄修缮还没有登记。")
+func _show_projects()->void:
+	var growth:Script=preload("res://scripts/village_growth.gd")
+	for id:String in growth.ORDER:
+		var data:Dictionary=GameState.content.projects[id];var q:Dictionary=growth.quote(GameState,id)
+		var phase:String=str(q.phase);var actions:Array={"survey":["survey"],"materials":["contribute","procure"],"collaborate":["collaborate"],"firstUse":["use"],"complete":[]}[phase]
+		var text:String=str(data.change)+"\n"+{"survey":"先到现场勘察，再分次筹料。","materials":"已交建材留在现场，支持分次提交。","collaborate":"材料齐备，等待乡亲按真实路线到场。","firstUse":"施工完成，第一次使用后记下改变。","complete":"已经完成与体验。"}[phase]
+		_add_card(str(data.name),text+"\n"+_items_text(q.remaining))
+		for op:String in actions:
+			var quote:Dictionary=growth.quote(GameState,id,op)
+			var label:String={"survey":"现场勘察 · 5 分钟","contribute":"提交当前可用建材","procure":"委托筹料 · %d 元"%int(quote.money),"collaborate":"现场协作 · 10 分钟 / 4 体力","use":"体验新设施"}[op]
+			var quantities:Dictionary=growth_quantities.get_or_add(id,{})
+			var detail:String=str(quote.reason) if not quote.ready else "确认后办理；失败不结算。"
+			if op=="procure" and quote.ready:detail="支付 %d 元，补齐现场缺口。建材不会发到背包。"%int(quote.money)
+			if op=="contribute" and quote.ready:detail="只扣下方选中的未保护建材；其余留在背包。"
+			var button:Button=_add_card(label,detail,label,not bool(quote.ready),_begin_growth.bind(id,op,quantities))
+			transaction_buttons["growth:"+id+":"+op]=button
+			if op=="contribute" and quote.ready:
+				var fields:=HBoxContainer.new();button.get_parent().add_child(fields);button.get_parent().move_child(fields,button.get_index())
+				for item:String in quote.contribution:
+					var maximum:int=int(quote.contribution[item]);quantities[item]=clampi(int(quantities.get(item,maximum)),0,maximum)
+					var name:=Label.new();name.text=str(GameState.item_catalog[item].name);fields.add_child(name)
+					var amount:=SpinBox.new();amount.min_value=0;amount.max_value=maximum;amount.step=1;amount.value=int(quantities[item]);amount.custom_minimum_size.x=90;fields.add_child(amount)
+					amount.value_changed.connect(func(value:float):quantities[item]=int(value))
+					transaction_buttons["quantity:"+id+":"+item]=amount.get_line_edit()
 
 func _show_orders() -> void:
 	for order in GameState.content.get("orders", []):
@@ -274,12 +290,20 @@ func _begin_transaction(action_id: String, item_id: String, choice: int = -1) ->
 
 func _restore_transaction_focus(key: String, scroll_value: int, starting_day: int, starting_room: String) -> void:
 	if not visible or GameState.day != starting_day or GameState.current_interior != starting_room: return
-	var button: Button = transaction_buttons.get(key)
-	if is_instance_valid(button) and not button.disabled: button.grab_focus()
+	var button: Control = transaction_buttons.get(key)
+	if is_instance_valid(button) and (not button is BaseButton or not button.disabled): button.grab_focus()
 	elif tab_buttons.has(active_tab): tab_buttons[active_tab].grab_focus()
 	content_scroll.scroll_vertical = scroll_value
 
 func _show_gatherings() -> void:
+	var growth:Script=preload("res://scripts/village_growth.gd")
+	var observation:Dictionary=growth.activity_quote(GameState,"observe")
+	_add_card("来源观察",str(observation.reason) if not observation.ready else "观察眼前的田块或钓点 · 5 分钟 · 不耗材料", "记录眼前的来源",not observation.ready,func():GameState.village_activity("observe"))
+	for person:Dictionary in GameState.npc_catalog:
+		if not GameState.npc_is_near(str(person.id)):continue
+		for kind:String in ["meal","share"]:
+			var q:Dictionary=growth.activity_quote(GameState,kind,str(person.id))
+			_add_card(GameState.npc_name(str(person.id))+" · "+("分享家常菜" if kind=="meal" else "聊聊生活见闻"),str(q.reason) if not q.ready else "10 分钟 · "+("实际用掉一份 "+str(GameState.item_catalog[q.item].name) if q.item!="" else "无材料费用")+" · 不重复奖励关系与物品", "一起坐一会儿",not q.ready,func():GameState.village_activity(kind,str(person.id)))
 	var names := {"tea": "山间茶桌", "repair": "修理摊边的小聚", "stage": "戏台上的小调", "lost": "河边的小画本"}
 	var details := {"tea": "周远烧好热水，欢迎坐下来讲讲这一周。", "repair": "宋伯摆出旧工具，大家讲讲修好继续用的东西。", "stage": "戏台修好后，江桂珍每周招呼大家来听一段。", "lost": "小岚请大家陪她找一找落在长椅边的画本。"}
 	var regions := {"tea": "mountain", "repair": "town", "stage": "town", "lost": "river"}
@@ -310,7 +334,7 @@ func _show_records() -> void:
 			var future := posmod(GameState.day, 112) < season * 28
 			var description := "%s\n%s" % [str(chapter.get("text", "")), str(chapter.get("goal", ""))]
 			if recorded: description += "\n今年已经记下另一种回应。"
-			transaction_buttons["e-chapter:%d:%d" % [season, choice]] = _add_card("%s · %s%s" % [season_name, str(chapter.get("title", "季节故事")), " · 已选" if is_selected else ""], description + "\n" + str(choices[choice]), "已记下" if recorded else "选择这段回应", recorded or future, _begin_transaction.bind("e-chapter", str(season), choice))
+			transaction_buttons["e-chapter:%d:%d" % [season, choice]] = _add_card("%s · %s%s" % [season_name, str(chapter.get("title", "时令随笔（可选）")), " · 已选" if is_selected else ""], description + "\n" + str(choices[choice]), "已记下" if recorded else "选择这段回应", recorded or future, _begin_transaction.bind("e-chapter", str(season), choice))
 	_show_achievements()
 
 func _show_achievements() -> void:
@@ -393,3 +417,6 @@ func _show_year() -> void:
 func _open_stories() -> void:
 	close()
 	get_parent().call("show_neighbors")
+
+func _begin_growth(id:String,op:String,quantities:Dictionary)->void:
+	if GameState.start_growth_action(id,op,quantities.duplicate(true) if op=="contribute" else {}):close()

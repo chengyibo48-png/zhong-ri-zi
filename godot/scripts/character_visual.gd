@@ -2,18 +2,26 @@ extends Node2D
 
 var character_key := ""
 var painted_active := false
+var actor_light:Dictionary={}
+var actor_material:ShaderMaterial
 var character_data: Dictionary = {}
 var appearance: Dictionary = {}
 var facing := Vector2.DOWN
 var walking := false
 var riding := false
 var working := false
+var work_contact:Dictionary={}
+var resident_context:Dictionary={}
+func resident_personality()->Dictionary:
+ return preload("res://scripts/resident_life.gd").sample(character_key,walk_clock,{"key":resident_context.get("key",""),"walking":walking,"explicit":action_state!="","reduced":str(GameState.visual_fx.get("motion","full"))=="reduced"})
+
 var walk_clock := 0.0
 var last_step := 0
 var last_animation_frame := -1
 var redraw_count := 0
 var fishing_state := "idle"
 var fishing_tension := 0.0
+var fishing_pose_elapsed := 0.0
 var action_state := ""
 var action_elapsed := 0.0
 var action_duration := 0.8
@@ -24,6 +32,7 @@ const ACTION_ART := preload("res://scripts/action_art.gd")
 const ITEM_ICON_SCRIPT := preload("res://scripts/item_icon.gd")
 var action_icon: Control
 var wardrobe: Node2D
+var player_locomotion := preload("res://scripts/player_rig.gd").new()
 
 func _ready() -> void:
  action_icon = ITEM_ICON_SCRIPT.new()
@@ -97,6 +106,15 @@ func set_riding(is_riding: bool) -> void:
  riding = is_riding
  queue_redraw()
 
+func resident_work_contact()->Dictionary:
+ return work_contact if working and action_state.is_empty() else {}
+
+func resident_motion()->Dictionary:
+ return player_locomotion.snapshot()
+
+func set_locomotion_sample(displacement: Vector2, delta: float) -> void:
+ player_locomotion.sample(displacement,delta)
+
 func set_pose(direction: Vector2, is_walking: bool) -> void:
  var previous_direction := facing
  var previous_walking := walking
@@ -105,18 +123,24 @@ func set_pose(direction: Vector2, is_walking: bool) -> void:
    facing = Vector2.RIGHT if direction.x > 0.0 else Vector2.LEFT
   else:
    facing = Vector2.DOWN if direction.y > 0.0 else Vector2.UP
+ player_locomotion.face(facing)
  walking = is_walking
+ if not walking and player_locomotion.moving:player_locomotion.sample(Vector2.ZERO,1.0/60.0)
  set_process(walking or fishing_state != "idle" or action_state != "" or PAINTED_ART.has_clip(character_key, "idle"))
  if previous_direction != facing or previous_walking != walking:
   queue_redraw()
 
 func set_fishing_pose(state: String, tension: float = 0.0) -> void:
+ var previous_state:=fishing_state
  fishing_state = "idle" if state == "cancel" else state
  fishing_tension = clampf(tension, 0.0, 1.0)
+ if is_instance_valid(wardrobe):wardrobe.fishing_tension=fishing_tension
+ if previous_state!=fishing_state:fishing_pose_elapsed=0.0
  set_process(walking or fishing_state != "idle" or action_state != "" or PAINTED_ART.has_clip(character_key, "idle"))
- queue_redraw()
+ if character_key!="player" or previous_state!=fishing_state:queue_redraw()
 
 func set_sequence_snapshot(snapshot: Dictionary) -> void:
+ var previous_action:=action_state
  if snapshot.is_empty():
   if not sequence_managed:return
   sequence_managed=false
@@ -129,7 +153,7 @@ func set_sequence_snapshot(snapshot: Dictionary) -> void:
   action_duration=float(snapshot.duration)
   action_elapsed=float(snapshot.progress)*action_duration
  set_process(walking or fishing_state!="idle" or action_state!="" or PAINTED_ART.has_clip(character_key, "idle"))
- queue_redraw()
+ if character_key!="player" or previous_action!=action_state:queue_redraw()
 
 func play_action(kind: String) -> void:
  if GameState.action_commit_in_progress or sequence_managed:return
@@ -151,11 +175,17 @@ func _process(delta: float) -> void:
  if not is_visible_in_tree() or GameState.simulation_hidden(): return
  if GameState.ui_open and action_state.is_empty(): return
  walk_clock += delta
+ if fishing_state!="idle":fishing_pose_elapsed+=delta
+ player_locomotion.advance(delta)
  if action_state != "":
   action_elapsed += 0.0 if sequence_managed else delta
   if action_elapsed >= action_duration: action_state = ""
  var animated := preload("res://scripts/life_presentation.gd").animate()
- var frame := floori(walk_clock * (12.0 if action_state != "" or riding else 8.0)) if animated else 0
+ var moving_visual:=walking and (not player_locomotion.sampled or player_locomotion.walk_weight>0)
+ var player_active:=character_key=="player" and (moving_visual or player_locomotion.walk_weight>0.0 or action_state!="" or fishing_state!="idle" or riding)
+ var frequency:=24.0 if player_active else 6.0 if character_key=="player" else 24.0 if moving_visual or player_locomotion.walk_weight>0 or action_state!="" or riding else 6.0
+ var semantic_motion:=character_key=="player" and (action_state!="" or fishing_state in ["cast","caught","released","miss"])
+ var frame := floori(walk_clock * frequency) if animated or semantic_motion else 0
  if frame != last_animation_frame:
   last_animation_frame = frame
   last_step = roundi(sin(walk_clock * 13.0) * 2.0) if animated else 0
@@ -259,19 +289,42 @@ func _draw_accessory(kind: String, at: Vector2, factor: float) -> void:
 
 func _draw() -> void:
  painted_active = false
+ actor_light=preload("res://scripts/actor_lighting.gd").sample(self)
  var painted_clip := action_state if action_state != "" else ("walk" if walking else "care" if working else "idle")
- if fishing_state != "idle": painted_clip = {"cast":"fish_cast","waiting":"fish_wait","bite":"fish_wait","fight":"fish_reel","caught":"fish_catch","released":"fish_catch","miss":"fish"}.get(fishing_state,"fish_wait")
+ if character_key!="player" and working and action_state.is_empty() and not work_contact.is_empty():painted_clip=str(work_contact.kind)
+ if fishing_state != "idle": painted_clip = {"aim":"fish_cast","cast":"fish_cast","waiting":"fish_wait","bite":"fish_wait","fight":"fish_reel","caught":"fish_catch","released":"fish_catch","miss":"fish"}.get(fishing_state,"fish_wait")
  if riding: painted_clip = "bike"
- var painted_direction := "left" if facing.x < 0 else "right" if facing.x > 0 else "up" if facing.y < 0 else "down"
+ var visual_facing:Vector2=player_locomotion.presentation_direction(facing) if action_state=="" and fishing_state=="idle" and not riding else facing
+ if character_key!="player" and working and action_state.is_empty() and not work_contact.is_empty():
+  var work_delta:Vector2=Vector2(work_contact.target)-global_position
+  if work_delta.length_squared()>1:visual_facing=(Vector2.LEFT if work_delta.x<0 else Vector2.RIGHT) if absf(work_delta.x)>absf(work_delta.y) else (Vector2.UP if work_delta.y<0 else Vector2.DOWN)
+ var painted_direction := "left" if visual_facing.x < 0 else "right" if visual_facing.x > 0 else "up" if visual_facing.y < 0 else "down"
  var painted_progress := clampf(action_elapsed / maxf(action_duration, 0.001), 0.0, 1.0) if action_state != "" else -1.0
+ if character_key=="player" and fishing_state!="idle":
+  var fishing_game:Dictionary=GameState.fishing_session.game
+  if fishing_state=="cast":painted_progress=clampf(float(fishing_game.get("phaseTime",fishing_pose_elapsed))/.55,0,1)
+  elif fishing_state=="aim":painted_progress=.06+.18*float(fishing_game.get("charge",0))
+  elif fishing_state in ["caught","released","miss"]:painted_progress=clampf(fishing_pose_elapsed/1.3,0,1)
+  else:painted_progress=-1.0
  var painted_allowed := true
- if wardrobe != null: wardrobe.hide()
- if character_key == "player" and wardrobe != null and (riding or wardrobe.needs_layers(GameState.appearance, appearance)):
+ if wardrobe != null and character_key!="player": wardrobe.hide()
+ if character_key == "player" and wardrobe != null:
+  var fish_pending:Dictionary=GameState.fishing.pending if GameState.fishing.get("pending") is Dictionary else {}
+  var fish_last:Dictionary=GameState.fishing.last if GameState.fishing.get("last") is Dictionary else {}
+  wardrobe.fishing_fish="" if fishing_state=="released" else str(fish_pending.get("fish",GameState.fishing_session.game.get("plan",{}).get("fish",fish_last.get("fish","fish"))))
+  wardrobe.fishing_tension=fishing_tension*(1-smoothstep(0,.6,fishing_pose_elapsed)) if fishing_state=="miss" else fishing_tension
+  wardrobe.locomotion_state=player_locomotion.snapshot()
+  wardrobe.contact_description=preload("res://scripts/action_contact.gd").describe(local_action_snapshot())
   painted_allowed = false
   if wardrobe.present(GameState.appearance, appearance, painted_clip, painted_direction, walk_clock, painted_progress):
-   preload("res://scripts/ground_style.gd").shadow(self, Vector2(0,.6), 20.0, 5.4)
+   preload("res://scripts/actor_lighting.gd").apply(wardrobe.material,actor_light)
+   preload("res://scripts/actor_lighting.gd").shadow(self,actor_light,wardrobe.rig_frame.get("feet",[]))
    painted_active = true
    return
+ if character_key!="player":
+  if actor_material==null:
+   actor_material=ShaderMaterial.new();actor_material.shader=preload("res://art/shaders/actor_lighting.gdshader");material=actor_material
+  preload("res://scripts/actor_lighting.gd").apply(actor_material,actor_light)
  if painted_allowed and PAINTED_ART.draw_actor(self, character_key, painted_clip, painted_direction, walk_clock, painted_progress, GameState.appearance):
   painted_active = true
   return
@@ -514,3 +567,9 @@ func _draw_source_action() -> void:
  draw_set_transform(Vector2.ZERO)
 
 
+
+func contact_attachments()->Dictionary:
+ if wardrobe==null or not wardrobe.visible:return {}
+ var contact:Dictionary=wardrobe.rig_frame.get("contact",{})
+ if contact.is_empty():return {}
+ return {"kind":contact.kind,"tip":wardrobe.to_global(Vector2(contact.impact)),"emitter":wardrobe.to_global(Vector2(contact.emitter)),"surface":wardrobe.to_global(Vector2(contact.surface))}

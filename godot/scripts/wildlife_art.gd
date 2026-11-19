@@ -51,8 +51,6 @@ static func _fallback(target: CanvasItem, wildlife: Dictionary, clock: float, ho
 		if int(floor(phase * 0.7)) % 5 == 0:
 			target.draw_arc(Vector2(11, -13), 3.0, 3.8, 5.7, 10, Color(1.0, 0.93, 0.74, 0.65), 0.8)
 		target.draw_set_transform(Vector2.ZERO)
-	if hovered:
-		target.draw_arc(Vector2(float(wildlife.get("x", 0.0)), float(wildlife.get("y", 0.0))), 13.0, 0.0, TAU, 20, Color("#f4e7ad"), 1.5)
 
 static func _draw_oval(target: CanvasItem, center: Vector2, size: Vector2, color: Color) -> void:
 	var points := PackedVector2Array()
@@ -110,5 +108,3 @@ static func draw(target: CanvasItem, wildlife: Dictionary, clock: float, hovered
 	target.draw_set_transform(at + Vector2(pose.offset))
 	target.draw_texture_rect_region(atlas, rectangle, source)
 	target.draw_set_transform(Vector2.ZERO)
-	if hovered:
-		target.draw_arc(at, 13, 0, TAU, 20, Color("#f4e7ad"), 1.5)
