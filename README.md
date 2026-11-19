@@ -1,10 +1,10 @@
-> 2026-11-19 已同步旧版稳定性、钓鱼入口与两头初始奶牛更新。详见[更新说明](godot/STABILITY_UPDATE_20261119.md)。使用 Godot 4.7.2 打开 `godot/project.godot` 运行。本次为源码更新，未发布新安装包。
+> 2026-11-19 已发布 Windows 0.30.0 稳定补丁，包含钓鱼入口、初始两头奶牛及旧版稳定性修复。下载后解压运行，无需 Godot。详见[更新说明](godot/STABILITY_UPDATE_20261119.md)。
 
 # 种日子 · Godot 0.30.0
 
 中式乡村生活游戏：单人单机、无战斗，围绕种植、牧场、垂钓、加工经营、邻里与村史展陈展开。
 
-**[下载上一版 Windows 试玩](https://github.com/chengyibo48-png/zhong-ri-zi/releases/tag/v0.29.0)** · [源码运行与构建](docs/GITHUB使用说明.md) · [0.29.0 验收记录](godot/RELEASE_20261017.md)
+**[下载最新 Windows 游戏](https://github.com/chengyibo48-png/zhong-ri-zi/releases/tag/v0.30.0-stable.20261119)** · [源码运行与构建](docs/GITHUB使用说明.md) · [0.29.0 验收记录](godot/RELEASE_20261017.md)
 
 ![0.29.0 实际游戏画面](docs/screenshots/gameplay-0.29.0.png)
 
